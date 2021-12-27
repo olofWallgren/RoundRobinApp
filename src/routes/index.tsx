@@ -6,6 +6,9 @@ import { Route, Switch } from "react-router-dom";
 const NotFound = React.lazy(()  => import('./not-found'));
 const Home = React.lazy(()  => import('./home'));
 const Tournament = React.lazy(()  => import('./tournament'));
+const PreviousRounds = React.lazy(()  => import('./previous-rounds'));
+const Round = React.lazy(()  => import('./round'));
+const Scoreboard = React.lazy(()  => import('./scoreboard'));
 
 interface IRoute {
     exact?: boolean,
@@ -25,6 +28,21 @@ export const RouterTree: IRoute[] = [
         path: '/tournament',
         title: 'Tournament',
         component: Tournament,
+    },
+    {
+        path: '/tournament/previous-rounds',
+        title: 'PreviousRounds',
+        component: PreviousRounds,
+    },
+    {
+        path: '/tournament/round',
+        title: 'Round',
+        component: Round,
+    },
+    {
+        path: '/tournament/scoreboard',
+        title: 'Scoreboard',
+        component: Scoreboard,
     },
     {
         path: '/not-found',
