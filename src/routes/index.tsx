@@ -25,22 +25,22 @@ export const RouterTree: IRoute[] = [
         component: Home,
     },
     {
-        path: '/tournament',
+        path: '/create-tournament',
         title: 'Tournament',
         component: Tournament,
     },
     {
-        path: '/tournament/previous-rounds',
+        path: '/current-tournament/previous-rounds',
         title: 'PreviousRounds',
         component: PreviousRounds,
     },
     {
-        path: '/tournament/round',
+        path: '/current-tournament/round',
         title: 'Round',
         component: Round,
     },
     {
-        path: '/tournament/scoreboard',
+        path: '/current-tournament/scoreboard',
         title: 'Scoreboard',
         component: Scoreboard,
     },
