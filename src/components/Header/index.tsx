@@ -15,13 +15,9 @@ interface NavigationItem {
 
 const NavigationList: NavigationItem[] = [
   {
-    title: "home",
+    title: "Home",
     path: "/",
     exact: true,
-  },
-  {
-    title: "tournament",
-    path: "/tournament",
   },
 ];
 
