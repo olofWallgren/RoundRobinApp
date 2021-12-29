@@ -5,7 +5,12 @@
 }
 
 html {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   height: 100%;
+
   font-size: 100%;
   -webkit-text-size-adjust: 100%;
   background-image: url("../src/Assets/images/background.jpg");
@@ -18,6 +23,7 @@ html {
 
 body {
   height: 100%;
+  width: 100%;
   margin: 0;
   background: linear-gradient(
     to right bottom,
@@ -25,14 +31,14 @@ body {
     rgba(255, 255, 255, 0.1)
   );
   backdrop-filter: blur(2rem);
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }

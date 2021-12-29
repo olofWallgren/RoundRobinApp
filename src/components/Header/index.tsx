@@ -11,7 +11,7 @@ const Header = () => {
     <header className="header">
       <div></div>
       <h1>Round Robin</h1>
-      <AccountBoxIcon/>
+      <AccountBoxIcon fontSize='large' />
     </header>
   );
 };
