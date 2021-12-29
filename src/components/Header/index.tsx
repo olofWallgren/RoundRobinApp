@@ -9,6 +9,7 @@ const Header = () => {
 
   return (
     <header className="header">
+      <div></div>
       <h1>Round Robin</h1>
       <AccountBoxIcon/>
     </header>
