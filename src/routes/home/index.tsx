@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { db } from "../../firebase-config";
 import "../../layout/container.css";
 import { Link } from "react-router-dom";
+import Button from "@mui/material/Button";
 
 const Home = () => {
   // const db = firestore();
@@ -20,7 +21,9 @@ const Home = () => {
 
   return (
     <div className="container">
-      <h1>Home Testing Olof</h1>
+      <div>
+        <Button variant="text">Text</Button>
+      </div>
     </div>
   );
 };
