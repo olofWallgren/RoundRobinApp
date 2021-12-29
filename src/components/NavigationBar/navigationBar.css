@@ -1,0 +1,28 @@
+.navigation-bar {
+  background-color: #170b38;
+  color: #ffffff;
+  width: 100%;
+  border-radius: 10px;
+}
+
+.navigation-bar__list {
+  display: flex;
+  flex-shrink: 0;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  list-style: none;
+}
+
+.navigation-bar__item {
+  display: inline;
+}
+
+.navigation-bar__link {
+  color: currentColor;
+  text-decoration: none;
+}
+
+.navigation-bar__link:hover {
+  color: #FA04F6;
+}
