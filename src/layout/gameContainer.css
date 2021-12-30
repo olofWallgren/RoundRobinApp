@@ -1,0 +1,17 @@
+.gameContainer {
+    background-color: rgba(11, 0, 44, 0.85);
+    color: white;
+    border-radius: 0 0 20px 20px;
+    padding: 0 20px 20px 20px;
+    width: 100%;
+  }
+  @media screen and (max-width: 700px) {
+    .gameContainer {
+      font-size: 14px;
+    }
+  }
+  @media screen and (max-width: 600px) {
+    .gameContainer {
+      font-size: 12px;
+    }
+  }
