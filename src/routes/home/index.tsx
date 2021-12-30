@@ -23,17 +23,18 @@ const Home = () => {
 
   return (
     <div className="container">
-      <div className="fatFox">
-
-      </div>
-        <FoxButton 
-          height="3rem"
-          width="15rem"
-          onClick={()=> console.log("Klicketiklack")}
-          children ="NEW TOURNAMENT"
-        />
+      <div className="fatFox"></div>
+      <FoxButton
+        height="3rem"
+        width="15rem"
+        onClick={() => console.log("Klicketiklack")}
+        children="NEW TOURNAMENT"
+      />
       <div>
-        <Button variant="text">Old tournaments</Button>
+        {/* <Button variant="text">Old tournaments</Button> */}
+        <Link style={{ color: "white" }} to="/create-tournament">
+          Tournament view
+        </Link>
       </div>
     </div>
   );
