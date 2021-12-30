@@ -1,0 +1,17 @@
+.secondaryBtn {
+  background: #2c2247;
+  border-radius: 10px;
+  border: black 4px;
+  padding: 16px 32px;
+  font-size: large;
+  font-weight: 600;
+  color: white;
+  cursor: pointer;
+  transform-origin: 50% 50%;
+  transition: transform 200ms ease, background-color 150ms ease;
+}
+
+.secondaryBtn:active {
+    transform: scale(0.97);
+  } 
+
