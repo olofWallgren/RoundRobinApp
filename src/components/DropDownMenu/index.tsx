@@ -16,26 +16,30 @@ const DropDownMenu: React.FC<Props> = ({
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
-
-    
+    console.log(anchorEl); 
+       
 };
 
-let result: string = "Still Playing";
+// const [newResult, setResult] = useState('');
+
+// let result: string = "Still Playing";
 // let bajs: String = "";
 
 const handleClose = () => {
     closeMenu();
-    changeName(result);
+    changeName();
     
 }
 function closeMenu() {
     setAnchorEl(null);
 }
 
-function changeName(result: String) {
+function changeName() {
   //  let korv = document.getElementById("result1");
-  result = '<p>hej</p>';
-  console.log(result);
+  //result = '<p>hej</p>';
+  // setResult(result)
+  console.log(anchorEl); 
+  //console.log(newResult);
    // korv.innerHTML = <p>Bajs</p>;
     //  setResult(prevState => (prevState === 'Still Playing' ? MenuItem.value);
   }
@@ -55,7 +59,7 @@ function changeName(result: String) {
         aria-expanded={open ? 'true' : undefined}
         onClick={handleClick}
       >
-          {result}
+          {/* {result} */}
       </Button>
       <Menu
         id="demo-positioned-menu"
