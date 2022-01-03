@@ -7,6 +7,7 @@ import NavigationBar from "../../components/NavigationBar";
 import { Divider } from "@mui/material";
 import { CSSProperties } from "react";
 import { Link } from "react-router-dom";
+import OutputBarRound from "../../components/OutputBarRound";
 
 const Round = () => {
   const [disable, setDisable] = React.useState(true); //Använd denna hook för att göra knappen klickbar efter att resultaten är ifyllda
@@ -20,7 +21,11 @@ const Round = () => {
           <div style={{ paddingTop: "2rem" }}>
             <h2 style={{ margin: "0" }}>Round 1</h2>
           </div>
+          <OutputBarRound 
+    player1="Erlef Doedsdufva"
+    player2="Tony McHallumi"/>
           <div style={flexBetween}>
+
             <div>
               <p style={paraStyle}>End Tournament</p>
             </div>
