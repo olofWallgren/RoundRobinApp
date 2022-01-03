@@ -22,9 +22,8 @@ html {
 }
 
 body {
-  height: 90%;
-  width: 90%;
-  border-radius: 20px;
+  height: 100%;
+  width: 100%;
   margin: 0;
   background: linear-gradient(
     to right bottom,
@@ -32,9 +31,7 @@ body {
     rgba(255, 255, 255, 0.055)
   );
   backdrop-filter: blur(1rem);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+  font-family: "Roboto", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
