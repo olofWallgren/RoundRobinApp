@@ -1,28 +1,50 @@
 import React from "react";
-// import { useLocation } from 'react-router-dom';
-import { Link } from "react-router-dom";
 import "../../layout/OutputBar.css";
-import { Grid } from '@mui/material';
+import { Grid, Button, Menu, MenuItem } from '@mui/material';
+import { writeHeapSnapshot } from "v8";
 
 
 interface Props {
-  players: string,
+  player?: React.ReactNode,
+  totalScore?: React.ReactNode,
+  wins?: React.ReactNode,
+  losses?: React.ReactNode,
+  draws?: React.ReactNode,
+  children?: React.ReactNode
 
 }
 
-const OutputBarScoreBoard = () => {
-
+const OutputBarScoreBoard: React.FC<Props> = ({
+  player,
+  totalScore,
+  wins,
+  losses,
+  draws,
+  children
+  }) => {
+ 
 
   return (
-    <div className="outputBarContainer">
-      <div>
-        <p className="names">n00by McNoobface - Spelare 2</p>
-      </div>
-      <div>
-        igen
-      </div>
-      <div>och igen</div>
-    </div>
+    <Grid container className="outputBarContainer" spacing={0}>
+
+      <Grid item xs={7}>
+        <p className="names">{player}</p>
+      </Grid>
+
+      <Grid item xs={2}>
+        <p className="totalScore">{totalScore}</p>
+      </Grid>
+
+      <Grid className="matchHistoryContainer" item xs={3}>
+        <p className="matchHistory">{wins}</p>
+        <p> - </p>
+        <p className="matchHistory">{losses}</p>
+        <p> - </p>
+        <p className="matchHistory">{draws}</p>
+      </Grid>
+
+</Grid>
+
   );
 };
 
