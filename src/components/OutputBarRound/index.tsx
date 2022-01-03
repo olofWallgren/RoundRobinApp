@@ -4,6 +4,8 @@ import "./OutputBarRound.css";
 import DropDownMenu from "../../components/DropDownMenu"
 import { Grid, Button, Menu, MenuItem } from '@mui/material';
 
+import { useForm, SubmitHandler } from "react-hook-form";
+
 
 interface Props {
   player1?: React.ReactNode,
