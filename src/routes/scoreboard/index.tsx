@@ -16,42 +16,40 @@ const Scoreboard = () => (
       <div style={{ paddingTop: "2rem" }}>
         <h2 style={{ margin: "0" }}>Scoreboard</h2>
       </div>
-      <div style={flexBetween}>
-
-        <div>
-          <p style={paraStyle}>End Tournament</p>
-        </div>
+      <div style={paraContainer}>
+        <p style={paraStyle}>End Tournament</p>
       </div>
     </div>
     <div style={btnContainer}>
       <Link style={btnWidth} to="/create-tournament" className="secondaryBtn">
         Back
       </Link>
-      <button style={btnWidth} className="primaryBtn">
+      <Link style={btnWidth} to="/current-tournament/round" className="primaryBtn">
         Next Round
-      </button>
+      </Link>
     </div>
   </div>
 );
 
-const paraStyle: CSSProperties = {
-color: "#FA04F6",
-cursor: "pointer",
+const paraContainer: CSSProperties = {
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  marginTop: "1rem",
+  marginBottom: "0",
 };
-const flexBetween: CSSProperties = {
-display: "flex",
-justifyContent: "space-between",
-marginTop: "1rem",
-marginBottom: "0",
+const paraStyle: CSSProperties = {
+  color: "#FA04F6",
+  cursor: "pointer",
 };
 const btnContainer: CSSProperties = {
-display: "flex",
-justifyContent: "space-between",
-marginTop: "2rem",
-width: "100%",
+  display: "flex",
+  justifyContent: "space-between",
+  marginTop: "2rem",
+  width: "100%",
 };
 const btnWidth: CSSProperties = {
-width: "48%",
+  width: "48%",
 };
 
 export default Scoreboard;
