@@ -2,12 +2,15 @@ import React from "react";
 import "../../layout/OutputBar.css";
 // import "./OutputBarRound.css";
 import { Grid, Button, Menu, MenuItem } from '@mui/material';
+import { writeHeapSnapshot } from "v8";
 
 
 interface Props {
   player?: React.ReactNode,
   totalScore?: React.ReactNode,
-  matchHistory?: React.ReactNode,
+  wins?: React.ReactNode,
+  losses?: React.ReactNode,
+  draws?: React.ReactNode,
   children?: React.ReactNode
 
 }
@@ -15,7 +18,9 @@ interface Props {
 const OutputBarScoreBoard: React.FC<Props> = ({
   player,
   totalScore,
-  matchHistory,
+  wins,
+  losses,
+  draws,
   children
   }) => {
  
@@ -32,9 +37,9 @@ const OutputBarScoreBoard: React.FC<Props> = ({
       </Grid>
 
       <Grid item xs={3}>
-        <p className="matchHistory">{matchHistory}</p>
-        <p className="matchHistory">{matchHistory}</p>
-        <p className="matchHistory">{matchHistory}</p>
+        <p className="matchHistory">{wins}</p>
+        <p className="matchHistory">{losses}</p>
+        <p className="matchHistory">{draws}</p>
       </Grid>
 
 </Grid>

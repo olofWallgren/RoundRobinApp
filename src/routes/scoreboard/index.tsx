@@ -10,12 +10,16 @@ const Scoreboard = () => (
     <OutputbarScoreBoard
       player="Erlef Doedsdufva"
       totalScore="3"
-      matchHistory="1-0-0"
+      wins="1"
+      losses="0"
+      draws="0"
       />
       <OutputbarScoreBoard
       player="Tony McHallumi"
       totalScore="0"
-      matchHistory="0-1-0"
+      wins="1"
+      losses="0"
+      draws="0"
       />
 
   </div>
