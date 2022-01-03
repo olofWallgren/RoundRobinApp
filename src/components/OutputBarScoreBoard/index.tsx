@@ -1,6 +1,5 @@
 import React from "react";
 import "../../layout/OutputBar.css";
-// import "./OutputBarRound.css";
 import { Grid, Button, Menu, MenuItem } from '@mui/material';
 import { writeHeapSnapshot } from "v8";
 
@@ -26,7 +25,7 @@ const OutputBarScoreBoard: React.FC<Props> = ({
  
 
   return (
-    <Grid container className="outputBarContainer" spacing={1}>
+    <Grid container className="outputBarContainer" spacing={0}>
 
       <Grid item xs={7}>
         <p className="names">{player}</p>
@@ -36,9 +35,11 @@ const OutputBarScoreBoard: React.FC<Props> = ({
         <p className="totalScore">{totalScore}</p>
       </Grid>
 
-      <Grid item xs={3}>
+      <Grid className="matchHistoryContainer" item xs={3}>
         <p className="matchHistory">{wins}</p>
+        <p> - </p>
         <p className="matchHistory">{losses}</p>
+        <p> - </p>
         <p className="matchHistory">{draws}</p>
       </Grid>
 

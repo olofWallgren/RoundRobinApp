@@ -16,3 +16,10 @@
   font-family: "Metamorphous";
   text-shadow: 2px 1px black;
 }
+
+.matchHistoryContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
