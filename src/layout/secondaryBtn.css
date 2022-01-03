@@ -9,6 +9,8 @@
   cursor: pointer;
   transform-origin: 50% 50%;
   transition: transform 200ms ease, background-color 150ms ease;
+  text-align: center;
+  text-decoration: none;
 }
 
 .secondaryBtn:active {
