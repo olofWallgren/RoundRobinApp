@@ -1,0 +1,23 @@
+.section {
+  background-color: rgba(11, 0, 44, 0.85);
+  color: white;
+  margin: 1rem;
+  padding: 1rem;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: row;
+}
+@media screen and (max-width: 700px) {
+  .section {
+    font-size: 14px;
+    margin: 0.5rem;
+    padding: 0.5rem;
+  }
+}
+@media screen and (max-width: 600px) {
+  .section {
+    font-size: 12px;
+    margin: 0.5rem;
+    padding: 0.5rem;
+  }
+}

@@ -1,0 +1,32 @@
+.navigation-bar {
+  background-color: rgba(11, 0, 44, 0.85);
+  color: #ffffff;
+  width: 100%;
+  border-radius: 20px 20px 0 0;
+}
+
+.navigation-bar__list {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  list-style: none;
+  flex-wrap: wrap;
+  margin: 0;
+}
+
+.navigation-bar__item {
+  display: inline;
+}
+
+.navigation-bar__link {
+  color: currentColor;
+  text-decoration: none;
+}
+
+.navigation-bar__link:hover {
+  color: #FA04F6;
+}
+.navigation-bar__link:active {
+  color: #FA04F6;
+}

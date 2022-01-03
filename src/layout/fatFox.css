@@ -1,0 +1,10 @@
+.fatFox {
+  display: flex;
+
+  background-image: url("../Assets/images/fatRobin.jpg");
+  object-fit: cover;
+  height: 15rem;
+  width: 15rem;
+  background-repeat: no-repeat;
+  margin: 3rem;
+}
