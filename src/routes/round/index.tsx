@@ -6,6 +6,7 @@ import "../../layout/secondaryBtn.css";
 import NavigationBar from "../../components/NavigationBar";
 import { Divider } from "@mui/material";
 import { CSSProperties } from "react";
+import { Link } from "react-router-dom";
 
 const Round = () => {
   const [disable, setDisable] = React.useState(true); //Använd denna hook för att göra knappen klickbar efter att resultaten är ifyllda
@@ -29,9 +30,9 @@ const Round = () => {
           </div>
         </div>
         <div style={btnContainer}>
-          <button style={btnWidth} className="secondaryBtn">
+          <Link style={btnWidth} to="/create-tournament" className="secondaryBtn">
             Back
-          </button>
+          </Link>
           <button style={btnWidth} className="primaryBtn" disabled={disable}>
             Next Round
           </button>
