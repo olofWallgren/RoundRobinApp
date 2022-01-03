@@ -5,6 +5,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { width } from "@mui/system";
+
 const ParticipantsCard = () => {
   type Inputs = {
     partisipants: string;
