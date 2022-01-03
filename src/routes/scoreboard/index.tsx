@@ -7,6 +7,7 @@ import NavigationBar from "../../components/NavigationBar";
 import { Divider } from "@mui/material";
 import { CSSProperties } from "react";
 import { Link } from "react-router-dom";
+import OutputbarScoreBoard from "../../components/OutputBarScoreBoard";
 
 const Scoreboard = () => (
   <div className="container">
@@ -16,6 +17,20 @@ const Scoreboard = () => (
       <div style={{ paddingTop: "2rem" }}>
         <h2 style={{ margin: "0" }}>Scoreboard</h2>
       </div>
+      <OutputbarScoreBoard
+      player="Erlef Doedsdufva"
+      totalScore="3"
+      wins="1"
+      losses="0"
+      draws="0"
+      />
+      <OutputbarScoreBoard
+      player="Tony McHallumi"
+      totalScore="0"
+      wins="1"
+      losses="0"
+      draws="0"
+      />
       <div style={paraContainer}>
         <p style={paraStyle}>End Tournament</p>
       </div>
