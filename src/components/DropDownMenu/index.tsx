@@ -21,27 +21,25 @@ const DropDownMenu: React.FC<Props> = ({
 };
 
 // const [newResult, setResult] = useState('');
+let result = "still playing";
 
-// let result: string = "Still Playing";
-// let bajs: String = "";
 
-const handleClose = () => {
-    closeMenu();
-    changeName();
+const handleClose = (e: any) => {
+    // closeMenu();
+    // changeName();
     
-}
-function closeMenu() {
     setAnchorEl(null);
+    
+    console.log(e.target.value);
+
+ 
 }
 
-function changeName() {
-  //  let korv = document.getElementById("result1");
-  //result = '<p>hej</p>';
-  // setResult(result)
-  console.log(anchorEl); 
-  //console.log(newResult);
-   // korv.innerHTML = <p>Bajs</p>;
-    //  setResult(prevState => (prevState === 'Still Playing' ? MenuItem.value);
+
+function closeMenu() {
+}
+
+function changeName(e: any) {
   }
 
 
@@ -59,7 +57,7 @@ function changeName() {
         aria-expanded={open ? 'true' : undefined}
         onClick={handleClick}
       >
-          {/* {result} */}
+        {result}
       </Button>
       <Menu
         id="demo-positioned-menu"
@@ -76,10 +74,10 @@ function changeName() {
           horizontal: 'left',
         }}
       >
-        <MenuItem id="firstChoice" value="Still Playing" onClick={handleClose}>Still Playing</MenuItem>
-        <MenuItem id="secondChoice" value="2 - 0 - 0" onClick={handleClose}>2 - 0 - 0</MenuItem>
-        <MenuItem id="thirdChoice" value="2 - 1 - 0" onClick={handleClose}>2 - 1 - 0</MenuItem>
-        <MenuItem onClick={handleClose}>1 - 0 - 1</MenuItem>
+        <MenuItem id="firstChoice" value={"korvkiosk"} onClick={handleClose}>Still Playing</MenuItem>
+        <MenuItem id="secondChoice" value={"2"} onClick={handleClose}>2 - 0 - 0</MenuItem>
+        <MenuItem id="thirdChoice" value={"3"} onClick={handleClose}>2 - 1 - 0</MenuItem>
+        <MenuItem value={"4"} onClick={handleClose}>1 - 0 - 1</MenuItem>
         <MenuItem onClick={handleClose}>1 - 1 - 1</MenuItem>
         <MenuItem onClick={handleClose}>0 - 2 - 0</MenuItem>
         <MenuItem onClick={handleClose}>1 - 2 - 0</MenuItem>
