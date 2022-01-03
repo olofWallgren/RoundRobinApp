@@ -26,12 +26,19 @@ const ParticipantsCard = () => {
       { id: participants.length + 1, name: data.partisipants },
     ];
     setParticipants(updateParticipants);
-    console.log(data.partisipants);
-    console.log(participants);
   };
 
   const participantInputHandler = () => {
     setParticipantInput(showParticipantsInput ? false : true);
+  };
+
+  const deleteParticipant = (name: string) => {
+    const updateParticipants = [
+      ...participants.filter((p) => {
+        return p.name !== name;
+      }),
+    ];
+    setParticipants(updateParticipants);
   };
 
   return (
@@ -52,6 +59,7 @@ const ParticipantsCard = () => {
             </form>
             {participants.map((i) => (
               <div
+                key={i.id}
                 style={{
                   backgroundColor: "rgba(56, 44, 89, 1)",
                   marginTop: "10px",
@@ -65,7 +73,7 @@ const ParticipantsCard = () => {
                 {i.name}
                 <div>
                   <CreateIcon />
-                  <DeleteIcon />
+                  <DeleteIcon onClick={() => deleteParticipant(i.name)} />
                 </div>
               </div>
             ))}
