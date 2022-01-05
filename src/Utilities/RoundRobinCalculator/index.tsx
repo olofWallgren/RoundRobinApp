@@ -1,40 +1,87 @@
 import React, { useState, useEffect} from 'react';
 import axios from 'axios';
 import Todo from '../Todo';
+import Tournament from "round-robin-tournament"; 
 
 
-function MakeRoundRobinPairings() {
 
-  const [todos, setTodos] = useState<any[]>([]);
+const RoundRobinCalculator = () => {
+  
+  const players = [
+    {id: 1, name: "Olof"},
+    {id: 2, name: "Tony"},
+    {id: 3, name: "Tim"},
+    {id: 4, name: "Kenta"},
+    {id: 5, name: "Emma"},
+    {id: 6, name: "Doris"},
+  ];
+  
+  const tournament = new Tournament(players);
+  const matches = tournament.matches;
 
-  useEffect(() => {
-    const fetchTodos = async () => {
-      let results = await axios.get(
-        'https://jsonplaceholder.typicode.com/todos'
-        );
-        setTodos(results.data)
-    };
-    fetchTodos();
-  }, [])
-
-  console.log(todos);
+  console.log(matches);
   return (
     <div>
-      <h4>
-        Mapping out pairings.
-      </h4>
-      {
-        todos.slice(0, 10).map(todo => (
-          <Todo key={todo.id} todo={todo}/>
-        ))
-      }
+
     </div>
   );
 
+};
 
-}
+export default RoundRobinCalculator;
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// TODO TESTINGS:
+
+// function MakeRoundRobinPairings() {
+
+//   const [todos, setTodos] = useState<any[]>([]);
+
+//   useEffect(() => {
+//     const fetchTodos = async () => {
+//       let results = await axios.get(
+//         'https://jsonplaceholder.typicode.com/todos'
+//         );
+//         setTodos(results.data)
+//     };
+//     fetchTodos();
+//   }, [])
+
+//   console.log(todos);
+//   return (
+//     <div>
+//       <h4>
+//         Mapping out pairings.
+//       </h4>
+//       {
+//         todos.slice(0, 10).map(todo => (
+//           <Todo key={todo.id} todo={todo}/>
+//         ))
+//       }
+//     </div>
+//   );
+
+
+// }
+
+// A GO AT DOING A ROUND ROBIN OURSELVES
 
 // interface Props {
 //     players: [],
@@ -77,4 +124,4 @@ function MakeRoundRobinPairings() {
 //     return tournamentPairings;
 //   }
 
-export default MakeRoundRobinPairings;
+// export default MakeRoundRobinPairings;

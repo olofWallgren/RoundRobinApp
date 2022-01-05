@@ -8,7 +8,8 @@ import { Divider } from "@mui/material";
 import { CSSProperties } from "react";
 import { Link } from "react-router-dom";
 import OutputBarRound from "../../components/OutputBarRound";
-import MakeRoundRobinPairings from "../../Utilities/RoundRobinCalculator";
+// import MakeRoundRobinPairings from "../../Utilities/RoundRobinCalculator";
+import RoundRobinCalculator from "../../Utilities/RoundRobinCalculator";
 
 const Round = () => {
   const [disable, setDisable] = React.useState(true); //Använd denna hook för att göra knappen klickbar efter att resultaten är ifyllda
@@ -25,7 +26,7 @@ const Round = () => {
           <OutputBarRound 
     player1="Erlef Doedsdufva"
     player2="Tony McHallumi"/>
-    <MakeRoundRobinPairings />
+    <RoundRobinCalculator />
           <div style={flexBetween}>
 
             <div>
