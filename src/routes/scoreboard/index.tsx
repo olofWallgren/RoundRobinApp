@@ -8,29 +8,37 @@ import { Divider } from "@mui/material";
 import { CSSProperties } from "react";
 import { Link } from "react-router-dom";
 import OutputbarScoreBoard from "../../components/OutputBarScoreBoard";
+import { Grid } from "@mui/material";
 
 const Scoreboard = () => (
   <div className="container">
     <NavigationBar />
     <Divider />
     <div className="gameContainer">
-      <div style={{ paddingTop: "2rem" }}>
-        <h2 style={{ margin: "0" }}>Scoreboard</h2>
+      <div style={{ padding: "1.5rem 0" }}>
+        <h3 style={{ margin: "0" }}>Scoreboard</h3>
       </div>
-      <OutputbarScoreBoard
-      player="Erlef Doedsdufva"
-      totalScore="3"
-      wins="1"
-      losses="0"
-      draws="0"
-      />
-      <OutputbarScoreBoard
-      player="Tony McHallumi"
-      totalScore="0"
-      wins="1"
-      losses="0"
-      draws="0"
-      />
+      <Grid container direction="row" style={textContainer}>
+        <Grid xs={6.5}><p>Participants</p></Grid>
+        <Grid item xs={3.5}  ><p>Points</p></Grid>
+        <Grid item xs={2} style={{textAlign:"right"}}><p>W - L - D</p></Grid>
+      </Grid>
+      <div style={scoreContainer}>
+        <OutputbarScoreBoard
+          player="Erlef Doedsdufva"
+          totalScore="3"
+          wins="1"
+          losses="0"
+          draws="0"
+        />
+        <OutputbarScoreBoard
+          player="Tony McHallumi"
+          totalScore="0"
+          wins="1"
+          losses="0"
+          draws="0"
+        />
+      </div>
       <div style={paraContainer}>
         <p style={paraStyle}>End Tournament</p>
       </div>
@@ -39,12 +47,22 @@ const Scoreboard = () => (
       <Link style={btnWidth} to="/create-tournament" className="secondaryBtn">
         Back
       </Link>
-      <Link style={btnWidth} to="/current-tournament/round" className="primaryBtn">
+      <Link
+        style={btnWidth}
+        to="/current-tournament/round"
+        className="primaryBtn"
+      >
         Next Round
       </Link>
     </div>
   </div>
 );
+
+const textContainer: CSSProperties = {
+  padding: "0 1rem",
+  color: "#FA04F6",
+  margin: "0",
+};
 
 const paraContainer: CSSProperties = {
   display: "flex",
@@ -65,6 +83,11 @@ const btnContainer: CSSProperties = {
 };
 const btnWidth: CSSProperties = {
   width: "48%",
+};
+const scoreContainer: CSSProperties = {
+  overflowY: "auto",
+  overflowX: "hidden",
+  height: "350px",
 };
 
 export default Scoreboard;
