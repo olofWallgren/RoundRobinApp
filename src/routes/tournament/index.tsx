@@ -5,19 +5,28 @@ import { Link } from "react-router-dom";
 import "../../layout/tournamentContainer.css";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { CSSProperties, useState } from "react";
-
-import React from "react";
-
 import ParticipantsCard from "../../components/NewTournamentCards/ParticipantsCard";
+import { TournamentStore } from "../../Contexts/tournamentContext";
 
 const Tournament = () => {
+  ///////// CONTEXT //////////////////////
+  const settingStore = TournamentStore();
+
+  ////////// togglar participants view/////////////////
   const [showParticipantView, setParticipantView] = useState(true);
-  const ToggleParticipantView = () => {
+  const toggleParticipantView = () => {
     setParticipantView(showParticipantView ? false : true);
   };
+
+  ///////// state med participants som hämtas och uppdateras från Participants card ///////////
+  const [playerArray, setPlayerArray] = useState<string[]>([]);
+  const getParticipants = (data: any) => {
+    setPlayerArray([...data]);
+    console.log("getParticipants");
+  };
+
   type Inputs = {
     tournamentName: string;
-
     hour: string;
     min: string;
     sec: string;
@@ -35,24 +44,35 @@ const Tournament = () => {
   } = useForm<Inputs>();
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    console.log(data);
+    const newTournament = {
+      persistants: playerArray,
+      tournamentName: data.tournamentName,
+      hour: data.min,
+      min: data.min,
+      sec: data.sec,
+      games: data.games,
+      win: data.win,
+      loss: data.loss,
+      draw: data.draw,
+    };
+    settingStore.setTournament(newTournament);
   };
-
+  console.log("constext", settingStore.tournament);
   return (
     <div className="container">
-      {/* <NewTournamentCard />
-      <ParticipantsCard />
-      <SettingsCard /> */}
       <div className="tournamentContainer">
-        <h1>Tournament</h1>
-        <button onClick={() => ToggleParticipantView()}>Test</button>
-        {/* <div style={formSection}>
-          <p>Participants</p>
-          <input {...register("partisipants", { required: true })} />
-            {errors.partisipants && <span>This field is required</span>}
-        </div> */}
+        <h2>New Tournament</h2>
+        <p>{`Players ${playerArray.length}`}</p>
+        {!showParticipantView && (
+          <button onClick={() => toggleParticipantView()}>Add players</button>
+        )}
+
         {showParticipantView ? (
-          <ParticipantsCard />
+          <ParticipantsCard
+            getParticipants={getParticipants}
+            playerArray={playerArray}
+            toggleParticipantView={toggleParticipantView}
+          />
         ) : (
           <form onSubmit={handleSubmit(onSubmit)}>
             <div style={formSection}>
@@ -129,12 +149,11 @@ const Tournament = () => {
                 {errors.sec && <span>This field is required</span>}
               </div>
             </div>
-
-            <input type="submit" />
+            <Link to="/current-tournament/round">
+              <input type="submit" />
+            </Link>
           </form>
         )}
-
-        <Link to="/current-tournament/round">Go to Current Tournament</Link>
       </div>
     </div>
   );
