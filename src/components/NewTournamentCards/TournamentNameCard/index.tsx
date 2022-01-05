@@ -2,12 +2,20 @@ import react from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useState } from "react";
 import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
+import { TournamentStore } from "../../../Contexts/tournamentContext";
 
 const NewTournamentCard = () => {
+  ////// using the settingsContext /////////
+  const settingStore = TournamentStore();
+
+  ////// show tornament-input state //////////
   const [showTournamentInput, setTournamentInput] = useState(false);
+
+  ///// tournament input handler ////////////
   const tournamentInputHandler = () => {
     setTournamentInput(showTournamentInput ? false : true);
   };
+  //////// type of the input ///////////
   type Inputs = {
     tournamentName: string;
   };
@@ -21,7 +29,12 @@ const NewTournamentCard = () => {
   } = useForm<Inputs>();
 
   //// submit function ////////
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<Inputs> = (data) => {
+    console.log(data);
+    let tournamentName = data.tournamentName;
+
+    console.log("testsettings", tournamentName);
+  };
 
   return (
     <div className="section">
