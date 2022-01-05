@@ -8,3 +8,10 @@
   cursor: pointer;
 }
 
+@media screen and (max-width: 375px) {
+  .select {
+    font-size: 8px;
+    width: 62px;
+  }
+}
+
