@@ -8,6 +8,8 @@ import { Divider } from "@mui/material";
 import { CSSProperties } from "react";
 import { Link } from "react-router-dom";
 import OutputBarRound from "../../components/OutputBarRound";
+
+import RoundRobinCalculator from "../../Utilities/RoundRobinCalculator";
 import { Grid } from "@mui/material";
 
 const Round = () => {
@@ -76,6 +78,7 @@ const Round = () => {
               player2="Tony McHallumi"
             />
           </div>
+          <RoundRobinCalculator />
           <div style={flexBetween}>
             <div>
               <p style={paraStyle}>End Tournament</p>
