@@ -1,27 +1,10 @@
 .select {
-  margin-right: 0.5rem;
   background-color: white;
   color: rgba(11, 0, 44, 0.85);
   outline: none;
   border: none;
   border-radius: 0.2rem;
-  margin-right: 1rem;
   font-family: inherit;
   cursor: pointer;
 }
 
-.okBtn {
-  background: linear-gradient(180deg, #fa00ff 0%, #ff7a00 100%);
-  border-radius: 2px;
-  color: white;
-  cursor: pointer;
-  text-align: center;
-  text-decoration: none;
-  border: none;
-  transform-origin: 50% 50%;
-  transition: transform 200ms ease, background-color 150ms ease;
-}
-
-.okBtn:active {
-  transform: scale(0.97);
-}
