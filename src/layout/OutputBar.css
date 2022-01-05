@@ -1,20 +1,15 @@
 .outputBarContainer {
   background-color: rgba(56, 44, 89, 0.9);
-  border-radius: 1.5rem;
+  border-radius: 0.5rem;
   color: white;
-  padding: 0rem 0rem 0rem 1rem;
-  margin: 1rem;
-  width: 90%;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: row;
+  margin: 0 0 1rem 0;
+  padding: 0.5rem 1rem;
 }
 
 .names {
   font-family: "Metamorphous";
   text-shadow: 2px 1px black;
+  margin: 0;
 }
 
 .matchHistoryContainer {
@@ -22,4 +17,9 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  margin: 0;
+}
+
+.totalScore {
+  margin: 0;
 }

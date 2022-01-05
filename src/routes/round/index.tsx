@@ -9,6 +9,9 @@ import { CSSProperties } from "react";
 import { Link } from "react-router-dom";
 import OutputBarRound from "../../components/OutputBarRound";
 
+import RoundRobinCalculator from "../../Utilities/RoundRobinCalculator";
+import { Grid } from "@mui/material";
+
 const Round = () => {
   const [disable, setDisable] = React.useState(true); //Använd denna hook för att göra knappen klickbar efter att resultaten är ifyllda
 
@@ -18,14 +21,65 @@ const Round = () => {
         <NavigationBar />
         <Divider />
         <div className="gameContainer">
-          <div style={{ paddingTop: "2rem" }}>
-            <h2 style={{ margin: "0" }}>Round 1</h2>
+          <div style={{ padding: "1.5rem 0" }}>
+            <h3 style={{ margin: "0" }}>Round 1</h3>
           </div>
-          <OutputBarRound 
-    player1="Erlef Doedsdufva"
-    player2="Tony McHallumi"/>
+          <div style={playerContainer}>
+            <OutputBarRound
+              player1="Erlef Doedsdufva"
+              player2="Tony McHallumi"
+            />
+            <OutputBarRound
+              player1="Erlef Doedsdufva"
+              player2="Tony McHallumi"
+            />
+            <OutputBarRound
+              player1="Erlef Doedsdufva"
+              player2="Tony McHallumi"
+            />
+            <OutputBarRound
+              player1="Erlef Doedsdufva"
+              player2="Tony McHallumi"
+            />
+            <OutputBarRound
+              player1="Erlef Doedsdufva"
+              player2="Tony McHallumi"
+            />
+            <OutputBarRound
+              player1="Erlef Doedsdufva"
+              player2="Tony McHallumi"
+            />
+            <OutputBarRound
+              player1="Erlef Doedsdufva"
+              player2="Tony McHallumi"
+            />
+            <OutputBarRound
+              player1="Erlef Doedsdufva"
+              player2="Tony McHallumi"
+            />
+            <OutputBarRound
+              player1="Erlef Doedsdufva"
+              player2="Tony McHallumi"
+            />
+            <OutputBarRound
+              player1="Erlef Doedsdufva"
+              player2="Tony McHallumi"
+            />
+            <OutputBarRound
+              player1="Erlef Doedsdufva"
+              player2="Tony McHallumi"
+            />
+            <OutputBarRound
+              player1="Erlef Doedsdufva"
+              player2="Tony McHallumi"
+            />
+            <OutputBarRound
+              player1="Erlef Doedsdufva"
+              player2="Tony McHallumi"
+            />
+          </div>
+          <RoundRobinCalculator />
           <div style={flexBetween}>
-
             <div>
               <p style={paraStyle}>End Tournament</p>
             </div>
@@ -35,7 +89,11 @@ const Round = () => {
           </div>
         </div>
         <div style={btnContainer}>
-          <Link style={btnWidth} to="/create-tournament" className="secondaryBtn">
+          <Link
+            style={btnWidth}
+            to="/create-tournament"
+            className="secondaryBtn"
+          >
             Back
           </Link>
           <button style={btnWidth} className="primaryBtn" disabled={disable}>
@@ -47,6 +105,9 @@ const Round = () => {
   );
 };
 
+const textContainer: CSSProperties = {
+  padding: "0 1rem",
+};
 const paraStyle: CSSProperties = {
   color: "#FA04F6",
   cursor: "pointer",
@@ -65,6 +126,11 @@ const btnContainer: CSSProperties = {
 };
 const btnWidth: CSSProperties = {
   width: "48%",
+};
+const playerContainer: CSSProperties = {
+  overflowY: "auto",
+  overflowX: "hidden",
+  height: "350px",
 };
 
 export default Round;
