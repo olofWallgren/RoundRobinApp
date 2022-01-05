@@ -1,0 +1,38 @@
+.textContainer {
+  color: #fa04f6;
+  margin: 0;
+}
+.paraContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+  margin-bottom: 0;
+}
+.paraStyle {
+  color: #fa04f6;
+  cursor: pointer;
+}
+.btnContainer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+  width: 100%;
+}
+.btnWidth {
+  width: 48%;
+}
+.scoreContainer {
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 300px;
+}
+.wldStyle {
+  /* font-size: 12px; */
+  text-align: end;
+  padding-right: 0.3rem;
+}
+.ptsStyle {
+  /* font-size: 12px;
+    padding-left:0.3rem; */
+}
