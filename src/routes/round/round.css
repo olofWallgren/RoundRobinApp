@@ -1,0 +1,43 @@
+.textContainer {
+  display: flex;
+  justify-content: space-between;
+  /* padding-right:3.6rem; */
+  margin-right: 36px;
+}
+.flexColumn {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0.3rem;
+}
+.paraStyle {
+  color: #FA04F6;
+  cursor: pointer;
+}
+.flexBetween {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+  margin-bottom: 0;
+}
+.btnContainer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+  width: 100%;
+}
+.btnWidth {
+  width: 48%;
+}
+.playerContainer {
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 300px;
+}
+.wldStyle {
+  margin: 0;
+  color: #fa04f6;
+  font-size: 12px;
+}
+.marginBottom {
+  margin-bottom: 0.5rem;
+}
