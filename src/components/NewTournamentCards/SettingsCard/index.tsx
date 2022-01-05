@@ -3,8 +3,10 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { CSSProperties } from "react";
+import { TournamentStore } from "../../../Contexts/tournamentContext";
 
 const SettingsCard = () => {
+  const settingStore = TournamentStore();
   type Inputs = {
     hour: string;
     min: string;
@@ -23,8 +25,10 @@ const SettingsCard = () => {
   } = useForm<Inputs>();
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    console.log(data);
+    settingStore.setTournament(data);
   };
+
+  console.log("constext", settingStore.tournament);
 
   const [showSettingsInput, setSettingsInput] = useState(false);
   const settingsInputHandler = () => {

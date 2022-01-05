@@ -10,6 +10,7 @@ import FoxButton from "../../components/foxButton";
 const Home = () => {
   // const db = firestore();
   const [users, setUsers] = useState([]);
+
   const usersCollectionRef = collection(db, "tournaments");
   useEffect(() => {
     const getUsers = async () => {
