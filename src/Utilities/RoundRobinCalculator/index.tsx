@@ -1,7 +1,8 @@
-import React, { useState, useEffect} from 'react';
-import axios from 'axios';
-import Todo from '../Todo';
-import Tournament from "round-robin-tournament"; 
+import React from 'react';
+// import React, { useState, useEffect} from 'react';
+//import axios from 'axios';
+// import Todo from '../Todo';
+import Tournament from "../RoundMaker/roundMaker"; 
 
 
 
@@ -14,6 +15,8 @@ const RoundRobinCalculator = () => {
     {id: 4, name: "Kenta"},
     {id: 5, name: "Emma"},
     {id: 6, name: "Doris"},
+    {id: 6, name: "Anders"},
+    {id: 6, name: "Per"},
   ];
   
   const tournament = new Tournament(players);
