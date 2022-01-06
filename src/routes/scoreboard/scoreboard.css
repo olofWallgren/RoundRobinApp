@@ -27,12 +27,25 @@
   overflow-x: hidden;
   height: 300px;
 }
-.wldStyle {
-  /* font-size: 12px; */
+.wld {
   text-align: end;
   padding-right: 0.3rem;
 }
 .ptsStyle {
-  /* font-size: 12px;
-    padding-left:0.3rem; */
+    padding-left:0.3rem;
+}
+
+@media screen and (max-width: 768px) {
+  .ptsStyle  {
+    padding-left:0;
+  }
+}
+@media screen and (max-width: 375px) {
+  .wld  {
+    padding-right: 0;
+    font-size: 10px;
+  }
+  .ptsStyle {
+     font-size: 10px;
+  }
 }

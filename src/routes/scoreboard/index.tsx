@@ -21,7 +21,7 @@ const Scoreboard = () => (
       <Grid container direction="row" className="textContainer">
         <Grid item xs={6.7}></Grid>
         <Grid item xs={2.3}><p className="ptsStyle">Points</p></Grid>
-        <Grid item xs={3} className="wldStyle"><p>W-L-D</p></Grid>
+        <Grid item xs={3} className="wld"><p>W-L-D</p></Grid>
       </Grid>
       <div className="scoreContainer">
         <OutputbarScoreBoard

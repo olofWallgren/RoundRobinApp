@@ -22,7 +22,7 @@ const Round = () => {
           <div style={{ padding: "1.5rem 0" }}>
             <h3 style={{ margin: "0" }}>Round 1</h3>
           </div>
-          <div className="textContainer">
+          <div className="textWrapper">
             <p className="marginBottom">Pairings:</p>
             <div className="flexColumn">
               <p className="marginBottom">Result:</p>
