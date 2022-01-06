@@ -7,9 +7,10 @@
 }
 
 .names {
-  font-family: "Metamorphous";
-  text-shadow: 2px 1px black;
+  /* font-family: "Metamorphous"; */
+  /* text-shadow: 2px 1px black; */
   margin: 0;
+  letter-spacing: 0.7px;
 }
 
 .matchHistoryContainer {
@@ -22,4 +23,11 @@
 
 .totalScore {
   margin: 0;
+}
+
+@media screen and (max-width: 600px) {
+  .outputBarContainer {
+    font-size: 10px;
+    padding: 0.3rem 0.5rem;
+  }
 }

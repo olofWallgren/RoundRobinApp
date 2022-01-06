@@ -30,3 +30,10 @@
 .navigation-bar__link:active {
   color: #FA04F6;
 }
+
+@media screen and (max-width: 600px) {
+  .navigation-bar__list {
+    font-size: 13px;
+    padding: 20px 12px;
+  }
+}
