@@ -10,6 +10,7 @@ import { CSSProperties } from "react";
 const Home = () => {
   // const db = firestore();
   const [users, setUsers] = useState([]);
+
   const usersCollectionRef = collection(db, "tournaments");
   useEffect(() => {
     const getUsers = async () => {
