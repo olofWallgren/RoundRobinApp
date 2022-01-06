@@ -40,7 +40,7 @@ export default class Tournament implements TournamentInterface {
     const matches = this.calculateMatches();
 
     return [
-      ...matches,
+ //     ...matches,
       ...matches.map((round) => round.map(([home, away]) => [away, home])),
     ];
   }
