@@ -19,6 +19,7 @@ const ParticipantsCard = (props: any) => {
   const {
     register,
     handleSubmit,
+    resetField,
     formState: { errors },
   } = useForm<Inputs>();
 
@@ -36,6 +37,7 @@ const ParticipantsCard = (props: any) => {
       ...participants,
       { id: participants.length + 1, name: data.partisipants },
     ];
+    resetField("partisipants");
     setParticipants(updateParticipants);
   };
 
@@ -58,7 +60,7 @@ const ParticipantsCard = (props: any) => {
           <form onSubmit={handleSubmit(onSubmit)}>
             <input
               // style={formElement}
-              {...register("partisipants", { required: true })}
+              {...register("partisipants", { required: true, maxLength: 15 })}
             />
             {errors.partisipants && <span>This field is required</span>}
 
@@ -88,8 +90,17 @@ const ParticipantsCard = (props: any) => {
         </div>
       </div>
       <div style={ButtonSection}>
+        {participants.length >= 2 ? (
+          <button
+            style={activeButton}
+            onClick={() => props.toggleParticipantView()}
+          >
+            Done
+          </button>
+        ) : (
+          <button style={inActiveButton}>Done</button>
+        )}
         {/* <PersonAddIcon sx={{ fontSize: 40 }} style={{ color: "FA04F6" }} /> */}
-        <button onClick={() => props.toggleParticipantView()}>Done</button>
       </div>
     </div>
   );
@@ -102,17 +113,30 @@ const formSection: CSSProperties = {
 const ButtonSection: CSSProperties = {
   display: "flex",
   justifyContent: "center",
-  alignItems: "center",
+  alignItems: "flex-start",
   width: "50%",
+  paddingTop: "1rem",
 };
 const formElement: CSSProperties = {
   display: "flex",
-  flexDirection: "row",
+  flexDirection: "column",
   justifyContent: "center",
   alignItems: "center",
   width: "100%",
 };
 const fullWidth: CSSProperties = {
   width: "100%",
+};
+const activeButton: CSSProperties = {
+  backgroundColor: "rgba(250, 0, 255, 1)",
+  color: "white",
+  border: "none",
+  padding: "0.5rem",
+};
+const inActiveButton: CSSProperties = {
+  backgroundColor: "rgba(11, 0, 44, 0.2)",
+  color: "rgba(23, 11, 56, 1)",
+  border: "none",
+  padding: "0.5rem",
 };
 export default ParticipantsCard;

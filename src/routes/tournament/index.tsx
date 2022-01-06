@@ -1,8 +1,9 @@
-// import * as React from "react";
+import * as React from "react";
 import "../../layout/container.css";
 import "../../layout/section.css";
 import { Link } from "react-router-dom";
 import "../../layout/tournamentContainer.css";
+
 import { useForm, SubmitHandler } from "react-hook-form";
 import { CSSProperties, useState } from "react";
 import ParticipantsCard from "../../components/NewTournamentCards/ParticipantsCard";
@@ -27,9 +28,9 @@ const Tournament = () => {
 
   type Inputs = {
     tournamentName: string;
-    hour: string;
-    min: string;
-    sec: string;
+    hour: number;
+    min: number;
+    sec: number;
     games: string;
     win: string;
     loss: string;
@@ -47,15 +48,12 @@ const Tournament = () => {
     const newTournament = {
       persistants: playerArray,
       tournamentName: data.tournamentName,
-      hour: data.min,
-      min: data.min,
-      sec: data.sec,
+      roundLength: [{ hour: data.hour }, { min: data.min }, { sec: data.sec }],
       games: data.games,
-      win: data.win,
-      loss: data.loss,
-      draw: data.draw,
+      scoring: [{ win: data.win }, { loss: data.loss }, { draw: data.draw }],
     };
     settingStore.setTournament(newTournament);
+    console.log("submitt");
   };
   console.log("constext", settingStore.tournament);
   return (
@@ -64,7 +62,12 @@ const Tournament = () => {
         <h2>New Tournament</h2>
         <p>{`Players ${playerArray.length}`}</p>
         {!showParticipantView && (
-          <button onClick={() => toggleParticipantView()}>Add players</button>
+          <button
+            style={{ padding: "0.5rem" }}
+            onClick={() => toggleParticipantView()}
+          >
+            Add players
+          </button>
         )}
 
         {showParticipantView ? (
@@ -76,9 +79,14 @@ const Tournament = () => {
         ) : (
           <form onSubmit={handleSubmit(onSubmit)}>
             <div style={formSection}>
-              <p>Tournament name</p>
-              <input {...register("tournamentName", { required: true })} />
-              {errors.tournamentName && <span>This field is required</span>}
+              <p style={{ paddingRight: "1rem" }}>Tournament name</p>
+              <input
+                {...register("tournamentName", {
+                  required: true,
+                  maxLength: 20,
+                })}
+              />
+              {errors.tournamentName && <span>Tournamentname is required</span>}
             </div>
 
             <div style={formSection}>
@@ -87,7 +95,8 @@ const Tournament = () => {
                 <p>Hour:</p>
                 <input
                   style={inputElement}
-                  {...register("hour", { required: true })}
+                  type="number"
+                  {...register("hour", { required: true, min: 0, max: 5 })}
                 />
                 {errors.hour && <span>This field is required</span>}
               </div>
@@ -95,8 +104,9 @@ const Tournament = () => {
               <div style={inputSection}>
                 <p>Min:</p>
                 <input
+                  type="number"
                   style={inputElement}
-                  {...register("min", { required: true })}
+                  {...register("min", { required: true, min: 0, max: 60 })}
                 />
                 {errors.min && <span>This field is required</span>}
               </div>
@@ -104,8 +114,9 @@ const Tournament = () => {
               <div style={inputSection}>
                 <p>Sec</p>
                 <input
+                  type="number"
                   style={inputElement}
-                  {...register("sec", { required: true })}
+                  {...register("sec", { required: true, min: 0, max: 60 })}
                 />
                 {errors.sec && <span>This field is required</span>}
               </div>
@@ -114,7 +125,7 @@ const Tournament = () => {
             <div style={selectionSection}>
               <p>Games per match</p>
 
-              <select {...register("games")}>
+              <select style={selectionInput} {...register("games")}>
                 <option value="best of three">best of 3</option>
                 <option value="best of five">best of 5</option>
                 <option value="best of seven">best of 7</option>
@@ -126,34 +137,30 @@ const Tournament = () => {
               <p style={{ paddingRight: "1rem" }}>Scoring</p>
               <div style={inputSection}>
                 <p>Win:</p>
-                <input
-                  style={inputElement}
-                  {...register("win", { required: true })}
-                />
-                {errors.hour && <span>This field is required</span>}
+                <select style={selectionInput} {...register("win")}>
+                  <option value="3">3</option>
+                  <option value="1">1</option>
+                </select>
               </div>
               <div style={inputSection}>
                 <p>Loss:</p>
-                <input
-                  style={inputElement}
-                  {...register("loss", { required: true })}
-                />
-                {errors.min && <span>This field is required</span>}
+                <select style={selectionInput} {...register("loss")}>
+                  <option value="0">0</option>
+                  <option value="1">1</option>
+                </select>
               </div>
               <div style={inputSection}>
                 <p>Draw:</p>
-                <input
-                  style={inputElement}
-                  {...register("draw", { required: true })}
-                />
-                {errors.sec && <span>This field is required</span>}
+                <select style={selectionInput} {...register("draw")}>
+                  <option value="1">1</option>
+                  <option value="0">0</option>
+                </select>
               </div>
             </div>
-            <Link to="/current-tournament/round">
-              <input type="submit" />
-            </Link>
+            <input style={{ padding: "0.5rem" }} type="submit" />
           </form>
         )}
+        <Link to="/current-tournament/round">next</Link>
       </div>
     </div>
   );
@@ -162,6 +169,8 @@ const formSection: CSSProperties = {
   backgroundColor: "rgba(56, 44, 89, 1)",
   display: "flex",
   marginBottom: "1rem",
+  marginTop: "1rem",
+  padding: "1rem",
 };
 const inputElement: CSSProperties = {
   width: "100%",
@@ -175,6 +184,9 @@ const inputSection: CSSProperties = {
 };
 const selectionSection: CSSProperties = {
   marginBottom: "1rem",
+};
+const selectionInput: CSSProperties = {
+  padding: "0.5rem",
 };
 
 export default Tournament;
