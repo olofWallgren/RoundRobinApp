@@ -1,11 +1,12 @@
 import * as React from "react";
 import "../../layout/container.css";
 import "../../layout/section.css";
-import { Link } from "react-router-dom";
 import "../../layout/tournamentContainer.css";
+import "../tournament/tournament.css";
+import { Link } from "react-router-dom";
 
 import { useForm, SubmitHandler } from "react-hook-form";
-import { CSSProperties, useState } from "react";
+import { useState } from "react";
 import ParticipantsCard from "../../components/NewTournamentCards/ParticipantsCard";
 import { TournamentStore } from "../../Contexts/tournamentContext";
 
@@ -78,7 +79,7 @@ const Tournament = () => {
           />
         ) : (
           <form onSubmit={handleSubmit(onSubmit)}>
-            <div style={formSection}>
+            <div className="formSection">
               <p style={{ paddingRight: "1rem" }}>Tournament name</p>
               <input
                 {...register("tournamentName", {
@@ -89,43 +90,43 @@ const Tournament = () => {
               {errors.tournamentName && <span>Tournamentname is required</span>}
             </div>
 
-            <div style={formSection}>
+            <div className="formSection">
               <p style={{ paddingRight: "1rem" }}>Length of round</p>
-              <div style={inputSection}>
+              <div className="inputSection">
                 <p>Hour:</p>
                 <input
-                  style={inputElement}
+                  className="inputElement"
                   type="number"
                   {...register("hour", { required: true, min: 0, max: 5 })}
                 />
                 {errors.hour && <span>This field is required</span>}
               </div>
 
-              <div style={inputSection}>
+              <div className="inputSection">
                 <p>Min:</p>
                 <input
                   type="number"
-                  style={inputElement}
+                  className="inputElement"
                   {...register("min", { required: true, min: 0, max: 60 })}
                 />
                 {errors.min && <span>This field is required</span>}
               </div>
 
-              <div style={inputSection}>
+              <div className="inputSection">
                 <p>Sec</p>
                 <input
                   type="number"
-                  style={inputElement}
+                  className="inputElement"
                   {...register("sec", { required: true, min: 0, max: 60 })}
                 />
                 {errors.sec && <span>This field is required</span>}
               </div>
             </div>
 
-            <div style={selectionSection}>
+            <div className="selectionSection">
               <p>Games per match</p>
 
-              <select style={selectionInput} {...register("games")}>
+              <select className="selectionInput" {...register("games")}>
                 <option value="best of three">best of 3</option>
                 <option value="best of five">best of 5</option>
                 <option value="best of seven">best of 7</option>
@@ -133,25 +134,25 @@ const Tournament = () => {
               </select>
             </div>
 
-            <div style={formSection}>
+            <div className="formSection">
               <p style={{ paddingRight: "1rem" }}>Scoring</p>
-              <div style={inputSection}>
+              <div className="inputSection">
                 <p>Win:</p>
-                <select style={selectionInput} {...register("win")}>
+                <select className="selectionInput" {...register("win")}>
                   <option value="3">3</option>
                   <option value="1">1</option>
                 </select>
               </div>
-              <div style={inputSection}>
+              <div className="inputSection">
                 <p>Loss:</p>
-                <select style={selectionInput} {...register("loss")}>
+                <select className="selectionInput" {...register("loss")}>
                   <option value="0">0</option>
                   <option value="1">1</option>
                 </select>
               </div>
-              <div style={inputSection}>
+              <div className="inputSection">
                 <p>Draw:</p>
-                <select style={selectionInput} {...register("draw")}>
+                <select className="selectionInput" {...register("draw")}>
                   <option value="1">1</option>
                   <option value="0">0</option>
                 </select>
@@ -164,29 +165,6 @@ const Tournament = () => {
       </div>
     </div>
   );
-};
-const formSection: CSSProperties = {
-  backgroundColor: "rgba(56, 44, 89, 1)",
-  display: "flex",
-  marginBottom: "1rem",
-  marginTop: "1rem",
-  padding: "1rem",
-};
-const inputElement: CSSProperties = {
-  width: "100%",
-  padding: "0.5rem",
-};
-const inputSection: CSSProperties = {
-  display: "flex",
-  flexDirection: "column",
-  fontSize: "12px",
-  color: "rgba(250, 4, 246, 1)",
-};
-const selectionSection: CSSProperties = {
-  marginBottom: "1rem",
-};
-const selectionInput: CSSProperties = {
-  padding: "0.5rem",
 };
 
 export default Tournament;

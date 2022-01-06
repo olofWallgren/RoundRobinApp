@@ -1,0 +1,23 @@
+.formSection {
+    background-color: rgba(56, 44, 89, 1);
+    display: flex;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+    padding: 1rem;
+  };
+  .inputElement {
+    width: 100%;
+    padding: 0.5rem;
+  };
+  .inputSection {
+    display: flex;
+    flex-direction: column;
+    font-size: 12px;
+    color: rgba(250, 4, 246, 1);
+  };
+  .selectionSection {
+    margin-bottom: 1rem;
+  };
+  .selectionInput {
+    padding: 0.5rem;
+  };
