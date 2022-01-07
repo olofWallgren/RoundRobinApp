@@ -9,9 +9,12 @@ import { Divider } from "@mui/material";
 import { Link } from "react-router-dom";
 import OutputBarRound from "../../components/OutputBarRound";
 import RoundRobinCalculator from "../../Utilities/RoundRobinCalculator";
+import { TournamentStore } from "../../Contexts/tournamentContext";
 
 const Round = () => {
   const [disable, setDisable] = React.useState(true); //Använd denna hook för att göra knappen klickbar efter att resultaten är ifyllda
+  const settingStore = TournamentStore();
+  console.log("context från round", settingStore.tournament);
 
   return (
     <>
@@ -94,10 +97,7 @@ const Round = () => {
           </div>
         </div>
         <div className="btnContainer">
-          <Link
-            to="/create-tournament"
-            className="secondaryBtn btnWidth"
-          >
+          <Link to="/create-tournament" className="secondaryBtn btnWidth">
             Back
           </Link>
           <button className="primaryBtn btnWidth" disabled={disable}>
