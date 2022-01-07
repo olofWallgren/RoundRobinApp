@@ -11,6 +11,7 @@ import OutputBarRound from "../../components/OutputBarRound";
 import RoundRobinCalculator from "../../Utilities/RoundRobinCalculator";
 import { TournamentStore } from "../../Contexts/tournamentContext";
 
+
 const Round = () => {
   const [disable, setDisable] = React.useState(true); //Använd denna hook för att göra knappen klickbar efter att resultaten är ifyllda
   const settingStore = TournamentStore();
@@ -87,6 +88,7 @@ const Round = () => {
             />
           </div>
           <RoundRobinCalculator />
+
           <div className="flexBetween">
             <div>
               <p className="paraStyle">End Tournament</p>

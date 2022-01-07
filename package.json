@@ -39,13 +39,7 @@
       "react-app/jest"
     ]
   },
-  "keywords": [
-    "round-robin",
-    "tournament",
-    "fixture",
-    "all-play-all",
-    "rotation"
-  ],
+
   "browserslist": {
     "production": [
       ">0.2%",
