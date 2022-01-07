@@ -1,8 +1,7 @@
-import react from "react";
-import PersonAddIcon from "@mui/icons-material/PersonAdd";
+import { useEffect } from "react";
 import CreateIcon from "@mui/icons-material/Create";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { useState, CSSProperties, useEffect } from "react";
+import { useState, CSSProperties } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 
 const ParticipantsCard = (props: any) => {
@@ -31,24 +30,41 @@ const ParticipantsCard = (props: any) => {
     getParticipants(participants);
   }, [participants]);
 
+  //// uppdaterar participants statet från localstorage/////////
+  useEffect(() => {
+    let ls = JSON.parse(localStorage.getItem("players") || "");
+    setParticipants(ls);
+  }, []);
+
+  //// sparar data till LS ///////////
+  function saveToLocalStorage(key: string, value: any): void {
+    localStorage.setItem(key, JSON.stringify(value));
+    console.log("cardLS", localStorage.getItem("players"));
+  }
+
   ///// uppdaterar participants statet ////////////
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    const updateParticipants = [
-      ...participants,
-      { id: participants.length + 1, name: data.partisipants },
-    ];
+    ///// rensar inputfield //////////
     resetField("partisipants");
-    setParticipants(updateParticipants);
+    setParticipants((prevState) => {
+      const newItems = [
+        ...prevState,
+        { id: Math.floor(Math.random() * 1000) + 1, name: data.partisipants },
+      ];
+      saveToLocalStorage("players", newItems);
+      return newItems;
+    });
   };
 
   ///// deletar en spelare från particisipant statet /////////
-  const deleteParticipant = (name: string) => {
+  const deleteParticipant = (id: number) => {
     const updateParticipants = [
       ...participants.filter((p) => {
-        return p.name !== name;
+        return p.id !== id;
       }),
     ];
     setParticipants(updateParticipants);
+    saveToLocalStorage("players", updateParticipants);
   };
 
   return (
@@ -83,7 +99,7 @@ const ParticipantsCard = (props: any) => {
               {i.name}
               <div>
                 <CreateIcon />
-                <DeleteIcon onClick={() => deleteParticipant(i.name)} />
+                <DeleteIcon onClick={() => deleteParticipant(i.id)} />
               </div>
             </div>
           ))}
@@ -117,16 +133,7 @@ const ButtonSection: CSSProperties = {
   width: "50%",
   paddingTop: "1rem",
 };
-const formElement: CSSProperties = {
-  display: "flex",
-  flexDirection: "column",
-  justifyContent: "center",
-  alignItems: "center",
-  width: "100%",
-};
-const fullWidth: CSSProperties = {
-  width: "100%",
-};
+
 const activeButton: CSSProperties = {
   backgroundColor: "rgba(250, 0, 255, 1)",
   color: "white",
