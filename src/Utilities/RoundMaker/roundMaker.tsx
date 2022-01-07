@@ -1,9 +1,6 @@
-// import List from "./list";
 
 type ListPlayers = ReadonlyArray<Player>;
-// type ListRounds = Array<any>;
-// type ListSimple = Array<Player>;
-// type Matches = string[][][];
+
 
 type Player = {
   readonly id: number;
