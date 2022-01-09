@@ -1,15 +1,26 @@
 .header {
-  color: black;
+  color: white;
   width: 100%;
-  padding: 40px;
+  padding: 24px 40px;
   display: flex;
-  flex-shrink: 0;
   justify-content: space-between;
   align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1600px;
+}
+
+.header__h1 {
+  margin: 0;
+  font-size: 20px;
+  letter-spacing: 4px;
+}
+.header__icon {
+  color: #FA04F6;
 }
 
 @media only screen and (max-width: 600px) {
     .header {
-        padding: 24px;
+        padding: 20px 16px 8px 16px;
     }
   }
