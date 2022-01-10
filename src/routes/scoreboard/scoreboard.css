@@ -1,0 +1,51 @@
+.textContainer {
+  color: #fa04f6;
+  margin: 0;
+}
+.paraContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+  margin-bottom: 0;
+}
+.paraStyle {
+  color: #fa04f6;
+  cursor: pointer;
+}
+.btnContainer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+  width: 100%;
+}
+.btnWidth {
+  width: 48%;
+}
+.scoreContainer {
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 300px;
+}
+.wld {
+  text-align: end;
+  padding-right: 0.3rem;
+}
+.ptsStyle {
+    padding-left:0.3rem;
+}
+
+@media screen and (max-width: 768px) {
+  .ptsStyle  {
+    padding-left:0;
+  }
+}
+@media screen and (max-width: 375px) {
+  .wld  {
+    padding-right: 0;
+    font-size: 10px;
+  }
+  .ptsStyle {
+     font-size: 10px;
+  }
+}

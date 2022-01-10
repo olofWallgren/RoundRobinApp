@@ -74,7 +74,7 @@ function changeName(e: any) {
           horizontal: 'left',
         }}
       >
-        <MenuItem id="firstChoice" value={"korvkiosk"} onClick={handleClose}>Still Playing</MenuItem>
+        <MenuItem id="firstChoice" value={"1"} onClick={handleClose}>Still Playing</MenuItem>
         <MenuItem id="secondChoice" value={"2"} onClick={handleClose}>2 - 0 - 0</MenuItem>
         <MenuItem id="thirdChoice" value={"3"} onClick={handleClose}>2 - 1 - 0</MenuItem>
         <MenuItem value={"4"} onClick={handleClose}>1 - 0 - 1</MenuItem>

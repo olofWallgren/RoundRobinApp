@@ -1,84 +1,134 @@
 import react from "react";
-import PersonAddIcon from "@mui/icons-material/PersonAdd";
+// import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import CreateIcon from "@mui/icons-material/Create";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { width } from "@mui/system";
-const ParticipantsCard = () => {
+import "../ParticipantsCard/participantsCard.css";
+import "../../../layout/primaryBtn.css";
+
+const ParticipantsCard = (props: any) => {
+  const { getParticipants } = props;
+
   type Inputs = {
     partisipants: string;
+  };
+  type participant = {
+    name: string;
+    id: number;
   };
 
   const {
     register,
     handleSubmit,
-    watch,
+    resetField,
     formState: { errors },
   } = useForm<Inputs>();
 
-  const [participants, setParticipants] = useState([{ id: 1, name: "test" }]);
-  const [showParticipantsInput, setParticipantInput] = useState(false);
+  //// en player array för att mappa ut alla players som skapas ///////
+  const [participants, setParticipants] = useState<participant[]>([]);
 
+  ///// uppdaterar en lika dan array i tournament view ////////
+  useEffect(() => {
+    getParticipants(participants);
+  }, [participants]);
+
+  //// uppdaterar participants statet från localstorage/////////
+  useEffect(() => {
+    let ls = JSON.parse(localStorage.getItem("players") || "");
+    setParticipants(ls);
+  }, []);
+
+  //// sparar data till LS ///////////
+  function saveToLocalStorage(key: string, value: any): void {
+    localStorage.setItem(key, JSON.stringify(value));
+    console.log("cardLS", localStorage.getItem("players"));
+  }
+
+  ///// uppdaterar participants statet ////////////
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    const updateParticipants = [
-      ...participants,
-      { id: participants.length + 1, name: data.partisipants },
-    ];
-    setParticipants(updateParticipants);
-    console.log(data.partisipants);
-    console.log(participants);
+    ///// rensar inputfield //////////
+    resetField("partisipants");
+    setParticipants((prevState) => {
+      const newItems = [
+        ...prevState,
+        { id: Math.floor(Math.random() * 1000) + 1, name: data.partisipants },
+      ];
+      saveToLocalStorage("players", newItems);
+      return newItems;
+    });
   };
 
-  const participantInputHandler = () => {
-    setParticipantInput(showParticipantsInput ? false : true);
+  ///// deletar en spelare från particisipant statet /////////
+  const deleteParticipant = (id: number) => {
+    const updateParticipants = [
+      ...participants.filter((p) => {
+        return p.id !== id;
+      }),
+    ];
+    setParticipants(updateParticipants);
+    saveToLocalStorage("players", updateParticipants);
   };
 
   return (
-    <div className="section">
-      <div>
-        <h3 style={{ marginTop: "0" }}>Participants</h3>
-        {!showParticipantsInput ? (
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio earum,
-            amet id hic quis voluptates repellendus doloremque ducimus.
+    <>
+      {/* Input för deltagare och add-knapp */}
+      <div className="inputContainer">
+        <form className="flexBetween" onSubmit={handleSubmit(onSubmit)}>
+          <input
+            className="textField"
+            type="text"
+            placeholder="Enter player name"
+            {...register("partisipants", { required: true, maxLength: 15 })}
+          />
+          {/* <PersonAddIcon sx={{ fontSize: 40 }} style={{ color: "FA04F6" }} /> */}
+          <input
+            className="addBtnWidth primaryBtn primaryBtn--small"
+            value="Add"
+            type="submit"
+          />
+        </form>
+        
+        {/* Error Text */}
+        {errors.partisipants && (
+          <p className="errorText">
+            Please enter a name with less than 16 letters
           </p>
-        ) : (
-          <div>
-            <form onSubmit={handleSubmit(onSubmit)}>
-              <input {...register("partisipants", { required: true })} />
-              {errors.partisipants && <span>This field is required</span>}
-              <input type="submit" />
-            </form>
-            {participants.map((i) => (
-              <div
-                style={{
-                  backgroundColor: "rgba(56, 44, 89, 1)",
-                  marginTop: "10px",
-                  display: "flex",
-                  flexDirection: "row",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                  width: "100%",
-                }}
-              >
-                {i.name}
-                <div>
-                  <CreateIcon />
-                  <DeleteIcon />
-                </div>
+        )}
+        
+        {/* Added Players with name and icons in a scrollbox */}
+        <div className="scrollBox">
+          {participants.map((i) => (
+            <div key={i.id} className="playerBox flexBetween">
+              {i.name}
+              <div>
+                <CreateIcon className="icon editIcon" />
+                <DeleteIcon
+                  className="icon deleteIcon"
+                  onClick={() => deleteParticipant(i.id)}
+                />
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
+        </div>
+      </div>
+      
+      {/* // Knappar // */}
+      <div className="buttonSection">
+        {participants.length >= 2 ? (
+          <button
+            className="primaryBtn fullWidth"
+            onClick={() => props.toggleParticipantView()}
+          >
+            Done
+          </button>
+        ) : (
+          <button disabled className="primaryBtn fullWidth">
+            Done
+          </button>
         )}
       </div>
-      <div
-        onClick={() => participantInputHandler()}
-        style={{ padding: "1rem", display: "flex", alignItems: "center" }}
-      >
-        <PersonAddIcon sx={{ fontSize: 40 }} style={{ color: "FA04F6" }} />
-      </div>
-    </div>
+    </>
   );
 };
 export default ParticipantsCard;

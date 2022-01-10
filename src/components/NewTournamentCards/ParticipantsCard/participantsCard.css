@@ -1,0 +1,68 @@
+.inputContainer {
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+}
+.textField {
+  width: 80%;
+  margin-right: 0.5rem;
+  background-color: white;
+  color: rgba(11, 0, 44, 0.85);
+  border: none;
+  border-radius: 0.2rem;
+  outline: none;
+  padding: 0.5rem 0.5rem;
+}
+.textField:focus {
+  border: 1px solid rgba(250, 0, 255, 1);
+}
+.errorText {
+  background-color: rgb(179, 0, 0);
+  color: white;
+  padding: 0.2rem;
+  margin-top: 0.3rem;
+  font-weight: 500;
+  font-size: 12px;
+}
+.addBtnWidth {
+  width: 20%;
+}
+
+.scrollBox {
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 320px;
+  margin-top: 0.5rem;
+}
+.playerBox {
+  background-color: rgba(56, 44, 89, 0.9);
+  color: white;
+  border-radius: 0.5rem;
+  width: 100;
+  margin: 0.5rem 0;
+  padding: 0.2rem 0.4rem;
+  align-items: center;
+  letter-spacing: 0.7px;
+  font-size: 14px;
+}
+.buttonSection {
+  margin-top: 1rem;
+  width: 100%;
+}
+.fullWidth {
+  width: 100%;
+}
+.icon {
+  font-size: 1.2rem;
+  color: rgba(250, 0, 255, 1);
+  cursor: pointer;
+}
+.editIcon {
+  margin-right: 0.7rem;
+}
+.flexBetween {
+  display: flex;
+  justify-content: space-between;
+}
+.noMargin {
+  margin: 0;
+}
