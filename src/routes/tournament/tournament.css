@@ -1,0 +1,65 @@
+.headingContainer {
+  padding: 1.5rem 0;
+}
+.formSection {
+  background-color: rgba(56, 44, 89, 1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1rem 0;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  min-height: 4rem;
+}
+.inputElement {
+  width: 100%;
+  /* padding: 0.5rem; */
+}
+.input {
+  background-color: white;
+  color: rgba(11, 0, 44, 0.85);
+  border: none;
+  border-radius: 0.3rem;
+  outline: none;
+  padding: 0.3rem 0.3rem;
+}
+.input:focus {
+  border: 1px solid rgba(250, 0, 255, 1);
+}
+.inputSection {
+  display: flex;
+  flex-direction: column;
+  color: rgba(250, 4, 246, 1);
+}
+/* .selectionInput {
+  padding: 0.5rem;
+} */
+.inputTournament {
+  /* border-radius: 0.5rem; */
+  /* font-size: small; */
+}
+.buttonContainer {
+  margin-top: 3rem;
+}
+.flexBetween {
+  display: flex;
+  justify-content: space-between;
+}
+.noMargin {
+  margin: 0;
+}
+.secondaryColor {
+  color: #fa04f6;
+}
+.fullwidth {
+  width: 100%;
+}
+.halfWidth {
+  width: 50%;
+}
+.justifyCenter {
+  align-items: center;
+}
+.bottomPadding {
+  padding-bottom: 0.2rem;
+}

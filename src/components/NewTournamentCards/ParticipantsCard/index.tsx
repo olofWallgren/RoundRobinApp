@@ -1,8 +1,11 @@
-import { useEffect } from "react";
+import react from "react";
+// import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import CreateIcon from "@mui/icons-material/Create";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { useState, CSSProperties } from "react";
+import { useState, useEffect } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
+import "../ParticipantsCard/participantsCard.css";
+import "../../../layout/primaryBtn.css";
 
 const ParticipantsCard = (props: any) => {
   const { getParticipants } = props;
@@ -68,82 +71,64 @@ const ParticipantsCard = (props: any) => {
   };
 
   return (
-    <div style={formSection}>
-      <div style={{ width: "100%" }}>
-        <h3 style={{ marginTop: "0" }}>Participants</h3>
-
-        <div style={{ width: "100%" }}>
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <input
-              // style={formElement}
-              {...register("partisipants", { required: true, maxLength: 15 })}
-            />
-            {errors.partisipants && <span>This field is required</span>}
-
-            <input value="Add" type="submit" />
-          </form>
-
+    <>
+      {/* Input för deltagare och add-knapp */}
+      <div className="inputContainer">
+        <form className="flexBetween" onSubmit={handleSubmit(onSubmit)}>
+          <input
+            className="textField"
+            type="text"
+            placeholder="Enter player name"
+            {...register("partisipants", { required: true, maxLength: 15 })}
+          />
+          {/* <PersonAddIcon sx={{ fontSize: 40 }} style={{ color: "FA04F6" }} /> */}
+          <input
+            className="addBtnWidth primaryBtn primaryBtn--small"
+            value="Add"
+            type="submit"
+          />
+        </form>
+        
+        {/* Error Text */}
+        {errors.partisipants && (
+          <p className="errorText">
+            Please enter a name with less than 16 letters
+          </p>
+        )}
+        
+        {/* Added Players with name and icons in a scrollbox */}
+        <div className="scrollBox">
           {participants.map((i) => (
-            <div
-              key={i.id}
-              style={{
-                backgroundColor: "rgba(11, 0, 44, 0.85)",
-                marginTop: "10px",
-                display: "flex",
-                flexDirection: "row",
-                alignItems: "center",
-                justifyContent: "space-between",
-                width: "100%",
-              }}
-            >
+            <div key={i.id} className="playerBox flexBetween">
               {i.name}
               <div>
-                <CreateIcon />
-                <DeleteIcon onClick={() => deleteParticipant(i.id)} />
+                <CreateIcon className="icon editIcon" />
+                <DeleteIcon
+                  className="icon deleteIcon"
+                  onClick={() => deleteParticipant(i.id)}
+                />
               </div>
             </div>
           ))}
         </div>
       </div>
-      <div style={ButtonSection}>
+      
+      {/* // Knappar // */}
+      <div className="buttonSection">
         {participants.length >= 2 ? (
           <button
-            style={activeButton}
+            className="primaryBtn fullWidth"
             onClick={() => props.toggleParticipantView()}
           >
             Done
           </button>
         ) : (
-          <button style={inActiveButton}>Done</button>
+          <button disabled className="primaryBtn fullWidth">
+            Done
+          </button>
         )}
-        {/* <PersonAddIcon sx={{ fontSize: 40 }} style={{ color: "FA04F6" }} /> */}
       </div>
-    </div>
+    </>
   );
-};
-const formSection: CSSProperties = {
-  backgroundColor: "rgba(56, 44, 89, 1)",
-  display: "flex",
-  marginBottom: "1rem",
-};
-const ButtonSection: CSSProperties = {
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "flex-start",
-  width: "50%",
-  paddingTop: "1rem",
-};
-
-const activeButton: CSSProperties = {
-  backgroundColor: "rgba(250, 0, 255, 1)",
-  color: "white",
-  border: "none",
-  padding: "0.5rem",
-};
-const inActiveButton: CSSProperties = {
-  backgroundColor: "rgba(11, 0, 44, 0.2)",
-  color: "rgba(23, 11, 56, 1)",
-  border: "none",
-  padding: "0.5rem",
 };
 export default ParticipantsCard;
