@@ -9,20 +9,21 @@
   cursor: pointer;
   text-align: center;
   text-decoration: none;
-
   transform-origin: 50% 50%;
   transition: transform 200ms ease, background-color 150ms ease;
 }
-
 .primaryBtn:active {
   transform: scale(0.97);
 }
-
 .primaryBtn:disabled {
   cursor: not-allowed;
   color: lightgray;
   background: #2c2247;
   opacity: 0.5;
+}
+.primaryBtn--small {
+  padding: 6px 6px;
+  border-radius: 4px;
 }
 
 @media screen and (max-width: 600px) {
@@ -30,5 +31,9 @@
     padding: 16px 16px;
     font-size: medium;
     font-weight: 500;
+  }
+  .primaryBtn--small {
+    padding: 6px 6px;
+    font-size: smaller;
   }
 }

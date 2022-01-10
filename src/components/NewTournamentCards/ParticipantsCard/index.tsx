@@ -67,7 +67,7 @@ const ParticipantsCard = (props: any) => {
           {/* <PersonAddIcon sx={{ fontSize: 40 }} style={{ color: "FA04F6" }} /> */}
           <input
             className="addBtnWidth primaryBtn primaryBtn--small"
-            value="ADD"
+            value="Add"
             type="submit"
           />
         </form>

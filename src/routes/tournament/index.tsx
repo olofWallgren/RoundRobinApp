@@ -1,8 +1,9 @@
 import * as React from "react";
 import "../../layout/container.css";
 import "../../layout/section.css";
+import "../../layout/primaryBtn.css";
 import "../../layout/tournamentContainer.css";
-import "../tournament/tournament.css";
+import "./tournament.css";
 import { Link } from "react-router-dom";
 
 import { useForm, SubmitHandler } from "react-hook-form";
@@ -58,112 +59,139 @@ const Tournament = () => {
   };
   console.log("constext", settingStore.tournament);
   return (
-    <div className="container">
-      <div className="tournamentContainer">
-        <h2>New Tournament</h2>
-        <p>{`Players ${playerArray.length}`}</p>
-        {!showParticipantView && (
-          <button
-            style={{ padding: "0.5rem" }}
-            onClick={() => toggleParticipantView()}
-          >
-            Add players
-          </button>
-        )}
+    <>
+      <div className="container">
+        <div className="tournamentContainer">
+          <div className="headingContainer">
+            <h3 className="noMargin">New Tournament</h3>
+          </div>
+          <div className="flexBetween justifyCenter">
+            <p className="noMargin secondaryColor">{`Added players: ${playerArray.length}`}</p>
+            {!showParticipantView && (
+              <button
+                className="primaryBtn primaryBtn--small"
+                onClick={() => toggleParticipantView()}
+              >
+                Add players
+              </button>
+            )}
+          </div>
 
-        {showParticipantView ? (
-          <ParticipantsCard
-            getParticipants={getParticipants}
-            playerArray={playerArray}
-            toggleParticipantView={toggleParticipantView}
-          />
-        ) : (
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <div className="formSection">
-              <p style={{ paddingRight: "1rem" }}>Tournament name</p>
-              <input
-                {...register("tournamentName", {
-                  required: true,
-                  maxLength: 20,
-                })}
-              />
-              {errors.tournamentName && <span>Tournamentname is required</span>}
-            </div>
-
-            <div className="formSection">
-              <p style={{ paddingRight: "1rem" }}>Length of round</p>
-              <div className="inputSection">
-                <p>Hour:</p>
+          {showParticipantView ? (
+            <ParticipantsCard
+              getParticipants={getParticipants}
+              playerArray={playerArray}
+              toggleParticipantView={toggleParticipantView}
+            />
+          ) : (
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <div className="formSection">
+                <p className="noMargin">Tournament name</p>
                 <input
-                  className="inputElement"
-                  type="number"
-                  {...register("hour", { required: true, min: 0, max: 5 })}
+                  className="input inputTournament"
+                  type="text"
+                  {...register("tournamentName", {
+                    required: true,
+                    maxLength: 20,
+                  })}
+                  placeholder="Enter tournament name"
                 />
-                {errors.hour && <span>This field is required</span>}
+                {errors.tournamentName && (
+                  <span>Tournament name is required</span>
+                )}
+              </div>
+                  {/* Length of round section */}
+              <div className="formSection">
+                <div className="halfWidth">
+                  <p className="noMargin">Length of round</p>
+                </div>
+                <div className="inputSection">
+                  <p className="noMargin bottomPadding">Hour:</p>
+                  <input
+                    className="input inputElement"
+                    type="number"
+                    {...register("hour", { required: true, min: 0, max: 5 })}
+                  />
+                  {errors.hour && <span>This field is required</span>}
+                </div>
+
+                <div className="inputSection">
+                  <p className="noMargin bottomPadding">Min:</p>
+                  <input
+                    type="number"
+                    className="input inputElement"
+                    {...register("min", { required: true, min: 0, max: 60 })}
+                  />
+                  {errors.min && <span>This field is required</span>}
+                </div>
+
+                <div className="inputSection">
+                  <p className="noMargin bottomPadding">Sec</p>
+                  <input
+                    className="input inputElement"
+                    type="number"
+                    {...register("sec", { required: true, min: 0, max: 60 })}
+                  />
+                  {errors.sec && <span>This field is required</span>}
+                </div>
               </div>
 
-              <div className="inputSection">
-                <p>Min:</p>
-                <input
-                  type="number"
-                  className="inputElement"
-                  {...register("min", { required: true, min: 0, max: 60 })}
-                />
-                {errors.min && <span>This field is required</span>}
-              </div>
+                  {/* Games per round section */}
+              <div className="formSection">
+                <p className="noMargin">Games per match</p>
 
-              <div className="inputSection">
-                <p>Sec</p>
-                <input
-                  type="number"
-                  className="inputElement"
-                  {...register("sec", { required: true, min: 0, max: 60 })}
-                />
-                {errors.sec && <span>This field is required</span>}
-              </div>
-            </div>
-
-            <div className="selectionSection">
-              <p>Games per match</p>
-
-              <select className="selectionInput" {...register("games")}>
-                <option value="best of three">best of 3</option>
-                <option value="best of five">best of 5</option>
-                <option value="best of seven">best of 7</option>
-                <option value="single round">single round</option>
-              </select>
-            </div>
-
-            <div className="formSection">
-              <p style={{ paddingRight: "1rem" }}>Scoring</p>
-              <div className="inputSection">
-                <p>Win:</p>
-                <select className="selectionInput" {...register("win")}>
-                  <option value="3">3</option>
-                  <option value="1">1</option>
+                <select className="input selectionInput" {...register("games")}>
+                  <option value="best of three">Best of 3</option>
+                  <option value="best of five">Best of 5</option>
+                  <option value="best of seven">Best of 7</option>
+                  <option value="single round">Single round</option>
                 </select>
               </div>
-              <div className="inputSection">
-                <p>Loss:</p>
-                <select className="selectionInput" {...register("loss")}>
-                  <option value="0">0</option>
-                  <option value="1">1</option>
-                </select>
+                  {/* Scoring section */}
+              <div className="formSection">
+                <div className="halfWidth">
+
+                <p className="noMargin">Scoring</p>
+                </div>
+                <div className="inputSection">
+                  <p className="noMargin bottomPadding">Win:</p>
+                  <select className="input selectionInput" {...register("win")}>
+                    <option value="3">3</option>
+                    <option value="1">1</option>
+                  </select>
+                </div>
+                <div className="inputSection">
+                  <p className="noMargin bottomPadding">Loss:</p>
+                  <select
+                    className="input selectionInput"
+                    {...register("loss")}
+                  >
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                  </select>
+                </div>
+                <div className="inputSection">
+                  <p className="noMargin bottomPadding">Draw:</p>
+                  <select
+                    className="input selectionInput"
+                    {...register("draw")}
+                  >
+                    <option value="1">1</option>
+                    <option value="0">0</option>
+                  </select>
+                </div>
               </div>
-              <div className="inputSection">
-                <p>Draw:</p>
-                <select className="selectionInput" {...register("draw")}>
-                  <option value="1">1</option>
-                  <option value="0">0</option>
-                </select>
+              <div className="buttonContainer">
+                <input className="primaryBtn fullWidth" value="Start" type="submit" />
               </div>
-            </div>
-            <input style={{ padding: "0.5rem" }} type="submit" />
-          </form>
-        )}
-        <Link to="/current-tournament/round">next</Link>
+            </form>
+          )}
+        </div>
       </div>
-    </div>
+      {/* <Link className="primaryBtn" to="/current-tournament/round">
+        Done
+      </Link> */}
+    </>
   );
 };
 
