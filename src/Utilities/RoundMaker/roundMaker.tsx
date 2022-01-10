@@ -1,3 +1,14 @@
+const players = [
+  {id: 1, name: "Olof"},
+  {id: 2, name: "Tony"},
+  {id: 3, name: "Tim"},
+  {id: 4, name: "Kenta"},
+  {id: 5, name: "Emma"},
+  {id: 6, name: "Doris"},
+
+];
+
+
 
 type ListPlayers = ReadonlyArray<Player>;
 
@@ -14,19 +25,9 @@ interface TournamentInterface {
 
 }
 
-export default class Tournament implements TournamentInterface {
-  readonly players: ListPlayers;
-
-  
-
-  constructor(players: ListPlayers) {
+   
+function MakeRoundRobinPairings(players: ListPlayers) {
     if (players.length % 2) throw new Error("Teams length must be even");
-
-    this.players = players;
-
-
-
-  function makeRoundRobinPairings(players: ListPlayers) {
 
 
     const playerCount = players.length;
@@ -62,10 +63,6 @@ export default class Tournament implements TournamentInterface {
     return tournamentPairings;
 }
 
-makeRoundRobinPairings(players);
 
 
-
-
-    }
-}
+export default MakeRoundRobinPairings;

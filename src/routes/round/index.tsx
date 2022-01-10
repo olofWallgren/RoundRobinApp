@@ -8,7 +8,7 @@ import NavigationBar from "../../components/NavigationBar";
 import { Divider } from "@mui/material";
 import { Link } from "react-router-dom";
 import OutputBarRound from "../../components/OutputBarRound";
-import RoundRobinCalculator from "../../Utilities/RoundRobinCalculator";
+import MakeRoundRobinPairings from "../../Utilities/RoundMaker/roundMaker";
 import { TournamentStore } from "../../Contexts/tournamentContext";
 
 
@@ -87,7 +87,7 @@ const Round = () => {
               player2="Tony McHallumi"
             />
           </div>
-          <RoundRobinCalculator />
+          <MakeRoundRobinPairings />
 
           <div className="flexBetween">
             <div>

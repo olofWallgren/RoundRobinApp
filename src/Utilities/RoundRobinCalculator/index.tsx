@@ -1,33 +1,29 @@
-import React from 'react';
-import Tournament from "../RoundMaker/roundMaker"; 
+// //import React from 'react';
+// //import Tournament from "../RoundMaker/roundMaker"; 
 
 
 
-const RoundRobinCalculator = () => {
+// const Players = () => {
   
-  const PLAYERS = [
-    {id: 1, name: "Olof"},
-    {id: 2, name: "Tony"},
-    {id: 3, name: "Tim"},
-    {id: 4, name: "Kenta"},
-    {id: 5, name: "Emma"},
-    {id: 6, name: "Doris"},
+//   const PLAYERS = [
+//     {id: 1, name: "Olof"},
+//     {id: 2, name: "Tony"},
+//     {id: 3, name: "Tim"},
+//     {id: 4, name: "Kenta"},
+//     {id: 5, name: "Emma"},
+//     {id: 6, name: "Doris"},
 
-  ];
+//   ];
   
-  const tournament = new Tournament(PLAYERS);
 
   
-  return (
-    <div>
-      {console.log(tournament)};
+//   return (
+//     PLAYERS;
+//   );
 
-    </div>
-  );
+// };
 
-};
-
-export default RoundRobinCalculator;
+// export default Players;
 
 
 
