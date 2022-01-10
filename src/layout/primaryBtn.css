@@ -1,8 +1,7 @@
 .primaryBtn {
   background: linear-gradient(180deg, #FA00FF 0%, #FF7A00 100%);
-  box-shadow: 4px 4px 10px rgba(255, 112, 24, 0.31);
   border-radius: 10px;
-  border: black 4px;
+  border:none;
   padding: 16px 32px;
   font-size: large;
   font-weight: 600;
@@ -35,6 +34,6 @@
   }
   .primaryBtn--small {
     padding: 6px 6px;
-    font-size: smaller;
+    font-size: small;
   }
 }
