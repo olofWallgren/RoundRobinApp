@@ -33,24 +33,41 @@ const ParticipantsCard = (props: any) => {
     getParticipants(participants);
   }, [participants]);
 
+  //// uppdaterar participants statet från localstorage/////////
+  useEffect(() => {
+    let ls = JSON.parse(localStorage.getItem("players") || "");
+    setParticipants(ls);
+  }, []);
+
+  //// sparar data till LS ///////////
+  function saveToLocalStorage(key: string, value: any): void {
+    localStorage.setItem(key, JSON.stringify(value));
+    console.log("cardLS", localStorage.getItem("players"));
+  }
+
   ///// uppdaterar participants statet ////////////
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    const updateParticipants = [
-      ...participants,
-      { id: participants.length + 1, name: data.partisipants },
-    ];
+    ///// rensar inputfield //////////
     resetField("partisipants");
-    setParticipants(updateParticipants);
+    setParticipants((prevState) => {
+      const newItems = [
+        ...prevState,
+        { id: Math.floor(Math.random() * 1000) + 1, name: data.partisipants },
+      ];
+      saveToLocalStorage("players", newItems);
+      return newItems;
+    });
   };
 
   ///// deletar en spelare från particisipant statet /////////
-  const deleteParticipant = (name: string) => {
+  const deleteParticipant = (id: number) => {
     const updateParticipants = [
       ...participants.filter((p) => {
-        return p.name !== name;
+        return p.id !== id;
       }),
     ];
     setParticipants(updateParticipants);
+    saveToLocalStorage("players", updateParticipants);
   };
 
   return (
@@ -88,7 +105,7 @@ const ParticipantsCard = (props: any) => {
                 <CreateIcon className="icon editIcon" />
                 <DeleteIcon
                   className="icon deleteIcon"
-                  onClick={() => deleteParticipant(i.name)}
+                  onClick={() => deleteParticipant(i.id)}
                 />
               </div>
             </div>

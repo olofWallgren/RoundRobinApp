@@ -1,7 +1,4 @@
 import React from 'react';
-// import React, { useState, useEffect} from 'react';
-//import axios from 'axios';
-// import Todo from '../Todo';
 import Tournament from "../RoundMaker/roundMaker"; 
 
 
@@ -15,17 +12,17 @@ const RoundRobinCalculator = () => {
     {id: 4, name: "Kenta"},
     {id: 5, name: "Emma"},
     {id: 6, name: "Doris"},
-    {id: 7, name: "Anders"},
-    {id: 8, name: "Per"},
+    {id: 7, name: "Harry"},
+    {id: 8, name: "Arvid"},
+
   ];
   
   const tournament = new Tournament(PLAYERS);
-  const matches = tournament.matches;
 
-  console.log(matches);
+  console.log(tournament);
   return (
     <div>
-     
+      
     </div>
   );
 
