@@ -2,24 +2,28 @@
 type ListPlayers = ReadonlyArray<Player>;
 
 
+
 type Player = {
   readonly id: number;
   readonly name: string;
 };
 
+
 interface TournamentInterface {
   readonly players: ListPlayers;
+
 }
 
 export default class Tournament implements TournamentInterface {
   readonly players: ListPlayers;
+
   
 
   constructor(players: ListPlayers) {
     if (players.length % 2) throw new Error("Teams length must be even");
 
     this.players = players;
-  
+
 
 
   function makeRoundRobinPairings(players: ListPlayers) {
@@ -51,8 +55,10 @@ export default class Tournament implements TournamentInterface {
       // rotating the array
       playerIndexes.push(playerIndexes.shift());
       tournamentPairings.push(roundPairings);
-      console.log(roundPairings);
+//    console.log(roundPairings);
+//    console.log(roundPairings[0]);
     }
+    // return tournamentPairings;
     return tournamentPairings;
 }
 

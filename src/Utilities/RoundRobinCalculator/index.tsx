@@ -12,17 +12,16 @@ const RoundRobinCalculator = () => {
     {id: 4, name: "Kenta"},
     {id: 5, name: "Emma"},
     {id: 6, name: "Doris"},
-    {id: 7, name: "Harry"},
-    {id: 8, name: "Arvid"},
 
   ];
   
   const tournament = new Tournament(PLAYERS);
 
-  console.log(tournament);
+  
   return (
     <div>
-      
+      {console.log(tournament)};
+
     </div>
   );
 
