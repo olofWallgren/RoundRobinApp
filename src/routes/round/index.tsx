@@ -43,62 +43,11 @@ const Round = () => {
             </div>
           </div>
           <div className="playerContainer">
-            <OutputBarRound
-              player1="Erlef Doedsdufva"
-              player2="Tony McHallumi"
-            />
-            <OutputBarRound
-              player1="Erlef Doedsdufva"
-              player2="Tony McHallumi"
-            />
-            <OutputBarRound
-              player1="Erlef Doedsdufva"
-              player2="Tony McHallumi"
-            />
-            <OutputBarRound
-              player1="Erlef Doedsdufva"
-              player2="Tony McHallumi"
-            />
-            <OutputBarRound
-              player1="Erlef Doedsdufva"
-              player2="Tony McHallumi"
-            />
-            <OutputBarRound
-              player1="Erlef Doedsdufva"
-              player2="Tony McHallumi"
-            />
-            <OutputBarRound
-              player1="Erlef Doedsdufva"
-              player2="Tony McHallumi"
-            />
-            <OutputBarRound
-              player1="Erlef Doedsdufva"
-              player2="Tony McHallumi"
-            />
-            <OutputBarRound
-              player1="Erlef Doedsdufva"
-              player2="Tony McHallumi"
-            />
-            <OutputBarRound
-              player1="Erlef Doedsdufva"
-              player2="Tony McHallumi"
-            />
-            <OutputBarRound
-              player1="Erlef Doedsdufva"
-              player2="Tony McHallumi"
-            />
-            <OutputBarRound
-              player1="Erlef Doedsdufva"
-              player2="Tony McHallumi"
-            />
-            <OutputBarRound
-              player1="Erlef Doedsdufva"
-              player2="Tony McHallumi"
-            />
+
+          <MakeRoundRobinPairings players={players} />
           </div>
           <div>
 
-          <MakeRoundRobinPairings players={players} />
           </div>
 
           <div className="flexBetween">

@@ -6,8 +6,8 @@ import { Grid } from "@mui/material";
 import { useForm, SubmitHandler } from "react-hook-form";
 
 interface Props {
-  player1?: React.ReactNode; // Any bör fungera
-  player2?: React.ReactNode; // Any bör fungera
+  player1?: any; // Any bör fungera
+  player2?: any; // Any bör fungera
   children?: React.ReactNode;
 }
 
