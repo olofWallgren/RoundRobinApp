@@ -13,6 +13,15 @@ import { TournamentStore } from "../../Contexts/tournamentContext";
 
 
 const Round = () => {
+  const players = [
+    {id: 1, name: "Olof"},
+    {id: 2, name: "Tony"},
+    {id: 3, name: "Tim"},
+    {id: 4, name: "Kenta"},
+    {id: 5, name: "Emma"},
+    {id: 6, name: "Doris"},
+  
+  ];
   const [disable, setDisable] = React.useState(true); //Använd denna hook för att göra knappen klickbar efter att resultaten är ifyllda
   const settingStore = TournamentStore();
   console.log("context från round", settingStore.tournament);
@@ -87,7 +96,10 @@ const Round = () => {
               player2="Tony McHallumi"
             />
           </div>
-          <MakeRoundRobinPairings />
+          <div>
+
+          <MakeRoundRobinPairings players={players} />
+          </div>
 
           <div className="flexBetween">
             <div>

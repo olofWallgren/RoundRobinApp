@@ -1,24 +1,9 @@
-const players = [
-  {id: 1, name: "Olof"},
-  {id: 2, name: "Tony"},
-  {id: 3, name: "Tim"},
-  {id: 4, name: "Kenta"},
-  {id: 5, name: "Emma"},
-  {id: 6, name: "Doris"},
-
-];
-
-
-
 type ListPlayers = ReadonlyArray<Player>;
-
-
 
 type Player = {
   readonly id: number;
   readonly name: string;
 };
-
 
 interface TournamentInterface {
   readonly players: ListPlayers;
@@ -26,17 +11,17 @@ interface TournamentInterface {
 }
 
    
-function MakeRoundRobinPairings(players: ListPlayers) {
-    if (players.length % 2) throw new Error("Teams length must be even");
+function MakeRoundRobinPairings(props: TournamentInterface) {
+    if (props.players.length % 2) throw new Error("Teams length must be even");
 
 
-    const playerCount = players.length;
+    const playerCount = props.players.length;
     const rounds = playerCount - 1;
     const half = playerCount / 2;
   
     const tournamentPairings = [];
   
-    const playerIndexes: any = players.map((_, i) => i).slice(1);
+    const playerIndexes: any = props.players.map((_, i) => i).slice(1);
   
     for (let round = 0; round < rounds; round++) {
       const roundPairings = [];
@@ -48,21 +33,26 @@ function MakeRoundRobinPairings(players: ListPlayers) {
   
       for (let i = 0; i < firstHalf.length; i++) {
         roundPairings.push({
-          white: players[firstHalf[i]],
-          black: players[secondHalf[i]],
+          white: props.players[firstHalf[i]],
+          black: props.players[secondHalf[i]],
         });
       }
   
       // rotating the array
       playerIndexes.push(playerIndexes.shift());
       tournamentPairings.push(roundPairings);
-//    console.log(roundPairings);
-//    console.log(roundPairings[0]);
+
+      console.log(tournamentPairings);
     }
     // return tournamentPairings;
-    return tournamentPairings;
-}
+    return (
+      <div>
+        {tournamentPairings[2].map((e)=>
+        <div key={Math.random()} style={{backgroundColor:"white",
+        color:"black"}}><p>{e.black.name}</p> <p>{e.white.name}</p></div>)}
+      </div>
+    )
 
-
+    }
 
 export default MakeRoundRobinPairings;

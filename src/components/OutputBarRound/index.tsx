@@ -6,8 +6,8 @@ import { Grid } from "@mui/material";
 import { useForm, SubmitHandler } from "react-hook-form";
 
 interface Props {
-  player1?: React.ReactNode;
-  player2?: React.ReactNode;
+  player1?: React.ReactNode; // Any bör fungera
+  player2?: React.ReactNode; // Any bör fungera
   children?: React.ReactNode;
 }
 
@@ -48,7 +48,7 @@ const OutputBarRound: React.FC<Props> = ({ player1, player2, children }) => {
             <option value="2 - 1 - 0">2 - 1 - 0</option>
             <option value="1 - 0 - 1">1 - 0 - 1</option>
             <option value="1 - 1 - 1">1 - 1 - 1</option>
-            <option value="1 - 1 - 1">0 - 0 - 1</option>
+            <option value="0 - 0 - 1">0 - 0 - 1</option>
             <option value="0 - 2 - 0">0 - 2 - 1</option>
             <option value="1 - 2 - 0">1 - 2 - 0</option>
             <option value="0 - 1 - 1">0 - 1 - 1</option>
