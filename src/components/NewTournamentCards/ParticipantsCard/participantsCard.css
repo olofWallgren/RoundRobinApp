@@ -30,7 +30,7 @@
 .scrollBox {
   overflow-y: auto;
   overflow-x: hidden;
-  height: 320px;
+  height: 260px;
   margin-top: 0.5rem;
 }
 .playerBox {
@@ -57,7 +57,7 @@
   cursor: pointer;
 }
 .editIcon {
-  margin-right: 0.7rem;
+  margin-right: 1rem;
 }
 .flexBetween {
   display: flex;
@@ -65,4 +65,13 @@
 }
 .noMargin {
   margin: 0;
+}
+
+@media screen and (max-width: 600px) {
+  .playerBox {
+    font-size: 10px;
+  }
+  .icon {
+    font-size: 1rem;
+  }
 }

@@ -30,7 +30,7 @@
 .playerContainer {
   overflow-y: auto;
   overflow-x: hidden;
-  height: 300px;
+  height: 260px;
 }
 .wldStyle {
   margin: 0;

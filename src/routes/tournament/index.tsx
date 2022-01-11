@@ -65,7 +65,7 @@ const Tournament = () => {
           <div className="headingContainer">
             <h3 className="noMargin">New Tournament</h3>
           </div>
-          <div className="flexBetween justifyCenter">
+          <div className="flexBetween baseline noMargin">
             <p className="noMargin secondaryColor">{`Added players: ${playerArray.length}`}</p>
             {!showParticipantView && (
               <button
@@ -105,26 +105,30 @@ const Tournament = () => {
                 <div className="halfWidth">
                   <p className="noMargin">Length of round</p>
                 </div>
-                <div className="inputSection">
+
+                {/* Hour input */}
+                <div className="inputSection marginRight">
                   <p className="noMargin bottomPadding">Hour:</p>
                   <input
                     className="input inputElement"
                     type="number"
                     {...register("hour", { required: true, min: 0, max: 5 })}
                   />
-                  {errors.hour && <span>This field is required</span>}
+                  {errors.hour && <p>This field is required</p>}
                 </div>
 
-                <div className="inputSection">
+                  {/* Min inputs */} 
+                <div className="inputSection marginRight">
                   <p className="noMargin bottomPadding">Min:</p>
                   <input
                     type="number"
                     className="input inputElement"
                     {...register("min", { required: true, min: 0, max: 60 })}
                   />
-                  {errors.min && <span>This field is required</span>}
+                  {errors.min && <p>This field is required</p>}
                 </div>
 
+                   {/* Sec inputs */}
                 <div className="inputSection">
                   <p className="noMargin bottomPadding">Sec</p>
                   <input
@@ -132,10 +136,9 @@ const Tournament = () => {
                     type="number"
                     {...register("sec", { required: true, min: 0, max: 60 })}
                   />
-                  {errors.sec && <span>This field is required</span>}
+                  {errors.sec && <p>This field is required</p>}
                 </div>
-              </div>
-
+              </div> 
                   {/* Games per round section */}
               <div className="formSection">
                 <p className="noMargin">Games per match</p>
@@ -153,14 +156,14 @@ const Tournament = () => {
 
                 <p className="noMargin">Scoring</p>
                 </div>
-                <div className="inputSection">
+                <div className="inputSection marginRight">
                   <p className="noMargin bottomPadding">Win:</p>
                   <select className="input selectionInput" {...register("win")}>
                     <option value="3">3</option>
                     <option value="1">1</option>
                   </select>
                 </div>
-                <div className="inputSection">
+                <div className="inputSection marginRight">
                   <p className="noMargin bottomPadding">Loss:</p>
                   <select
                     className="input selectionInput"

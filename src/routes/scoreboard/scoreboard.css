@@ -25,7 +25,7 @@
 .scoreContainer {
   overflow-y: auto;
   overflow-x: hidden;
-  height: 300px;
+  height: 260px;
 }
 .wld {
   text-align: end;
