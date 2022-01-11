@@ -19,8 +19,8 @@ const Scoreboard = () => (
         <h3 className="noMargin">Scoreboard</h3>
       </div>
       <Grid container direction="row" className="textContainer">
-        <Grid item xs={6.5}></Grid>
-        <Grid item xs={2.5}><p className="ptsStyle">Points</p></Grid>
+        <Grid item xs={6.5} md={6.7} xl={6.8}></Grid>
+        <Grid item xs={2.5} md={2.3} xl={2.2}><p className="ptsStyle">Points</p></Grid>
         <Grid item xs={3} className="wld"><p>W-L-D</p></Grid>
       </Grid>
       <div className="scoreContainer">

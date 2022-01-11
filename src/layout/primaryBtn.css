@@ -22,8 +22,10 @@
   opacity: 0.5;
 }
 .primaryBtn--small {
-  padding: 2px 6px;
+  padding: 6px 6px;
   border-radius: 4px;
+  font-weight: 400;
+  font-size: small;
 }
 
 @media screen and (max-width: 600px) {
@@ -33,7 +35,7 @@
     font-weight: 500;
   }
   .primaryBtn--small {
-    padding: 6px 6px;
     font-size: small;
+    padding: 5px 6px;
   }
 }
