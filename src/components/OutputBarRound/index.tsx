@@ -6,7 +6,7 @@ import { Grid } from "@mui/material";
 import { useForm, SubmitHandler } from "react-hook-form";
 
 interface Props {
-  pairingId: any;
+  pairingId?: any;
   player1?: any;
   player2?: any;
   children?: React.ReactNode;
@@ -29,7 +29,7 @@ const OutputBarRound: React.FC<Props> = ({
   } = useForm<Inputs>();
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    console.log("från outputbar", pairingId, data, player1, "vs", player2);
+    console.log("från outputbar:", "matchID:",pairingId, data, player1, "vs", player2);
   };
 
   return (

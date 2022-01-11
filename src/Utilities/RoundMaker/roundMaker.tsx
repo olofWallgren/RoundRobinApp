@@ -34,9 +34,14 @@ function MakeRoundRobinPairings(props: TournamentInterface) {
     const secondHalf = newPlayerIndexes.slice(half, playerCount).reverse();
 
     for (let i = 0; i < firstHalf.length; i++) {
+
+      let roundNumber: any = ((tournamentPairings.length)+1);
+      let idMatchFormater = "r" + roundNumber + "m" + ((i)+1);
+
       roundPairings.push({
         player1: props.players[firstHalf[i]],
         player2: props.players[secondHalf[i]],
+        matchId: idMatchFormater
       });
     }
 
@@ -44,17 +49,18 @@ function MakeRoundRobinPairings(props: TournamentInterface) {
     playerIndexes.push(playerIndexes.shift());
     tournamentPairings.push(roundPairings);
 
-    console.log(tournamentPairings);
+//    console.log(tournamentPairings);
+//    console.log(tournamentPairings)
   }
   const setPairingsPoints = () => {};
   // return tournamentPairings;
   return (
     <div>
-      {tournamentPairings[0].map((e) => (
+      {tournamentPairings[2].map((e) => (
         <OutputBarRound
           player1={e.player1.name}
           player2={e.player2.name}
-          pairingId={1}
+          pairingId={e.matchId}
         />
       ))}
     </div>
