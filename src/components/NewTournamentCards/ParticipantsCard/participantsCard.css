@@ -30,7 +30,7 @@
 .scrollBox {
   overflow-y: auto;
   overflow-x: hidden;
-  height: 260px;
+  height: 42vh;
   margin-top: 0.5rem;
 }
 .playerBox {
