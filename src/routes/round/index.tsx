@@ -23,11 +23,11 @@ const Round = () => {
         <NavigationBar />
         <Divider />
         <div className="gameContainer">
-          <div style={{ padding: "1.5rem 0" }}>
-            <h3 style={{ margin: "0" }}>Round 1</h3>
+          <div className="headingWrapper">
+            <h3 className="zeroMargin">Round 1</h3>
           </div>
           <div className="textWrapper">
-            <p className="marginBottom">Pairings:</p>
+            <p className="alignBottom secondaryColor">Pairings:</p>
             <div className="flexColumn">
               <p className="marginBottom">Result:</p>
               <p className="wldStyle">W - L - D</p>

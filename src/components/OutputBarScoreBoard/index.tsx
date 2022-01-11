@@ -24,9 +24,6 @@ const OutputBarScoreBoard: React.FC<Props> = ({
     <Grid
       container
       className="outputBarContainer"
-      // direction="row"
-      // justifyContent="space-between"
-      // alignItems="center"
     >
       <Grid item xs={7}>
         <p className="names">{player}</p>

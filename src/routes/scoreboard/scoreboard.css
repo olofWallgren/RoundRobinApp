@@ -1,11 +1,12 @@
+.headingWrapper {
+  padding: 1rem 0 0 0;
+}
 .textContainer {
   color: #fa04f6;
   margin: 0;
 }
 .paraContainer {
   display: flex;
-  justify-content: center;
-  align-items: center;
   margin-top: 1rem;
   margin-bottom: 0;
 }
@@ -13,13 +14,13 @@
   color: #fa04f6;
   cursor: pointer;
 }
-.btnContainer {
+.buttonContainer {
   display: flex;
   justify-content: space-between;
-  margin-top: 2rem;
+  margin-top: 1.2rem;
   width: 100%;
 }
-.btnWidth {
+.buttonWidth {
   width: 48%;
 }
 .scoreContainer {
@@ -32,20 +33,32 @@
   padding-right: 0.3rem;
 }
 .ptsStyle {
-    padding-left:0.3rem;
+  padding-left: 0.3rem;
+}
+.noMargin {
+  margin: 0;
 }
 
-@media screen and (max-width: 768px) {
-  .ptsStyle  {
-    padding-left:0;
+@media screen and (max-width: 600px) {
+  .ptsStyle {
+    padding-left: 0;
+  }
+  .buttonContainer {
+    margin-top: 1rem;
+  }
+  .buttonWidth {
+    width: 49%;
   }
 }
 @media screen and (max-width: 375px) {
-  .wld  {
+  .wld {
     padding-right: 0;
     font-size: 10px;
   }
   .ptsStyle {
-     font-size: 10px;
+    font-size: 10px;
+  }
+  .buttonContainer {
+    margin-top: 0.8rem;
   }
 }

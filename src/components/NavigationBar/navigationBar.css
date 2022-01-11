@@ -31,9 +31,14 @@
   color: #FA04F6;
 }
 
+@media screen and (max-width: 600px) {
+  .navigation-bar__list {
+    font-size: 14px;
+    padding: 12px 12px;
+  }
+}
 @media screen and (max-width: 375px) {
   .navigation-bar__list {
     font-size: 12px;
-    padding: 12px 12px;
   }
 }
