@@ -15,20 +15,8 @@ import { useState } from "react";
 const Round = () => {
   const settingContext = TournamentStore();
 
-  type player = {
-    name: string;
-    id: number;
-    score: number;
-    matchHistory: { win: number; loss: number; draw: number };
-  };
-  const [newPlayer, setNewPlayer] = useState([]);
+  const test = settingContext.tournament?.players;
 
-  const newPlayers = () => {
-    // const testPlayers = settingContext.tournament.forEach((e) => e.players);
-    //console.log("från newPlayers", testPlayers);
-    console.log(settingContext);
-  };
-  newPlayers();
   const players = [
     { id: 1, name: "Olof" }, // {id: 1, name: "Olof", score: 0, matchHistory: {0 - 0 - 0}},
     { id: 2, name: "Tony" },
@@ -56,7 +44,7 @@ const Round = () => {
             </div>
           </div>
           <div className="playerContainer">
-            <MakeRoundRobinPairings players={players} />
+            <MakeRoundRobinPairings players={test} />
           </div>
           <div></div>
 

@@ -21,14 +21,14 @@ type tournamentSettings = {
 };
 
 type ContextTournamentSettings = {
-  tournament: tournamentSettings[];
+  tournament: tournamentSettings | undefined;
   setTournament: any;
 };
 
 const TournamentContext = createContext<ContextTournamentSettings>(undefined!);
 
 export const TournamentProvider: FunctionComponent = ({ children }) => {
-  const [tournament, setTournament] = useState<tournamentSettings[]>([]);
+  const [tournament, setTournament] = useState();
 
   //   function addSettings(hour:string,min:string,sec:string,games:string,win:string,loss:string,draw:string){
   //     let newTournamentSettings = {

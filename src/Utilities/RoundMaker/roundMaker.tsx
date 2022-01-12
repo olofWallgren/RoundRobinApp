@@ -6,6 +6,8 @@ type ListPlayers = ReadonlyArray<Player>;
 type Player = {
   name: string;
   id: number;
+  score: number;
+  matchHistory: { win: number; loss: number; draw: number };
 };
 
 interface TournamentInterface {
@@ -14,8 +16,6 @@ interface TournamentInterface {
 
 function MakeRoundRobinPairings(props: TournamentInterface) {
   if (props.players.length % 2) throw new Error("Teams length must be even");
-
-  const [newPairings, setNewPairings] = useState();
 
   const playerCount = props.players.length;
   const rounds = playerCount - 1;
@@ -48,8 +48,6 @@ function MakeRoundRobinPairings(props: TournamentInterface) {
     playerIndexes.push(playerIndexes.shift());
     tournamentPairings.push(roundPairings);
   }
-  const setPairingsPoints = () => {};
-  // return tournamentPairings;
 
   let round: number = 2;
 
