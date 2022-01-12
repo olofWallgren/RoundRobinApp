@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useState } from "react";
-import ParticipantsCard from "../../components/NewTournamentCards/ParticipantsCard";
+import ParticipantsCard from "../../components/NewTournamentCards/PlayersCard";
 import { TournamentStore } from "../../Contexts/tournamentContext";
 
 const Tournament = () => {
@@ -48,11 +48,11 @@ const Tournament = () => {
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     const newTournament = {
-      persistants: playerArray,
+      players: playerArray,
       tournamentName: data.tournamentName,
-      roundLength: [{ hour: data.hour }, { min: data.min }, { sec: data.sec }],
+      roundLength: { hour: data.hour, min: data.min, sec: data.sec },
       games: data.games,
-      scoring: [{ win: data.win }, { loss: data.loss }, { draw: data.draw }],
+      scoring: { win: data.win, loss: data.loss, draw: data.draw },
     };
     settingStore.setTournament(newTournament);
     console.log("submitt");
@@ -100,7 +100,7 @@ const Tournament = () => {
                   <span>Tournament name is required</span>
                 )}
               </div>
-                  {/* Length of round section */}
+              {/* Length of round section */}
               <div className="formSection">
                 <div className="halfWidth">
                   <p className="noMargin">Length of round</p>
@@ -117,7 +117,7 @@ const Tournament = () => {
                   {errors.hour && <p>This field is required</p>}
                 </div>
 
-                  {/* Min inputs */} 
+                {/* Min inputs */}
                 <div className="inputSection marginRight">
                   <p className="noMargin bottomPadding">Min:</p>
                   <input
@@ -128,7 +128,7 @@ const Tournament = () => {
                   {errors.min && <p>This field is required</p>}
                 </div>
 
-                   {/* Sec inputs */}
+                {/* Sec inputs */}
                 <div className="inputSection">
                   <p className="noMargin bottomPadding">Sec</p>
                   <input
@@ -138,8 +138,8 @@ const Tournament = () => {
                   />
                   {errors.sec && <p>This field is required</p>}
                 </div>
-              </div> 
-                  {/* Games per round section */}
+              </div>
+              {/* Games per round section */}
               <div className="formSection">
                 <p className="noMargin">Games per match</p>
 
@@ -150,11 +150,10 @@ const Tournament = () => {
                   <option value="single round">Single round</option>
                 </select>
               </div>
-                  {/* Scoring section */}
+              {/* Scoring section */}
               <div className="formSection">
                 <div className="halfWidth">
-
-                <p className="noMargin">Scoring</p>
+                  <p className="noMargin">Scoring</p>
                 </div>
                 <div className="inputSection marginRight">
                   <p className="noMargin bottomPadding">Win:</p>
@@ -185,15 +184,19 @@ const Tournament = () => {
                 </div>
               </div>
               <div className="buttonContainer">
-                <input className="primaryBtn fullWidth" value="Start" type="submit" />
+                <input
+                  className="primaryBtn fullWidth"
+                  value="Start"
+                  type="submit"
+                />
               </div>
             </form>
           )}
         </div>
       </div>
-      {/* <Link className="primaryBtn" to="/current-tournament/round">
+      <Link className="primaryBtn" to="/current-tournament/round">
         Done
-      </Link> */}
+      </Link>
     </>
   );
 };

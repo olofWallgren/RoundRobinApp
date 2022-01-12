@@ -7,14 +7,17 @@ import React, {
 
 type tournamentSettings = {
   tournamentName: string;
-  participants: [{ id: string; name: string }];
-  hour: string;
-  min: string;
-  sec: string;
+  players: [
+    {
+      id: string;
+      name: string;
+      score: number;
+      matchHistory: { win: number; loss: number; draw: number };
+    }
+  ];
+  roundLength: { hour: number; min: number; sec: number };
+  scoring: { win: number; loss: number; draw: number };
   games: string;
-  win: string;
-  loss: string;
-  draw: string;
 };
 
 type ContextTournamentSettings = {

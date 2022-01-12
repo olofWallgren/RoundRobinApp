@@ -4,8 +4,8 @@ import OutputBarRound from "../../components/OutputBarRound";
 type ListPlayers = ReadonlyArray<Player>;
 
 type Player = {
-  readonly id: number;
-  readonly name: string;
+  name: string;
+  id: number;
 };
 
 interface TournamentInterface {
@@ -34,27 +34,25 @@ function MakeRoundRobinPairings(props: TournamentInterface) {
     const secondHalf = newPlayerIndexes.slice(half, playerCount).reverse();
 
     for (let i = 0; i < firstHalf.length; i++) {
-
-      let roundNumber: any = ((tournamentPairings.length)+1);
-      let idMatchFormater = "r" + roundNumber + "m" + ((i)+1);
+      let roundNumber: any = tournamentPairings.length + 1;
+      let idMatchFormater = "r" + roundNumber + "m" + (i + 1);
 
       roundPairings.push({
         player1: props.players[firstHalf[i]],
         player2: props.players[secondHalf[i]],
-        matchId: idMatchFormater
+        matchId: idMatchFormater,
       });
     }
 
     // rotating the array
     playerIndexes.push(playerIndexes.shift());
     tournamentPairings.push(roundPairings);
-
   }
   const setPairingsPoints = () => {};
   // return tournamentPairings;
 
   let round: number = 2;
-  
+
   return (
     <div>
       {tournamentPairings[round].map((e) => (
