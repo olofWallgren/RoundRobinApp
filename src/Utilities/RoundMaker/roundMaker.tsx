@@ -49,14 +49,15 @@ function MakeRoundRobinPairings(props: TournamentInterface) {
     playerIndexes.push(playerIndexes.shift());
     tournamentPairings.push(roundPairings);
 
-//    console.log(tournamentPairings);
-//    console.log(tournamentPairings)
   }
   const setPairingsPoints = () => {};
   // return tournamentPairings;
+
+  let round: number = 2;
+  
   return (
     <div>
-      {tournamentPairings[2].map((e) => (
+      {tournamentPairings[round].map((e) => (
         <OutputBarRound
           player1={e.player1.name}
           player2={e.player2.name}
