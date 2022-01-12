@@ -1,7 +1,15 @@
+.headingWrapper {
+  padding: 1rem 0 0 0;
+}
 .textWrapper {
   display: flex;
   justify-content: space-between;
   margin-right: 30px;
+  padding: 0;
+  margin-top: 0;
+}
+.alignBottom {
+  align-self: flex-end;
 }
 .flexColumn {
   display: flex;
@@ -9,19 +17,17 @@
   margin-bottom: 0.3rem;
 }
 .paraStyle {
-  color: #FA04F6;
+  color: #fa04f6;
   cursor: pointer;
 }
 .flexBetween {
   display: flex;
   justify-content: space-between;
-  margin-top: 1rem;
-  margin-bottom: 0;
 }
 .btnContainer {
   display: flex;
   justify-content: space-between;
-  margin-top: 2rem;
+  margin-top: 1.2rem;
   width: 100%;
 }
 .btnWidth {
@@ -30,22 +36,38 @@
 .playerContainer {
   overflow-y: auto;
   overflow-x: hidden;
-  height: 300px;
+  height: 42vh;
 }
 .wldStyle {
   margin: 0;
   color: #fa04f6;
 }
 .marginBottom {
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.1rem;
+}
+.zeroMargin {
+  margin: 0;
+}
+.secondaryColor {
+  color: #fa04f6;
 }
 
-
-@media screen and (max-width: 375px) {
-    .textWrapper  {
-        margin-right: 20px;
-    }
-    .wldStyle {
-        font-size: 10px;
-    }
+@media screen and (max-width: 600px) {
+  .btnContainer {
+    margin-top: 1rem;
   }
+  .btnWidth {
+    width: 49%;
+  }
+}
+@media screen and (max-width: 375px) {
+  .textWrapper {
+    margin-right: 30px;
+  }
+  .wldStyle {
+    font-size: 10px;
+  }
+  .btnContainer {
+    margin-top: 0.8rem;
+  }
+}

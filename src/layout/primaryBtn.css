@@ -1,7 +1,7 @@
 .primaryBtn {
-  background: linear-gradient(180deg, #fa00ff 0%, #ff7a00 100%);
+  background: linear-gradient(180deg, #FA00FF 0%, #FF7A00 100%);
   border-radius: 10px;
-  border: black 4px;
+  border:none;
   padding: 16px 32px;
   font-size: large;
   font-weight: 600;
@@ -24,6 +24,8 @@
 .primaryBtn--small {
   padding: 6px 6px;
   border-radius: 4px;
+  font-weight: 400;
+  font-size: small;
 }
 
 @media screen and (max-width: 600px) {
@@ -33,7 +35,7 @@
     font-weight: 500;
   }
   .primaryBtn--small {
-    padding: 6px 6px;
-    font-size: smaller;
+    font-size: small;
+    padding: 5px 6px;
   }
 }

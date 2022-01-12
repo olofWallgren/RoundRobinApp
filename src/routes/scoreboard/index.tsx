@@ -15,15 +15,85 @@ const Scoreboard = () => (
     <NavigationBar />
     <Divider />
     <div className="gameContainer">
-      <div style={{ padding: "1.5rem 0" }}>
-        <h3 style={{ margin: "0" }}>Scoreboard</h3>
+      <div className="headingWrapper">
+        <h3 className="noMargin">Scoreboard</h3>
       </div>
       <Grid container direction="row" className="textContainer">
-        <Grid item xs={6.7}></Grid>
-        <Grid item xs={2.3}><p className="ptsStyle">Points</p></Grid>
+        <Grid item xs={6.5} md={6.7} xl={6.8}></Grid>
+        <Grid item xs={2.5} md={2.3} xl={2.2}><p className="ptsStyle">Points</p></Grid>
         <Grid item xs={3} className="wld"><p>W-L-D</p></Grid>
       </Grid>
       <div className="scoreContainer">
+        <OutputbarScoreBoard
+          player="Erlef Doedsdufva"
+          totalScore="3"
+          wins="1"
+          losses="0"
+          draws="0"
+        />
+        <OutputbarScoreBoard
+          player="Tony McHallumi"
+          totalScore="0"
+          wins="1"
+          losses="0"
+          draws="0"
+        />
+        <OutputbarScoreBoard
+          player="Erlef Doedsdufva"
+          totalScore="3"
+          wins="1"
+          losses="0"
+          draws="0"
+        />
+        <OutputbarScoreBoard
+          player="Tony McHallumi"
+          totalScore="0"
+          wins="1"
+          losses="0"
+          draws="0"
+        />
+        <OutputbarScoreBoard
+          player="Erlef Doedsdufva"
+          totalScore="3"
+          wins="1"
+          losses="0"
+          draws="0"
+        />
+        <OutputbarScoreBoard
+          player="Tony McHallumi"
+          totalScore="0"
+          wins="1"
+          losses="0"
+          draws="0"
+        />
+        <OutputbarScoreBoard
+          player="Erlef Doedsdufva"
+          totalScore="3"
+          wins="1"
+          losses="0"
+          draws="0"
+        />
+        <OutputbarScoreBoard
+          player="Tony McHallumi"
+          totalScore="0"
+          wins="1"
+          losses="0"
+          draws="0"
+        />
+        <OutputbarScoreBoard
+          player="Erlef Doedsdufva"
+          totalScore="3"
+          wins="1"
+          losses="0"
+          draws="0"
+        />
+        <OutputbarScoreBoard
+          player="Tony McHallumi"
+          totalScore="0"
+          wins="1"
+          losses="0"
+          draws="0"
+        />
         <OutputbarScoreBoard
           player="Erlef Doedsdufva"
           totalScore="3"
@@ -43,13 +113,13 @@ const Scoreboard = () => (
         <p className="paraStyle">End Tournament</p>
       </div>
     </div>
-    <div className="btnContainer">
-      <Link to="/create-tournament" className="secondaryBtn btnWidth">
+    <div className="buttonContainer">
+      <Link to="/create-tournament" className="secondaryBtn buttonWidth">
         Back
       </Link>
       <Link
         to="/current-tournament/round"
-        className="primaryBtn btnWidth"
+        className="primaryBtn buttonWidth"
       >
         Next Round
       </Link>

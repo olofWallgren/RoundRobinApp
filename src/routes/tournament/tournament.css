@@ -1,5 +1,5 @@
 .headingContainer {
-  padding: 1.5rem 0;
+  padding: 1rem 0;
 }
 .formSection {
   background-color: rgba(56, 44, 89, 1);
@@ -30,6 +30,10 @@
   display: flex;
   flex-direction: column;
   color: rgba(250, 4, 246, 1);
+  align-items: center;
+}
+.marginRight {
+  margin-right: 1rem;
 }
 /* .selectionInput {
   padding: 0.5rem;
@@ -39,7 +43,7 @@
   /* font-size: small; */
 }
 .buttonContainer {
-  margin-top: 3rem;
+  margin-top: 1rem;
 }
 .flexBetween {
   display: flex;
@@ -55,11 +59,14 @@
   width: 100%;
 }
 .halfWidth {
-  width: 50%;
+  width: 90%;
 }
 .justifyCenter {
   align-items: center;
 }
 .bottomPadding {
   padding-bottom: 0.2rem;
+}
+.baseline {
+  align-items: baseline;
 }

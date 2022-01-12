@@ -21,7 +21,8 @@
 }
 
 @media only screen and (max-width: 600px) {
-  .header {
-    padding: 20px 16px 8px 16px;
+    .header {
+        padding: 4px 16px 4px 16px;
+    }
   }
-}
+
