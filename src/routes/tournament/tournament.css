@@ -42,6 +42,9 @@
   /* border-radius: 0.5rem; */
   /* font-size: small; */
 }
+.errorWrapper {
+  position: relative;
+}
 .buttonContainer {
   margin-top: 1rem;
 }
