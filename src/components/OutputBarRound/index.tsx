@@ -6,8 +6,9 @@ import { Grid } from "@mui/material";
 import { useForm, SubmitHandler } from "react-hook-form";
 
 interface Props {
-  player1?: React.ReactNode;
-  player2?: React.ReactNode;
+  pairingId?: any;
+  player1?: any;
+  player2?: any;
   children?: React.ReactNode;
 }
 
@@ -15,7 +16,12 @@ type Inputs = {
   result: String;
 };
 
-const OutputBarRound: React.FC<Props> = ({ player1, player2, children }) => {
+const OutputBarRound: React.FC<Props> = ({
+  player1,
+  player2,
+  pairingId,
+  children,
+}) => {
   const {
     register,
     handleSubmit,
@@ -23,7 +29,7 @@ const OutputBarRound: React.FC<Props> = ({ player1, player2, children }) => {
   } = useForm<Inputs>();
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    console.log(data);
+    console.log("från outputbar:", "matchID:",pairingId, data, player1, "vs", player2);
   };
 
   return (
@@ -48,12 +54,12 @@ const OutputBarRound: React.FC<Props> = ({ player1, player2, children }) => {
             <option value="2 - 1 - 0">2 - 1 - 0</option>
             <option value="1 - 0 - 1">1 - 0 - 1</option>
             <option value="1 - 1 - 1">1 - 1 - 1</option>
-            <option value="1 - 1 - 1">0 - 0 - 1</option>
+            <option value="0 - 0 - 1">0 - 0 - 1</option>
             <option value="0 - 2 - 0">0 - 2 - 1</option>
             <option value="1 - 2 - 0">1 - 2 - 0</option>
             <option value="0 - 1 - 1">0 - 1 - 1</option>
           </select>
-          {/* <input type="submit" value="OK" className="okBtn" /> */}
+          <input type="submit" value="OK" className="okBtn" />
         </form>
       </Grid>
     </Grid>

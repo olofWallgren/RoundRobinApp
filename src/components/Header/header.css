@@ -14,9 +14,10 @@
   margin: 0;
   font-size: 20px;
   letter-spacing: 4px;
+  font-family: metamorphous;
 }
 .header__icon {
-  color: #FA04F6;
+  color: #fa04f6;
 }
 
 @media only screen and (max-width: 600px) {
@@ -24,3 +25,4 @@
         padding: 4px 16px 4px 16px;
     }
   }
+

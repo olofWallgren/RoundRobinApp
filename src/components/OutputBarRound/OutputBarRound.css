@@ -8,6 +8,10 @@
   cursor: pointer;
 }
 
+.names {
+  font-family: metamorphous;
+}
+
 @media screen and (max-width: 375px) {
   .select {
     font-size: 10px;
@@ -20,4 +24,3 @@
     font-size: 8px;
   }
 }
-
