@@ -14,7 +14,7 @@ import { TournamentStore } from "../../Contexts/tournamentContext";
 
 const Round = () => {
   const players = [
-    {id: 1, name: "Olof"},
+    {id: 1, name: "Olof"}, // {id: 1, name: "Olof", score: 0, matchHistory: {0 - 0 - 0}},
     {id: 2, name: "Tony"},
     {id: 3, name: "Tim"},
     {id: 4, name: "Kenta"},
