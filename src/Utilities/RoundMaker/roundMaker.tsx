@@ -6,8 +6,6 @@ type ListPlayers = ReadonlyArray<Player>;
 type Player = {
   name: string;
   id: number;
-  score: number;
-  matchHistory: { win: number; loss: number; draw: number };
 };
 
 interface TournamentInterface {

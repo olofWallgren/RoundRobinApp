@@ -24,6 +24,9 @@ const Tournament = () => {
   ///////// state med participants som hämtas och uppdateras från Participants card ///////////
   const [playerArray, setPlayerArray] = useState<string[]>([]);
   const getParticipants = (data: any) => {
+    ////TESTAR ETT NYTT STATE I CONTEXT /////////
+    settingStore.setPlayerList(data);
+
     setPlayerArray([...data]);
     console.log("getParticipants");
   };

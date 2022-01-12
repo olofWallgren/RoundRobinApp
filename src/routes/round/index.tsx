@@ -15,16 +15,26 @@ import { useState } from "react";
 const Round = () => {
   const settingContext = TournamentStore();
 
-  const test = settingContext.tournament?.players;
+  //// testar att skapa en ny array från players-context //////
+  const testArray: any = [];
+  console.log("players från round context", settingContext.playerList);
+  const testFunction = () => {
+    settingContext.playerList.forEach((e) => {
+      testArray.push({ name: e.name, id: e.id });
+    });
+  };
+  testFunction();
+  console.log("testArray", testArray);
 
-  const players = [
-    { id: 1, name: "Olof" }, // {id: 1, name: "Olof", score: 0, matchHistory: {0 - 0 - 0}},
-    { id: 2, name: "Tony" },
-    { id: 3, name: "Tim" },
-    { id: 4, name: "Kenta" },
-    { id: 5, name: "Emma" },
-    { id: 6, name: "Doris" },
-  ];
+  // const players = [
+  //   { id: 1, name: "Olof" }, // {id: 1, name: "Olof", score: 0, matchHistory: {0 - 0 - 0}},
+  //   { id: 2, name: "Tony" },
+  //   { id: 3, name: "Tim" },
+  //   { id: 4, name: "Kenta" },
+  //   { id: 5, name: "Emma" },
+  //   { id: 6, name: "Doris" },
+  // ];
+
   const [disable, setDisable] = React.useState(true); //Använd denna hook för att göra knappen klickbar efter att resultaten är ifyllda
 
   return (
@@ -44,7 +54,7 @@ const Round = () => {
             </div>
           </div>
           <div className="playerContainer">
-            <MakeRoundRobinPairings players={test} />
+            <MakeRoundRobinPairings players={testArray} />
           </div>
           <div></div>
 
