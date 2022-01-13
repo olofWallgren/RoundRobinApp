@@ -4,7 +4,6 @@ import "../../layout/section.css";
 import "../../layout/primaryBtn.css";
 import "../../layout/tournamentContainer.css";
 import "./tournament.css";
-import { Link } from "react-router-dom";
 import Alert from "@mui/material/Alert";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useState } from "react";
@@ -88,7 +87,7 @@ const Tournament = () => {
               <div className="formSection">
                 <p className="noMargin">Tournament name</p>
                 <input
-                  className="input inputTournament"
+                  className="input"
                   type="text"
                   {...register("tournamentName", {
                     required: true,
@@ -118,7 +117,7 @@ const Tournament = () => {
 
               {/* Length of round section */}
               <div className="formSection">
-                <div className="halfWidth">
+                <div className="narrowWidth">
                   <p className="noMargin">Length of round</p>
                 </div>
                 {/* Hour input */}
@@ -157,7 +156,7 @@ const Tournament = () => {
 
               {/* Error modal for hour, minutes and seconds */}
               <div className="errorWrapper">
-                {errors.hour && (errors.min || errors.sec) &&(
+                {errors.hour && errors.min && errors.sec && (
                   <Alert
                     sx={{
                       zIndex: "modal",
@@ -176,43 +175,37 @@ const Tournament = () => {
               <div className="formSection">
                 <p className="noMargin">Games per match</p>
 
-                <select className="input selectionInput" {...register("games")}>
+                <select className="input gamesSelection" {...register("games")}>
                   <option value="best of three">Best of 3</option>
-                  <option value="best of five">Best of 5</option>
-                  <option value="best of seven">Best of 7</option>
-                  <option value="single round">Single round</option>
                 </select>
               </div>
               {/* Scoring section */}
               <div className="formSection">
-                <div className="halfWidth">
+                <div className="narrowWidth">
                   <p className="noMargin">Scoring</p>
                 </div>
                 <div className="inputSection marginRight">
                   <p className="noMargin bottomPadding">Win:</p>
-                  <select className="input selectionInput" {...register("win")}>
+                  <select className="input scoringInput" {...register("win")}>
                     <option value="3">3</option>
-                    <option value="1">1</option>
                   </select>
                 </div>
                 <div className="inputSection marginRight">
                   <p className="noMargin bottomPadding">Loss:</p>
                   <select
-                    className="input selectionInput"
+                    className="input scoringInput"
                     {...register("loss")}
                   >
                     <option value="0">0</option>
-                    <option value="1">1</option>
                   </select>
                 </div>
                 <div className="inputSection">
                   <p className="noMargin bottomPadding">Draw:</p>
                   <select
-                    className="input selectionInput"
+                    className="input scoringInput"
                     {...register("draw")}
                   >
                     <option value="1">1</option>
-                    <option value="0">0</option>
                   </select>
                 </div>
               </div>
@@ -227,9 +220,6 @@ const Tournament = () => {
           )}
         </div>
       </div>
-      {/* <Link className="primaryBtn" to="/current-tournament/round">
-        Done
-      </Link> */}
     </>
   );
 };
