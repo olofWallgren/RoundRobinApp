@@ -6,18 +6,13 @@ import { useState, useEffect } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import "./playersCard.css";
 import "../../../layout/primaryBtn.css";
+import { playerItem } from "../../../types/playerItem";
 
 const PlayersCard = (props: any) => {
   const { getParticipants } = props;
 
   type Inputs = {
     player: any;
-  };
-  type player = {
-    name: string;
-    id: number;
-    score: number;
-    matchHistory: { win: number; loss: number; draw: number };
   };
 
   const {
@@ -28,7 +23,7 @@ const PlayersCard = (props: any) => {
   } = useForm<Inputs>();
 
   //// en player array för att mappa ut alla players som skapas ///////
-  const [players, setPlayers] = useState<player[]>([]);
+  const [players, setPlayers] = useState<playerItem[]>([]);
 
   ///// uppdaterar en lika dan array i tournament view ////////
   useEffect(() => {

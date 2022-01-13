@@ -4,32 +4,20 @@ import React, {
   FunctionComponent,
   createContext,
 } from "react";
+import { playerItem } from "../types/playerItem";
 
 type tournamentSettings = {
   tournamentName: string;
-  players: [
-    {
-      id: string;
-      name: string;
-      score: number;
-      matchHistory: { win: number; loss: number; draw: number };
-    }
-  ];
+  players: playerItem[];
   roundLength: { hour: number; min: number; sec: number };
   scoring: { win: number; loss: number; draw: number };
   games: string;
-};
-type playerListObject = {
-  name: string;
-  id: number;
-  score: number;
-  matchHistory: { win: number; loss: number; draw: number };
 };
 
 type ContextTournamentSettings = {
   tournament: tournamentSettings[];
   setTournament: any;
-  playerList: playerListObject[];
+  playerList: playerItem[];
   setPlayerList: any;
 };
 
@@ -37,7 +25,7 @@ const TournamentContext = createContext<ContextTournamentSettings>(undefined!);
 
 export const TournamentProvider: FunctionComponent = ({ children }) => {
   const [tournament, setTournament] = useState<tournamentSettings[]>([]);
-  const [playerList, setPlayerList] = useState<playerListObject[]>([]);
+  const [playerList, setPlayerList] = useState<playerItem[]>([]);
 
   //   function addSettings(hour:string,min:string,sec:string,games:string,win:string,loss:string,draw:string){
   //     let newTournamentSettings = {

@@ -24,9 +24,6 @@ const Tournament = () => {
   ///////// state med participants som hämtas och uppdateras från Participants card ///////////
   const [playerArray, setPlayerArray] = useState<string[]>([]);
   const getParticipants = (data: any) => {
-    ////TESTAR ETT NYTT STATE I CONTEXT /////////
-    settingStore.setPlayerList(data);
-
     setPlayerArray([...data]);
     console.log("getParticipants");
   };
@@ -57,10 +54,10 @@ const Tournament = () => {
       games: data.games,
       scoring: { win: data.win, loss: data.loss, draw: data.draw },
     };
+    settingStore.setPlayerList(playerArray);
     settingStore.setTournament(newTournament);
-    console.log("submitt");
   };
-  console.log("constext", settingStore.tournament);
+
   return (
     <>
       <div className="container">
