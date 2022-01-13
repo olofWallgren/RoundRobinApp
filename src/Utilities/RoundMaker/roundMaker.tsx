@@ -47,7 +47,7 @@ function MakeRoundRobinPairings(props: TournamentInterface) {
     tournamentPairings.push(roundPairings);
   }
 
-  let round: number = 2;
+  let round: number = 0;
 
   return (
     <div>
