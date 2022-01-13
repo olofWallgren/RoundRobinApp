@@ -7,33 +7,21 @@ import "../round/round.css";
 import NavigationBar from "../../components/NavigationBar";
 import { Divider } from "@mui/material";
 import { Link } from "react-router-dom";
-import OutputBarRound from "../../components/OutputBarRound";
 import MakeRoundRobinPairings from "../../Utilities/RoundMaker/roundMaker";
 import { TournamentStore } from "../../Contexts/tournamentContext";
-import { useState } from "react";
 
 const Round = () => {
   const settingContext = TournamentStore();
 
   //// testar att skapa en ny array från players-context //////
-  const testArray: any = [];
+  const playerArray: any = [];
   console.log("players från round context", settingContext.playerList);
-  const testFunction = () => {
-    settingContext.playerList.forEach((e) => {
-      testArray.push({ name: e.name, id: e.id });
+  const getNameAndId = () => {
+    settingContext.tournament.players.forEach((e) => {
+      playerArray.push({ name: e.name, id: e.id });
     });
   };
-  testFunction();
-  console.log("testArray", testArray);
-
-  // const players = [
-  //   { id: 1, name: "Olof" }, // {id: 1, name: "Olof", score: 0, matchHistory: {0 - 0 - 0}},
-  //   { id: 2, name: "Tony" },
-  //   { id: 3, name: "Tim" },
-  //   { id: 4, name: "Kenta" },
-  //   { id: 5, name: "Emma" },
-  //   { id: 6, name: "Doris" },
-  // ];
+  getNameAndId();
 
   const [disable, setDisable] = React.useState(true); //Använd denna hook för att göra knappen klickbar efter att resultaten är ifyllda
 
@@ -54,7 +42,7 @@ const Round = () => {
             </div>
           </div>
           <div className="playerContainer">
-            <MakeRoundRobinPairings players={testArray} />
+            <MakeRoundRobinPairings players={playerArray} />
           </div>
           <div></div>
 

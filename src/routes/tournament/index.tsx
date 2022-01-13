@@ -5,11 +5,11 @@ import "../../layout/primaryBtn.css";
 import "../../layout/tournamentContainer.css";
 import "./tournament.css";
 import { Link } from "react-router-dom";
-
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useState } from "react";
 import ParticipantsCard from "../../components/NewTournamentCards/PlayersCard";
 import { TournamentStore } from "../../Contexts/tournamentContext";
+import { Inputs } from "../../types/tournamentInput";
 
 const Tournament = () => {
   ///////// CONTEXT //////////////////////
@@ -26,17 +26,6 @@ const Tournament = () => {
   const getParticipants = (data: any) => {
     setPlayerArray([...data]);
     console.log("getParticipants");
-  };
-
-  type Inputs = {
-    tournamentName: string;
-    hour: number;
-    min: number;
-    sec: number;
-    games: string;
-    win: string;
-    loss: string;
-    draw: string;
   };
 
   const {

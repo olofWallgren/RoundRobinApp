@@ -12,9 +12,8 @@ const PlayersCard = (props: any) => {
   const { getParticipants } = props;
 
   type Inputs = {
-    player: any;
+    player: string;
   };
-
   const {
     register,
     handleSubmit,
@@ -33,18 +32,20 @@ const PlayersCard = (props: any) => {
   //// uppdaterar participants statet från localstorage/////////
 
   ////// UTKOMMENTERAD FÖR TILLFÄLLET ////////////
-  // useEffect(() => {
-  //   let ls = JSON.parse(localStorage.getItem("players") || "");
-  //   setPlayers(ls);
-  // }, []);
+  useEffect(() => {
+    try {
+      let ls = JSON.parse(localStorage.getItem("players") || "");
+      setPlayers(ls);
+    } catch (error) {}
+  }, []);
 
   //// sparar data till LS ///////////
 
   ///////// UTKOMMENTERAD FÖR TILLFÄLLET ///////////
-  // function saveToLocalStorage(key: string, value: any): void {
-  //   localStorage.setItem(key, JSON.stringify(value));
-  //   console.log("cardLS", localStorage.getItem("players"));
-  // }
+  function saveToLocalStorage(key: string, value: any): void {
+    localStorage.setItem(key, JSON.stringify(value));
+    console.log("cardLS", localStorage.getItem("players"));
+  }
 
   ///// uppdaterar participants statet ////////////
   const onSubmit: SubmitHandler<Inputs> = (data) => {
@@ -61,7 +62,7 @@ const PlayersCard = (props: any) => {
         },
       ];
       ///////// UTKOMMENTERAD FÖR TILLFÄLLET ///////////
-      //saveToLocalStorage("players", newItems);
+      saveToLocalStorage("players", newItems);
 
       return newItems;
     });
@@ -76,7 +77,7 @@ const PlayersCard = (props: any) => {
     ];
     setPlayers(updateParticipants);
     ///////// UTKOMMENTERAD FÖR TILLFÄLLET ///////////
-    //saveToLocalStorage("players", updateParticipants);
+    saveToLocalStorage("players", updateParticipants);
   };
 
   return (
