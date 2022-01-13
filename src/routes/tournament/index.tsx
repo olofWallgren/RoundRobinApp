@@ -4,11 +4,13 @@ import "../../layout/section.css";
 import "../../layout/primaryBtn.css";
 import "../../layout/tournamentContainer.css";
 import "./tournament.css";
+import { Link } from "react-router-dom";
 import Alert from "@mui/material/Alert";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useState } from "react";
-import ParticipantsCard from "../../components/NewTournamentCards/ParticipantsCard";
+import ParticipantsCard from "../../components/NewTournamentCards/PlayersCard";
 import { TournamentStore } from "../../Contexts/tournamentContext";
+import { Inputs } from "../../types/tournamentInput";
 
 const Tournament = () => {
   ///////// CONTEXT //////////////////////
@@ -27,17 +29,6 @@ const Tournament = () => {
     console.log("getParticipants");
   };
 
-  type Inputs = {
-    tournamentName: string;
-    hour: number;
-    min: number;
-    sec: number;
-    games: string;
-    win: string;
-    loss: string;
-    draw: string;
-  };
-
   const {
     register,
     handleSubmit,
@@ -47,16 +38,16 @@ const Tournament = () => {
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     const newTournament = {
-      persistants: playerArray,
+      players: playerArray,
       tournamentName: data.tournamentName,
-      roundLength: [{ hour: data.hour }, { min: data.min }, { sec: data.sec }],
+      roundLength: { hour: data.hour, min: data.min, sec: data.sec },
       games: data.games,
-      scoring: [{ win: data.win }, { loss: data.loss }, { draw: data.draw }],
+      scoring: { win: data.win, loss: data.loss, draw: data.draw },
     };
+    settingStore.setPlayerList(playerArray);
     settingStore.setTournament(newTournament);
-    console.log("submitt");
   };
-  console.log("constext", settingStore.tournament);
+
   return (
     <>
       <div className="container">
@@ -114,7 +105,6 @@ const Tournament = () => {
                   </Alert>
                 )}
               </div>
-
               {/* Length of round section */}
               <div className="formSection">
                 <div className="narrowWidth">
@@ -192,19 +182,13 @@ const Tournament = () => {
                 </div>
                 <div className="inputSection marginRight">
                   <p className="noMargin bottomPadding">Loss:</p>
-                  <select
-                    className="input scoringInput"
-                    {...register("loss")}
-                  >
+                  <select className="input scoringInput" {...register("loss")}>
                     <option value="0">0</option>
                   </select>
                 </div>
                 <div className="inputSection">
                   <p className="noMargin bottomPadding">Draw:</p>
-                  <select
-                    className="input scoringInput"
-                    {...register("draw")}
-                  >
+                  <select className="input scoringInput" {...register("draw")}>
                     <option value="1">1</option>
                   </select>
                 </div>
@@ -220,6 +204,9 @@ const Tournament = () => {
           )}
         </div>
       </div>
+      <Link className="primaryBtn" to="/current-tournament/round">
+        Done
+      </Link>
     </>
   );
 };

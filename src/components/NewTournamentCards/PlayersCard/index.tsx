@@ -4,20 +4,16 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import Alert from "@mui/material/Alert";
 import { useState, useEffect } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import "../ParticipantsCard/participantsCard.css";
+import "./playersCard.css";
 import "../../../layout/primaryBtn.css";
+import { playerItem } from "../../../types/playerItem";
 
-const ParticipantsCard = (props: any) => {
+const PlayersCard = (props: any) => {
   const { getParticipants } = props;
 
   type Inputs = {
-    partisipants: string;
+    player: string;
   };
-  type participant = {
-    name: string;
-    id: number;
-  };
-
   const {
     register,
     handleSubmit,
@@ -26,20 +22,26 @@ const ParticipantsCard = (props: any) => {
   } = useForm<Inputs>();
 
   //// en player array för att mappa ut alla players som skapas ///////
-  const [participants, setParticipants] = useState<participant[]>([]);
+  const [players, setPlayers] = useState<playerItem[]>([]);
 
   ///// uppdaterar en lika dan array i tournament view ////////
   useEffect(() => {
-    getParticipants(participants);
-  }, [participants]);
+    getParticipants(players);
+  }, [players]);
 
   //// uppdaterar participants statet från localstorage/////////
+
+  ////// UTKOMMENTERAD FÖR TILLFÄLLET ////////////
   useEffect(() => {
-    let ls = JSON.parse(localStorage.getItem("players") || "");
-    setParticipants(ls);
+    try {
+      let ls = JSON.parse(localStorage.getItem("players") || "");
+      setPlayers(ls);
+    } catch (error) {}
   }, []);
 
   //// sparar data till LS ///////////
+
+  ///////// UTKOMMENTERAD FÖR TILLFÄLLET ///////////
   function saveToLocalStorage(key: string, value: any): void {
     localStorage.setItem(key, JSON.stringify(value));
     console.log("cardLS", localStorage.getItem("players"));
@@ -48,13 +50,20 @@ const ParticipantsCard = (props: any) => {
   ///// uppdaterar participants statet ////////////
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     ///// rensar inputfield //////////
-    resetField("partisipants");
-    setParticipants((prevState) => {
+    resetField("player");
+    setPlayers((prevState) => {
       const newItems = [
         ...prevState,
-        { id: Math.floor(Math.random() * 1000) + 1, name: data.partisipants },
+        {
+          id: players.length,
+          name: data.player,
+          score: 0,
+          matchHistory: { win: 0, loss: 0, draw: 0 },
+        },
       ];
+      ///////// UTKOMMENTERAD FÖR TILLFÄLLET ///////////
       saveToLocalStorage("players", newItems);
+
       return newItems;
     });
   };
@@ -62,11 +71,12 @@ const ParticipantsCard = (props: any) => {
   ///// deletar en spelare från particisipant statet /////////
   const deleteParticipant = (id: number) => {
     const updateParticipants = [
-      ...participants.filter((p) => {
+      ...players.filter((p) => {
         return p.id !== id;
       }),
     ];
-    setParticipants(updateParticipants);
+    setPlayers(updateParticipants);
+    ///////// UTKOMMENTERAD FÖR TILLFÄLLET ///////////
     saveToLocalStorage("players", updateParticipants);
   };
 
@@ -79,7 +89,7 @@ const ParticipantsCard = (props: any) => {
             className="textField"
             type="text"
             placeholder="Enter player name"
-            {...register("partisipants", { required: true, maxLength: 15 })}
+            {...register("player", { required: true, maxLength: 15 })}
           />
           <input
             className="addBtnWidth primaryBtn primaryBtn--small"
@@ -90,7 +100,7 @@ const ParticipantsCard = (props: any) => {
 
         {/* Error Modal */}
         <div className="errorContainer">
-          {errors.partisipants && (
+          {errors.player && (
             <Alert
               sx={{
                 zIndex: "modal",
@@ -107,7 +117,7 @@ const ParticipantsCard = (props: any) => {
 
         {/* Added Players with name and icons in a scrollbox */}
         <div className="scrollBox">
-          {participants.map((i) => (
+          {players.map((i) => (
             <div key={i.id} className="playerBox flexBetween">
               {i.name}
               <div>
@@ -124,7 +134,7 @@ const ParticipantsCard = (props: any) => {
 
       {/* // Buttons // */}
       <div className="buttonSection">
-        {participants.length >= 2 ? (
+        {players.length >= 2 ? (
           <button
             className="primaryBtn fullWidth"
             onClick={() => props.toggleParticipantView()}
@@ -140,4 +150,4 @@ const ParticipantsCard = (props: any) => {
     </>
   );
 };
-export default ParticipantsCard;
+export default PlayersCard;
