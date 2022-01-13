@@ -1,7 +1,6 @@
 import React from 'react';
 import { Route, Switch } from "react-router-dom";
-
-// import { Loader } from '../components/loader';
+import Loader from '../components/Loader';
 
 const NotFound = React.lazy(()  => import('./not-found'));
 const Home = React.lazy(()  => import('./home'));
@@ -52,8 +51,7 @@ export const RouterTree: IRoute[] = [
 ];
 
 const Router = () => (
-    // <React.Suspense fallback={<Loader center />}>
-    <React.Suspense fallback >   
+    <React.Suspense fallback={<Loader />} >   
         <Switch>
             {RouterTree.map((r: IRoute) =>
                 <Route key={r.path} {...r} />
