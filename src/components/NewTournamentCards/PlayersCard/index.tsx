@@ -1,7 +1,7 @@
 import react from "react";
-// import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import CreateIcon from "@mui/icons-material/Create";
 import DeleteIcon from "@mui/icons-material/Delete";
+import Alert from "@mui/material/Alert";
 import { useState, useEffect } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import "./playersCard.css";
@@ -12,9 +12,8 @@ const PlayersCard = (props: any) => {
   const { getParticipants } = props;
 
   type Inputs = {
-    player: any;
+    player: string;
   };
-
   const {
     register,
     handleSubmit,
@@ -33,18 +32,20 @@ const PlayersCard = (props: any) => {
   //// uppdaterar participants statet från localstorage/////////
 
   ////// UTKOMMENTERAD FÖR TILLFÄLLET ////////////
-  // useEffect(() => {
-  //   let ls = JSON.parse(localStorage.getItem("players") || "");
-  //   setPlayers(ls);
-  // }, []);
+  useEffect(() => {
+    try {
+      let ls = JSON.parse(localStorage.getItem("players") || "");
+      setPlayers(ls);
+    } catch (error) {}
+  }, []);
 
   //// sparar data till LS ///////////
 
   ///////// UTKOMMENTERAD FÖR TILLFÄLLET ///////////
-  // function saveToLocalStorage(key: string, value: any): void {
-  //   localStorage.setItem(key, JSON.stringify(value));
-  //   console.log("cardLS", localStorage.getItem("players"));
-  // }
+  function saveToLocalStorage(key: string, value: any): void {
+    localStorage.setItem(key, JSON.stringify(value));
+    console.log("cardLS", localStorage.getItem("players"));
+  }
 
   ///// uppdaterar participants statet ////////////
   const onSubmit: SubmitHandler<Inputs> = (data) => {
@@ -61,7 +62,7 @@ const PlayersCard = (props: any) => {
         },
       ];
       ///////// UTKOMMENTERAD FÖR TILLFÄLLET ///////////
-      //saveToLocalStorage("players", newItems);
+      saveToLocalStorage("players", newItems);
 
       return newItems;
     });
@@ -76,7 +77,7 @@ const PlayersCard = (props: any) => {
     ];
     setPlayers(updateParticipants);
     ///////// UTKOMMENTERAD FÖR TILLFÄLLET ///////////
-    //saveToLocalStorage("players", updateParticipants);
+    saveToLocalStorage("players", updateParticipants);
   };
 
   return (
@@ -90,7 +91,6 @@ const PlayersCard = (props: any) => {
             placeholder="Enter player name"
             {...register("player", { required: true, maxLength: 15 })}
           />
-          {/* <PersonAddIcon sx={{ fontSize: 40 }} style={{ color: "FA04F6" }} /> */}
           <input
             className="addBtnWidth primaryBtn primaryBtn--small"
             value="Add"
@@ -98,12 +98,22 @@ const PlayersCard = (props: any) => {
           />
         </form>
 
-        {/* Error Text */}
-        {errors.player && (
-          <p className="errorText">
-            Please enter a name with less than 16 letters
-          </p>
-        )}
+        {/* Error Modal */}
+        <div className="errorContainer">
+          {errors.player && (
+            <Alert
+              sx={{
+                zIndex: "modal",
+                position: "absolute",
+                width: "100%",
+                top: "5px",
+              }}
+              severity="error"
+            >
+              Please enter a name with less than 16 letters!
+            </Alert>
+          )}
+        </div>
 
         {/* Added Players with name and icons in a scrollbox */}
         <div className="scrollBox">
@@ -122,7 +132,7 @@ const PlayersCard = (props: any) => {
         </div>
       </div>
 
-      {/* // Knappar // */}
+      {/* // Buttons // */}
       <div className="buttonSection">
         {players.length >= 2 ? (
           <button

@@ -13,9 +13,16 @@ type tournamentSettings = {
   scoring: { win: number; loss: number; draw: number };
   games: string;
 };
+const test = {
+  tournamentName: " ",
+  players: [],
+  roundLength: { hour: 0, min: 0, sec: 0 },
+  scoring: { win: 0, loss: 0, draw: 0 },
+  games: " ",
+};
 
 type ContextTournamentSettings = {
-  tournament: tournamentSettings[];
+  tournament: tournamentSettings;
   setTournament: any;
   playerList: playerItem[];
   setPlayerList: any;
@@ -24,7 +31,7 @@ type ContextTournamentSettings = {
 const TournamentContext = createContext<ContextTournamentSettings>(undefined!);
 
 export const TournamentProvider: FunctionComponent = ({ children }) => {
-  const [tournament, setTournament] = useState<tournamentSettings[]>([]);
+  const [tournament, setTournament] = useState<tournamentSettings>(test);
   const [playerList, setPlayerList] = useState<playerItem[]>([]);
 
   //   function addSettings(hour:string,min:string,sec:string,games:string,win:string,loss:string,draw:string){
