@@ -8,9 +8,19 @@ import NavigationBar from "../../components/NavigationBar";
 import { Divider } from "@mui/material";
 import { Link } from "react-router-dom";
 import OutputbarScoreBoard from "../../components/OutputBarScoreBoard";
+import { TournamentStore } from "../../Contexts/tournamentContext";
 import { Grid } from "@mui/material";
 
-const Scoreboard = () => (
+
+
+
+const Scoreboard = () => {
+
+  const settingContext = TournamentStore();
+  const players = settingContext.playerList;
+  console.log(players);
+
+return (
   <div className="container">
     <NavigationBar />
     <Divider />
@@ -24,90 +34,16 @@ const Scoreboard = () => (
         <Grid item xs={3} className="wld"><p>W-L-D</p></Grid>
       </Grid>
       <div className="scoreContainer">
-        <OutputbarScoreBoard
-          player="Erlef Doedsdufva"
-          totalScore="3"
-          wins="1"
-          losses="0"
-          draws="0"
-        />
-        <OutputbarScoreBoard
-          player="Tony McHallumi"
-          totalScore="0"
-          wins="1"
-          losses="0"
-          draws="0"
-        />
-        <OutputbarScoreBoard
-          player="Erlef Doedsdufva"
-          totalScore="3"
-          wins="1"
-          losses="0"
-          draws="0"
-        />
-        <OutputbarScoreBoard
-          player="Tony McHallumi"
-          totalScore="0"
-          wins="1"
-          losses="0"
-          draws="0"
-        />
-        <OutputbarScoreBoard
-          player="Erlef Doedsdufva"
-          totalScore="3"
-          wins="1"
-          losses="0"
-          draws="0"
-        />
-        <OutputbarScoreBoard
-          player="Tony McHallumi"
-          totalScore="0"
-          wins="1"
-          losses="0"
-          draws="0"
-        />
-        <OutputbarScoreBoard
-          player="Erlef Doedsdufva"
-          totalScore="3"
-          wins="1"
-          losses="0"
-          draws="0"
-        />
-        <OutputbarScoreBoard
-          player="Tony McHallumi"
-          totalScore="0"
-          wins="1"
-          losses="0"
-          draws="0"
-        />
-        <OutputbarScoreBoard
-          player="Erlef Doedsdufva"
-          totalScore="3"
-          wins="1"
-          losses="0"
-          draws="0"
-        />
-        <OutputbarScoreBoard
-          player="Tony McHallumi"
-          totalScore="0"
-          wins="1"
-          losses="0"
-          draws="0"
-        />
-        <OutputbarScoreBoard
-          player="Erlef Doedsdufva"
-          totalScore="3"
-          wins="1"
-          losses="0"
-          draws="0"
-        />
-        <OutputbarScoreBoard
-          player="Tony McHallumi"
-          totalScore="0"
-          wins="1"
-          losses="0"
-          draws="0"
-        />
+        {players.map((e) => (
+       
+          <OutputbarScoreBoard player= {e.name}
+                               totalScore= {e.score} 
+                               wins={e.matchHistory.win}
+                               losses={e.matchHistory.loss}
+                               draws={e.matchHistory.draw} />
+
+        ))}
+      
       </div>
       <div className="paraContainer">
         <p className="paraStyle">End Tournament</p>
@@ -125,6 +61,7 @@ const Scoreboard = () => (
       </Link>
     </div>
   </div>
-); 
+);
+}; 
 
 export default Scoreboard;
