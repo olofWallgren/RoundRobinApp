@@ -12,10 +12,7 @@ interface Props {
   player2?: any;
   children?: React.ReactNode;
 }
-type Player = {
-  name: string;
-  id: number;
-};
+
 type Score = {
   score: number;
   wins: number;
@@ -40,84 +37,155 @@ const OutputBarRound: React.FC<Props> = ({
 
   const settingContext = TournamentStore();
 
+  ///// Hämtar alla spelare från Context, 
+  ///// jämför med namn från våra spelare1, spelare2
+  ///// för att kunna lägga in resultaten i rätt spelare
   function findPlayer(player: string, score: Score) {
     const newPlayer: any = settingContext.playerList.find((p) => {
       return p.name === player;
     });
-    console.log("found player", newPlayer);
+    // Lägger till poäng, uppdaterar context med nya poäng
+    // Inte säkra på varför context uppdateras dock
+    newPlayer.score += score.score
+    newPlayer.matchHistory.win += score.wins
+    newPlayer.matchHistory.loss += score.losses
+    newPlayer.matchHistory.draw += score.draw
 
-    let updatedPlayer = {
-      name: newPlayer.name,
-      id: newPlayer.id,
-      score: (newPlayer.score += score.score),
-      matchHistory: {
-        win: (newPlayer.matchHistory.win += score.wins),
-        loss: (newPlayer.matchHistory.loss += score.losses),
-        draw: (newPlayer.matchHistory.draw += score.draw),
-      },
-    };
-    console.log("updaterad player", updatedPlayer);
+
     console.log("loggar playerlistcontext", settingContext.playerList);
     console.log("loggar tournamentcontext", settingContext.tournament);
   }
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    // let korv = settingContext.playerList;
-    //let player1 = korv
-    console.log(player1);
-    // myArray.find(x => x.id === '45').foo;
-
-    console.log(
-      "från outputbar:",
-      "matchID:",
-      pairingId,
-      data,
-      player1,
-      "vs",
-      player2
-    );
+ 
     switch (data.result) {
       case "2 - 0 - 0":
-        const scoreP1 = {
+        let scoreP1c1 = {
           score: 3,
           wins: 2,
           losses: 0,
           draw: 0,
         };
-        const scoreP2 = {
+        let scoreP2c1 = {
           score: 0,
           wins: 0,
+          losses: 2,
+          draw: 0,
+        };
+        findPlayer(player1, scoreP1c1);
+        findPlayer(player2, scoreP2c1);
+        break;
+      case "2 - 1 - 0":
+        let scoreP1c2 = {
+          score: 3,
+          wins: 2,
           losses: 1,
           draw: 0,
         };
-        console.log("två nöll te", { player1 });
-        findPlayer(player1, scoreP1);
-        findPlayer(player2, scoreP2);
-        // player1.score + 3
-        // player1.wins + 2
-        // player1.losses + 0
-        // player1.draws + 0
-        break;
-      case "2 - 1 - 0":
-        console.log("hejsan");
+        let scoreP2c2 = {
+          score: 0,
+          wins: 1,
+          losses: 2,
+          draw: 0,
+        };
+        findPlayer(player1, scoreP1c2);
+        findPlayer(player2, scoreP2c2);
         break;
       case "1 - 0 - 1":
-        console.log("hejsan");
+        let scoreP1c3 = {
+          score: 3,
+          wins: 1,
+          losses: 0,
+          draw: 1,
+        };
+        let scoreP2c3 = {
+          score: 0,
+          wins: 0,
+          losses: 1,
+          draw: 1,
+        };
+        findPlayer(player1, scoreP1c3);
+        findPlayer(player2, scoreP2c3);
         break;
       case "1 - 1 - 1":
-        console.log("hejsan");
+        let scoreP1c4 = {
+          score: 1,
+          wins: 1,
+          losses: 1,
+          draw: 1,
+        };
+        let scoreP2c4 = {
+          score: 1,
+          wins: 1,
+          losses: 1,
+          draw: 1,
+        };
+        findPlayer(player1, scoreP1c4);
+        findPlayer(player2, scoreP2c4);
         break;
       case "0 - 0 - 1":
-        console.log("hejsan");
+        let scoreP1c5 = {
+          score: 1,
+          wins: 0,
+          losses: 0,
+          draw: 1,
+        };
+        let scoreP2c5 = {
+          score: 1,
+          wins: 0,
+          losses: 0,
+          draw: 1,
+        };
+        findPlayer(player1, scoreP1c5);
+        findPlayer(player2, scoreP2c5);
         break;
       case "0 - 2 - 0":
-        console.log("hejsan");
+        let scoreP1c6 = {
+          score: 0,
+          wins: 0,
+          losses: 2,
+          draw: 0,
+        };
+        let scoreP2c6 = {
+          score: 3,
+          wins: 2,
+          losses: 0,
+          draw: 0,
+        };
+        findPlayer(player1, scoreP1c6);
+        findPlayer(player2, scoreP2c6);
         break;
       case "1 - 2 - 0":
-        console.log("hejsan");
+        let scoreP1c7 = {
+          score: 0,
+          wins: 1,
+          losses: 2,
+          draw: 0,
+        };
+        let scoreP2c7 = {
+          score: 3,
+          wins: 2,
+          losses: 1,
+          draw: 0,
+        };
+        findPlayer(player1, scoreP1c7);
+        findPlayer(player2, scoreP2c7);
         break;
       case "0 - 1 - 1":
-        console.log("hejsan");
+        let scoreP1c8 = {
+          score: 0,
+          wins: 0,
+          losses: 1,
+          draw: 1,
+        };
+        let scoreP2c8 = {
+          score: 3,
+          wins: 1,
+          losses: 0,
+          draw: 1,
+        };
+        findPlayer(player1, scoreP1c8);
+        findPlayer(player2, scoreP2c8);
         break;
       default:
         console.log("bajskorv");
