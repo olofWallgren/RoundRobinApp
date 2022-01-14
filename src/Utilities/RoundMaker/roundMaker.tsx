@@ -51,11 +51,12 @@ function MakeRoundRobinPairings(props: TournamentInterface) {
 
   return (
     <div>
-      {tournamentPairings[round].map((e) => (
+      {tournamentPairings[round].map((pairing, i) => (
         <OutputBarRound
-          player1={e.player1.name}
-          player2={e.player2.name}
-          pairingId={e.matchId}
+          key={`${pairing.matchId}-${i}`}
+          player1={pairing.player1.name}
+          player2={pairing.player2.name}
+          pairingId={pairing.matchId}
         />
       ))}
     </div>
