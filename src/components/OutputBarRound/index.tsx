@@ -33,18 +33,20 @@ const OutputBarRound: React.FC<Props> = ({
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
 
-    let korv = settingContext.playerList[];
-let player1 = korv
+    let korv = settingContext.playerList;
+    let player1 = korv
+    console.log(player1)
+    // myArray.find(x => x.id === '45').foo;
 
 
     console.log("från outputbar:", "matchID:",pairingId, data, player1, "vs", player2);
     switch (data.result) {
       case '2 - 0 - 0': 
         console.log("två nöll te", {player1});
-        player1.score + 3
-        player1.wins + 2
-        player1.losses + 0
-        player1.draws + 0
+        // player1.score + 3
+        // player1.wins + 2
+        // player1.losses + 0
+        // player1.draws + 0
       break;
       case '2 - 1 - 0': 
         console.log("hejsan");
