@@ -14,6 +14,7 @@ const Round = () => {
   const settingContext = TournamentStore();
 
   //// testar att skapa en ny array från players-context //////
+  console.log("loggar constext vid refresh", settingContext.playerList);
   const playerArray: any = [];
   console.log("players från round context", settingContext.playerList);
   const getNameAndId = () => {
