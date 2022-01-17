@@ -1,0 +1,57 @@
+.notFound__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5rem;
+}
+
+.notFound__icon {
+  font-size: 9rem;
+  color: #fa04f6;
+}
+.notFound__title {
+  color: #fa04f6;
+  font-size: 5rem;
+}
+.notFound__subHeading {
+  color: white;
+}
+.notFound__text {
+  color: white;
+}
+.notFound__link {
+  color: white;
+}
+.notFound--noMargin {
+  margin: 0;
+}
+
+@media screen and (max-width: 600px) {
+  .notFound__icon {
+    font-size: 7rem;
+  }
+  .notFound__title {
+    font-size: 3rem;
+  }
+  .notFound__container {
+    margin-top: 4rem;
+  }
+}
+@media screen and (max-width: 600px) {
+  .notFound__icon {
+    font-size: 5rem;
+  }
+  .notFound__title {
+    font-size: 2rem;
+  }
+  .notFound__text {
+    font-size: 11px;
+  }
+  .notFound__container {
+    font-size: 14px;
+  }
+  .notFound__subHeading {
+    font-size: 15px;
+  }
+}
