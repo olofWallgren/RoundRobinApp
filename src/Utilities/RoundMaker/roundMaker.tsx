@@ -1,5 +1,6 @@
-import { useState } from "react";
 import OutputBarRound from "../../components/OutputBarRound";
+import { TournamentStore } from "../../Contexts/tournamentContext";
+import "../../layout/OutputBar.css";
 
 type ListPlayers = ReadonlyArray<Player>;
 
@@ -10,16 +11,21 @@ type Player = {
 
 interface TournamentInterface {
   readonly players: ListPlayers;
+  round: number;
+  ableNextRound: () => void;
 }
 
 function MakeRoundRobinPairings(props: TournamentInterface) {
   if (props.players.length % 2) throw new Error("Teams length must be even");
-
   const playerCount = props.players.length;
   const rounds = playerCount - 1;
   const half = playerCount / 2;
 
-  const tournamentPairings = [];
+  const tournamentPairings: {
+    player1: Player;
+    player2: Player;
+    matchId: string;
+  }[][] = [];
 
   const playerIndexes: any = props.players.map((_, i) => i).slice(1);
 
@@ -47,18 +53,12 @@ function MakeRoundRobinPairings(props: TournamentInterface) {
     tournamentPairings.push(roundPairings);
   }
 
-  let round: number = 0;
-
   return (
-    <div>
-      {tournamentPairings[round].map((e) => (
-        <OutputBarRound
-          player1={e.player1.name}
-          player2={e.player2.name}
-          pairingId={e.matchId}
-        />
-      ))}
-    </div>
+    <OutputBarRound
+      tournamentPairings={tournamentPairings}
+      round={props.round}
+      ableNextRound={props.ableNextRound}
+    />
   );
 }
 
