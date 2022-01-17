@@ -9,6 +9,7 @@ import { Divider } from "@mui/material";
 import { Link } from "react-router-dom";
 import MakeRoundRobinPairings from "../../Utilities/RoundMaker/roundMaker";
 import { TournamentStore } from "../../Contexts/tournamentContext";
+import Timer from "../../components/Timer";
 
 const Round = () => {
   const settingContext = TournamentStore();
@@ -48,11 +49,11 @@ const Round = () => {
           <div></div>
 
           <div className="flexBetween">
-            <div>
-              <p className="paraStyle">End Tournament</p>
+            <div className="alignBottom">
+              <p className="paraStyle zeroMargin">End Tournament</p>
             </div>
             <div>
-              <p className="paraStyle">Pause Round</p>
+            <Timer hours={0} minutes={50} seconds={0}/>
             </div>
           </div>
         </div>
