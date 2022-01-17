@@ -11,6 +11,8 @@ type Player = {
 
 interface TournamentInterface {
   readonly players: ListPlayers;
+  round: number;
+  ableNextRound: () => void;
 }
 
 function MakeRoundRobinPairings(props: TournamentInterface) {
@@ -51,10 +53,12 @@ function MakeRoundRobinPairings(props: TournamentInterface) {
     tournamentPairings.push(roundPairings);
   }
 
-  let round: number = 0;
-
   return (
-    <OutputBarRound tournamentPairings={tournamentPairings} round={round} />
+    <OutputBarRound
+      tournamentPairings={tournamentPairings}
+      round={props.round}
+      ableNextRound={props.ableNextRound}
+    />
   );
 }
 

@@ -23,7 +23,20 @@ const Round = () => {
     });
   };
   getNameAndId();
-
+  const [round, setRound] = React.useState(0);
+  function incrementRound() {
+    ableNextRound();
+    const roundLength = playerArray.length;
+    if (round >= roundLength) {
+      setRound(0);
+    } else {
+      setRound(round + 1);
+    }
+    console.log("round", round);
+  }
+  const ableNextRound = () => {
+    setDisable(!disable && true);
+  };
   const [disable, setDisable] = React.useState(true); //Använd denna hook för att göra knappen klickbar efter att resultaten är ifyllda
 
   return (
@@ -43,7 +56,11 @@ const Round = () => {
             </div>
           </div>
           <div className="playerContainer">
-            <MakeRoundRobinPairings players={playerArray} />
+            <MakeRoundRobinPairings
+              players={playerArray}
+              round={round}
+              ableNextRound={ableNextRound}
+            />
           </div>
           <div></div>
 
@@ -60,7 +77,11 @@ const Round = () => {
           <Link to="/create-tournament" className="secondaryBtn btnWidth">
             Back
           </Link>
-          <button className="primaryBtn btnWidth" disabled={disable}>
+          <button
+            onClick={incrementRound}
+            className="primaryBtn btnWidth"
+            disabled={disable}
+          >
             Next Round
           </button>
         </div>

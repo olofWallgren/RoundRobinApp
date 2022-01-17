@@ -16,6 +16,7 @@ interface Props {
   children?: React.ReactNode;
   tournamentPairings: any;
   round: number;
+  ableNextRound: () => void;
 }
 
 const OutputBarRound: React.FC<Props> = ({
@@ -23,6 +24,7 @@ const OutputBarRound: React.FC<Props> = ({
   children,
   tournamentPairings,
   round,
+  ableNextRound,
 }) => {
   type Score = {
     score: number;
@@ -70,6 +72,7 @@ const OutputBarRound: React.FC<Props> = ({
     data.result.forEach((e, index) => {
       const player1 = tournamentPairings[round][index].player1.name;
       const player2 = tournamentPairings[round][index].player2.name;
+      ableNextRound();
 
       switch (e.name) {
         case "2 - 0 - 0":
