@@ -1,6 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import OutputBarRound from "../../components/OutputBarRound";
 import { TournamentStore } from "../../Contexts/tournamentContext";
+import "../../layout/OutputBar.css";
+import { Grid } from "@mui/material";
 import {
   useForm,
   useFieldArray,
@@ -32,6 +34,14 @@ function MakeRoundRobinPairings(props: TournamentInterface) {
     matchId: string;
   }[][] = [];
 
+  // const [lsPairings, setLsPairings] = useState();
+  // useEffect(() => {
+  //   try {
+  //     let ls = JSON.parse(localStorage.getItem("pairings") || "");
+  //     setLsPairings(ls);
+  //   } catch (error) {}
+  // }, []);
+
   const playerIndexes: any = props.players.map((_, i) => i).slice(1);
 
   for (let round = 0; round < rounds; round++) {
@@ -56,6 +66,8 @@ function MakeRoundRobinPairings(props: TournamentInterface) {
     // rotating the array
     playerIndexes.push(playerIndexes.shift());
     tournamentPairings.push(roundPairings);
+    localStorage.setItem("pairings", JSON.stringify(tournamentPairings));
+    console.log("pairings", localStorage.getItem("pairings"));
   }
 
   let round: number = 0;
@@ -100,15 +112,19 @@ function MakeRoundRobinPairings(props: TournamentInterface) {
     newPlayer.matchHistory.loss += score.losses;
     newPlayer.matchHistory.draw += score.draw;
 
-    console.log("loggar playerlistcontext", settingContext.playerList);
-    console.log("loggar tournamentcontext", settingContext.tournament);
+    // console.log("loggar playerlistcontext", settingContext.playerList);
+    // console.log("loggar tournamentcontext", settingContext.tournament);
   }
 
   const onSubmit: SubmitHandler<formValues> = (data) => {
     console.log(data);
     data.result.forEach((e, index) => {
-      const player1 = tournamentPairings[index][index].player1.name;
-      const player2 = tournamentPairings[index][index].player2.name;
+      const player1 = tournamentPairings[round][index].player1.name;
+      const player2 = tournamentPairings[round][index].player2.name;
+      // console.log("on submit", player1, player2);
+      console.log("submit pairins 0 [index]", player1, player2);
+      console.log("submit index", tournamentPairings[index]);
+
       switch (e.name) {
         case "2 - 0 - 0":
           let scoreP1c1 = {
@@ -245,28 +261,39 @@ function MakeRoundRobinPairings(props: TournamentInterface) {
   };
 
   return (
-    <div>
+    <div className="">
       <form onSubmit={handleSubmit(onSubmit)}>
         {tournamentPairings[round].map((e, index) => (
-          <div>
-            <p>{e.player1.name}</p>
-            <p>{e.player2.name}</p>
-            <select
-              key={`${e.player1.name}-${index}`}
-              className="select"
-              {...register(`result.${index}.name` as const)}
-            >
-              <option value="Still playing">Still Playing</option>
-              <option value="2 - 0 - 0">2 - 0 - 0</option>
-              <option value="2 - 1 - 0">2 - 1 - 0</option>
-              <option value="1 - 0 - 1">1 - 0 - 1</option>
-              <option value="1 - 1 - 1">1 - 1 - 1</option>
-              <option value="0 - 0 - 1">0 - 0 - 1</option>
-              <option value="0 - 2 - 0">0 - 2 - 1</option>
-              <option value="1 - 2 - 0">1 - 2 - 0</option>
-              <option value="0 - 1 - 1">0 - 1 - 1</option>
-            </select>
-          </div>
+          <Grid
+            container
+            className="outputBarContainer"
+            direction="row"
+            justifyContent="space-between"
+            alignItems="center"
+          >
+            <Grid item>
+              <p className="names">
+                {e.player1.name} - {e.player2.name}
+              </p>
+            </Grid>
+            <Grid item>
+              <select
+                key={`${e.player1.name}-${index}`}
+                className="select"
+                {...register(`result.${index}.name` as const)}
+              >
+                <option value="Still playing">Still Playing</option>
+                <option value="2 - 0 - 0">2 - 0 - 0</option>
+                <option value="2 - 1 - 0">2 - 1 - 0</option>
+                <option value="1 - 0 - 1">1 - 0 - 1</option>
+                <option value="1 - 1 - 1">1 - 1 - 1</option>
+                <option value="0 - 0 - 1">0 - 0 - 1</option>
+                <option value="0 - 2 - 0">0 - 2 - 1</option>
+                <option value="1 - 2 - 0">1 - 2 - 0</option>
+                <option value="0 - 1 - 1">0 - 1 - 1</option>
+              </select>
+            </Grid>
+          </Grid>
           // <OutputBarRound
           //   player1={e.player1.name}
           //   player2={e.player2.name}
