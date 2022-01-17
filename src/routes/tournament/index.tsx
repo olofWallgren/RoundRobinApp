@@ -4,13 +4,13 @@ import "../../layout/section.css";
 import "../../layout/primaryBtn.css";
 import "../../layout/tournamentContainer.css";
 import "./tournament.css";
-import { Link } from "react-router-dom";
 import Alert from "@mui/material/Alert";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useState } from "react";
 import ParticipantsCard from "../../components/NewTournamentCards/PlayersCard";
 import { TournamentStore } from "../../Contexts/tournamentContext";
 import { Inputs } from "../../types/tournamentInput";
+import SettingsModal from "../../components/SettingsModal";
 
 const Tournament = () => {
   ///////// CONTEXT //////////////////////
@@ -20,7 +20,30 @@ const Tournament = () => {
   const [showParticipantView, setParticipantView] = useState(true);
   const toggleParticipantView = () => {
     setParticipantView(showParticipantView ? false : true);
+    makePlayersEven();
   };
+  
+  /// Om det är ojämnt antal spelare så skapas en spelare "**BYE**" som sedan
+  /// Räknas som en gratisvinst.
+  const makePlayersEven = () => {
+
+    const byePlayer: any = {
+      id: playerArray.length++,
+      name: "**BYE**",
+      score: 0,
+      matchHistory: { win: 0, loss: 0, draw:0 },
+    }
+    if (playerArray.length % 2) {
+        
+      return;
+    } else {
+      
+      playerArray.push(byePlayer);
+
+    }
+   
+
+  }
 
   ///////// state med participants som hämtas och uppdateras från Participants card ///////////
   const [playerArray, setPlayerArray] = useState<string[]>([]);
@@ -101,7 +124,7 @@ const Tournament = () => {
                     }}
                     severity="error"
                   >
-                    Please enter tournament name!
+                    Please enter a tournament name with less than 21 letters!
                   </Alert>
                 )}
               </div>
@@ -194,19 +217,18 @@ const Tournament = () => {
                 </div>
               </div>
               <div className="buttonContainer">
-                <input
-                  className="primaryBtn fullWidth"
-                  value="Start"
-                  type="submit"
-                />
+                {errors.tournamentName ? (
+                  <button disabled className="primaryBtn fullWidth">
+                    Submit
+                  </button>
+                ) : (
+                  <SettingsModal />
+                )}
               </div>
             </form>
           )}
         </div>
       </div>
-      <Link className="primaryBtn" to="/current-tournament/round">
-        Done
-      </Link>
     </>
   );
 };
