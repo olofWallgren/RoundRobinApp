@@ -22,28 +22,27 @@ const Tournament = () => {
     setParticipantView(showParticipantView ? false : true);
     makePlayersEven();
   };
-  
+
   /// Om det är ojämnt antal spelare så skapas en spelare "**BYE**" som sedan
   /// Räknas som en gratisvinst.
   const makePlayersEven = () => {
-
     const byePlayer: any = {
-      id: playerArray.length++,
-      name: "**BYE**",
+      id: playerArray.length + 2,
+      name: "**BYE**(Free win)",
       score: 0,
-      matchHistory: { win: 0, loss: 0, draw:0 },
-    }
+      matchHistory: { win: 0, loss: 0, draw: 0 },
+    };
+
     if (playerArray.length % 2) {
-        
-      return;
+      setPlayerArray((prevState) => {
+        const newPlayerArray = [...prevState, byePlayer];
+        return newPlayerArray;
+      });
     } else {
-      
-      playerArray.push(byePlayer);
-
+      return;
+      // playerArray.push(byePlayer);
     }
-   
-
-  }
+  };
 
   ///////// state med participants som hämtas och uppdateras från Participants card ///////////
   const [playerArray, setPlayerArray] = useState<string[]>([]);

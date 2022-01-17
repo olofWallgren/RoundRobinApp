@@ -72,7 +72,7 @@ const OutputBarRound: React.FC<Props> = ({
     data.result.forEach((e, index) => {
       const player1 = tournamentPairings[round][index].player1.name;
       const player2 = tournamentPairings[round][index].player2.name;
-      ableNextRound();
+      console.log(round);
 
       switch (e.name) {
         case "2 - 0 - 0":
@@ -207,6 +207,7 @@ const OutputBarRound: React.FC<Props> = ({
           console.log("THE END");
       }
     });
+    ableNextRound();
   };
   return (
     <div className="">

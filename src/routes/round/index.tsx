@@ -23,7 +23,11 @@ const Round = () => {
     });
   };
   getNameAndId();
+
+  /////// State för Rounds //////////////////
   const [round, setRound] = React.useState(0);
+
+  ////// Ökar statet med +1 ////////////////
   function incrementRound() {
     ableNextRound();
     const roundLength = playerArray.length;
@@ -34,9 +38,11 @@ const Round = () => {
     }
     console.log("round", round);
   }
+  ////// Togglar disable på next round-knappen /////////
   const ableNextRound = () => {
     setDisable(!disable && true);
   };
+
   const [disable, setDisable] = React.useState(true); //Använd denna hook för att göra knappen klickbar efter att resultaten är ifyllda
 
   return (
@@ -46,7 +52,7 @@ const Round = () => {
         <Divider />
         <div className="gameContainer">
           <div className="headingWrapper">
-            <h3 className="zeroMargin">Round 1</h3>
+            <h3 className="zeroMargin">{`Round-${round + 1}`}</h3>
           </div>
           <div className="textWrapper">
             <p className="alignBottom secondaryColor">Pairings:</p>
