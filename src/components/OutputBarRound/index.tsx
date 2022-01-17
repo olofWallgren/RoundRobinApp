@@ -212,7 +212,7 @@ const OutputBarRound: React.FC<Props> = ({
 
       <Grid item>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <select onChange={keepOptionValue()} className="select" {...register("result")}>
+          <select onSelect={keepOptionValue("value")} className="select" {...register("result")}>
             <option value="Still playing">Still Playing</option>
             <option value="2 - 0 - 0">2 - 0 - 0</option>
             <option value="2 - 1 - 0">2 - 1 - 0</option>
