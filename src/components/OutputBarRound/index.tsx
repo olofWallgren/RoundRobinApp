@@ -48,6 +48,7 @@ const OutputBarRound: React.FC<Props> = ({
     register,
     control,
     handleSubmit,
+    resetField,
     formState: { errors },
   } = useForm<formValues>();
   const { fields } = useFieldArray({
@@ -68,7 +69,6 @@ const OutputBarRound: React.FC<Props> = ({
   }
 
   const onSubmit: SubmitHandler<formValues> = (data) => {
-    console.log(data);
     data.result.forEach((e, index) => {
       const player1 = tournamentPairings[round][index].player1.name;
       const player2 = tournamentPairings[round][index].player2.name;
@@ -206,6 +206,7 @@ const OutputBarRound: React.FC<Props> = ({
         default:
           console.log("THE END");
       }
+      resetField(`result.${index}.name`);
     });
     ableNextRound();
   };
