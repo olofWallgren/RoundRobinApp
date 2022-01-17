@@ -7,15 +7,43 @@ import "../round/round.css";
 import NavigationBar from "../../components/NavigationBar";
 import { Divider } from "@mui/material";
 import { Link } from "react-router-dom";
-import OutputBarRound from "../../components/OutputBarRound";
-import RoundRobinCalculator from "../../Utilities/RoundRobinCalculator";
+import MakeRoundRobinPairings from "../../Utilities/RoundMaker/roundMaker";
 import { TournamentStore } from "../../Contexts/tournamentContext";
 
-
 const Round = () => {
+  const settingContext = TournamentStore();
+
+  //// testar att skapa en ny array från players-context //////
+
+  const playerArray: any = [];
+
+  const getNameAndId = () => {
+    settingContext.tournament.players.forEach((e) => {
+      playerArray.push({ name: e.name, id: e.id });
+    });
+  };
+  getNameAndId();
+
+  /////// State för Rounds //////////////////
+  const [round, setRound] = React.useState(0);
+
+  ////// Ökar statet med +1 ////////////////
+  function incrementRound() {
+    ableNextRound();
+    const roundLength = playerArray.length;
+    if (round >= roundLength) {
+      setRound(0);
+    } else {
+      setRound(round + 1);
+    }
+    console.log("round", round);
+  }
+  ////// Togglar disable på next round-knappen /////////
+  const ableNextRound = () => {
+    setDisable(!disable && true);
+  };
+
   const [disable, setDisable] = React.useState(true); //Använd denna hook för att göra knappen klickbar efter att resultaten är ifyllda
-  const settingStore = TournamentStore();
-  console.log("context från round", settingStore.tournament);
 
   return (
     <>
@@ -23,71 +51,24 @@ const Round = () => {
         <NavigationBar />
         <Divider />
         <div className="gameContainer">
-          <div style={{ padding: "1.5rem 0" }}>
-            <h3 style={{ margin: "0" }}>Round 1</h3>
+          <div className="headingWrapper">
+            <h3 className="zeroMargin">{`Round-${round + 1}`}</h3>
           </div>
           <div className="textWrapper">
-            <p className="marginBottom">Pairings:</p>
+            <p className="alignBottom secondaryColor">Pairings:</p>
             <div className="flexColumn">
               <p className="marginBottom">Result:</p>
               <p className="wldStyle">W - L - D</p>
             </div>
           </div>
           <div className="playerContainer">
-            <OutputBarRound
-              player1="Erlef Doedsdufva"
-              player2="Tony McHallumi"
-            />
-            <OutputBarRound
-              player1="Erlef Doedsdufva"
-              player2="Tony McHallumi"
-            />
-            <OutputBarRound
-              player1="Erlef Doedsdufva"
-              player2="Tony McHallumi"
-            />
-            <OutputBarRound
-              player1="Erlef Doedsdufva"
-              player2="Tony McHallumi"
-            />
-            <OutputBarRound
-              player1="Erlef Doedsdufva"
-              player2="Tony McHallumi"
-            />
-            <OutputBarRound
-              player1="Erlef Doedsdufva"
-              player2="Tony McHallumi"
-            />
-            <OutputBarRound
-              player1="Erlef Doedsdufva"
-              player2="Tony McHallumi"
-            />
-            <OutputBarRound
-              player1="Erlef Doedsdufva"
-              player2="Tony McHallumi"
-            />
-            <OutputBarRound
-              player1="Erlef Doedsdufva"
-              player2="Tony McHallumi"
-            />
-            <OutputBarRound
-              player1="Erlef Doedsdufva"
-              player2="Tony McHallumi"
-            />
-            <OutputBarRound
-              player1="Erlef Doedsdufva"
-              player2="Tony McHallumi"
-            />
-            <OutputBarRound
-              player1="Erlef Doedsdufva"
-              player2="Tony McHallumi"
-            />
-            <OutputBarRound
-              player1="Erlef Doedsdufva"
-              player2="Tony McHallumi"
+            <MakeRoundRobinPairings
+              players={playerArray}
+              round={round}
+              ableNextRound={ableNextRound}
             />
           </div>
-          <RoundRobinCalculator />
+          <div></div>
 
           <div className="flexBetween">
             <div>
@@ -102,7 +83,11 @@ const Round = () => {
           <Link to="/create-tournament" className="secondaryBtn btnWidth">
             Back
           </Link>
-          <button className="primaryBtn btnWidth" disabled={disable}>
+          <button
+            onClick={incrementRound}
+            className="primaryBtn btnWidth"
+            disabled={disable}
+          >
             Next Round
           </button>
         </div>

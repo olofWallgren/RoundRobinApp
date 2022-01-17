@@ -8,19 +8,24 @@ import { Link } from "react-router-dom";
 import { CSSProperties } from "react";
 
 const Home = () => {
-  // const db = firestore();
-  const [users, setUsers] = useState([]);
+  ///// sätter en key och value i ls annars crashar appen när man ska hämta ls ifrån participantCard och ls är tomt //////
 
-  const usersCollectionRef = collection(db, "tournaments");
-  useEffect(() => {
-    const getUsers = async () => {
-      const data = await getDocs(usersCollectionRef);
-      data.docs.map((i: any) => {
-        console.log(i.data());
-      });
-    };
-    getUsers();
-  }, []);
+  ////// UTKOMMENTERAD FÖR TILLFÄLLET ///////////////
+
+  /////////// TEST ANNROP TILL DB //////////////////
+  // const db = firestore();
+  // const [users, setUsers] = useState([]);
+
+  // const usersCollectionRef = collection(db, "tournaments");
+  // useEffect(() => {
+  //   const getUsers = async () => {
+  //     const data = await getDocs(usersCollectionRef);
+  //     data.docs.map((i: any) => {
+  //       console.log(i.data());
+  //     });
+  //   };
+  //   getUsers();
+  // }, []);
 
   return (
     <div style={homeContainer}>

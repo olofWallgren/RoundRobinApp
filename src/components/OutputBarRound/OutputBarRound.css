@@ -8,10 +8,19 @@
   cursor: pointer;
 }
 
+.names {
+  font-family: metamorphous;
+}
+
 @media screen and (max-width: 375px) {
   .select {
-    font-size: 8px;
-    width: 62px;
+    font-size: 10px;
+    width: 100%;
   }
 }
 
+@media screen and (max-width: 320px) {
+  .select {
+    font-size: 8px;
+  }
+}

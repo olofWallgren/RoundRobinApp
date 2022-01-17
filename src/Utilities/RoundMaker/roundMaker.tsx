@@ -1,65 +1,65 @@
+import OutputBarRound from "../../components/OutputBarRound";
+import { TournamentStore } from "../../Contexts/tournamentContext";
+import "../../layout/OutputBar.css";
 
 type ListPlayers = ReadonlyArray<Player>;
 
-
 type Player = {
-  readonly id: number;
-  readonly name: string;
+  name: string;
+  id: number;
 };
 
 interface TournamentInterface {
   readonly players: ListPlayers;
+  round: number;
+  ableNextRound: () => void;
 }
 
-export default class Tournament implements TournamentInterface {
-  readonly players: ListPlayers;
-  
+function MakeRoundRobinPairings(props: TournamentInterface) {
+  if (props.players.length % 2) throw new Error("Teams length must be even");
+  const playerCount = props.players.length;
+  const rounds = playerCount - 1;
+  const half = playerCount / 2;
 
-  constructor(players: ListPlayers) {
-    if (players.length % 2) throw new Error("Teams length must be even");
+  const tournamentPairings: {
+    player1: Player;
+    player2: Player;
+    matchId: string;
+  }[][] = [];
 
-    this.players = players;
-  
+  const playerIndexes: any = props.players.map((_, i) => i).slice(1);
 
+  for (let round = 0; round < rounds; round++) {
+    const roundPairings = [];
 
-  function makeRoundRobinPairings(players: ListPlayers) {
+    const newPlayerIndexes = [0].concat(playerIndexes);
 
+    const firstHalf = newPlayerIndexes.slice(0, half);
+    const secondHalf = newPlayerIndexes.slice(half, playerCount).reverse();
 
-    const playerCount = players.length;
-    const rounds = playerCount - 1;
-    const half = playerCount / 2;
-  
-    const tournamentPairings = [];
-  
-    const playerIndexes: any = players.map((_, i) => i).slice(1);
-  
-    for (let round = 0; round < rounds; round++) {
-      const roundPairings = [];
-  
-      const newPlayerIndexes = [0].concat(playerIndexes);
-  
-      const firstHalf = newPlayerIndexes.slice(0, half);
-      const secondHalf = newPlayerIndexes.slice(half, playerCount).reverse();
-  
-      for (let i = 0; i < firstHalf.length; i++) {
-        roundPairings.push({
-          white: players[firstHalf[i]],
-          black: players[secondHalf[i]],
-        });
-      }
-  
-      // rotating the array
-      playerIndexes.push(playerIndexes.shift());
-      tournamentPairings.push(roundPairings);
-      console.log(roundPairings);
+    for (let i = 0; i < firstHalf.length; i++) {
+      let roundNumber: any = tournamentPairings.length + 1;
+      let idMatchFormater = "r" + roundNumber + "m" + (i + 1);
+
+      roundPairings.push({
+        player1: props.players[firstHalf[i]],
+        player2: props.players[secondHalf[i]],
+        matchId: idMatchFormater,
+      });
     }
-    return tournamentPairings;
+
+    // rotating the array
+    playerIndexes.push(playerIndexes.shift());
+    tournamentPairings.push(roundPairings);
+  }
+
+  return (
+    <OutputBarRound
+      tournamentPairings={tournamentPairings}
+      round={props.round}
+      ableNextRound={props.ableNextRound}
+    />
+  );
 }
 
-makeRoundRobinPairings(players);
-
-
-
-
-    }
-}
+export default MakeRoundRobinPairings;

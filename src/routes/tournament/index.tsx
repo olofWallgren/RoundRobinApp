@@ -4,12 +4,13 @@ import "../../layout/section.css";
 import "../../layout/primaryBtn.css";
 import "../../layout/tournamentContainer.css";
 import "./tournament.css";
-import { Link } from "react-router-dom";
-
+import Alert from "@mui/material/Alert";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useState } from "react";
-import ParticipantsCard from "../../components/NewTournamentCards/ParticipantsCard";
+import ParticipantsCard from "../../components/NewTournamentCards/PlayersCard";
 import { TournamentStore } from "../../Contexts/tournamentContext";
+import { Inputs } from "../../types/tournamentInput";
+import SettingsModal from "../../components/SettingsModal";
 
 const Tournament = () => {
   ///////// CONTEXT //////////////////////
@@ -19,6 +20,28 @@ const Tournament = () => {
   const [showParticipantView, setParticipantView] = useState(true);
   const toggleParticipantView = () => {
     setParticipantView(showParticipantView ? false : true);
+    makePlayersEven();
+  };
+
+  /// Om det är ojämnt antal spelare så skapas en spelare "**BYE**" som sedan
+  /// Räknas som en gratisvinst.
+  const makePlayersEven = () => {
+    const byePlayer: any = {
+      id: playerArray.length + 2,
+      name: "**BYE**(Free win)",
+      score: 0,
+      matchHistory: { win: 0, loss: 0, draw: 0 },
+    };
+
+    if (playerArray.length % 2) {
+      setPlayerArray((prevState) => {
+        const newPlayerArray = [...prevState, byePlayer];
+        return newPlayerArray;
+      });
+    } else {
+      return;
+      // playerArray.push(byePlayer);
+    }
   };
 
   ///////// state med participants som hämtas och uppdateras från Participants card ///////////
@@ -26,17 +49,6 @@ const Tournament = () => {
   const getParticipants = (data: any) => {
     setPlayerArray([...data]);
     console.log("getParticipants");
-  };
-
-  type Inputs = {
-    tournamentName: string;
-    hour: number;
-    min: number;
-    sec: number;
-    games: string;
-    win: string;
-    loss: string;
-    draw: string;
   };
 
   const {
@@ -48,16 +60,16 @@ const Tournament = () => {
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     const newTournament = {
-      persistants: playerArray,
+      players: playerArray,
       tournamentName: data.tournamentName,
-      roundLength: [{ hour: data.hour }, { min: data.min }, { sec: data.sec }],
+      roundLength: { hour: data.hour, min: data.min, sec: data.sec },
       games: data.games,
-      scoring: [{ win: data.win }, { loss: data.loss }, { draw: data.draw }],
+      scoring: { win: data.win, loss: data.loss, draw: data.draw },
     };
+    settingStore.setPlayerList(playerArray);
     settingStore.setTournament(newTournament);
-    console.log("submitt");
   };
-  console.log("constext", settingStore.tournament);
+
   return (
     <>
       <div className="container">
@@ -65,7 +77,7 @@ const Tournament = () => {
           <div className="headingContainer">
             <h3 className="noMargin">New Tournament</h3>
           </div>
-          <div className="flexBetween justifyCenter">
+          <div className="flexBetween baseline noMargin">
             <p className="noMargin secondaryColor">{`Added players: ${playerArray.length}`}</p>
             {!showParticipantView && (
               <button
@@ -88,7 +100,7 @@ const Tournament = () => {
               <div className="formSection">
                 <p className="noMargin">Tournament name</p>
                 <input
-                  className="input inputTournament"
+                  className="input"
                   type="text"
                   {...register("tournamentName", {
                     required: true,
@@ -96,101 +108,126 @@ const Tournament = () => {
                   })}
                   placeholder="Enter tournament name"
                 />
+              </div>
+
+              {/* Error modal for tournament name */}
+              <div className="errorWrapper">
                 {errors.tournamentName && (
-                  <span>Tournament name is required</span>
+                  <Alert
+                    sx={{
+                      zIndex: "modal",
+                      position: "absolute",
+                      width: "100%",
+                      top: "-30px",
+                      padding: "0 8px",
+                    }}
+                    severity="error"
+                  >
+                    Please enter a tournament name with less than 21 letters!
+                  </Alert>
                 )}
               </div>
-                  {/* Length of round section */}
+              {/* Length of round section */}
               <div className="formSection">
-                <div className="halfWidth">
+                <div className="narrowWidth">
                   <p className="noMargin">Length of round</p>
                 </div>
-                <div className="inputSection">
+                {/* Hour input */}
+                <div className="inputSection marginRight">
                   <p className="noMargin bottomPadding">Hour:</p>
                   <input
-                    className="input inputElement"
                     type="number"
+                    className="input inputElement"
+                    value="0"
                     {...register("hour", { required: true, min: 0, max: 5 })}
                   />
-                  {errors.hour && <span>This field is required</span>}
                 </div>
 
-                <div className="inputSection">
+                {/* Min inputs */}
+                <div className="inputSection marginRight">
                   <p className="noMargin bottomPadding">Min:</p>
                   <input
                     type="number"
                     className="input inputElement"
+                    value="50"
                     {...register("min", { required: true, min: 0, max: 60 })}
                   />
-                  {errors.min && <span>This field is required</span>}
                 </div>
 
+                {/* Sec inputs */}
                 <div className="inputSection">
                   <p className="noMargin bottomPadding">Sec</p>
                   <input
                     className="input inputElement"
                     type="number"
+                    value="0"
                     {...register("sec", { required: true, min: 0, max: 60 })}
                   />
-                  {errors.sec && <span>This field is required</span>}
                 </div>
               </div>
 
-                  {/* Games per round section */}
+              {/* Error modal for hour, minutes and seconds */}
+              <div className="errorWrapper">
+                {errors.hour && errors.min && errors.sec && (
+                  <Alert
+                    sx={{
+                      zIndex: "modal",
+                      position: "absolute",
+                      width: "100%",
+                      top: "-20px",
+                      padding: "0 8px",
+                    }}
+                    severity="error"
+                  >
+                    Please enter numbers for hour, minutes and seconds!
+                  </Alert>
+                )}
+              </div>
+              {/* Games per round section */}
               <div className="formSection">
                 <p className="noMargin">Games per match</p>
 
-                <select className="input selectionInput" {...register("games")}>
+                <select className="input gamesSelection" {...register("games")}>
                   <option value="best of three">Best of 3</option>
-                  <option value="best of five">Best of 5</option>
-                  <option value="best of seven">Best of 7</option>
-                  <option value="single round">Single round</option>
                 </select>
               </div>
-                  {/* Scoring section */}
+              {/* Scoring section */}
               <div className="formSection">
-                <div className="halfWidth">
-
-                <p className="noMargin">Scoring</p>
+                <div className="narrowWidth">
+                  <p className="noMargin">Scoring</p>
                 </div>
-                <div className="inputSection">
+                <div className="inputSection marginRight">
                   <p className="noMargin bottomPadding">Win:</p>
-                  <select className="input selectionInput" {...register("win")}>
+                  <select className="input scoringInput" {...register("win")}>
                     <option value="3">3</option>
-                    <option value="1">1</option>
                   </select>
                 </div>
-                <div className="inputSection">
+                <div className="inputSection marginRight">
                   <p className="noMargin bottomPadding">Loss:</p>
-                  <select
-                    className="input selectionInput"
-                    {...register("loss")}
-                  >
+                  <select className="input scoringInput" {...register("loss")}>
                     <option value="0">0</option>
-                    <option value="1">1</option>
                   </select>
                 </div>
                 <div className="inputSection">
                   <p className="noMargin bottomPadding">Draw:</p>
-                  <select
-                    className="input selectionInput"
-                    {...register("draw")}
-                  >
+                  <select className="input scoringInput" {...register("draw")}>
                     <option value="1">1</option>
-                    <option value="0">0</option>
                   </select>
                 </div>
               </div>
               <div className="buttonContainer">
-                <input className="primaryBtn fullWidth" value="Start" type="submit" />
+                {errors.tournamentName ? (
+                  <button disabled className="primaryBtn fullWidth">
+                    Submit
+                  </button>
+                ) : (
+                  <SettingsModal />
+                )}
               </div>
             </form>
           )}
         </div>
       </div>
-      {/* <Link className="primaryBtn" to="/current-tournament/round">
-        Done
-      </Link> */}
     </>
   );
 };

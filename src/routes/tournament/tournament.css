@@ -1,5 +1,5 @@
 .headingContainer {
-  padding: 1.5rem 0;
+  padding: 1rem 0;
 }
 .formSection {
   background-color: rgba(56, 44, 89, 1);
@@ -13,7 +13,6 @@
 }
 .inputElement {
   width: 100%;
-  /* padding: 0.5rem; */
 }
 .input {
   background-color: white;
@@ -30,16 +29,24 @@
   display: flex;
   flex-direction: column;
   color: rgba(250, 4, 246, 1);
+  align-items: center;
 }
-/* .selectionInput {
-  padding: 0.5rem;
-} */
-.inputTournament {
-  /* border-radius: 0.5rem; */
-  /* font-size: small; */
+.marginRight {
+  margin-right: 1rem;
+}
+.gamesSelection {
+  width: 6rem;
+}
+.scoringInput {
+  width: 4rem;
+  text-align: center;
+}
+.errorWrapper {
+  position: relative;
 }
 .buttonContainer {
-  margin-top: 3rem;
+  margin-top: 1rem;
+  width: 100%;
 }
 .flexBetween {
   display: flex;
@@ -54,8 +61,8 @@
 .fullwidth {
   width: 100%;
 }
-.halfWidth {
-  width: 50%;
+.narrowWidth {
+  width: 90%;
 }
 .justifyCenter {
   align-items: center;
@@ -63,3 +70,14 @@
 .bottomPadding {
   padding-bottom: 0.2rem;
 }
+.baseline {
+  align-items: baseline;
+}
+
+@media screen and (max-width: 600px) {
+  .scoringInput {
+    width: 3rem;
+  }
+}
+
+

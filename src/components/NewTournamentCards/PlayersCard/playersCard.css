@@ -15,22 +15,16 @@
 .textField:focus {
   border: 1px solid rgba(250, 0, 255, 1);
 }
-.errorText {
-  background-color: rgb(179, 0, 0);
-  color: white;
-  padding: 0.2rem;
-  margin-top: 0.3rem;
-  font-weight: 500;
-  font-size: 12px;
+.errorContainer {
+  position: relative;
 }
 .addBtnWidth {
   width: 20%;
 }
-
 .scrollBox {
   overflow-y: auto;
   overflow-x: hidden;
-  height: 320px;
+  height: 42vh;
   margin-top: 0.5rem;
 }
 .playerBox {
@@ -38,8 +32,8 @@
   color: white;
   border-radius: 0.5rem;
   width: 100;
-  margin: 0.5rem 0;
-  padding: 0.2rem 0.4rem;
+  margin: 1rem 0;
+  padding: 0.5rem 1rem;
   align-items: center;
   letter-spacing: 0.7px;
   font-size: 14px;
@@ -57,7 +51,7 @@
   cursor: pointer;
 }
 .editIcon {
-  margin-right: 0.7rem;
+  margin-right: 1rem;
 }
 .flexBetween {
   display: flex;
@@ -65,4 +59,18 @@
 }
 .noMargin {
   margin: 0;
+}
+
+@media screen and (max-width: 600px) {
+  .playerBox {
+    font-size: 12px;
+    margin: 0.8rem 0;
+    padding: 0.4rem 0.5rem;
+  }
+  .icon {
+    font-size: 1.2rem;
+  }
+  .editIcon {
+    margin-right: 1.2rem;
+  }
 }
