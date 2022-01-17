@@ -15,15 +15,34 @@ const Round = () => {
   const settingContext = TournamentStore();
 
   //// testar att skapa en ny array från players-context //////
-  console.log("loggar constext vid refresh", settingContext.playerList);
+
   const playerArray: any = [];
-  console.log("players från round context", settingContext.playerList);
+
   const getNameAndId = () => {
     settingContext.tournament.players.forEach((e) => {
       playerArray.push({ name: e.name, id: e.id });
     });
   };
   getNameAndId();
+
+  /////// State för Rounds //////////////////
+  const [round, setRound] = React.useState(0);
+
+  ////// Ökar statet med +1 ////////////////
+  function incrementRound() {
+    ableNextRound();
+    const roundLength = playerArray.length;
+    if (round >= roundLength) {
+      setRound(0);
+    } else {
+      setRound(round + 1);
+    }
+    console.log("round", round);
+  }
+  ////// Togglar disable på next round-knappen /////////
+  const ableNextRound = () => {
+    setDisable(!disable && true);
+  };
 
   const [disable, setDisable] = React.useState(true); //Använd denna hook för att göra knappen klickbar efter att resultaten är ifyllda
 
@@ -34,7 +53,7 @@ const Round = () => {
         <Divider />
         <div className="gameContainer">
           <div className="headingWrapper">
-            <h3 className="zeroMargin">Round 1</h3>
+            <h3 className="zeroMargin">{`Round-${round + 1}`}</h3>
           </div>
           <div className="textWrapper">
             <p className="alignBottom secondaryColor">Pairings:</p>
@@ -44,7 +63,11 @@ const Round = () => {
             </div>
           </div>
           <div className="playerContainer">
-            <MakeRoundRobinPairings players={playerArray} />
+            <MakeRoundRobinPairings
+              players={playerArray}
+              round={round}
+              ableNextRound={ableNextRound}
+            />
           </div>
           <div></div>
 
@@ -61,7 +84,11 @@ const Round = () => {
           <Link to="/create-tournament" className="secondaryBtn btnWidth">
             Back
           </Link>
-          <button className="primaryBtn btnWidth" disabled={disable}>
+          <button
+            onClick={incrementRound}
+            className="primaryBtn btnWidth"
+            disabled={disable}
+          >
             Next Round
           </button>
         </div>
