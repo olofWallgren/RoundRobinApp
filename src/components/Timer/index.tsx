@@ -1,5 +1,6 @@
 import React from "react";
 import "./timer.css";
+import TimerModal from "../TimerModal";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import PauseIcon from "@mui/icons-material/Pause";
 import RestartAltIcon from "@mui/icons-material/RestartAlt";
@@ -55,7 +56,7 @@ const Timer = ({ hours = 0, minutes = 0, seconds = 0 }: ITimer) => {
       <div className="timer__iconContainer timer--noMargin">
         <RestartAltIcon fontSize="medium" className="timer__icons" onClick={() => reset()} />
       </div>
-      {/* <div>{over ? "Time's up!" : ""}</div>  */}
+      <div>{over ? <TimerModal /> : ""}</div> 
     </div>
   );
 };
