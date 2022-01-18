@@ -11,6 +11,7 @@ import ParticipantsCard from "../../components/NewTournamentCards/PlayersCard";
 import { TournamentStore } from "../../Contexts/tournamentContext";
 import { Inputs } from "../../types/tournamentInput";
 import SettingsModal from "../../components/SettingsModal";
+import { saveToLocalStorage } from "../../Utilities/LocalStorage/saveToLocalStorage";
 
 const Tournament = () => {
   ///////// CONTEXT //////////////////////
@@ -68,6 +69,7 @@ const Tournament = () => {
     };
     settingStore.setPlayerList(playerArray);
     settingStore.setTournament(newTournament);
+    saveToLocalStorage("tournamentSetting", newTournament);
   };
 
   return (

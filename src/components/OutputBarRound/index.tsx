@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../../layout/OutputBar.css";
 import "./OutputBarRound.css";
 import { Grid } from "@mui/material";
@@ -39,7 +39,33 @@ const OutputBarRound: React.FC<Props> = ({
     }[];
   };
   const settingContext = TournamentStore();
+  const { setRoundPairings } = TournamentStore();
+  const { roundPairings } = TournamentStore();
+  const [pairings, setPairings] = useState<string[]>([]);
+  useEffect(() => {
+    try {
+      let settingsResult = JSON.parse(
+        localStorage.getItem("tournamentSetting") || ""
+      );
+      settingContext.setTournament(settingsResult);
+    } catch (error) {}
+  }, []);
+  let lsPairingsArray;
+  try {
+    let result = JSON.parse(localStorage.getItem("roundPairings") || "");
 
+    //tournamentPairings.push(result);
+
+    lsPairingsArray = result;
+    console.log(result);
+  } catch (error) {}
+
+  if (tournamentPairings.length === 0) {
+    tournamentPairings = lsPairingsArray;
+  }
+  console.log("ls pairings ", lsPairingsArray, settingContext.round);
+  console.log("pairings", tournamentPairings, settingContext.round);
+  console.log(settingContext.tournament);
   // function checkForLs() {
   //   if (tournamentPairings.length === 0) {
   //     console.log("tornamentpairings less than 0");

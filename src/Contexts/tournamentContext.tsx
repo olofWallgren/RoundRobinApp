@@ -13,6 +13,10 @@ type tournamentSettings = {
   scoring: { win: number; loss: number; draw: number };
   games: string;
 };
+type Player = {
+  name: string;
+  id: number;
+};
 const test = {
   tournamentName: " ",
   players: [],
@@ -20,6 +24,11 @@ const test = {
   scoring: { win: 0, loss: 0, draw: 0 },
   games: " ",
 };
+const tournamentPairings: {
+  player1: Player;
+  player2: Player;
+  matchId: string;
+}[][] = [];
 
 type ContextTournamentSettings = {
   tournament: tournamentSettings;
@@ -28,6 +37,12 @@ type ContextTournamentSettings = {
   setPlayerList: any;
   round: number;
   incrementRound: any;
+  roundPairings: {
+    player1: Player;
+    player2: Player;
+    matchId: string;
+  }[][];
+  setRoundPairings: any;
 };
 
 const TournamentContext = createContext<ContextTournamentSettings>(undefined!);
@@ -36,6 +51,7 @@ export const TournamentProvider: FunctionComponent = ({ children }) => {
   const [tournament, setTournament] = useState<tournamentSettings>(test);
   const [playerList, setPlayerList] = useState<playerItem[]>([]);
   const [round, setRound] = useState(0);
+  const [roundPairings, setRoundPairings] = useState(tournamentPairings);
   //////// Ökar round number //////////////
   function incrementRound() {
     // ableNextRound();
@@ -72,6 +88,8 @@ export const TournamentProvider: FunctionComponent = ({ children }) => {
         setPlayerList,
         incrementRound,
         round,
+        roundPairings,
+        setRoundPairings,
       }}
     >
       {children}
