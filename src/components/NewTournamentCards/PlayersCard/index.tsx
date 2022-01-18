@@ -21,17 +21,15 @@ const PlayersCard = (props: any) => {
     formState: { errors },
   } = useForm<Inputs>();
 
-  //// en player array för att mappa ut alla players som skapas ///////
+  //// En player array för att mappa ut alla players som skapas ///////
   const [players, setPlayers] = useState<playerItem[]>([]);
 
-  ///// uppdaterar en lika dan array i tournament view ////////
+  ///// Uppdaterar en lika dan array i tournament view ////////
   useEffect(() => {
     getParticipants(players);
   }, [players]);
 
-  //// uppdaterar participants statet från localstorage/////////
-
-  ////// UTKOMMENTERAD FÖR TILLFÄLLET ////////////
+  //// Uppdaterar participants statet från localstorage/////////
   useEffect(() => {
     try {
       let ls = JSON.parse(localStorage.getItem("players") || "");
@@ -39,9 +37,9 @@ const PlayersCard = (props: any) => {
     } catch (error) {}
   }, []);
 
-  ///// uppdaterar participants statet ////////////
+  ///// Uppdaterar participants statet ////////////
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    ///// rensar inputfield //////////
+    ///// Rensar inputfield //////////
     resetField("player");
     setPlayers((prevState) => {
       const newItems = [
@@ -54,12 +52,11 @@ const PlayersCard = (props: any) => {
         },
       ];
       saveToLocalStorage("players", newItems);
-
       return newItems;
     });
   };
 
-  ///// deletar en spelare från particisipant statet /////////
+  ///// Deletar en spelare från particisipant statet /////////
   const deleteParticipant = (id: number) => {
     const updateParticipants = [
       ...players.filter((p) => {
