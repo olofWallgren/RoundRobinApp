@@ -238,7 +238,7 @@ const OutputBarRound: React.FC<Props> = ({
                 <option value="1 - 0 - 1">1 - 0 - 1</option>
                 <option value="1 - 1 - 1">1 - 1 - 1</option>
                 <option value="0 - 0 - 1">0 - 0 - 1</option>
-                <option value="0 - 2 - 0">0 - 2 - 1</option>
+                <option value="0 - 2 - 0">0 - 2 - 0</option>
                 <option value="1 - 2 - 0">1 - 2 - 0</option>
                 <option value="0 - 1 - 1">0 - 1 - 1</option>
               </select>
