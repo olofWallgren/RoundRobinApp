@@ -1,5 +1,8 @@
 import React from "react";
 import "./timer.css";
+import PlayArrowIcon from '@mui/icons-material/PlayArrow';
+import PauseIcon from '@mui/icons-material/Pause';
+import RestartAltIcon from '@mui/icons-material/RestartAlt';
 
 interface ITimer {
   hours: number;
@@ -22,6 +25,12 @@ const Timer = ({ hours = 0, minutes = 0, seconds = 0 }: ITimer) => {
     } else {
       setTime([h, m, s - 1]);
     }
+  };
+
+  const reset = () => {
+    setTime([Math.floor(hours), Math.floor(minutes), Math.floor(seconds)]);
+    setPaused(false);
+    setOver(false);
   };
 
   React.useEffect(() => {
