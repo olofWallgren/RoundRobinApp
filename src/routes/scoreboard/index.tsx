@@ -34,8 +34,10 @@ return (
         <Grid item xs={3} className="wld"><p>W-L-D</p></Grid>
       </Grid>
       <div className="scoreContainer">
-        {/* {players.map((e) => ( */}
-       {players.sort((a, b) => (b.score) - (a.score)).map((e) => (
+       {/* Placerar den med högst poäng överst, om två är lika för mest poäng hamnar 
+       den med färre losses över */}
+       {players.sort((a, b) => (b.score) - (a.score)).sort((x, y) =>
+       x.matchHistory.loss - y.matchHistory.loss).map((e) => (
           <OutputbarScoreBoard player= {e.name}
                                totalScore= {e.score} 
                                wins={e.matchHistory.win}
