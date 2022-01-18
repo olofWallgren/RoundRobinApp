@@ -7,7 +7,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import "./playersCard.css";
 import "../../../layout/primaryBtn.css";
 import { playerItem } from "../../../types/playerItem";
-
+import { saveToLocalStorage } from "../../../Utilities/LocalStorage/saveToLocalStorage";
 const PlayersCard = (props: any) => {
   const { getParticipants } = props;
 
@@ -39,14 +39,6 @@ const PlayersCard = (props: any) => {
     } catch (error) {}
   }, []);
 
-  //// sparar data till LS ///////////
-
-  ///////// UTKOMMENTERAD FÖR TILLFÄLLET ///////////
-  function saveToLocalStorage(key: string, value: any): void {
-    localStorage.setItem(key, JSON.stringify(value));
-    console.log("cardLS", localStorage.getItem("players"));
-  }
-
   ///// uppdaterar participants statet ////////////
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     ///// rensar inputfield //////////
@@ -61,7 +53,6 @@ const PlayersCard = (props: any) => {
           matchHistory: { win: 0, loss: 0, draw: 0 },
         },
       ];
-      ///////// UTKOMMENTERAD FÖR TILLFÄLLET ///////////
       saveToLocalStorage("players", newItems);
 
       return newItems;
@@ -76,7 +67,6 @@ const PlayersCard = (props: any) => {
       }),
     ];
     setPlayers(updateParticipants);
-    ///////// UTKOMMENTERAD FÖR TILLFÄLLET ///////////
     saveToLocalStorage("players", updateParticipants);
   };
 

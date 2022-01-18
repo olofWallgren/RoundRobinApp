@@ -13,36 +13,27 @@ import { TournamentStore } from "../../Contexts/tournamentContext";
 const Round = () => {
   const settingContext = TournamentStore();
 
-  //// testar att skapa en ny array från players-context //////
-
-  const playerArray: any = [];
-
-  const getNameAndId = () => {
-    settingContext.tournament.players.forEach((e) => {
-      playerArray.push({ name: e.name, id: e.id });
-    });
-  };
-  getNameAndId();
-
   /////// State för Rounds //////////////////
-  const [round, setRound] = React.useState(0);
+  // const [round, setRound] = React.useState(0);
 
-  ////// Ökar statet med +1 ////////////////
-  function incrementRound() {
-    ableNextRound();
-    const roundLength = playerArray.length;
-    if (round >= roundLength) {
-      setRound(0);
-    } else {
-      setRound(round + 1);
-    }
-    console.log("round", round);
-  }
+  // ////// Ökar statet med +1 ////////////////
+  // function incrementRound(): void {
+  //   ableNextRound();
+  //   const roundLength = settingContext.tournament.players.length;
+  //   if (round >= roundLength) {
+  //     setRound(0);
+  //   } else {
+  //     setRound(round + 1);
+  //   }
+  // }
   ////// Togglar disable på next round-knappen /////////
   const ableNextRound = () => {
     setDisable(!disable && true);
   };
-
+  function handleNextRound() {
+    ableNextRound();
+    settingContext.incrementRound();
+  }
   const [disable, setDisable] = React.useState(true); //Använd denna hook för att göra knappen klickbar efter att resultaten är ifyllda
 
   return (
@@ -52,7 +43,9 @@ const Round = () => {
         <Divider />
         <div className="gameContainer">
           <div className="headingWrapper">
-            <h3 className="zeroMargin">{`Round-${round + 1}`}</h3>
+            <h3 className="zeroMargin">{`Round-${
+              settingContext.round + 1
+            }`}</h3>
           </div>
           <div className="textWrapper">
             <p className="alignBottom secondaryColor">Pairings:</p>
@@ -62,11 +55,7 @@ const Round = () => {
             </div>
           </div>
           <div className="playerContainer">
-            <MakeRoundRobinPairings
-              players={playerArray}
-              round={round}
-              ableNextRound={ableNextRound}
-            />
+            <MakeRoundRobinPairings ableNextRound={ableNextRound} />
           </div>
           <div></div>
 
@@ -84,7 +73,7 @@ const Round = () => {
             Back
           </Link>
           <button
-            onClick={incrementRound}
+            onClick={handleNextRound}
             className="primaryBtn btnWidth"
             disabled={disable}
           >

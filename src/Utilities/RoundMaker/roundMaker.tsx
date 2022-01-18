@@ -1,8 +1,10 @@
 import OutputBarRound from "../../components/OutputBarRound";
 import { TournamentStore } from "../../Contexts/tournamentContext";
 import "../../layout/OutputBar.css";
+import { playerItem } from "../../types/playerItem";
+import { saveToLocalStorage } from "../LocalStorage/saveToLocalStorage";
 
-type ListPlayers = ReadonlyArray<Player>;
+type ListPlayers = ReadonlyArray<playerItem>;
 
 type Player = {
   name: string;
@@ -10,14 +12,17 @@ type Player = {
 };
 
 interface TournamentInterface {
-  readonly players: ListPlayers;
-  round: number;
+  // readonly players: ListPlayers;
+
   ableNextRound: () => void;
 }
 
 function MakeRoundRobinPairings(props: TournamentInterface) {
-  if (props.players.length % 2) throw new Error("Teams length must be even");
-  const playerCount = props.players.length;
+  const { playerList } = TournamentStore();
+  let players: ListPlayers = playerList;
+
+  if (players.length % 2) throw new Error("Teams length must be even");
+  const playerCount = players.length;
   const rounds = playerCount - 1;
   const half = playerCount / 2;
 
@@ -27,7 +32,7 @@ function MakeRoundRobinPairings(props: TournamentInterface) {
     matchId: string;
   }[][] = [];
 
-  const playerIndexes: any = props.players.map((_, i) => i).slice(1);
+  const playerIndexes: any = players.map((_, i) => i).slice(1);
 
   for (let round = 0; round < rounds; round++) {
     const roundPairings = [];
@@ -42,8 +47,8 @@ function MakeRoundRobinPairings(props: TournamentInterface) {
       let idMatchFormater = "r" + roundNumber + "m" + (i + 1);
 
       roundPairings.push({
-        player1: props.players[firstHalf[i]],
-        player2: props.players[secondHalf[i]],
+        player1: players[firstHalf[i]],
+        player2: players[secondHalf[i]],
         matchId: idMatchFormater,
       });
     }
@@ -51,12 +56,12 @@ function MakeRoundRobinPairings(props: TournamentInterface) {
     // rotating the array
     playerIndexes.push(playerIndexes.shift());
     tournamentPairings.push(roundPairings);
+    // saveToLocalStorage("roundPairings", tournamentPairings);
   }
 
   return (
     <OutputBarRound
       tournamentPairings={tournamentPairings}
-      round={props.round}
       ableNextRound={props.ableNextRound}
     />
   );

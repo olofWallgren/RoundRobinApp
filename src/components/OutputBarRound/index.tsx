@@ -11,11 +11,12 @@ import {
   Control,
   useWatch,
 } from "react-hook-form";
+import { getLocalStorage } from "../../Utilities/LocalStorage/saveToLocalStorage";
 
 interface Props {
   children?: React.ReactNode;
   tournamentPairings: any;
-  round: number;
+
   ableNextRound: () => void;
 }
 
@@ -23,7 +24,7 @@ const OutputBarRound: React.FC<Props> = ({
   // pairingId,
   children,
   tournamentPairings,
-  round,
+
   ableNextRound,
 }) => {
   type Score = {
@@ -38,6 +39,20 @@ const OutputBarRound: React.FC<Props> = ({
     }[];
   };
   const settingContext = TournamentStore();
+
+  // function checkForLs() {
+  //   if (tournamentPairings.length === 0) {
+  //     console.log("tornamentpairings less than 0");
+  //     try {
+  //       let result = JSON.parse(localStorage.getItem("roundPairings") || "");
+  //       tournamentPairings = result;
+
+  //       console.log("ls result", result);
+  //     } catch (error) {}
+  //   }
+  //   console.log("checkLsFunc", tournamentPairings);
+  // }
+
   const Total = ({ control }: { control: Control<formValues> }) => {
     const formvalues = useWatch({
       name: "result",
@@ -70,9 +85,10 @@ const OutputBarRound: React.FC<Props> = ({
   const onSubmit: SubmitHandler<formValues> = (data) => {
     console.log(data);
     data.result.forEach((e, index) => {
-      const player1 = tournamentPairings[round][index].player1.name;
-      const player2 = tournamentPairings[round][index].player2.name;
-      console.log(round);
+      const player1 =
+        tournamentPairings[settingContext.round][index].player1.name;
+      const player2 =
+        tournamentPairings[settingContext.round][index].player2.name;
 
       switch (e.name) {
         case "2 - 0 - 0":
@@ -212,38 +228,40 @@ const OutputBarRound: React.FC<Props> = ({
   return (
     <div className="">
       <form onSubmit={handleSubmit(onSubmit)}>
-        {tournamentPairings[round].map((e: any, index: number) => (
-          <Grid
-            container
-            className="outputBarContainer"
-            direction="row"
-            justifyContent="space-between"
-            alignItems="center"
-          >
-            <Grid item>
-              <p className="names">
-                {e.player1.name} - {e.player2.name}
-              </p>
+        {tournamentPairings[settingContext.round].map(
+          (e: any, index: number) => (
+            <Grid
+              container
+              className="outputBarContainer"
+              direction="row"
+              justifyContent="space-between"
+              alignItems="center"
+            >
+              <Grid item>
+                <p className="names">
+                  {e.player1.name} - {e.player2.name}
+                </p>
+              </Grid>
+              <Grid item>
+                <select
+                  key={`${e.player1.name}-${index}`}
+                  className="select"
+                  {...register(`result.${index}.name` as const)}
+                >
+                  <option value="Still playing">Still Playing</option>
+                  <option value="2 - 0 - 0">2 - 0 - 0</option>
+                  <option value="2 - 1 - 0">2 - 1 - 0</option>
+                  <option value="1 - 0 - 1">1 - 0 - 1</option>
+                  <option value="1 - 1 - 1">1 - 1 - 1</option>
+                  <option value="0 - 0 - 1">0 - 0 - 1</option>
+                  <option value="0 - 2 - 0">0 - 2 - 1</option>
+                  <option value="1 - 2 - 0">1 - 2 - 0</option>
+                  <option value="0 - 1 - 1">0 - 1 - 1</option>
+                </select>
+              </Grid>
             </Grid>
-            <Grid item>
-              <select
-                key={`${e.player1.name}-${index}`}
-                className="select"
-                {...register(`result.${index}.name` as const)}
-              >
-                <option value="Still playing">Still Playing</option>
-                <option value="2 - 0 - 0">2 - 0 - 0</option>
-                <option value="2 - 1 - 0">2 - 1 - 0</option>
-                <option value="1 - 0 - 1">1 - 0 - 1</option>
-                <option value="1 - 1 - 1">1 - 1 - 1</option>
-                <option value="0 - 0 - 1">0 - 0 - 1</option>
-                <option value="0 - 2 - 0">0 - 2 - 1</option>
-                <option value="1 - 2 - 0">1 - 2 - 0</option>
-                <option value="0 - 1 - 1">0 - 1 - 1</option>
-              </select>
-            </Grid>
-          </Grid>
-        ))}
+          )
+        )}
         <input type="submit" value="OK" className="okBtn" />
       </form>
     </div>

@@ -26,6 +26,8 @@ type ContextTournamentSettings = {
   setTournament: any;
   playerList: playerItem[];
   setPlayerList: any;
+  round: number;
+  incrementRound: any;
 };
 
 const TournamentContext = createContext<ContextTournamentSettings>(undefined!);
@@ -33,6 +35,17 @@ const TournamentContext = createContext<ContextTournamentSettings>(undefined!);
 export const TournamentProvider: FunctionComponent = ({ children }) => {
   const [tournament, setTournament] = useState<tournamentSettings>(test);
   const [playerList, setPlayerList] = useState<playerItem[]>([]);
+  const [round, setRound] = useState(0);
+  //////// Ökar round number //////////////
+  function incrementRound() {
+    // ableNextRound();
+    const roundLength = tournament.players.length;
+    if (round >= roundLength) {
+      setRound(0);
+    } else {
+      setRound(round + 1);
+    }
+  }
 
   //   function addSettings(hour:string,min:string,sec:string,games:string,win:string,loss:string,draw:string){
   //     let newTournamentSettings = {
@@ -52,7 +65,14 @@ export const TournamentProvider: FunctionComponent = ({ children }) => {
 
   return (
     <TournamentContext.Provider
-      value={{ tournament, setTournament, playerList, setPlayerList }}
+      value={{
+        tournament,
+        setTournament,
+        playerList,
+        setPlayerList,
+        incrementRound,
+        round,
+      }}
     >
       {children}
     </TournamentContext.Provider>
