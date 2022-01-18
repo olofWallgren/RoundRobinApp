@@ -1,16 +1,21 @@
 .timer__container {
   display: flex;
-  flex-direction: column;
+  align-items: center;
 }
-.timer__startText {
+.timer__totalTime {
+  font-size: 16px;
+  margin-right: 0.8rem;
+}
+.timer__icons {
   cursor: pointer;
   color: #fa04f6;
 }
-.timer__totalTime {
-  margin-bottom: 0.5rem;
-  margin-top: 0;
-  text-align: center;
+.timer__playIcon {
+  margin-right: 0.8rem;
 }
+.timer__pauseIcon {
+  margin-right: 0.8rem;
+} 
 .timer--noMargin {
   margin: 0;
 }
