@@ -1,5 +1,6 @@
 import React from "react";
 import "../../layout/OutputBar.css";
+import "../../layout/primaryBtn.css";
 import "./OutputBarRound.css";
 import { Grid } from "@mui/material";
 import { TournamentStore } from "../../Contexts/tournamentContext";
@@ -37,6 +38,8 @@ const OutputBarRound: React.FC<Props> = ({
       name: string;
     }[];
   };
+  // Hook för att disabled button
+  const [disableBtn, setDisableBtn] = React.useState(true);
   const settingContext = TournamentStore();
   const Total = ({ control }: { control: Control<formValues> }) => {
     const formvalues = useWatch({
@@ -245,7 +248,14 @@ const OutputBarRound: React.FC<Props> = ({
             </Grid>
           </Grid>
         ))}
-        <input type="submit" value="OK" className="okBtn" />
+        <div>
+          <input
+            type="submit"
+            value="Submit result"
+            className="primaryBtn primaryBtn--small"
+            disabled={disableBtn}
+          />
+        </div>
       </form>
     </div>
   );
