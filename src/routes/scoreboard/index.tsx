@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 import OutputbarScoreBoard from "../../components/OutputBarScoreBoard";
 import { TournamentStore } from "../../Contexts/tournamentContext";
 import { Grid } from "@mui/material";
+import zIndex from "@mui/material/styles/zIndex";
 
 
 
@@ -34,8 +35,12 @@ return (
         <Grid item xs={3} className="wld"><p>W-L-D</p></Grid>
       </Grid>
       <div className="scoreContainer">
-        {players.map((e) => (
-       
+       {/* Placerar den med högst poäng överst, om två är lika för mest poäng hamnar 
+       den med färre losses över, boten filtreras bort från scoreboardet */}
+       {players.sort((a, b) => (b.score) - (a.score)).sort((x, y) =>
+       x.matchHistory.loss - y.matchHistory.loss).sort((a, b) => 
+       b.matchHistory.win - a.matchHistory.win).filter((z) => 
+       z.name !== "**BYE**(Free win)").map((e) => (
           <OutputbarScoreBoard player= {e.name}
                                totalScore= {e.score} 
                                wins={e.matchHistory.win}
