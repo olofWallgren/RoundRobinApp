@@ -34,8 +34,8 @@ return (
         <Grid item xs={3} className="wld"><p>W-L-D</p></Grid>
       </Grid>
       <div className="scoreContainer">
-        {players.map((e) => (
-       
+        {/* {players.map((e) => ( */}
+       {players.sort((a, b) => (b.score) - (a.score)).map((e) => (
           <OutputbarScoreBoard player= {e.name}
                                totalScore= {e.score} 
                                wins={e.matchHistory.win}
