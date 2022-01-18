@@ -43,9 +43,13 @@ const Timer = ({ hours = 0, minutes = 0, seconds = 0 }: ITimer) => {
       <p className="timer__totalTime ">{`${h.toString().padStart(2, "0")}:${m.toString().padStart(2, "0")}:${s
         .toString()
         .padStart(2, "0")}`}</p>
-      <p className="timer__startText timer--noMargin" onClick={() => setPaused(!paused)}>
+      {/* <p className="timer__startText timer--noMargin" onClick={() => setPaused(!paused)}>
         {paused ? "Start round" : "Pause round"}
-      </p>
+      </p> */}
+      <div onClick={() => setPaused(!paused)}>
+        {paused ? <PlayArrowIcon /> : <PauseIcon />}
+      </div>
+      <RestartAltIcon onClick={() => reset()} />
       {/* <div>{over ? "Time's up!" : ""}</div> */} 
     </div>
   );
