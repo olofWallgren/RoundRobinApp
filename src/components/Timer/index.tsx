@@ -1,8 +1,8 @@
 import React from "react";
 import "./timer.css";
-import PlayArrowIcon from '@mui/icons-material/PlayArrow';
-import PauseIcon from '@mui/icons-material/Pause';
-import RestartAltIcon from '@mui/icons-material/RestartAlt';
+import PlayArrowIcon from "@mui/icons-material/PlayArrow";
+import PauseIcon from "@mui/icons-material/Pause";
+import RestartAltIcon from "@mui/icons-material/RestartAlt";
 
 interface ITimer {
   hours: number;
@@ -29,7 +29,7 @@ const Timer = ({ hours = 0, minutes = 0, seconds = 0 }: ITimer) => {
 
   const reset = () => {
     setTime([Math.floor(hours), Math.floor(minutes), Math.floor(seconds)]);
-    setPaused(false);
+    setPaused(true);
     setOver(false);
   };
 
@@ -39,20 +39,29 @@ const Timer = ({ hours = 0, minutes = 0, seconds = 0 }: ITimer) => {
   });
 
   return (
-    <div className="timer__container" >
-      <p className="timer__totalTime ">{`${h.toString().padStart(2, "0")}:${m.toString().padStart(2, "0")}:${s
-        .toString()
-        .padStart(2, "0")}`}</p>
-      {/* <p className="timer__startText timer--noMargin" onClick={() => setPaused(!paused)}>
-        {paused ? "Start round" : "Pause round"}
-      </p> */}
-      <div onClick={() => setPaused(!paused)}>
-        {paused ? <PlayArrowIcon /> : <PauseIcon />}
+    <div className="timer__container">
+      <div className="timer__totalTime ">
+        <p className="timer--noMargin">{`${h.toString().padStart(2, "0")}:${m
+          .toString()
+          .padStart(2, "0")}:${s.toString().padStart(2, "0")}`}</p>
       </div>
-      <RestartAltIcon onClick={() => reset()} />
-      {/* <div>{over ? "Time's up!" : ""}</div> */} 
+      <div className="timer--noMargin" onClick={() => setPaused(!paused)}>
+        {paused ? (
+          <PlayArrowIcon fontSize="medium" className="timer__icons timer__playIcon" />
+        ) : (
+          <PauseIcon fontSize="medium" className="timer__icons timer__pauseIcon" />
+        )}
+      </div>
+      <div className="timer__iconContainer timer--noMargin">
+        <RestartAltIcon fontSize="medium" className="timer__icons" onClick={() => reset()} />
+      </div>
+      {/* <div>{over ? "Time's up!" : ""}</div>  */}
     </div>
   );
 };
 
 export default Timer;
+
+
+
+
