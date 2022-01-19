@@ -3,6 +3,7 @@ import "../../layout/OutputBar.css";
 import "./OutputBarRound.css";
 import { Grid } from "@mui/material";
 import { TournamentStore } from "../../Contexts/tournamentContext";
+import { testArray } from "../../types/pairingList";
 import {
   useForm,
   SubmitHandler,
@@ -13,9 +14,10 @@ import {
 interface Props {
   children?: React.ReactNode;
   ableNextRound: () => void;
+  pairingsDb: testArray;
 }
 
-const OutputBarRound: React.FC<Props> = ({ ableNextRound }) => {
+const OutputBarRound: React.FC<Props> = ({ ableNextRound, pairingsDb }) => {
   type Score = {
     score: number;
     wins: number;

@@ -1,13 +1,8 @@
 import "../../layout/OutputBar.css";
 import { playerItem } from "../../types/playerItem";
+import { TournamentArray } from "../../types/pairingList";
 
 // type ListPlayers = ReadonlyArray<playerItem>;
-
-type Player = {
-  name: string;
-  id: number;
-};
-
 // interface TournamentInterface {
 //   readonly players:ListPlayers
 // }
@@ -20,12 +15,13 @@ export function MakeRoundRobinPairings(props: playerItem[]) {
   const rounds = playerCount - 1;
   const half = playerCount / 2;
 
-  const tournamentPairings: {
-    player1: Player;
-    player2: Player;
-    matchId: string;
-    matchResult: string;
-  }[][] = [];
+  // const tournamentPairings: {
+  //   player1: Player;
+  //   player2: Player;
+  //   matchId: string;
+  //   matchResult: string;
+  // }[][] = [];
+  const tournamentPairings: TournamentArray = [];
 
   const playerIndexes: any = players.map((_, i) => i).slice(1);
 

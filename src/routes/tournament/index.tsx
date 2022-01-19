@@ -14,8 +14,14 @@ import SettingsModal from "../../components/SettingsModal";
 import { saveToLocalStorage } from "../../Utilities/LocalStorage/saveToLocalStorage";
 import { MakeRoundRobinPairings } from "../../Utilities/RoundMaker/roundMaker";
 import { playerItem } from "../../types/playerItem";
-import { collection, addDoc } from "@firebase/firestore";
+import { collection, addDoc, doc, setDoc } from "@firebase/firestore";
 import { db } from "../../firebase-config";
+import {
+  pairingArray,
+  pairingMatch,
+  TournamentArray,
+} from "../../types/pairingList";
+
 const Tournament = () => {
   ///////// CONTEXT //////////////////////
   const settingStore = TournamentStore();
@@ -24,9 +30,29 @@ const Tournament = () => {
   const [pairings, setPairings] = useState<any[]>();
 
   ////////////// SPARA TILL DB //////////////////////////////////
-  const tournamentCollectionRef = collection(db, "tournaments");
-  const saveTournamentToDb = async (data: any) => {
-    await addDoc(tournamentCollectionRef, data);
+  const tournamentCollectionRef = collection(db, "roundPairings");
+
+  const saveTournamentToDb = async (data: TournamentArray) => {
+    const roundPairing = data.map((e, index) => {
+      return {
+        pairingMatch1: {
+          player1: e[0].player1,
+          player2: e[0].player2,
+          matchId: e[0].matchId,
+          matchResult: e[0].matchResult,
+        },
+        pairingMatch2: {
+          player1: e[1].player1,
+          player2: e[1].player2,
+          matchId: e[1].matchId,
+          matchResult: e[1].matchResult,
+        },
+      };
+    });
+    console.log("data conerter", roundPairing);
+    await setDoc(doc(tournamentCollectionRef, "112112"), {
+      pairings: roundPairing,
+    });
   };
 
   useEffect(() => {
@@ -76,6 +102,10 @@ const Tournament = () => {
   } = useForm<Inputs>();
   //setPairings(newPairings);
 
+  function convertPairingsToData() {
+    let pairings: TournamentArray = MakeRoundRobinPairings(playerArray);
+    console.log(pairings);
+  }
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     const newTournament = {
       players: playerArray,
@@ -84,15 +114,18 @@ const Tournament = () => {
       games: data.games,
       scoring: { win: data.win, loss: data.loss, draw: data.draw },
     };
-    let newPairings = MakeRoundRobinPairings(playerArray);
-    settingStore.setRoundPairings(newPairings);
+    let pairings = MakeRoundRobinPairings(playerArray);
+    settingStore.setRoundPairings(pairings);
     settingStore.setPlayerList(playerArray);
     settingStore.setTournament(newTournament);
-
-    saveToLocalStorage("tournamentSetting", newTournament);
-    saveToLocalStorage("roundPairings", newPairings);
-    saveToLocalStorage("playerArray", playerArray);
-    console.log("TIMS PAIRINGS", newPairings);
+    //convertPairingsToData();
+    console.log("pairings", pairings);
+    saveTournamentToDb(pairings);
+    //saveTournamentToDb(pairings);
+    // saveToLocalStorage("tournamentSetting", newTournament);
+    // saveToLocalStorage("roundPairings", newPairings);
+    // saveToLocalStorage("playerArray", playerArray);
+    // console.log("TIMS PAIRINGS", newPairings);
   };
 
   return (

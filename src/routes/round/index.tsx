@@ -12,15 +12,28 @@ import { TournamentStore } from "../../Contexts/tournamentContext";
 import { useState, useEffect } from "react";
 import { playerItem } from "../../types/playerItem";
 import OutputBarRound from "../../components/OutputBarRound";
+import { testArray } from "../../types/pairingList";
+import { collection, getDocs } from "@firebase/firestore";
+import { db } from "../../firebase-config";
 
 const Round = () => {
   const settingContext = TournamentStore();
+  const [pairingsDb, setpairingsDb] = useState<any>([]);
+  //////// HÄMTAR PAIRINGS FRÅN DB /////////////////////
+  const usersCollectionRef = collection(db, "roundPairings");
+  const getUsers = async () => {
+    const data = await getDocs(usersCollectionRef);
+    let newPairings = data.docs.map((i: any) => {
+      console.log(i.data());
+      return i.data();
+    });
+    setpairingsDb(newPairings[0].pairings);
+  };
 
-  console.log(settingContext.roundPairings);
-  console.log(settingContext.playerList);
-  console.log(settingContext.tournament);
-  console.log(settingContext.roundPairings);
-  const [pairingsDb, setpairingsDb] = useState();
+  useEffect(() => {
+    let data = getUsers();
+  }, []);
+  console.log("pairins från db", pairingsDb);
 
   ////// Togglar disable på next round-knappen /////////
   const ableNextRound = () => {
@@ -52,7 +65,10 @@ const Round = () => {
           </div>
           <div className="playerContainer">
             {/* <MakeRoundRobinPairings ableNextRound={ableNextRound} /> */}
-            <OutputBarRound ableNextRound={ableNextRound} />
+            {/* <OutputBarRound
+              ableNextRound={ableNextRound}
+              pairingsDb={pairingsDb}
+            /> */}
           </div>
           <div></div>
 
