@@ -6,7 +6,7 @@ import "../../layout/primaryBtn.css";
 import "../../layout/secondaryBtn.css";
 import { Link } from "react-router-dom";
 import { CSSProperties } from "react";
-import fatRobin from "../../Assets/images/robinThree.png";
+import fatRobin from "../../Assets/images/magicRoundRobinMascot.png";
 
 
 const Home = () => {
@@ -33,11 +33,14 @@ const Home = () => {
   return (
     <div style={homeContainer}>
       {/* <div className="fatFox"></div> */}
-      <div className="test">
-        <div className="foxContainer">
-        <img className="fox" src={fatRobin} alt="maskot" />
+      <div className="fest">
+        <div className="test">
+          <div className="foxContainer">
+          <img className="fox" src={fatRobin} alt="maskot" />
+          </div>
         </div>
       </div>
+
 
       <div style={btnContainer}>
         <Link
