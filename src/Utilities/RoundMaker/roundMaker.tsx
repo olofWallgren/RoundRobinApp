@@ -24,6 +24,7 @@ export function MakeRoundRobinPairings(props: playerItem[]) {
     player1: Player;
     player2: Player;
     matchId: string;
+    matchResult: string;
   }[][] = [];
 
   const playerIndexes: any = players.map((_, i) => i).slice(1);
@@ -44,6 +45,7 @@ export function MakeRoundRobinPairings(props: playerItem[]) {
         player1: players[firstHalf[i]],
         player2: players[secondHalf[i]],
         matchId: idMatchFormater,
+        matchResult: "",
       });
     }
 

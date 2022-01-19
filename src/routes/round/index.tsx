@@ -19,15 +19,9 @@ const Round = () => {
   console.log(settingContext.roundPairings);
   console.log(settingContext.playerList);
   console.log(settingContext.tournament);
-
-  useEffect(() => {
-    try {
-      let pairingsLs = JSON.parse(localStorage.getItem("roundPairings") || "");
-      settingContext.setRoundPairings(pairingsLs);
-    } catch (error) {}
-  }, []);
-
   console.log(settingContext.roundPairings);
+  const [pairingsDb, setpairingsDb] = useState();
+
   ////// Togglar disable på next round-knappen /////////
   const ableNextRound = () => {
     setDisable(!disable && true);

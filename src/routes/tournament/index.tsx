@@ -14,13 +14,19 @@ import SettingsModal from "../../components/SettingsModal";
 import { saveToLocalStorage } from "../../Utilities/LocalStorage/saveToLocalStorage";
 import { MakeRoundRobinPairings } from "../../Utilities/RoundMaker/roundMaker";
 import { playerItem } from "../../types/playerItem";
-
+import { db } from "../../firebase-config";
 const Tournament = () => {
   ///////// CONTEXT //////////////////////
   const settingStore = TournamentStore();
   ///////// state med participants som hämtas och uppdateras från Participants card ///////////
   const [playerArray, setPlayerArray] = useState<playerItem[]>([]);
   const [pairings, setPairings] = useState<any[]>();
+
+  ////////////// SPARA TILL DB //////////////////////////////////
+  const tournamentCollectionRef = collection(db, "tournaments");
+  const saveTournamentToDb = async (data: any) => {
+    await addDoc(tournamentCollectionRef, data);
+  };
 
   useEffect(() => {
     try {
@@ -85,6 +91,7 @@ const Tournament = () => {
     saveToLocalStorage("tournamentSetting", newTournament);
     saveToLocalStorage("roundPairings", newPairings);
     saveToLocalStorage("playerArray", playerArray);
+    console.log("TIMS PAIRINGS", newPairings);
   };
 
   return (
