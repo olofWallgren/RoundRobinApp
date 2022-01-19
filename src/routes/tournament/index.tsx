@@ -6,17 +6,28 @@ import "../../layout/tournamentContainer.css";
 import "./tournament.css";
 import Alert from "@mui/material/Alert";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ParticipantsCard from "../../components/NewTournamentCards/PlayersCard";
 import { TournamentStore } from "../../Contexts/tournamentContext";
 import { Inputs } from "../../types/tournamentInput";
 import SettingsModal from "../../components/SettingsModal";
 import { saveToLocalStorage } from "../../Utilities/LocalStorage/saveToLocalStorage";
+import { MakeRoundRobinPairings } from "../../Utilities/RoundMaker/roundMaker";
+import { playerItem } from "../../types/playerItem";
 
 const Tournament = () => {
   ///////// CONTEXT //////////////////////
   const settingStore = TournamentStore();
+  ///////// state med participants som hämtas och uppdateras från Participants card ///////////
+  const [playerArray, setPlayerArray] = useState<playerItem[]>([]);
+  const [pairings, setPairings] = useState<any[]>();
 
+  useEffect(() => {
+    try {
+      let lsPlayerArray = JSON.parse(localStorage.getItem("playerArray") || "");
+      setPlayerArray(lsPlayerArray);
+    } catch (error) {}
+  }, []);
   ////////// togglar participants view/////////////////
   const [showParticipantView, setParticipantView] = useState(true);
   const toggleParticipantView = () => {
@@ -45,8 +56,6 @@ const Tournament = () => {
     }
   };
 
-  ///////// state med participants som hämtas och uppdateras från Participants card ///////////
-  const [playerArray, setPlayerArray] = useState<string[]>([]);
   const getParticipants = (data: any) => {
     setPlayerArray([...data]);
     console.log("getParticipants");
@@ -58,6 +67,7 @@ const Tournament = () => {
     watch,
     formState: { errors },
   } = useForm<Inputs>();
+  //setPairings(newPairings);
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     const newTournament = {
@@ -67,9 +77,14 @@ const Tournament = () => {
       games: data.games,
       scoring: { win: data.win, loss: data.loss, draw: data.draw },
     };
+    let newPairings = MakeRoundRobinPairings(playerArray);
+    settingStore.setRoundPairings(newPairings);
     settingStore.setPlayerList(playerArray);
     settingStore.setTournament(newTournament);
+
     saveToLocalStorage("tournamentSetting", newTournament);
+    saveToLocalStorage("roundPairings", newPairings);
+    saveToLocalStorage("playerArray", playerArray);
   };
 
   return (

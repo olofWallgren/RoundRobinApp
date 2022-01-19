@@ -62,6 +62,18 @@ export const TournamentProvider: FunctionComponent = ({ children }) => {
       setRound(round + 1);
     }
   }
+  function updateFromLS() {
+    try {
+      let tournamnetSettingLs = JSON.parse(
+        localStorage.getItem("tournamentSetting") || ""
+      );
+      let pairingsLs = JSON.parse(localStorage.getItem("roundPairings") || "");
+      console.log("ls", tournamnetSettingLs);
+      console.log("ls", pairingsLs);
+      setRoundPairings(pairingsLs);
+      setTournament(tournamnetSettingLs);
+    } catch (error) {}
+  }
 
   //   function addSettings(hour:string,min:string,sec:string,games:string,win:string,loss:string,draw:string){
   //     let newTournamentSettings = {

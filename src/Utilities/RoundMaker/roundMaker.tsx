@@ -1,36 +1,19 @@
-import OutputBarRound from "../../components/OutputBarRound";
-import { TournamentStore } from "../../Contexts/tournamentContext";
 import "../../layout/OutputBar.css";
 import { playerItem } from "../../types/playerItem";
-import { saveToLocalStorage } from "../LocalStorage/saveToLocalStorage";
 
-type ListPlayers = ReadonlyArray<playerItem>;
+// type ListPlayers = ReadonlyArray<playerItem>;
 
 type Player = {
   name: string;
   id: number;
 };
 
-interface TournamentInterface {
-  // readonly players: ListPlayers;
+// interface TournamentInterface {
+//   readonly players:ListPlayers
+// }
 
-  ableNextRound: () => void;
-}
-
-function MakeRoundRobinPairings(props: TournamentInterface) {
-  const { playerList } = TournamentStore();
-  function checkLocalStorage(key: string, value: any) {
-    saveToLocalStorage(key, value);
-
-    try {
-      let result = JSON.parse(localStorage.getItem(key) || "");
-      if (result === null) {
-        saveToLocalStorage(key, value);
-      }
-    } catch (error) {}
-  }
-
-  let players: ListPlayers = playerList;
+export function MakeRoundRobinPairings(props: playerItem[]) {
+  let players = props;
 
   if (players.length % 2) throw new Error("Teams length must be even");
   const playerCount = players.length;
@@ -66,20 +49,8 @@ function MakeRoundRobinPairings(props: TournamentInterface) {
 
     // rotating the array
     playerIndexes.push(playerIndexes.shift());
-    // saveToLocalStorage("roundPairings", roundPairings);
     tournamentPairings.push(roundPairings);
   }
-  if (tournamentPairings.length === 0) {
-    console.log("tournamnetPairings 0 ");
-  } else {
-    saveToLocalStorage("roundPairings", tournamentPairings);
-  }
-  return (
-    <OutputBarRound
-      tournamentPairings={tournamentPairings}
-      ableNextRound={props.ableNextRound}
-    />
-  );
-}
 
-export default MakeRoundRobinPairings;
+  return tournamentPairings;
+}

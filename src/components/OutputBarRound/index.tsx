@@ -3,7 +3,6 @@ import "../../layout/OutputBar.css";
 import "./OutputBarRound.css";
 import { Grid } from "@mui/material";
 import { TournamentStore } from "../../Contexts/tournamentContext";
-import { playerItem } from "../../types/playerItem";
 import {
   useForm,
   SubmitHandler,
@@ -11,22 +10,12 @@ import {
   Control,
   useWatch,
 } from "react-hook-form";
-import { getLocalStorage } from "../../Utilities/LocalStorage/saveToLocalStorage";
-
 interface Props {
   children?: React.ReactNode;
-  tournamentPairings: any;
-
   ableNextRound: () => void;
 }
 
-const OutputBarRound: React.FC<Props> = ({
-  // pairingId,
-  children,
-  tournamentPairings,
-
-  ableNextRound,
-}) => {
+const OutputBarRound: React.FC<Props> = ({ ableNextRound }) => {
   type Score = {
     score: number;
     wins: number;
@@ -38,47 +27,7 @@ const OutputBarRound: React.FC<Props> = ({
       name: string;
     }[];
   };
-  const settingContext = TournamentStore();
-  const { setRoundPairings } = TournamentStore();
-  const { roundPairings } = TournamentStore();
-  const [pairings, setPairings] = useState<string[]>([]);
-  useEffect(() => {
-    try {
-      let settingsResult = JSON.parse(
-        localStorage.getItem("tournamentSetting") || ""
-      );
-      settingContext.setTournament(settingsResult);
-    } catch (error) {}
-  }, []);
-  let lsPairingsArray;
-  try {
-    let result = JSON.parse(localStorage.getItem("roundPairings") || "");
-
-    //tournamentPairings.push(result);
-
-    lsPairingsArray = result;
-    console.log(result);
-  } catch (error) {}
-
-  if (tournamentPairings.length === 0) {
-    tournamentPairings = lsPairingsArray;
-  }
-  console.log("ls pairings ", lsPairingsArray, settingContext.round);
-  console.log("pairings", tournamentPairings, settingContext.round);
-  console.log(settingContext.tournament);
-  // function checkForLs() {
-  //   if (tournamentPairings.length === 0) {
-  //     console.log("tornamentpairings less than 0");
-  //     try {
-  //       let result = JSON.parse(localStorage.getItem("roundPairings") || "");
-  //       tournamentPairings = result;
-
-  //       console.log("ls result", result);
-  //     } catch (error) {}
-  //   }
-  //   console.log("checkLsFunc", tournamentPairings);
-  // }
-
+  ///////////// Form hook vars ///////////////
   const Total = ({ control }: { control: Control<formValues> }) => {
     const formvalues = useWatch({
       name: "result",
@@ -96,12 +45,13 @@ const OutputBarRound: React.FC<Props> = ({
     control,
   });
 
+  const settingContext = TournamentStore();
+
   function findPlayer(player: string, score: Score) {
     const newPlayer: any = settingContext.playerList.find((p) => {
       return p.name === player;
     });
     // Lägger till poäng, uppdaterar context med nya poäng
-    // Inte säkra på varför context uppdateras dock
     newPlayer.score += score.score;
     newPlayer.matchHistory.win += score.wins;
     newPlayer.matchHistory.loss += score.losses;
@@ -112,9 +62,9 @@ const OutputBarRound: React.FC<Props> = ({
     console.log(data);
     data.result.forEach((e, index) => {
       const player1 =
-        tournamentPairings[settingContext.round][index].player1.name;
+        settingContext.roundPairings[settingContext.round][index].player1.name;
       const player2 =
-        tournamentPairings[settingContext.round][index].player2.name;
+        settingContext.roundPairings[settingContext.round][index].player2.name;
 
       switch (e.name) {
         case "2 - 0 - 0":
@@ -254,7 +204,7 @@ const OutputBarRound: React.FC<Props> = ({
   return (
     <div className="">
       <form onSubmit={handleSubmit(onSubmit)}>
-        {tournamentPairings[settingContext.round].map(
+        {settingContext.roundPairings[settingContext.round].map(
           (e: any, index: number) => (
             <Grid
               container

@@ -7,25 +7,27 @@ import "../round/round.css";
 import NavigationBar from "../../components/NavigationBar";
 import { Divider } from "@mui/material";
 import { Link } from "react-router-dom";
-import MakeRoundRobinPairings from "../../Utilities/RoundMaker/roundMaker";
+import { MakeRoundRobinPairings } from "../../Utilities/RoundMaker/roundMaker";
 import { TournamentStore } from "../../Contexts/tournamentContext";
+import { useState, useEffect } from "react";
+import { playerItem } from "../../types/playerItem";
+import OutputBarRound from "../../components/OutputBarRound";
 
 const Round = () => {
   const settingContext = TournamentStore();
 
-  /////// State för Rounds //////////////////
-  // const [round, setRound] = React.useState(0);
+  console.log(settingContext.roundPairings);
+  console.log(settingContext.playerList);
+  console.log(settingContext.tournament);
 
-  // ////// Ökar statet med +1 ////////////////
-  // function incrementRound(): void {
-  //   ableNextRound();
-  //   const roundLength = settingContext.tournament.players.length;
-  //   if (round >= roundLength) {
-  //     setRound(0);
-  //   } else {
-  //     setRound(round + 1);
-  //   }
-  // }
+  useEffect(() => {
+    try {
+      let pairingsLs = JSON.parse(localStorage.getItem("roundPairings") || "");
+      settingContext.setRoundPairings(pairingsLs);
+    } catch (error) {}
+  }, []);
+
+  console.log(settingContext.roundPairings);
   ////// Togglar disable på next round-knappen /////////
   const ableNextRound = () => {
     setDisable(!disable && true);
@@ -55,7 +57,8 @@ const Round = () => {
             </div>
           </div>
           <div className="playerContainer">
-            <MakeRoundRobinPairings ableNextRound={ableNextRound} />
+            {/* <MakeRoundRobinPairings ableNextRound={ableNextRound} /> */}
+            <OutputBarRound ableNextRound={ableNextRound} />
           </div>
           <div></div>
 
