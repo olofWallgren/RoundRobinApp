@@ -1,7 +1,34 @@
 .fatFox {
-  background-image: url("../Assets/images/fatRobin.jpg");
+  /* background-image: url("../Assets/images/"); */
   object-fit: cover;
   background-repeat: no-repeat;
   height: 225px;
   width: 224px;
+}
+
+.test {
+  background-image: url("../Assets/images/bg2.png");
+  opacity: 0.5;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  border-radius: 1rem;
+
+  width: 20rem;
+  height: 25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.foxContainer {
+  z-index: 1;
+}
+
+.fox {
+  width: 19rem;
+  transform: rotate(-40deg);
+  padding-bottom: 2rem;
+  margin-left: 2rem;
 }

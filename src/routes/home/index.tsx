@@ -6,6 +6,8 @@ import "../../layout/primaryBtn.css";
 import "../../layout/secondaryBtn.css";
 import { Link } from "react-router-dom";
 import { CSSProperties } from "react";
+import fatRobin from "../../Assets/images/robinThree.png";
+
 
 const Home = () => {
   ///// sätter en key och value i ls annars crashar appen när man ska hämta ls ifrån participantCard och ls är tomt //////
@@ -26,10 +28,17 @@ const Home = () => {
   //   };
   //   getUsers();
   // }, []);
+  console.log(fatRobin);
 
   return (
     <div style={homeContainer}>
-      <div className="fatFox"></div>
+      {/* <div className="fatFox"></div> */}
+      <div className="test">
+        <div className="foxContainer">
+        <img className="fox" src={fatRobin} alt="maskot" />
+        </div>
+      </div>
+
       <div style={btnContainer}>
         <Link
           className="primaryBtn"
