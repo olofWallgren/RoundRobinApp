@@ -12,18 +12,21 @@ const Home = () => {
 
   /////////// TEST ANNROP TILL DB //////////////////
   // const db = firestore();
-  // const [users, setUsers] = useState([]);
+  // const [users, setUsers] = useState<any>([]);
 
-  // const usersCollectionRef = collection(db, "tournaments");
+  // const usersCollectionRef = collection(db, "users");
   // useEffect(() => {
   //   const getUsers = async () => {
   //     const data = await getDocs(usersCollectionRef);
-  //     data.docs.map((i: any) => {
-  //       console.log(i.data());
-  //     });
+  //     // data.docs.map((i: any) => {
+  //     //   console.log(i.data());
+  //     // });
+  //     setUsers(data.docs.map((doc) => ({ ...doc.data() })));
   //   };
+
   //   getUsers();
   // }, []);
+  // console.log(users);
 
   return (
     <div style={homeContainer}>

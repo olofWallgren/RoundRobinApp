@@ -21,17 +21,13 @@ const Round = () => {
   const [pairingsDb, setpairingsDb] = useState<any>([]);
   //////// HÄMTAR PAIRINGS FRÅN DB /////////////////////
   const usersCollectionRef = collection(db, "roundPairings");
-  const getUsers = async () => {
-    const data = await getDocs(usersCollectionRef);
-    let newPairings = data.docs.map((i: any) => {
-      console.log(i.data());
-      return i.data();
-    });
-    setpairingsDb(newPairings[0].pairings);
-  };
 
   useEffect(() => {
-    let data = getUsers();
+    const getUsers = async () => {
+      const data = await getDocs(usersCollectionRef);
+      setpairingsDb(data.docs.map((doc) => ({ ...doc.data() })));
+    };
+    getUsers();
   }, []);
   console.log("pairins från db", pairingsDb);
 
@@ -69,8 +65,15 @@ const Round = () => {
               ableNextRound={ableNextRound}
               pairingsDb={pairingsDb}
             /> */}
+            {pairingsDb.map((e: any, index: number) => {
+              return (
+                <p className="paraStyle">
+                  {e.pairings[2].pairingMatch1.player1.name} vs{" "}
+                  {e.pairings[2].pairingMatch1.player2.name}
+                </p>
+              );
+            })}
           </div>
-          <div></div>
 
           <div className="flexBetween">
             <div>
