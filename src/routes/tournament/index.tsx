@@ -14,6 +14,7 @@ import SettingsModal from "../../components/SettingsModal";
 import { saveToLocalStorage } from "../../Utilities/LocalStorage/saveToLocalStorage";
 import { MakeRoundRobinPairings } from "../../Utilities/RoundMaker/roundMaker";
 import { playerItem } from "../../types/playerItem";
+import { collection, addDoc } from "@firebase/firestore";
 import { db } from "../../firebase-config";
 const Tournament = () => {
   ///////// CONTEXT //////////////////////
