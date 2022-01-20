@@ -25,7 +25,7 @@ return (
   <div className="container">
     <NavigationBar />
     <Divider />
-    <div className="gameContainer">
+    <div className="gameContainer gameContainer--large">
       <div className="headingWrapper">
         <h3 className="noMargin">Scoreboard</h3>
       </div>
@@ -53,17 +53,6 @@ return (
       <div className="paraContainer">
         <p className="paraStyle">End Tournament</p>
       </div>
-    </div>
-    <div className="buttonContainer">
-      <Link to="/create-tournament" className="secondaryBtn buttonWidth">
-        Back
-      </Link>
-      <Link
-        to="/current-tournament/round"
-        className="primaryBtn buttonWidth"
-      >
-        Next Round
-      </Link>
     </div>
   </div>
 );

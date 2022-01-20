@@ -20,14 +20,6 @@ const PreviousRounds = () => (
         <p style={paraStyle}>End Tournament</p>
       </div>
     </div>
-    <div style={btnContainer}>
-      <Link style={btnWidth} to="/create-tournament" className="secondaryBtn">
-        Back
-      </Link>
-      <Link style={btnWidth} to="/current-tournament/round" className="primaryBtn">
-        Next Round
-      </Link>
-    </div>
   </div>
 );
 
@@ -41,15 +33,6 @@ const paraContainer: CSSProperties = {
 const paraStyle: CSSProperties = {
   color: "#FA04F6",
   cursor: "pointer",
-};
-const btnContainer: CSSProperties = {
-  display: "flex",
-  justifyContent: "space-between",
-  marginTop: "2rem",
-  width: "100%",
-};
-const btnWidth: CSSProperties = {
-  width: "48%",
 };
 
 export default PreviousRounds;
