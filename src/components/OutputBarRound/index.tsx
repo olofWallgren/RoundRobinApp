@@ -1,9 +1,11 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import "../../layout/OutputBar.css";
+import "../../layout/primaryBtn.css";
 import "./OutputBarRound.css";
 import { Grid } from "@mui/material";
 import { TournamentStore } from "../../Contexts/tournamentContext";
 import { playerItem } from "../../types/playerItem";
+import { optionsDataList } from "./optionsDataList";
 import {
   useForm,
   SubmitHandler,
@@ -37,6 +39,8 @@ const OutputBarRound: React.FC<Props> = ({
       name: string;
     }[];
   };
+  // Hook för att disabled button
+  const [disableBtn, setDisableBtn] = React.useState(true);
   const settingContext = TournamentStore();
   const Total = ({ control }: { control: Control<formValues> }) => {
     const formvalues = useWatch({
@@ -211,8 +215,28 @@ const OutputBarRound: React.FC<Props> = ({
     });
     ableNextRound();
   };
+  // optionsDataList[0].value sätter statet till "Still playing"
+  const [optionState, setOptionState] = useState(optionsDataList[0].value);
 
-  const [optionState, setOptionState] = useState("");
+  const handleUserInput = (e: { target: { value: any } }) => {
+    // Kollar användarens ändringar av options och sätter state utifrån det
+    const selectedResult = e.target.value;
+    setOptionState(selectedResult);
+
+    // Här vill vi loopa över listan med options
+    // för att kolla att alla options inte är still playing och sedan sätta submit-knappen till true
+    // fungerar dock inte nu
+    optionsDataList.forEach((option) => {
+      for (const option of optionsDataList) {
+        if (
+          // selectedResult !== "Still playing" &&
+          option.value !== "Still playing"
+        ) {
+          setDisableBtn(true);
+        }
+      }
+    });
+  };
   console.log(optionState);
 
   return (
@@ -236,25 +260,25 @@ const OutputBarRound: React.FC<Props> = ({
                 key={`${e.player1.name}-${index}`}
                 className="select"
                 {...register(`result.${index}.name` as const)}
-                onChange={(e)=>{
-                  const selectedResult = e.target.value;
-                  setOptionState(selectedResult)
-                }}
+                onChange={handleUserInput}
               >
-                <option selected value="Still playing">Still Playing</option>
-                <option value="2 - 0 - 0">2 - 0 - 0</option>
-                <option value="2 - 1 - 0">2 - 1 - 0</option>
-                <option value="1 - 0 - 1">1 - 0 - 1</option>
-                <option value="1 - 1 - 1">1 - 1 - 1</option>
-                <option value="0 - 0 - 1">0 - 0 - 1</option>
-                <option value="0 - 2 - 0">0 - 2 - 0</option>
-                <option value="1 - 2 - 0">1 - 2 - 0</option>
-                <option value="0 - 1 - 1">0 - 1 - 1</option>
+                {optionsDataList.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
               </select>
             </Grid>
           </Grid>
         ))}
-        <input type="submit" value="OK" className="okBtn" />
+        <div>
+          <input
+            type="submit"
+            value="Submit result"
+            className="primaryBtn primaryBtn--small"
+            disabled={disableBtn}
+          />
+        </div>
       </form>
     </div>
   );
