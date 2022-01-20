@@ -28,11 +28,10 @@ const Home = () => {
   //   };
   //   getUsers();
   // }, []);
-  console.log(fatRobin);
 
   return (
     <div style={homeContainer}>
-      {/* <div className="fatFox"></div> */}
+
       <div className="fest">
         <div className="test">
           <div className="foxContainer">
