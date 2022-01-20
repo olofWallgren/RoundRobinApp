@@ -70,12 +70,10 @@ const Round = () => {
               ableNextRound={ableNextRound}
             />
           </div>
-          <div className="flexBetween">
-            <div className="alignBottom">
+            <div className="linkWrapper">
               <Link to="/" className="linkStyle" >End Tournament</Link>
             </div>
           </div>
-        </div>
         <div className="btnContainer">
           <button
             onClick={incrementRound}

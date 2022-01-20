@@ -20,10 +20,20 @@
     font-size: 10px;
     width: 100%;
   }
+  .inputButton {
+    width: 28%;
+  }
 }
 
 @media screen and (max-width: 320px) {
   .select {
+    font-size: 10px;
+  }
+  .select {
     font-size: 8px;
   }
+  .inputButton {
+    width: 33%;
+  }
+  
 }
