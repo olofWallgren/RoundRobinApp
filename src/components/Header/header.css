@@ -10,10 +10,6 @@
   max-width: 1600px;
 }
 
-.header {
-  margin-top: 1rem;
-}
-
 .fixer {
   visibility: hidden;
 }
@@ -35,5 +31,8 @@
 @media only screen and (max-width: 600px) {
   .header {
     padding: 4px 16px 4px 16px;
+  }
+  .header {
+    margin-top: 1rem;
   }
 }
