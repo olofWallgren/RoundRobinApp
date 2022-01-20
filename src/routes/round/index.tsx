@@ -77,9 +77,6 @@ const Round = () => {
           </div>
         </div>
         <div className="btnContainer">
-          <Link to="/create-tournament" className="secondaryBtn btnWidth">
-            Back
-          </Link>
           <button
             onClick={incrementRound}
             className="primaryBtn btnWidth"
