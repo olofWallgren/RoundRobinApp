@@ -68,7 +68,7 @@ const Tournament = () => {
       scoring: { win: data.win, loss: data.loss, draw: data.draw },
     };
     let pairings = MakeRoundRobinPairings(playerArray);
-    savePairingsToDb(pairings);
+    //savePairingsToDb(pairings);
     settingStore.setPairings(pairings);
     settingStore.setPlayerList(playerArray);
     settingStore.setTournament(newTournament);
