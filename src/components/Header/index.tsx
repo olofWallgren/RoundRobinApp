@@ -7,7 +7,7 @@ import AccountBoxIcon from "@mui/icons-material/AccountBox";
 const Header = () => {
   return (
     <header className="header">
-      <div></div>
+      <div className="header--hide"></div>
       <h1 className="header__h1">Magic Round Robin</h1>
       <div className="header__iconContainer">
         <AccountBoxIcon fontSize="large" className="header__icon" />
