@@ -1,33 +1,17 @@
-import OutputBarRound from "../../components/OutputBarRound";
-import { TournamentStore } from "../../Contexts/tournamentContext";
 import "../../layout/OutputBar.css";
+import { playerItem } from "../../types/playerItem";
+import { TournamentArray } from "../../types/tournamentArray";
 
-type ListPlayers = ReadonlyArray<Player>;
-
-type Player = {
-  name: string;
-  id: number;
-};
-
-interface TournamentInterface {
-  readonly players: ListPlayers;
-  round: number;
-  ableNextRound: () => void;
-}
-
-function MakeRoundRobinPairings(props: TournamentInterface) {
-  if (props.players.length % 2) throw new Error("Teams length must be even");
-  const playerCount = props.players.length;
+function MakeRoundRobinPairings(props: playerItem[]) {
+  let players = props;
+  if (players.length % 2) throw new Error("Teams length must be even");
+  const playerCount = players.length;
   const rounds = playerCount - 1;
   const half = playerCount / 2;
 
-  const tournamentPairings: {
-    player1: Player;
-    player2: Player;
-    matchId: string;
-  }[][] = [];
+  const tournamentPairings: TournamentArray = [];
 
-  const playerIndexes: any = props.players.map((_, i) => i).slice(1);
+  const playerIndexes: any = players.map((_, i) => i).slice(1);
 
   for (let round = 0; round < rounds; round++) {
     const roundPairings = [];
@@ -42,9 +26,10 @@ function MakeRoundRobinPairings(props: TournamentInterface) {
       let idMatchFormater = "r" + roundNumber + "m" + (i + 1);
 
       roundPairings.push({
-        player1: props.players[firstHalf[i]],
-        player2: props.players[secondHalf[i]],
+        player1: players[firstHalf[i]],
+        player2: players[secondHalf[i]],
         matchId: idMatchFormater,
+        matchResult: "",
       });
     }
 
@@ -52,14 +37,7 @@ function MakeRoundRobinPairings(props: TournamentInterface) {
     playerIndexes.push(playerIndexes.shift());
     tournamentPairings.push(roundPairings);
   }
-
-  return (
-    <OutputBarRound
-      tournamentPairings={tournamentPairings}
-      round={props.round}
-      ableNextRound={props.ableNextRound}
-    />
-  );
+  return tournamentPairings;
 }
 
 export default MakeRoundRobinPairings;
