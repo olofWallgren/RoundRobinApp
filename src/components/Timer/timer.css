@@ -1,0 +1,21 @@
+.timer__container {
+  display: flex;
+  align-items: center;
+}
+.timer__totalTime {
+  font-size: 16px;
+  margin-right: 0.8rem;
+}
+.timer__icons {
+  cursor: pointer;
+  color: #fa04f6;
+}
+.timer__playIcon {
+  margin-right: 0.8rem;
+}
+.timer__pauseIcon {
+  margin-right: 0.8rem;
+} 
+.timer--noMargin {
+  margin: 0;
+}
