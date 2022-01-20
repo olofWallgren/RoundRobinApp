@@ -10,26 +10,25 @@ import { Link } from "react-router-dom";
 import { MakeRoundRobinPairings } from "../../Utilities/RoundMaker/roundMaker";
 import { TournamentStore } from "../../Contexts/tournamentContext";
 import { useState, useEffect } from "react";
-import { playerItem } from "../../types/playerItem";
-import OutputBarRound from "../../components/OutputBarRound";
-import { testArray } from "../../types/pairingList";
+
 import { collection, getDocs } from "@firebase/firestore";
 import { db } from "../../firebase-config";
+import OutputBarRound from "../../components/OutputBarRound";
 
 const Round = () => {
   const settingContext = TournamentStore();
-  const [pairingsDb, setpairingsDb] = useState<any>([]);
-  //////// HÄMTAR PAIRINGS FRÅN DB /////////////////////
-  const usersCollectionRef = collection(db, "roundPairings");
+  // const [pairingsDb, setpairingsDb] = useState<any>([]);
+  // //////// HÄMTAR PAIRINGS FRÅN DB /////////////////////
+  // const usersCollectionRef = collection(db, "roundPairings");
 
-  useEffect(() => {
-    const getUsers = async () => {
-      const data = await getDocs(usersCollectionRef);
-      setpairingsDb(data.docs.map((doc) => ({ ...doc.data() })));
-    };
-    getUsers();
-  }, []);
-  console.log("pairins från db", pairingsDb);
+  // useEffect(() => {
+  //   const getUsers = async () => {
+  //     const data = await getDocs(usersCollectionRef);
+  //     setpairingsDb(data.docs.map((doc) => ({ ...doc.data() })));
+  //   };
+  //   getUsers();
+  // }, []);
+  // console.log("pairins från db", pairingsDb);
 
   ////// Togglar disable på next round-knappen /////////
   const ableNextRound = () => {
@@ -61,18 +60,16 @@ const Round = () => {
           </div>
           <div className="playerContainer">
             {/* <MakeRoundRobinPairings ableNextRound={ableNextRound} /> */}
-            {/* <OutputBarRound
-              ableNextRound={ableNextRound}
-              pairingsDb={pairingsDb}
-            /> */}
-            {pairingsDb.map((e: any, index: number) => {
+            <OutputBarRound ableNextRound={ableNextRound} />
+
+            {/* {pairingsDb.map((e: any, index: number) => {
               return (
                 <p className="paraStyle">
                   {e.pairings[2].pairingMatch1.player1.name} vs{" "}
                   {e.pairings[2].pairingMatch1.player2.name}
                 </p>
               );
-            })}
+            })} */}
           </div>
 
           <div className="flexBetween">

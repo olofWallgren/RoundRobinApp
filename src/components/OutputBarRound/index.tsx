@@ -4,6 +4,9 @@ import "./OutputBarRound.css";
 import { Grid } from "@mui/material";
 import { TournamentStore } from "../../Contexts/tournamentContext";
 import { testArray } from "../../types/pairingList";
+
+import { collection, getDocs } from "@firebase/firestore";
+import { db } from "../../firebase-config";
 import {
   useForm,
   SubmitHandler,
@@ -14,10 +17,9 @@ import {
 interface Props {
   children?: React.ReactNode;
   ableNextRound: () => void;
-  pairingsDb: testArray;
 }
 
-const OutputBarRound: React.FC<Props> = ({ ableNextRound, pairingsDb }) => {
+const OutputBarRound: React.FC<Props> = ({ ableNextRound }) => {
   type Score = {
     score: number;
     wins: number;
@@ -48,7 +50,39 @@ const OutputBarRound: React.FC<Props> = ({ ableNextRound, pairingsDb }) => {
   });
 
   const settingContext = TournamentStore();
+  const [pairingsDb, setpairingsDb] = useState<any>([]);
+  //////// HÄMTAR PAIRINGS FRÅN DB /////////////////////
+  const usersCollectionRef = collection(db, "roundPairings");
+  // let newPairingArray: any = [];
 
+  // function makePairingRounds() {
+  //   pairingsDb.forEach((e: any) => {
+  //     let newArray = [];
+  //     newArray.push(e.pairingMatch1, e.pairingMatch2);
+  //     newPairingArray.push(newArray);
+  //   });
+  //   console.log("new pairing array", newPairingArray);
+  // }
+
+  useEffect(() => {
+    const getUsers = async () => {
+      const data = await getDocs(usersCollectionRef);
+      let pairingsDb = data.docs.map((doc) => ({ ...doc.data() }));
+      //////// test funktion ////////////
+      let newPairingArray: any = [];
+      pairingsDb[0].pairings.forEach((e: any) => {
+        let newArray = [];
+        newArray.push(e.pairingMatch1, e.pairingMatch2);
+        newPairingArray.push(newArray);
+      });
+      setpairingsDb(newPairingArray[0]);
+      console.log("new pairing array", newPairingArray);
+      //setpairingsDb(pairingsDb[0].pairings);
+    };
+    getUsers();
+  }, []);
+  console.log("pairins från db", pairingsDb);
+  // makePairingRounds();
   function findPlayer(player: string, score: Score) {
     const newPlayer: any = settingContext.playerList.find((p) => {
       return p.name === player;
@@ -203,43 +237,47 @@ const OutputBarRound: React.FC<Props> = ({ ableNextRound, pairingsDb }) => {
     });
     ableNextRound();
   };
+  // {pairingsDb.map((e: any, index: number) => {
+  //   return (
+  //     <p className="paraStyle">
+  //       {e.pairings[2].pairingMatch1.player1.name} vs{" "}
+  //       {e.pairings[2].pairingMatch1.player2.name}
+  //     </p>
   return (
     <div className="">
       <form onSubmit={handleSubmit(onSubmit)}>
-        {settingContext.roundPairings[settingContext.round].map(
-          (e: any, index: number) => (
-            <Grid
-              container
-              className="outputBarContainer"
-              direction="row"
-              justifyContent="space-between"
-              alignItems="center"
-            >
-              <Grid item>
-                <p className="names">
-                  {e.player1.name} - {e.player2.name}
-                </p>
-              </Grid>
-              <Grid item>
-                <select
-                  key={`${e.player1.name}-${index}`}
-                  className="select"
-                  {...register(`result.${index}.name` as const)}
-                >
-                  <option value="Still playing">Still Playing</option>
-                  <option value="2 - 0 - 0">2 - 0 - 0</option>
-                  <option value="2 - 1 - 0">2 - 1 - 0</option>
-                  <option value="1 - 0 - 1">1 - 0 - 1</option>
-                  <option value="1 - 1 - 1">1 - 1 - 1</option>
-                  <option value="0 - 0 - 1">0 - 0 - 1</option>
-                  <option value="0 - 2 - 0">0 - 2 - 1</option>
-                  <option value="1 - 2 - 0">1 - 2 - 0</option>
-                  <option value="0 - 1 - 1">0 - 1 - 1</option>
-                </select>
-              </Grid>
+        {pairingsDb.map((e: any, index: number) => (
+          <Grid
+            container
+            className="outputBarContainer"
+            direction="row"
+            justifyContent="space-between"
+            alignItems="center"
+          >
+            <Grid item>
+              <p className="names">
+                {e.player1.name} - {e.player2.name}
+              </p>
             </Grid>
-          )
-        )}
+            <Grid item>
+              <select
+                // key={`${e.player1.name}-${index}`}
+                className="select"
+                {...register(`result.${index}.name` as const)}
+              >
+                <option value="Still playing">Still Playing</option>
+                <option value="2 - 0 - 0">2 - 0 - 0</option>
+                <option value="2 - 1 - 0">2 - 1 - 0</option>
+                <option value="1 - 0 - 1">1 - 0 - 1</option>
+                <option value="1 - 1 - 1">1 - 1 - 1</option>
+                <option value="0 - 0 - 1">0 - 0 - 1</option>
+                <option value="0 - 2 - 0">0 - 2 - 1</option>
+                <option value="1 - 2 - 0">1 - 2 - 0</option>
+                <option value="0 - 1 - 1">0 - 1 - 1</option>
+              </select>
+            </Grid>
+          </Grid>
+        ))}
         <input type="submit" value="OK" className="okBtn" />
       </form>
     </div>
