@@ -13,6 +13,7 @@ import { Inputs } from "../../types/tournamentInput";
 import SettingsModal from "../../components/SettingsModal";
 import MakeRoundRobinPairings from "../../Utilities/RoundMaker/roundMaker";
 import { playerItem } from "../../types/playerItem";
+import { savePairingsToDb } from "../../Utilities/SaveToDB/savePairingToDB";
 
 const Tournament = () => {
   ///////// CONTEXT //////////////////////
@@ -67,9 +68,11 @@ const Tournament = () => {
       scoring: { win: data.win, loss: data.loss, draw: data.draw },
     };
     let pairings = MakeRoundRobinPairings(playerArray);
+    savePairingsToDb(pairings);
     settingStore.setPairings(pairings);
     settingStore.setPlayerList(playerArray);
     settingStore.setTournament(newTournament);
+    console.log("pairings", pairings);
   };
 
   return (
