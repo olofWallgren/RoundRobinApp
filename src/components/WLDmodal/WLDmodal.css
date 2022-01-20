@@ -8,3 +8,7 @@
 .knapp:hover {
   cursor: pointer;
 }
+
+.box {
+  border-radius: 0.5rem;
+}

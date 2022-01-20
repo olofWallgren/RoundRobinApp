@@ -84,7 +84,7 @@ const SettingsModal = () => {
           </Typography>
           <Typography gutterBottom>
             To change your tournament settings close this
-            modal.       
+            window.       
           </Typography>
         </DialogContent>
         <DialogActions>

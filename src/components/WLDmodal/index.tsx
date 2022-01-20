@@ -1,6 +1,7 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
+import DialogContent from "@mui/material/DialogContent";
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import "../../components/WLDmodal/WLDmodal.css"
@@ -31,10 +32,13 @@ export default function BasicModal() {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style}>
+        <Box className="box" sx={style}>
+
           <Typography id="modal-modal-title" variant="h6" component="h2">
             W - L - D Meaning
           </Typography>
+
+        <DialogContent dividers>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
             W - L - D = First Player wins - Second Player wins - Draws
           </Typography>
@@ -43,6 +47,7 @@ export default function BasicModal() {
             and Marion none. If Marion won 2 games and Robin won 1 game.
             the choice should be "1 - 2 - 0".
           </Typography>
+          </DialogContent>
         </Box>
       </Modal>
     </div>
