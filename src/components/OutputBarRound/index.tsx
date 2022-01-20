@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import "../../layout/OutputBar.css";
 import "./OutputBarRound.css";
 import { Grid } from "@mui/material";
@@ -23,7 +23,7 @@ const OutputBarRound: React.FC<Props> = ({
   // pairingId,
   children,
   tournamentPairings,
-  round,
+  round, 
   ableNextRound,
 }) => {
   type Score = {
@@ -55,6 +55,7 @@ const OutputBarRound: React.FC<Props> = ({
     name: "result",
     control,
   });
+
 
   function findPlayer(player: string, score: Score) {
     const newPlayer: any = settingContext.playerList.find((p) => {
@@ -210,6 +211,10 @@ const OutputBarRound: React.FC<Props> = ({
     });
     ableNextRound();
   };
+
+  const [optionState, setOptionState] = useState("");
+  console.log(optionState);
+
   return (
     <div className="">
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -231,8 +236,12 @@ const OutputBarRound: React.FC<Props> = ({
                 key={`${e.player1.name}-${index}`}
                 className="select"
                 {...register(`result.${index}.name` as const)}
+                onChange={(e)=>{
+                  const selectedResult = e.target.value;
+                  setOptionState(selectedResult)
+                }}
               >
-                <option value="Still playing">Still Playing</option>
+                <option selected value="Still playing">Still Playing</option>
                 <option value="2 - 0 - 0">2 - 0 - 0</option>
                 <option value="2 - 1 - 0">2 - 1 - 0</option>
                 <option value="1 - 0 - 1">1 - 0 - 1</option>
@@ -250,5 +259,6 @@ const OutputBarRound: React.FC<Props> = ({
     </div>
   );
 };
+
 
 export default OutputBarRound;

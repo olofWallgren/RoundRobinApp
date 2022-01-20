@@ -32,7 +32,6 @@ const Tournament = () => {
       score: 0,
       matchHistory: { win: 0, loss: 0, draw: 0 },
     };
-
     if (playerArray.length % 2) {
       setPlayerArray((prevState) => {
         const newPlayerArray = [...prevState, byePlayer];
@@ -40,7 +39,6 @@ const Tournament = () => {
       });
     } else {
       return;
-      // playerArray.push(byePlayer);
     }
   };
 
