@@ -276,7 +276,7 @@ const OutputBarRound: React.FC<Props> = ({
             type="submit"
             value="Submit result"
             className="primaryBtn primaryBtn--small"
-            disabled={disableBtn}
+            // disabled={disableBtn}
           />
         </div>
       </form>

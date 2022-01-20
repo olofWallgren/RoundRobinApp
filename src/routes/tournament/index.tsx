@@ -11,6 +11,8 @@ import ParticipantsCard from "../../components/NewTournamentCards/PlayersCard";
 import { TournamentStore } from "../../Contexts/tournamentContext";
 import { Inputs } from "../../types/tournamentInput";
 import SettingsModal from "../../components/SettingsModal";
+import MakeRoundRobinPairings from "../../Utilities/RoundMaker/roundMaker";
+import { playerItem } from "../../types/playerItem";
 
 const Tournament = () => {
   ///////// CONTEXT //////////////////////
@@ -43,7 +45,7 @@ const Tournament = () => {
   };
 
   ///////// state med participants som hämtas och uppdateras från Participants card ///////////
-  const [playerArray, setPlayerArray] = useState<string[]>([]);
+  const [playerArray, setPlayerArray] = useState<playerItem[]>([]);
   const getParticipants = (data: any) => {
     setPlayerArray([...data]);
     console.log("getParticipants");
@@ -64,6 +66,8 @@ const Tournament = () => {
       games: data.games,
       scoring: { win: data.win, loss: data.loss, draw: data.draw },
     };
+    let pairings = MakeRoundRobinPairings(playerArray);
+    settingStore.setPairings(pairings);
     settingStore.setPlayerList(playerArray);
     settingStore.setTournament(newTournament);
   };

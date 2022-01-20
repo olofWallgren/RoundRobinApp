@@ -7,9 +7,9 @@ import "../round/round.css";
 import NavigationBar from "../../components/NavigationBar";
 import { Divider } from "@mui/material";
 import { Link } from "react-router-dom";
-import MakeRoundRobinPairings from "../../Utilities/RoundMaker/roundMaker";
 import { TournamentStore } from "../../Contexts/tournamentContext";
 import Timer from "../../components/Timer";
+import OutputBarRound from "../../components/OutputBarRound";
 
 const Round = () => {
   const settingContext = TournamentStore();
@@ -54,7 +54,7 @@ const Round = () => {
         <div className="gameContainer">
           <div className="headingWrapper flexBetween">
             <h3 className="zeroMargin">{`Round-${round + 1}`}</h3>
-            <Timer hours={0} minutes={50} seconds={0}/>
+            <Timer hours={0} minutes={50} seconds={0} />
           </div>
           <div className="textWrapper">
             <p className="alignBottom secondaryColor">Pairings:</p>
@@ -64,8 +64,8 @@ const Round = () => {
             </div>
           </div>
           <div className="playerContainer">
-            <MakeRoundRobinPairings
-              players={playerArray}
+            <OutputBarRound
+              tournamentPairings={settingContext.pairings}
               round={round}
               ableNextRound={ableNextRound}
             />
