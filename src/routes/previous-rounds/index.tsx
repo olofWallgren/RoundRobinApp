@@ -16,23 +16,21 @@ const PreviousRounds = () => (
       <div style={{ paddingTop: "2rem" }}>
         <h2 style={{ margin: "0" }}>Round</h2>
       </div>
-      <div style={paraContainer}>
-        <p style={paraStyle}>End Tournament</p>
+      <div style={homeLinkContainer}>
+        <Link to="/" style={linkStyle}>End Tournament</Link>
       </div>
     </div>
   </div>
 );
 
-const paraContainer: CSSProperties = {
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
+const homeLinkContainer: CSSProperties = {
   marginTop: "1rem",
   marginBottom: "0",
 };
-const paraStyle: CSSProperties = {
+const linkStyle: CSSProperties = {
   color: "#FA04F6",
   cursor: "pointer",
+  textDecoration: "none",
 };
 
 export default PreviousRounds;

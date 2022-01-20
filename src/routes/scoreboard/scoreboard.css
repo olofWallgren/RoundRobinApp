@@ -5,14 +5,15 @@
   color: #fa04f6;
   margin: 0;
 }
-.paraContainer {
+.linkContainer {
   display: flex;
   margin-top: 1rem;
   margin-bottom: 0;
 }
-.paraStyle {
+.link {
   color: #fa04f6;
   cursor: pointer;
+  text-decoration: none;
 }
 .scoreContainer {
   overflow-y: auto;

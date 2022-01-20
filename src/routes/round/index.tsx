@@ -72,7 +72,7 @@ const Round = () => {
           </div>
           <div className="flexBetween">
             <div className="alignBottom">
-              <p className="paraStyle">End Tournament</p>
+              <Link to="/" className="linkStyle" >End Tournament</Link>
             </div>
           </div>
         </div>

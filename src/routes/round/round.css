@@ -16,9 +16,10 @@
   flex-direction: column;
   margin-bottom: 0.3rem;
 }
-.paraStyle {
+.linkStyle {
   color: #fa04f6;
   cursor: pointer;
+  text-decoration: none;
 }
 .flexBetween {
   display: flex;

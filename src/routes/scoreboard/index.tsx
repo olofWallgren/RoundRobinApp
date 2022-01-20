@@ -50,8 +50,8 @@ return (
         ))}
       
       </div>
-      <div className="paraContainer">
-        <p className="paraStyle">End Tournament</p>
+      <div className="linkContainer">
+      <Link to="/" className="link">End tournament</Link>
       </div>
     </div>
   </div>
