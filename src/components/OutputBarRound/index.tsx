@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import "../../layout/OutputBar.css";
 import "../../layout/primaryBtn.css";
 import "./OutputBarRound.css";
 import { Grid } from "@mui/material";
 import { TournamentStore } from "../../Contexts/tournamentContext";
 import { playerItem } from "../../types/playerItem";
+import { optionsDataList } from "./optionsDataList";
 import {
   useForm,
   SubmitHandler,
@@ -213,6 +214,29 @@ const OutputBarRound: React.FC<Props> = ({
     });
     ableNextRound();
   };
+  // optionsDataList[0].value sätter statet till "Still playing"
+  const [optionState, setOptionState] = useState(optionsDataList[0].value);
+
+  const handleUserInput = (e: { target: { value: any } }) => {
+    // Kollar användarens ändringar av options och sätter state utifrån det
+    const selectedResult = e.target.value;
+    setOptionState(selectedResult);
+
+    // Här vill vi loopa över listan med options 
+    // för att kolla att alla options inte är still playing och sedan sätta submit-knappen till true
+    // fungerar dock inte nu
+    optionsDataList.forEach((option) => {
+      for (const option of optionsDataList) {
+        if (
+          selectedResult !== "Still playing" &&
+          option.value !== "Still Playing"
+        ) {
+          setDisableBtn(true);
+        }
+      }
+    });
+  };
+
   return (
     <div className="">
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -234,16 +258,11 @@ const OutputBarRound: React.FC<Props> = ({
                 key={`${e.player1.name}-${index}`}
                 className="select"
                 {...register(`result.${index}.name` as const)}
+                onChange={handleUserInput}
               >
-                <option value="Still playing">Still Playing</option>
-                <option value="2 - 0 - 0">2 - 0 - 0</option>
-                <option value="2 - 1 - 0">2 - 1 - 0</option>
-                <option value="1 - 0 - 1">1 - 0 - 1</option>
-                <option value="1 - 1 - 1">1 - 1 - 1</option>
-                <option value="0 - 0 - 1">0 - 0 - 1</option>
-                <option value="0 - 2 - 0">0 - 2 - 0</option>
-                <option value="1 - 2 - 0">1 - 2 - 0</option>
-                <option value="0 - 1 - 1">0 - 1 - 1</option>
+                {optionsDataList.map((option) => (
+                  <option value={option.value}>{option.label}</option>
+                ))}
               </select>
             </Grid>
           </Grid>
