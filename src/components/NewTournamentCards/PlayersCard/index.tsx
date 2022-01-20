@@ -1,5 +1,4 @@
 import react from "react";
-import CreateIcon from "@mui/icons-material/Create";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Alert from "@mui/material/Alert";
 import { useState, useEffect } from "react";
@@ -121,7 +120,6 @@ const PlayersCard = (props: any) => {
             <div key={i.id} className="playerBox flexBetween">
               {i.name}
               <div>
-                <CreateIcon className="icon editIcon" />
                 <DeleteIcon
                   className="icon deleteIcon"
                   onClick={() => deleteParticipant(i.id)}

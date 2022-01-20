@@ -25,7 +25,7 @@ const OutputBarRound: React.FC<Props> = ({
   // pairingId,
   children,
   tournamentPairings,
-  round,
+  round, 
   ableNextRound,
 }) => {
   type Score = {
@@ -59,6 +59,7 @@ const OutputBarRound: React.FC<Props> = ({
     name: "result",
     control,
   });
+
 
   function findPlayer(player: string, score: Score) {
     const newPlayer: any = settingContext.playerList.find((p) => {
@@ -282,5 +283,6 @@ const OutputBarRound: React.FC<Props> = ({
     </div>
   );
 };
+
 
 export default OutputBarRound;
