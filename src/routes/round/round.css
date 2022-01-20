@@ -52,6 +52,15 @@
   color: #fa04f6;
 }
 
+.scoring {
+  display: flex;
+  flex-direction: row;
+}
+
+.oneRemLeft {
+  margin-left: 1rem;
+}
+
 @media screen and (max-width: 600px) {
   .btnContainer {
     margin-top: 1rem;

@@ -1,0 +1,10 @@
+.knapp {
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  color: violet;
+  margin-left: 0.5rem;
+}
+
+.knapp:hover {
+  cursor: pointer;
+}
