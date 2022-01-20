@@ -1,7 +1,7 @@
 export const optionsDataList = [
     {
       label: "Still playing",
-      value: "Still Playing",
+      value: "Still playing",
     },
     {
       label: "2 - 0 - 0",
@@ -22,10 +22,6 @@ export const optionsDataList = [
     {
       label: "0 - 0 - 1",
       value: "0 - 0 - 1",
-    },
-    {
-      label: "1 - 1 - 1",
-      value: "1 - 1 - 1",
     },
     {
       label: "0 - 2 - 0",

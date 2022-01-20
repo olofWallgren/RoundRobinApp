@@ -222,20 +222,21 @@ const OutputBarRound: React.FC<Props> = ({
     const selectedResult = e.target.value;
     setOptionState(selectedResult);
 
-    // Här vill vi loopa över listan med options 
+    // Här vill vi loopa över listan med options
     // för att kolla att alla options inte är still playing och sedan sätta submit-knappen till true
     // fungerar dock inte nu
     optionsDataList.forEach((option) => {
       for (const option of optionsDataList) {
         if (
-          selectedResult !== "Still playing" &&
-          option.value !== "Still Playing"
+          // selectedResult !== "Still playing" &&
+          option.value !== "Still playing"
         ) {
           setDisableBtn(true);
         }
       }
     });
   };
+  console.log(optionState);
 
   return (
     <div className="">
@@ -261,7 +262,9 @@ const OutputBarRound: React.FC<Props> = ({
                 onChange={handleUserInput}
               >
                 {optionsDataList.map((option) => (
-                  <option value={option.value}>{option.label}</option>
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
                 ))}
               </select>
             </Grid>
