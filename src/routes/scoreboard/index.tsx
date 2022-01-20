@@ -25,7 +25,7 @@ return (
   <div className="container">
     <NavigationBar />
     <Divider />
-    <div className="gameContainer gameContainer--large">
+    <div className="gameContainer">
       <div className="headingWrapper">
         <h3 className="noMargin">Scoreboard</h3>
       </div>
