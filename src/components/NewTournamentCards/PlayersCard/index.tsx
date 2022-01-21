@@ -50,7 +50,8 @@ const PlayersCard = (props: any) => {
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     ///// rensar inputfield //////////
     resetField("player");
-    setPlayers((prevState) => {
+    setPlayers((prevState) => {   
+     
       const newItems = [
         ...prevState,
         {
@@ -60,13 +61,36 @@ const PlayersCard = (props: any) => {
           matchHistory: { win: 0, loss: 0, draw: 0 },
         },
       ];
+      
+      
       ///////// UTKOMMENTERAD FÖR TILLFÄLLET ///////////
       saveToLocalStorage("players", newItems);
-
+      // console.log(i);
+      idHandler(newItems)
       return newItems;
     });
   };
 
+
+  ////// HÄR ÄR TIM FREDAG 21/1-22 //////
+  //// Försöker skapa unika id'n
+  function idHandler(newItems: any) {
+
+    let newItemsId = newItems.map((a: any) => a.id)
+    let highestId = 0;
+    let i = players.length;
+  
+    
+    for (i = 0; i < newItemsId.length; i++) {
+      if (newItemsId[i] > highestId) {
+        highestId = newItemsId[i];
+      }
+    }
+    console.log(highestId);
+    return highestId;
+  }
+    ////// HÄR ÄR TIM FREDAG 21/1-22 //////
+  
   ///// deletar en spelare från particisipant statet /////////
   const deleteParticipant = (id: number) => {
     const updateParticipants = [
