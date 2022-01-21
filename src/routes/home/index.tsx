@@ -6,7 +6,7 @@ import "../../layout/primaryBtn.css";
 import "../../layout/secondaryBtn.css";
 import { Link } from "react-router-dom";
 import { CSSProperties } from "react";
-import fatRobin from "../../Assets/images/magicFatRobinSmaller.png";
+import fatRobin from "../../Assets/images/foxUpRightSmall.png";
 
 
 const Home = () => {

@@ -48,6 +48,11 @@ export default function BasicModal() {
             the choice should be "1 - 2 - 0".
           </Typography>
           </DialogContent>
+          <button
+            style={{ width: "100%" }}
+            className="primaryBtn"
+            onClick={handleClose}
+            >Got it!</button>
         </Box>
       </Modal>
     </div>
