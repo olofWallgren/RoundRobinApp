@@ -6,7 +6,7 @@ import "../../layout/primaryBtn.css";
 import "../../layout/secondaryBtn.css";
 import { Link } from "react-router-dom";
 import { CSSProperties } from "react";
-import fatRobin from "../../Assets/images/foxUpRightSmall.png";
+import fatRobin from "../../Assets/images/magicFatRobin.png";
 
 const Home = () => {
   ///// sätter en key och value i ls annars crashar appen när man ska hämta ls ifrån participantCard och ls är tomt //////
