@@ -16,40 +16,21 @@ const PreviousRounds = () => (
       <div style={{ paddingTop: "2rem" }}>
         <h2 style={{ margin: "0" }}>Round</h2>
       </div>
-      <div style={paraContainer}>
-        <p style={paraStyle}>End Tournament</p>
+      <div style={homeLinkContainer}>
+        <Link to="/" style={linkStyle}>End Tournament</Link>
       </div>
-    </div>
-    <div style={btnContainer}>
-      <Link style={btnWidth} to="/create-tournament" className="secondaryBtn">
-        Back
-      </Link>
-      <Link style={btnWidth} to="/current-tournament/round" className="primaryBtn">
-        Next Round
-      </Link>
     </div>
   </div>
 );
 
-const paraContainer: CSSProperties = {
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
+const homeLinkContainer: CSSProperties = {
   marginTop: "1rem",
   marginBottom: "0",
 };
-const paraStyle: CSSProperties = {
+const linkStyle: CSSProperties = {
   color: "#FA04F6",
   cursor: "pointer",
-};
-const btnContainer: CSSProperties = {
-  display: "flex",
-  justifyContent: "space-between",
-  marginTop: "2rem",
-  width: "100%",
-};
-const btnWidth: CSSProperties = {
-  width: "48%",
+  textDecoration: "none",
 };
 
 export default PreviousRounds;
