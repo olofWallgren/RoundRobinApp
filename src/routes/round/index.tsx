@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 import { TournamentStore } from "../../Contexts/tournamentContext";
 import Timer from "../../components/Timer";
 import OutputBarRound from "../../components/OutputBarRound";
+import BasicModal from "../../components/WLDmodal";
 
 const Round = () => {
   const settingContext = TournamentStore();
@@ -68,9 +69,12 @@ const Round = () => {
           </div>
           <div className="textWrapper">
             <p className="alignBottom secondaryColor">Pairings:</p>
-            <div className="flexColumn">
-              <p className="marginBottom">Result:</p>
+            <div className="flexColumn result">
+              <p className="marginBottom oneRemLeft">Result:</p>
+              <div className="scoring">
+              <BasicModal />
               <p className="wldStyle">W - L - D</p>
+              </div>
             </div>
           </div>
           <div className="playerContainer">

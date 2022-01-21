@@ -18,7 +18,7 @@
 
 .test {
   /* opacity: 0.2; */
-  background-image: url("../Assets/images/bg2.png");
+  background-image: url("../Assets/images/bg6.png");
   background-image: "transparent";
   background-position: center;
   background-size: cover;
@@ -39,9 +39,9 @@
 } */
 
 .fox {
-  width: 19rem;
-  transform: rotate(-40deg);
+  width: 12.5rem;
+  /* transform: rotate(-40deg); */
   padding-bottom: 2rem;
-  margin-left: 2rem;
+  margin-left: 0.1rem;
   z-index: 1;
 }
