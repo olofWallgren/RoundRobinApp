@@ -53,6 +53,16 @@
 .linkWrapper {
   margin-top: 20px;
 }
+
+.scoring {
+  display: flex;
+  flex-direction: row;
+}
+
+.oneRemLeft {
+  margin-left: 1rem;
+}
+
 @media screen and (max-width: 600px) {
   .linkWrapper {
     margin-top: 12px;
