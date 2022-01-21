@@ -13,7 +13,18 @@ import OutputBarRound from "../../components/OutputBarRound";
 
 const Round = () => {
   const settingContext = TournamentStore();
-
+  React.useEffect(() => {
+    try {
+      let pairings = JSON.parse(localStorage.getItem("pairings") || "");
+      //setPlayers(ls);
+      settingContext.setPairings(pairings);
+    } catch (error) {}
+    try {
+      let players = JSON.parse(localStorage.getItem("players") || "");
+      //setPlayers(ls);
+      settingContext.setPlayerList(players);
+    } catch (error) {}
+  }, []);
   //// testar att skapa en ny array från players-context //////
 
   const playerArray: any = [];
@@ -37,7 +48,6 @@ const Round = () => {
     } else {
       setRound(round + 1);
     }
-    console.log("round", round);
   }
   ////// Togglar disable på next round-knappen /////////
   const ableNextRound = () => {

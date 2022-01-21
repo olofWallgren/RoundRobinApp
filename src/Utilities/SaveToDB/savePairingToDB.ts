@@ -7,11 +7,11 @@ export type TournamentEntity = {
   name: string;
   rounds: RoundEntity[];
 };
-type RoundEntity = {
+export type RoundEntity = {
   roundNo: number;
   pairings: PairingEntity[];
 };
-type PairingEntity = {
+export type PairingEntity = {
   matchNo: number;
   player1: Player;
   player2: Player;
