@@ -10,19 +10,40 @@
   max-width: 1600px;
 }
 
+.fixer {
+  visibility: hidden;
+}
+
 .header__h1 {
   margin: 0;
+
   font-size: 20px;
   letter-spacing: 4px;
   font-family: metamorphous;
+  text-shadow: 1px 1px 2px black, 0 0 25px blueviolet,
+    0 0 5px rgba(11, 0, 44, 1);
 }
 .header__icon {
   color: #fa04f6;
+  text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
+  display: hidden;
+}
+
+.foxyProfileIcon {
+  height: 3rem;
+  width: auto;
+  text-shadow: 1px 1px 2px black, 0 0 25px blueviolet,
+    0 0 5px rgba(11, 0, 44, 1);
 }
 
 @media only screen and (max-width: 600px) {
-    .header {
-        padding: 4px 16px 4px 16px;
-    }
+  .header {
+    padding: 4px 16px 4px 16px;
   }
-
+  .header {
+    margin-top: 1rem;
+  }
+  /* .fixer {
+    display: none;
+  } */
+}
