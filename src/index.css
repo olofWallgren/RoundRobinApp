@@ -23,7 +23,7 @@ html {
 }
 
 body {
-  height: 90%;
+  min-height: 90%;
   width: 90%;
   border-radius: 20px;
   margin: 0;
