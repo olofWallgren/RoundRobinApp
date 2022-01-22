@@ -11,21 +11,26 @@ import { TournamentStore } from "../../Contexts/tournamentContext";
 import Timer from "../../components/Timer";
 import OutputBarRound from "../../components/OutputBarRound";
 import BasicModal from "../../components/WLDmodal";
+import { useEffect } from "react";
 
 const Round = () => {
   const settingContext = TournamentStore();
+  /////// State för Rounds //////////////////
+  const [round, setRound] = React.useState(0);
+
   React.useEffect(() => {
     try {
       let pairings = JSON.parse(localStorage.getItem("pairings") || "");
-      //setPlayers(ls);
       settingContext.setPairings(pairings);
     } catch (error) {}
     try {
       let players = JSON.parse(localStorage.getItem("players") || "");
-      //setPlayers(ls);
       settingContext.setPlayerList(players);
+      let lsRound = JSON.parse(localStorage.getItem("round") || "");
+      setRound(lsRound);
     } catch (error) {}
   }, []);
+
   //// testar att skapa en ny array från players-context //////
 
   const playerArray: any = [];
@@ -37,17 +42,21 @@ const Round = () => {
   };
   getNameAndId();
 
-  /////// State för Rounds //////////////////
-  const [round, setRound] = React.useState(0);
-
   ////// Ökar statet med +1 ////////////////
+  ////////// titta över vad som händer när round == roundLength //////
   function incrementRound() {
     ableNextRound();
     const roundLength = playerArray.length;
-    if (round >= roundLength) {
-      setRound(0);
+    if (round === roundLength) {
+      console.log("round >= roundLength");
+      // setRound(0);
+      // localStorage.setItem("round", JSON.stringify(0));
     } else {
-      setRound(round + 1);
+      setRound((prevState) => {
+        let newRound = prevState + 1;
+        localStorage.setItem("round", JSON.stringify(newRound));
+        return newRound;
+      });
     }
   }
   ////// Togglar disable på next round-knappen /////////
@@ -72,8 +81,8 @@ const Round = () => {
             <div className="flexColumn result">
               <p className="marginBottom oneRemLeft">Result:</p>
               <div className="scoring">
-              <BasicModal />
-              <p className="wldStyle">W - L - D</p>
+                <BasicModal />
+                <p className="wldStyle">W - L - D</p>
               </div>
             </div>
           </div>

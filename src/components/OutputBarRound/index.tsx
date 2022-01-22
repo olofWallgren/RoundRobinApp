@@ -58,6 +58,7 @@ const OutputBarRound: React.FC<Props> = ({
   const settingContext = TournamentStore();
   const [pairingList, setPairingList] = useState<TournamentArray>([]);
   const [hasLoaded, setHasLoaded] = useState(false);
+  const [testRound, setTestRound] = useState(0);
 
   //// Hämtar Pairings från Db //////
   useEffect(() => {
@@ -76,12 +77,18 @@ const OutputBarRound: React.FC<Props> = ({
 
       setPairingList(filteredData);
     };
+    try {
+      let lsRound = JSON.parse(localStorage.getItem("round") || "");
+      setTestRound(lsRound);
+    } catch (error) {}
+
     getUsers();
   }, []);
   //// Kollar så att PairingList statet är uppdaterat /////////
   useEffect(() => {
     checkLoading();
   }, [pairingList]);
+  console.log("teestRound", testRound);
 
   const checkLoading = () => {
     if (pairingList.length <= 0) {
@@ -271,6 +278,7 @@ const OutputBarRound: React.FC<Props> = ({
       }
       //resetField(`result.${index}.name`);
     });
+
     localStorage.setItem("players", JSON.stringify(settingContext.playerList));
     ableNextRound();
   };
