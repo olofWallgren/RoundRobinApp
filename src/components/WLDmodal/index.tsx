@@ -5,6 +5,7 @@ import DialogContent from "@mui/material/DialogContent";
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import "../../components/WLDmodal/WLDmodal.css"
+import HelpIcon from '@mui/icons-material/Help';
 
 const style = {
   position: 'absolute' as 'absolute',
@@ -25,7 +26,8 @@ export default function BasicModal() {
 
   return (
     <div>
-      <button className="knapp" onClick={handleOpen}>[ ? ]</button>
+      {/* <button className="knapp" onClick={handleOpen}>[ ? ]</button> */}
+      <HelpIcon fontSize='small' sx={{color:"#fa04f6",cursor:"pointer"}} onClick={handleOpen} />
       <Modal
         open={open}
         onClose={handleClose}
