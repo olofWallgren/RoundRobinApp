@@ -1,0 +1,49 @@
+.rounds__headingContainer {
+  margin: 1rem 0;
+}
+.rounds__heading {
+  font-size: 20px;
+}
+.rounds__textContainer {
+  color: #fa04f6;
+  margin: 0;
+}
+.rounds__text {
+  text-align: end;
+  /* padding-right: 0.3rem; */
+  padding-right: 1.1rem;
+}
+
+.rounds__linkContainer {
+  margin-top: 1rem;
+  margin-bottom: 0;
+}
+.rounds__link {
+  color: #fa04f6;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.rounds__scrollBox {
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 48vh;
+}
+.rounds--noMargin {
+  margin: 0;
+}
+
+@media screen and (max-width: 600px) {
+    .rounds__scrollBox {
+      height: 55vh;
+    }
+    .rounds__text {
+        font-size: 11px;
+      }
+  }
+  @media screen and (max-width: 375px) {
+    .rounds__text {
+      padding-right: 0;
+      font-size: 10px;
+    }
+  }
