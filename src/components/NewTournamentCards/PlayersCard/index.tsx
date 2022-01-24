@@ -37,20 +37,26 @@ const PlayersCard = (props: any) => {
       setPlayers(ls);
     } catch (error) {}
   }, []);
-
+  
   //// sparar data till LS ///////////
-
+  
   ///////// UTKOMMENTERAD FÖR TILLFÄLLET ///////////
   function saveToLocalStorage(key: string, value: any): void {
     localStorage.setItem(key, JSON.stringify(value));
     console.log("cardLS", localStorage.getItem("players"));
   }
-
+  
   ///// uppdaterar participants statet ////////////
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    ///// rensar inputfield //////////
+    //// Checks if name is already in use
+    let oldNames = players.map((a) => a.name)
+    if (oldNames.includes(data.player)) {
+      nameAlreadyInUse()
+    } else {
+      
+      ///// rensar inputfield //////////
     resetField("player");
-    setPlayers((prevState) => {   
+    setPlayers((prevState) => {  
 
       ///// Kollar genom alla spelarobjekt efter det
       ///// högsta ID't. newItem tar sedan det värdet och 
@@ -63,7 +69,7 @@ const PlayersCard = (props: any) => {
           highestId = a;
         }
       })
-
+      
       const newItems = [
         ...prevState,
         {
@@ -72,15 +78,20 @@ const PlayersCard = (props: any) => {
           score: 0,
           matchHistory: { win: 0, loss: 0, draw: 0 },
         },
-      ];    
+      ]; 
+
       ///////// UTKOMMENTERAD FÖR TILLFÄLLET ///////////
       saveToLocalStorage("players", newItems);
       console.log(newItems);
       return newItems;
     });
+  }
   };
 
+  const nameAlreadyInUse = () => {
 
+    alert("name is in use")
+  }
   
   ///// deletar en spelare från particisipant statet /////////
   const deleteParticipant = (id: number) => {
