@@ -23,7 +23,7 @@ const PlayersCard = (props: any) => {
   //// en player array för att mappa ut alla players som skapas ///////
   const [players, setPlayers] = useState<playerItem[]>([]);
 
-  ///// uppdaterar en lika dan array i tournament view ////////
+  ///// uppdaterar en likadan array i tournament view ////////
   useEffect(() => {
     getParticipants(players);
   }, [players]);
@@ -50,23 +50,38 @@ const PlayersCard = (props: any) => {
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     ///// rensar inputfield //////////
     resetField("player");
-    setPlayers((prevState) => {
+    setPlayers((prevState) => {   
+
+      ///// Kollar genom alla spelarobjekt efter det
+      ///// högsta ID't. newItem tar sedan det värdet och 
+      ///// lägger till 1 för att skapa ett högre ID
+      let oldIds = prevState.map((a) => a.id)
+      let highestId = 0;
+   
+      oldIds.forEach((a) => {
+        if (highestId < a) {
+          highestId = a;
+        }
+      })
+
       const newItems = [
         ...prevState,
         {
-          id: players.length,
+          id: highestId + 1,
           name: data.player,
           score: 0,
           matchHistory: { win: 0, loss: 0, draw: 0 },
         },
-      ];
+      ];    
       ///////// UTKOMMENTERAD FÖR TILLFÄLLET ///////////
       saveToLocalStorage("players", newItems);
-
+      console.log(newItems);
       return newItems;
     });
   };
 
+
+  
   ///// deletar en spelare från particisipant statet /////////
   const deleteParticipant = (id: number) => {
     const updateParticipants = [
