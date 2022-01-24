@@ -29,6 +29,10 @@ const Round = () => {
   /////// State för Rounds //////////////////
   const [round, setRound] = React.useState(0);
 
+  let nxtRoundButtonText = "Next Round";
+  if ((round + 2) === playerArray.length) {
+    nxtRoundButtonText = "Final Score!"
+  }
   ////// Ökar statet med +1 ////////////////
   function incrementRound() {
     ableNextRound();
@@ -36,10 +40,17 @@ const Round = () => {
     if (round >= roundLength) {
       setRound(0);
     } else {
+      ///Kollar om det är sista rundan
+      if ((round + 2) === playerArray.length) {
+        alert("då var det slut!")
+      } else {
       setRound(round + 1);
+      }
     }
     console.log("round", round);
   }
+
+
   ////// Togglar disable på next round-knappen /////////
   const ableNextRound = () => {
     setDisable(!disable && true);
@@ -87,7 +98,7 @@ const Round = () => {
               className="primaryBtn btnWidth"
               disabled={disable}
             >
-              Next Round
+              {nxtRoundButtonText}
             </button>
           </div>
         </div>
