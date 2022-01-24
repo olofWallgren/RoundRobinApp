@@ -20,7 +20,7 @@ import {
 
 interface Props {
   children?: React.ReactNode;
-  tournamentPairings: any;
+  //tournamentPairings: any;
   round: number;
   ableNextRound: () => void;
 }
@@ -28,7 +28,7 @@ interface Props {
 const OutputBarRound: React.FC<Props> = ({
   // pairingId,
   children,
-  tournamentPairings,
+  // tournamentPairings,
   round,
   ableNextRound,
 }) => {
@@ -62,33 +62,41 @@ const OutputBarRound: React.FC<Props> = ({
 
   //// Hämtar Pairings från Db //////
   useEffect(() => {
-    const getUsers = async () => {
-      const tournamentCollectionRef = collection(db, "roundPairings");
-      const data = await getDocs(tournamentCollectionRef);
-      let pairingsDb = data.docs.map((doc) => ({ ...doc.data() }));
+    /////////// HÄMTAR PAIRINGS FRÅN DB ///////////////////
+    // const getUsers = async () => {
+    //   const tournamentCollectionRef = collection(db, "roundPairings");
+    //   const data = await getDocs(tournamentCollectionRef);
+    //   let pairingsDb = data.docs.map((doc) => ({ ...doc.data() }));
 
-      //////// Gör om datan till samm struktur som context pairings ////////////
-      let filteredData: any = [];
-      console.log("from Db", pairingsDb[0].pairings.rounds);
-      let test = pairingsDb[0].pairings.rounds;
-      test.forEach((e: any) => {
-        filteredData.push(e.pairings);
-      });
+    //   //////// Gör om datan till samm struktur som context pairings ////////////
+    //   let filteredData: any = [];
+    //   console.log("from Db", pairingsDb[0].pairings.rounds);
+    //   let test = pairingsDb[0].pairings.rounds;
+    //   test.forEach((e: any) => {
+    //     filteredData.push(e.pairings);
+    //   });
 
-      setPairingList(filteredData);
-    };
+    //   setPairingList(filteredData);
+    // };
+
+    /////////// UPDATERAR CONTEXT-STATES FRÅN LS //////////////////
+
+    // try {
+    //   let lsRound = JSON.parse(localStorage.getItem("round") || "");
+
+    //   setTestRound(lsRound);
+    // } catch (error) {}
     try {
-      let lsRound = JSON.parse(localStorage.getItem("round") || "");
-      setTestRound(lsRound);
-    } catch (error) {}
+      let lsPairings = JSON.parse(localStorage.getItem("pairings") || "");
 
-    getUsers();
+      setPairingList(lsPairings);
+    } catch (error) {}
   }, []);
+
   //// Kollar så att PairingList statet är uppdaterat /////////
   useEffect(() => {
     checkLoading();
   }, [pairingList]);
-  console.log("teestRound", testRound);
 
   const checkLoading = () => {
     if (pairingList.length <= 0) {
@@ -132,17 +140,18 @@ const OutputBarRound: React.FC<Props> = ({
   }
 
   const onSubmit: SubmitHandler<formValues> = (data) => {
-    console.log("resutat från submitt", data.result);
-    console.log("db pairing", pairingList[round][0].player1.name);
-    console.log("db pairing", pairingList[round][0].player2.name);
-    console.log("context pairing", settingContext.pairings[round]);
+    //console.log("resutat från submitt", data.result);
+    // console.log("db pairing", pairingList[round][0].player1.name);
+    // console.log("db pairing", pairingList[round][0].player2.name);
+    // console.log("context pairing", settingContext.pairings[round][0]);
 
     data.result.forEach((e, index) => {
       ////////// Utkommenterad pga den kollar i DB-pairingList /////////////
-      // const player1 = settingContext.pairings[round][index].player1.name;
-      // const player2 = settingContext.pairings[round][index].player2.name;
-      const player1 = pairingList[round][index].player1.name;
-      const player2 = pairingList[round][index].player2.name;
+      const player1 = settingContext.pairings[round][index].player1.name;
+      const player2 = settingContext.pairings[round][index].player2.name;
+
+      // const player1 = pairingList[round][index].player1.name;
+      // const player2 = pairingList[round][index].player2.name;
 
       switch (e.name) {
         case "2 - 0 - 0":
@@ -310,7 +319,7 @@ const OutputBarRound: React.FC<Props> = ({
     <div className="">
       <form onSubmit={handleSubmit(onSubmit)}>
         {hasLoaded &&
-          pairingList[round].map((e: any, index: number) => (
+          settingContext.pairings[round].map((e: any, index: number) => (
             <Grid
               container
               className="outputBarContainer"

@@ -17,40 +17,32 @@ const Round = () => {
   const settingContext = TournamentStore();
   /////// State för Rounds //////////////////
   const [round, setRound] = React.useState(0);
-
+  /////////// Updaterar alla context-states vid en refresh //////////
   React.useEffect(() => {
     try {
       let pairings = JSON.parse(localStorage.getItem("pairings") || "");
       settingContext.setPairings(pairings);
     } catch (error) {}
+
     try {
       let players = JSON.parse(localStorage.getItem("players") || "");
       settingContext.setPlayerList(players);
+    } catch (error) {}
+
+    try {
       let lsRound = JSON.parse(localStorage.getItem("round") || "");
       setRound(lsRound);
     } catch (error) {}
   }, []);
 
-  //// testar att skapa en ny array från players-context //////
-
-  const playerArray: any = [];
-
-  const getNameAndId = () => {
-    settingContext.tournament.players.forEach((e) => {
-      playerArray.push({ name: e.name, id: e.id });
-    });
-  };
-  getNameAndId();
-
-  ////// Ökar statet med +1 ////////////////
+  ////// Ökar statet med +1 och updaterar round-LS ////////////////
   ////////// titta över vad som händer när round == roundLength //////
   function incrementRound() {
     ableNextRound();
-    const roundLength = playerArray.length;
+    //const roundLength = playerArray.length;
+    const roundLength = settingContext.playerList.length;
     if (round === roundLength) {
       console.log("round >= roundLength");
-      // setRound(0);
-      // localStorage.setItem("round", JSON.stringify(0));
     } else {
       setRound((prevState) => {
         let newRound = prevState + 1;
@@ -90,7 +82,7 @@ const Round = () => {
           </div>
           <div className="playerContainer">
             <OutputBarRound
-              tournamentPairings={settingContext.pairings}
+              //tournamentPairings={settingContext.pairings}
               round={round}
               ableNextRound={ableNextRound}
             />
