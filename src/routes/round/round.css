@@ -3,10 +3,8 @@
 }
 .textWrapper {
   display: flex;
-  justify-content: space-between;
-  margin-right: 30px;
   padding: 0;
-  margin-top: 0;
+  margin-top: 1rem;
 }
 .alignBottom {
   align-self: flex-end;
@@ -16,34 +14,29 @@
   flex-direction: column;
   margin-bottom: 0.3rem;
 }
-.paraStyle {
+.linkStyle {
   color: #fa04f6;
   cursor: pointer;
+  text-decoration: none;
 }
 .flexBetween {
   display: flex;
   justify-content: space-between;
 }
 .btnContainer {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 1.2rem;
+  margin-top: 1rem;
   width: 100%;
 }
 .btnWidth {
-  width: 48%;
+  width: 100%;
 }
 .playerContainer {
   overflow-y: auto;
   overflow-x: hidden;
-  height: 42vh;
-}
-.wldStyle {
-  margin: 0;
-  color: #fa04f6;
+  height: 40vh;
 }
 .marginBottom {
-  margin-bottom: 0.1rem;
+  margin-bottom: 0.5rem;
 }
 .zeroMargin {
   margin: 0;
@@ -51,32 +44,45 @@
 .secondaryColor {
   color: #fa04f6;
 }
-
-.scoring {
-  display: flex;
-  flex-direction: row;
+.linkWrapper {
+  margin-top: 20px;
 }
 
-.oneRemLeft {
-  margin-left: 1rem;
+.scoringContainer {
+  display: flex;
+  flex-direction: column;
+  margin-right: 30px;
+}
+.questionMark {
+  margin-left: auto;
+  margin-right: 0.5rem;
+  align-items: baseline;
 }
 
 @media screen and (max-width: 600px) {
-  .btnContainer {
-    margin-top: 1rem;
+  .linkWrapper {
+    margin-top: 12px;
   }
-  .btnWidth {
-    width: 49%;
+  .btnContainer {
+    margin-top: 0.8rem;
   }
 }
 @media screen and (max-width: 375px) {
   .textWrapper {
-    margin-right: 30px;
-  }
-  .wldStyle {
     font-size: 10px;
   }
   .btnContainer {
-    margin-top: 0.8rem;
+    margin-top: 0.6rem;
+  }
+  .marginBottom {
+    margin-bottom: 0.2rem;
+  }
+  .scoringContainer {
+    margin-right: 26px;
+  }
+}
+@media screen and (max-width: 320px) {
+  .scoringContainer {
+    margin-right: 16px;
   }
 }

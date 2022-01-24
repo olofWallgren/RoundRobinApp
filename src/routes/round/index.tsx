@@ -77,13 +77,15 @@ const Round = () => {
             <Timer hours={0} minutes={50} seconds={0} />
           </div>
           <div className="textWrapper">
-            <p className="alignBottom secondaryColor">Pairings:</p>
-            <div className="flexColumn result">
-              <p className="marginBottom oneRemLeft">Result:</p>
-              <div className="scoring">
-                <BasicModal />
-                <p className="wldStyle">W - L - D</p>
-              </div>
+            <div className="alignBottom marginBottom">
+              <p className="zeroMargin secondaryColor">Pairings:</p>
+            </div>
+            <div className="questionMark">
+              <BasicModal />
+            </div>
+            <div className="scoringContainer alignBottom marginBottom">
+              <p className="zeroMargin">Result:</p>
+              <p className="zeroMargin secondaryColor">W-L-D</p>
             </div>
           </div>
           <div className="playerContainer">
@@ -93,23 +95,20 @@ const Round = () => {
               ableNextRound={ableNextRound}
             />
           </div>
-          <div className="flexBetween">
-            <div className="alignBottom">
-              <p className="paraStyle">End Tournament</p>
-            </div>
+          <div className="linkWrapper">
+            <Link to="/" className="linkStyle">
+              End Tournament
+            </Link>
           </div>
-        </div>
-        <div className="btnContainer">
-          <Link to="/create-tournament" className="secondaryBtn btnWidth">
-            Back
-          </Link>
-          <button
-            onClick={incrementRound}
-            className="primaryBtn btnWidth"
-            disabled={disable}
-          >
-            Next Round
-          </button>
+          <div className="btnContainer">
+            <button
+              onClick={incrementRound}
+              className="primaryBtn btnWidth"
+              disabled={disable}
+            >
+              Next Round
+            </button>
+          </div>
         </div>
       </div>
     </>

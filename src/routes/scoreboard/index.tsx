@@ -50,20 +50,9 @@ return (
         ))}
       
       </div>
-      <div className="paraContainer">
-        <p className="paraStyle">End Tournament</p>
+      <div className="linkContainer">
+      <Link to="/" className="link">End tournament</Link>
       </div>
-    </div>
-    <div className="buttonContainer">
-      <Link to="/create-tournament" className="secondaryBtn buttonWidth">
-        Back
-      </Link>
-      <Link
-        to="/current-tournament/round"
-        className="primaryBtn buttonWidth"
-      >
-        Next Round
-      </Link>
     </div>
   </div>
 );

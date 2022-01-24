@@ -44,15 +44,8 @@ const Home = () => {
       </div>
 
       <div style={btnContainer}>
-        <Link
-          className="primaryBtn"
-          style={{ marginBottom: "1rem" }}
-          to="/create-tournament"
-        >
+        <Link className="primaryBtn" to="/create-tournament">
           Create Tournament
-        </Link>
-        <Link className="secondaryBtn" to="/">
-          Continue Old
         </Link>
       </div>
     </div>
