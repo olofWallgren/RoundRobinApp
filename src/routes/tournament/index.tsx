@@ -45,7 +45,7 @@ const Tournament = () => {
     }
   };
 
-  ///////// state med participants som hämtas och uppdateras från Participants card ///////////
+  ///////// state med players som hämtas och uppdateras från Participants card ///////////
   const [playerArray, setPlayerArray] = useState<playerItem[]>([]);
   const getParticipants = (data: any) => {
     setPlayerArray([...data]);
@@ -68,12 +68,11 @@ const Tournament = () => {
       scoring: { win: data.win, loss: data.loss, draw: data.draw },
     };
     let pairings = MakeRoundRobinPairings(playerArray);
-    savePairingsToDb(pairings);
-    settingStore.setPairings(pairings);
+    //savePairingsToDb(pairings);
     localStorage.setItem("pairings", JSON.stringify(pairings));
+    settingStore.setPairings(pairings);
     settingStore.setPlayerList(playerArray);
     settingStore.setTournament(newTournament);
-    console.log("pairings", pairings);
   };
 
   return (
