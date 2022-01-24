@@ -11,6 +11,8 @@ import { TournamentStore } from "../../Contexts/tournamentContext";
 import Timer from "../../components/Timer";
 import OutputBarRound from "../../components/OutputBarRound";
 import BasicModal from "../../components/WLDmodal";
+import TransitionsModal from "../../components/WinnerModal";
+import { useState } from "react";
 
 const Round = () => {
   const settingContext = TournamentStore();
@@ -42,12 +44,19 @@ const Round = () => {
     } else {
       ///Kollar om det är sista rundan
       if ((round + 2) === playerArray.length) {
-        alert("då var det slut!")
+        showWinner()
       } else {
-      setRound(round + 1);
+        setRound(round + 1);
       }
     }
-    console.log("round", round);
+  }
+  
+  const [showWinnerModal, setShowWinnerModal] = useState(false)
+  // let showWinnerModal: boolean = false;
+  
+  function showWinner() {
+    setShowWinnerModal(true);
+
   }
 
 
@@ -86,7 +95,11 @@ const Round = () => {
               round={round}
               ableNextRound={ableNextRound}
             />
-          </div>
+            <div>{showWinnerModal ? 
+            <TransitionsModal />
+             : ''}</div>
+
+             </div>
           <div className="linkWrapper">
             <Link to="/" className="linkStyle">
               End Tournament

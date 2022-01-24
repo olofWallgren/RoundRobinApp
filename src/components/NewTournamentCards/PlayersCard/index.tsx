@@ -82,7 +82,6 @@ const PlayersCard = (props: any) => {
 
       ///////// UTKOMMENTERAD FÖR TILLFÄLLET ///////////
       saveToLocalStorage("players", newItems);
-      console.log(newItems);
       return newItems;
     });
   }
