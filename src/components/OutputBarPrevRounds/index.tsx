@@ -4,13 +4,13 @@ import "../../layout/OutputBar.css";
 import { Grid } from "@mui/material";
 
 interface Props {
-  player?: React.ReactNode;
+  players?: React.ReactNode;
   roundResult?: React.ReactNode;
   children?: React.ReactNode;
 }
 
 const OutputBarPrevRounds: React.FC<Props> = ({
-  player,
+  players,
   roundResult,
   children,
 }) => {
@@ -23,7 +23,7 @@ const OutputBarPrevRounds: React.FC<Props> = ({
       alignItems="center"
     >
       <Grid item >
-        <p className="names">{player}</p>
+        <p className="names">{players}</p>
       </Grid>
 
       <Grid item >

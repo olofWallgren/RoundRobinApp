@@ -14,55 +14,18 @@ const PreviousRounds = () => (
     <Divider />
     <div className="gameContainer">
       <div className="rounds__scrollBox">
+        
+        {/* Detta vill vi mappa ut */}
         <div className="rounds__headingContainer">
-          <h1 className="rounds__heading rounds--noMargin">Round</h1>
+          <h1 className="rounds__heading rounds--noMargin">Round 1</h1>
         </div>
-        <div className="rounds__textContainer">
+        <div className="rounds__textContainer rounds--noMargin">
           <p className="rounds__text">W-L-D</p>
         </div>
+        <OutputBarPrevRounds players={"Tony Montana - Fjunte "} roundResult={"2-0-0"} />
 
-        <OutputBarPrevRounds
-          player={"tony martinsson"}
-          roundResult={"2 - 0 - 0"}
-        />
-        <OutputBarPrevRounds
-          player={"tony martinsson"}
-          roundResult={"2 - 0 - 0"}
-        />
-        <OutputBarPrevRounds
-          player={"tony martinsson"}
-          roundResult={"2 - 0 - 0"}
-        />
-        <OutputBarPrevRounds
-          player={"tony martinsson"}
-          roundResult={"2 - 0 - 0"}
-        />
-        <OutputBarPrevRounds
-          player={"tony martinsson"}
-          roundResult={"2 - 0 - 0"}
-        />
-        <OutputBarPrevRounds
-          player={"tony martinsson"}
-          roundResult={"2 - 0 - 0"}
-        />
-        <OutputBarPrevRounds
-          player={"tony martinsson"}
-          roundResult={"2 - 0 - 0"}
-        />
-        <OutputBarPrevRounds
-          player={"tony martinsson"}
-          roundResult={"2 - 0 - 0"}
-        />
-        <OutputBarPrevRounds
-          player={"tony martinsson"}
-          roundResult={"2 - 0 - 0"}
-        />
-        <OutputBarPrevRounds
-          player={"tony martinsson"}
-          roundResult={"2 - 0 - 0"}
-        />
+        {/* Stängnings-tagg för scrollBox nedanför, inte med i mappningen */}
       </div>
-
       <div className="rounds__linkContainer">
         <Link to="/" className="rounds__link">
           End Tournament
