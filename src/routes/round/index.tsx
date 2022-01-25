@@ -14,6 +14,7 @@ import BasicModal from "../../components/WLDmodal";
 import TransitionsModal from "../../components/WinnerModal";
 import { useState } from "react";
 import { useEffect } from "react";
+import Tournament from "../tournament";
 
 const Round = () => {
   const settingContext = TournamentStore();
@@ -69,6 +70,8 @@ const Round = () => {
     setDisable(!disable && true);
   };
 
+ // let matchId = settingContext.tournament.
+
 
   return (
     <>
@@ -94,7 +97,7 @@ const Round = () => {
           </div>
           <div className="playerContainer">
             <OutputBarRound
-              key={(round)}
+              key={Math.floor(Math.random() * round)}
               //tournamentPairings={settingContext.pairings}
               round={round}
               ableNextRound={ableNextRound}

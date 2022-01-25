@@ -102,7 +102,6 @@ const OutputBarRound: React.FC<Props> = ({
     if (pairingList.length <= 0) {
       setHasLoaded(false);
     } else {
-      console.log("more than o");
       setHasLoaded(true);
     }
   };
@@ -284,10 +283,10 @@ const OutputBarRound: React.FC<Props> = ({
           findPlayer(player2, scoreP2c8);
           break;
         case "still playing":
-          console.log("Please fill in your score");
           break;
         default:
-          console.log("THE END");
+          break;
+          
       }
       //resetField(`result.${index}.name`);
     });
@@ -331,7 +330,7 @@ const OutputBarRound: React.FC<Props> = ({
     //   }
     // });
   };
-  console.log(optionState);
+//  console.log(optionState);
 
   return (
     <div className="">
