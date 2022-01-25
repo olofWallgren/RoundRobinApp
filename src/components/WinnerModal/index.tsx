@@ -6,10 +6,7 @@ import Fade from '@mui/material/Fade';
 // import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { TournamentStore } from "../../Contexts/tournamentContext";
-import PlayersCard from '../NewTournamentCards/PlayersCard';
-
-
-
+// import PlayersCard from '../NewTournamentCards/PlayersCard';
 
 const style = {
   position: 'absolute' as 'absolute',
@@ -41,13 +38,8 @@ const TransitionsModal = () => {
 
   let winner = players.find(a => a.score === highestScore)?.name
 
-  console.log(winner, "won with", highestScore);
-
-  
   return (
-
       <div>
-
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
