@@ -22,6 +22,10 @@
 .navigation-bar__link {
   color: currentColor;
   text-decoration: none;
+  transition: all 0.3s;
+}
+.navigation-bar__link--notActive {
+  visibility: hidden;
 }
 
 .navigation-bar__link:hover {
