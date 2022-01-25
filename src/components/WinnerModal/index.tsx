@@ -5,18 +5,24 @@ import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 // import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import DialogContent from "@mui/material/DialogContent";
 import { TournamentStore } from "../../Contexts/tournamentContext";
 // import PlayersCard from '../NewTournamentCards/PlayersCard';
+import OutputbarScoreBoard from "../../components/OutputBarScoreBoard";
+//import { TournamentStore } from "../../Contexts/tournamentContext";
+import "../../components/WinnerModal/winnermodal.css"
 
 const style = {
   position: 'absolute' as 'absolute',
+  color: 'white',
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
   width: '90%',
-  bgcolor: 'background.paper',
+  bgcolor: 'rgba(125, 0, 127, .8)',
   border: '2px solid #000',
   boxShadow: 11,
+  borderRadius: '15px',
   p: 4,
 };
 
@@ -56,13 +62,43 @@ const TransitionsModal = () => {
       >
         <Fade in={open}>
           <Box sx={style}>
-            <Typography id="transition-modal-title" variant="h6" component="h2">
+          <div className="presentation">
+            <Typography variant="h6" component="h4">
               And the grand champion of {theTournamentName} is, drumroll...
             </Typography>
+            <br></br>
+          </div>
+            <DialogContent dividers>
             <Typography id="transition-modal-description" sx={{ mt: 2 }}>
               {winner} that won with {highestScore} points!
               Bravely fought. You may now wear the tallest wizards hat!
             </Typography>
+            </DialogContent>
+            <br></br>
+            <Typography>
+
+            <div className="scoreContainer">
+            <Typography className="scoreBoardTitle">
+              Scoreboard:
+            </Typography>
+       {/* Placerar den med högst poäng överst, om två är lika för mest poäng hamnar 
+       den med färre losses över, boten filtreras bort från scoreboardet */}
+       {players.sort((a, b) => (b.score) - (a.score)).sort((x, y) =>
+       x.matchHistory.loss - y.matchHistory.loss).sort((a, b) => 
+       b.matchHistory.win - a.matchHistory.win).filter((z) => 
+       z.name !== "**BYE**(Free win)").map((e) => (
+         <OutputbarScoreBoard 
+         key={e.id}
+         player= {e.name}
+         totalScore= {e.score} 
+         wins={e.matchHistory.win}
+         losses={e.matchHistory.loss}
+         draws={e.matchHistory.draw} />
+         
+         ))}
+      
+      </div>
+         </Typography>
           </Box>
         </Fade>
       </Modal>

@@ -44,7 +44,6 @@ const Tournament = () => {
     if (playerArray.length % 2) {
       setPlayerArray((prevState) => {
         const newPlayerArray = [...prevState, byePlayer];
-        console.log(byePlayer);
         return newPlayerArray;
       });
     } else {

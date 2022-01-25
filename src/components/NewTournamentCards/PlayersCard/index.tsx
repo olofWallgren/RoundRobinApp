@@ -43,7 +43,6 @@ const PlayersCard = (props: any) => {
   ///////// UTKOMMENTERAD FÖR TILLFÄLLET ///////////
   function saveToLocalStorage(key: string, value: any): void {
     localStorage.setItem(key, JSON.stringify(value));
-    console.log("cardLS", localStorage.getItem("players"));
   }
   
   ///// uppdaterar participants statet ////////////
