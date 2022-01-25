@@ -13,17 +13,23 @@ import { Inputs } from "../../types/tournamentInput";
 import SettingsModal from "../../components/SettingsModal";
 import MakeRoundRobinPairings from "../../Utilities/RoundMaker/roundMaker";
 import { playerItem } from "../../types/playerItem";
-import { savePairingsToDb } from "../../Utilities/SaveToDB/savePairingToDB";
 
 const Tournament = () => {
   ///////// CONTEXT //////////////////////
   const settingStore = TournamentStore();
 
-  ////////// togglar participants view/////////////////
-  const [showParticipantView, setParticipantView] = useState(true);
-  const toggleParticipantView = () => {
-    setParticipantView(showParticipantView ? false : true);
-    makePlayersEven();
+    ///////// state med players som hämtas och uppdateras från Participants card ///////////
+    const [playerArray, setPlayerArray] = useState<playerItem[]>([]);
+    const getParticipants = (data: any) => {
+      setPlayerArray([...data]);
+    };
+    
+    
+    ////////// togglar participants view/////////////////
+    const [showParticipantView, setParticipantView] = useState(true);
+    const toggleParticipantView = () => {
+      setParticipantView(showParticipantView ? false : true);
+      makePlayersEven();
   };
 
   /// Om det är ojämnt antal spelare så skapas en spelare "**BYE**" som sedan
@@ -31,13 +37,14 @@ const Tournament = () => {
   const makePlayersEven = () => {
     const byePlayer: any = {
       id: playerArray.length + 2,
-      name: "**BYE**(Free win)",
       score: 0,
+      name: "**BYE**(Free win)",
       matchHistory: { win: 0, loss: 0, draw: 0 },
     };
     if (playerArray.length % 2) {
       setPlayerArray((prevState) => {
         const newPlayerArray = [...prevState, byePlayer];
+        console.log(byePlayer);
         return newPlayerArray;
       });
     } else {
@@ -45,12 +52,6 @@ const Tournament = () => {
     }
   };
 
-  ///////// state med players som hämtas och uppdateras från Participants card ///////////
-  const [playerArray, setPlayerArray] = useState<playerItem[]>([]);
-  const getParticipants = (data: any) => {
-    setPlayerArray([...data]);
-    console.log("getParticipants");
-  };
 
   const {
     register,
