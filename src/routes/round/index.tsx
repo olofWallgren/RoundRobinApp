@@ -11,12 +11,16 @@ import { TournamentStore } from "../../Contexts/tournamentContext";
 import Timer from "../../components/Timer";
 import OutputBarRound from "../../components/OutputBarRound";
 import BasicModal from "../../components/WLDmodal";
+import TransitionsModal from "../../components/WinnerModal";
+import { useState } from "react";
 import { useEffect } from "react";
 
 const Round = () => {
   const settingContext = TournamentStore();
   /////// State för Rounds //////////////////
   const [round, setRound] = React.useState(0);
+  const [showWinnerModal, setShowWinnerModal] = useState(false) //// Hook för att visa vinnarmodal
+  const [disable, setDisable] = React.useState(true); //Använd denna hook för att göra knappen klickbar efter att resultaten är ifyllda
   /////////// Updaterar alla context-states vid en refresh //////////
   React.useEffect(() => {
     try {
@@ -29,34 +33,42 @@ const Round = () => {
       settingContext.setPlayerList(players);
     } catch (error) {}
 
+    ////// Ökar statet med +1 ////////////////
     try {
       let lsRound = JSON.parse(localStorage.getItem("round") || "");
       setRound(lsRound);
     } catch (error) {}
   }, []);
 
+  let amountOfplayers = settingContext.playerList.length;
+  
+  let nxtRoundButtonText = "Next Round";
+  if ((round + 2) === amountOfplayers) {
+    nxtRoundButtonText = "Final Score!"
+  }
   ////// Ökar statet med +1 och updaterar round-LS ////////////////
   ////////// titta över vad som händer när round == roundLength //////
   function incrementRound() {
     ableNextRound();
-    //const roundLength = playerArray.length;
-    const roundLength = settingContext.playerList.length;
-    if (round === roundLength) {
-      console.log("round >= roundLength");
-    } else {
+    if (((round + 2) === amountOfplayers)) {
+      showWinner()
+      } else {      
       setRound((prevState) => {
         let newRound = prevState + 1;
         localStorage.setItem("round", JSON.stringify(newRound));
         return newRound;
       });
     }
+  } 
+  function showWinner() {
+    setShowWinnerModal(true);
   }
+
   ////// Togglar disable på next round-knappen /////////
   const ableNextRound = () => {
     setDisable(!disable && true);
   };
 
-  const [disable, setDisable] = React.useState(true); //Använd denna hook för att göra knappen klickbar efter att resultaten är ifyllda
 
   return (
     <>
@@ -86,7 +98,11 @@ const Round = () => {
               round={round}
               ableNextRound={ableNextRound}
             />
-          </div>
+            <div>{showWinnerModal ? 
+            <TransitionsModal />
+             : ''}</div>
+
+             </div>
           <div className="linkWrapper">
             <Link to="/" className="linkStyle">
               End Tournament
@@ -98,7 +114,7 @@ const Round = () => {
               className="primaryBtn btnWidth"
               disabled={disable}
             >
-              Next Round
+              {nxtRoundButtonText}
             </button>
           </div>
         </div>

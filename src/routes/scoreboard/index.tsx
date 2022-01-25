@@ -19,7 +19,6 @@ const Scoreboard = () => {
 
   const settingContext = TournamentStore();
   const players = settingContext.playerList;
-  console.log(players);
 
 return (
   <div className="container">
