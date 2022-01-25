@@ -38,7 +38,7 @@ const Home = () => {
       <div className="fest">
         <div className="test">
           <div className="foxContainer">
-            <img className="fox" src={fatRobin} alt="maskot" />
+            <img className="fox" src={fatRobin} alt="A cartoonish fox with a magic hat on his head" />
           </div>
         </div>
       </div>
