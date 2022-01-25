@@ -1,6 +1,9 @@
 .headingWrapper {
   padding: 1rem 0 0 0;
 }
+.round__header {
+  font-size: 20px;
+}
 .textWrapper {
   display: flex;
   padding: 0;
@@ -60,6 +63,9 @@
 }
 
 @media screen and (max-width: 600px) {
+  .round__header {
+    font-size:16px;
+  }
   .linkWrapper {
     margin-top: 12px;
   }
@@ -68,6 +74,9 @@
   }
 }
 @media screen and (max-width: 375px) {
+  .round__header {
+    font-size: 14px;
+  }
   .textWrapper {
     font-size: 10px;
   }

@@ -27,7 +27,7 @@ return (
     <Divider />
     <div className="gameContainer">
       <div className="headingWrapper">
-        <h3 className="noMargin">Scoreboard</h3>
+        <h1 className="scoreboard__heading noMargin">Scoreboard</h1>
       </div>
       <Grid container direction="row" className="textContainer">
         <Grid item xs={6.5} md={6.7} xl={6.8}></Grid>

@@ -65,7 +65,7 @@ const Round = () => {
         <Divider />
         <div className="gameContainer">
           <div className="headingWrapper flexBetween">
-            <h3 className="zeroMargin">{`Round-${round + 1}`}</h3>
+            <h1 className="round__header zeroMargin">{`Round-${round + 1}`}</h1>
             <Timer hours={0} minutes={50} seconds={0} />
           </div>
           <div className="textWrapper">
