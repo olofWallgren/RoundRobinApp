@@ -1,0 +1,46 @@
+.timer__container {
+  display: flex;
+  align-items: center;
+}
+.timer__totalTime {
+  font-size: 16px;
+  margin-right: 0.8rem;
+}
+.timer__icons {
+  cursor: pointer;
+  color: #fa04f6;
+}
+.timer__playIcon {
+  margin-right: 0.8rem;
+}
+.timer__pauseIcon {
+  margin-right: 0.8rem;
+} 
+.timer--noMargin {
+  margin: 0;
+}
+
+@media only screen and (max-width: 600px) {
+  .timer__totalTime {
+      font-size: 14px;
+      margin-right: 0.4rem;
+  }
+  .timer__playIcon {
+    margin-right: 0.4rem;
+  }
+  .timer__pauseIcon {
+    margin-right: 0.4rem;
+  } 
+}
+@media only screen and (max-width: 320px) {
+  .timer__totalTime {
+      font-size: 12px;
+      margin-right: 0.2rem;
+  }
+  .timer__playIcon {
+    margin-right: 0.2rem;
+  }
+  .timer__pauseIcon {
+    margin-right: 0.2rem;
+  } 
+}

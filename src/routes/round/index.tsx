@@ -7,43 +7,68 @@ import "../round/round.css";
 import NavigationBar from "../../components/NavigationBar";
 import { Divider } from "@mui/material";
 import { Link } from "react-router-dom";
-import MakeRoundRobinPairings from "../../Utilities/RoundMaker/roundMaker";
 import { TournamentStore } from "../../Contexts/tournamentContext";
+import Timer from "../../components/Timer";
+import OutputBarRound from "../../components/OutputBarRound";
+import BasicModal from "../../components/WLDmodal";
+import TransitionsModal from "../../components/WinnerModal";
+import { useState } from "react";
+import { useEffect } from "react";
 
 const Round = () => {
   const settingContext = TournamentStore();
-
-  //// testar att skapa en ny array från players-context //////
-
-  const playerArray: any = [];
-
-  const getNameAndId = () => {
-    settingContext.tournament.players.forEach((e) => {
-      playerArray.push({ name: e.name, id: e.id });
-    });
-  };
-  getNameAndId();
-
   /////// State för Rounds //////////////////
   const [round, setRound] = React.useState(0);
+  const [showWinnerModal, setShowWinnerModal] = useState(false) //// Hook för att visa vinnarmodal
+  const [disable, setDisable] = React.useState(true); //Använd denna hook för att göra knappen klickbar efter att resultaten är ifyllda
+  /////////// Updaterar alla context-states vid en refresh //////////
+  React.useEffect(() => {
+    try {
+      let pairings = JSON.parse(localStorage.getItem("pairings") || "");
+      settingContext.setPairings(pairings);
+    } catch (error) {}
 
-  ////// Ökar statet med +1 ////////////////
+    try {
+      let players = JSON.parse(localStorage.getItem("players") || "");
+      settingContext.setPlayerList(players);
+    } catch (error) {}
+
+    ////// Ökar statet med +1 ////////////////
+    try {
+      let lsRound = JSON.parse(localStorage.getItem("round") || "");
+      setRound(lsRound);
+    } catch (error) {}
+  }, []);
+
+  let amountOfplayers = settingContext.playerList.length;
+  
+  let nxtRoundButtonText = "Next Round";
+  if ((round + 2) === amountOfplayers) {
+    nxtRoundButtonText = "Final Score!"
+  }
+  ////// Ökar statet med +1 och updaterar round-LS ////////////////
+  ////////// titta över vad som händer när round == roundLength //////
   function incrementRound() {
     ableNextRound();
-    const roundLength = playerArray.length;
-    if (round >= roundLength) {
-      setRound(0);
-    } else {
-      setRound(round + 1);
+    if (((round + 2) === amountOfplayers)) {
+      showWinner()
+      } else {      
+      setRound((prevState) => {
+        let newRound = prevState + 1;
+        localStorage.setItem("round", JSON.stringify(newRound));
+        return newRound;
+      });
     }
-    console.log("round", round);
+  } 
+  function showWinner() {
+    setShowWinnerModal(true);
   }
+
   ////// Togglar disable på next round-knappen /////////
   const ableNextRound = () => {
     setDisable(!disable && true);
   };
 
-  const [disable, setDisable] = React.useState(true); //Använd denna hook för att göra knappen klickbar efter att resultaten är ifyllda
 
   return (
     <>
@@ -51,45 +76,47 @@ const Round = () => {
         <NavigationBar />
         <Divider />
         <div className="gameContainer">
-          <div className="headingWrapper">
+          <div className="headingWrapper flexBetween">
             <h3 className="zeroMargin">{`Round-${round + 1}`}</h3>
+            <Timer hours={0} minutes={50} seconds={0} />
           </div>
           <div className="textWrapper">
-            <p className="alignBottom secondaryColor">Pairings:</p>
-            <div className="flexColumn">
-              <p className="marginBottom">Result:</p>
-              <p className="wldStyle">W - L - D</p>
+            <div className="alignBottom marginBottom">
+              <p className="zeroMargin secondaryColor">Pairings:</p>
+            </div>
+            <div className="questionMark">
+              <BasicModal />
+            </div>
+            <div className="scoringContainer alignBottom marginBottom">
+              <p className="zeroMargin">Result:</p>
+              <p className="zeroMargin secondaryColor">W-L-D</p>
             </div>
           </div>
           <div className="playerContainer">
-            <MakeRoundRobinPairings
-              players={playerArray}
+            <OutputBarRound
+              //tournamentPairings={settingContext.pairings}
               round={round}
               ableNextRound={ableNextRound}
             />
-          </div>
-          <div></div>
+            <div>{showWinnerModal ? 
+            <TransitionsModal />
+             : ''}</div>
 
-          <div className="flexBetween">
-            <div>
-              <p className="paraStyle">End Tournament</p>
-            </div>
-            <div>
-              <p className="paraStyle">Pause Round</p>
-            </div>
+             </div>
+          <div className="linkWrapper">
+            <Link to="/" className="linkStyle">
+              End Tournament
+            </Link>
           </div>
-        </div>
-        <div className="btnContainer">
-          <Link to="/create-tournament" className="secondaryBtn btnWidth">
-            Back
-          </Link>
-          <button
-            onClick={incrementRound}
-            className="primaryBtn btnWidth"
-            disabled={disable}
-          >
-            Next Round
-          </button>
+          <div className="btnContainer">
+            <button
+              onClick={incrementRound}
+              className="primaryBtn btnWidth"
+              disabled={disable}
+            >
+              {nxtRoundButtonText}
+            </button>
+          </div>
         </div>
       </div>
     </>

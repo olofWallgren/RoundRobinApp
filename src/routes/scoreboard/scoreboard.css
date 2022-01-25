@@ -5,28 +5,20 @@
   color: #fa04f6;
   margin: 0;
 }
-.paraContainer {
+.linkContainer {
   display: flex;
   margin-top: 1rem;
   margin-bottom: 0;
 }
-.paraStyle {
+.link {
   color: #fa04f6;
   cursor: pointer;
-}
-.buttonContainer {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 1.2rem;
-  width: 100%;
-}
-.buttonWidth {
-  width: 48%;
+  text-decoration: none;
 }
 .scoreContainer {
   overflow-y: auto;
   overflow-x: hidden;
-  height: 42vh;
+  height: 48vh;
 }
 .wld {
   text-align: end;
@@ -43,11 +35,8 @@
   .ptsStyle {
     padding-left: 0;
   }
-  .buttonContainer {
-    margin-top: 1rem;
-  }
-  .buttonWidth {
-    width: 49%;
+  .scoreContainer {
+    height: 55vh;
   }
 }
 @media screen and (max-width: 375px) {
@@ -57,8 +46,5 @@
   }
   .ptsStyle {
     font-size: 10px;
-  }
-  .buttonContainer {
-    margin-top: 0.8rem;
   }
 }

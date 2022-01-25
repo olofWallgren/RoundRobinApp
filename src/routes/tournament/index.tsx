@@ -11,6 +11,8 @@ import ParticipantsCard from "../../components/NewTournamentCards/PlayersCard";
 import { TournamentStore } from "../../Contexts/tournamentContext";
 import { Inputs } from "../../types/tournamentInput";
 import SettingsModal from "../../components/SettingsModal";
+import MakeRoundRobinPairings from "../../Utilities/RoundMaker/roundMaker";
+import { playerItem } from "../../types/playerItem";
 
 const Tournament = () => {
   ///////// CONTEXT //////////////////////
@@ -32,7 +34,6 @@ const Tournament = () => {
       score: 0,
       matchHistory: { win: 0, loss: 0, draw: 0 },
     };
-
     if (playerArray.length % 2) {
       setPlayerArray((prevState) => {
         const newPlayerArray = [...prevState, byePlayer];
@@ -40,12 +41,11 @@ const Tournament = () => {
       });
     } else {
       return;
-      // playerArray.push(byePlayer);
     }
   };
 
-  ///////// state med participants som hämtas och uppdateras från Participants card ///////////
-  const [playerArray, setPlayerArray] = useState<string[]>([]);
+  ///////// state med players som hämtas och uppdateras från Participants card ///////////
+  const [playerArray, setPlayerArray] = useState<playerItem[]>([]);
   const getParticipants = (data: any) => {
     setPlayerArray([...data]);
     console.log("getParticipants");
@@ -66,6 +66,10 @@ const Tournament = () => {
       games: data.games,
       scoring: { win: data.win, loss: data.loss, draw: data.draw },
     };
+    let pairings = MakeRoundRobinPairings(playerArray);
+    //savePairingsToDb(pairings);
+    localStorage.setItem("pairings", JSON.stringify(pairings));
+    settingStore.setPairings(pairings);
     settingStore.setPlayerList(playerArray);
     settingStore.setTournament(newTournament);
   };

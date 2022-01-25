@@ -6,8 +6,14 @@ import "../../layout/primaryBtn.css";
 import "../../layout/secondaryBtn.css";
 import { Link } from "react-router-dom";
 import { CSSProperties } from "react";
+import fatRobin from "../../Assets/images/magicFatRobin.png";
 
 const Home = () => {
+  localStorage.clear();
+  // useEffect(() => {
+  //   localStorage.setItem("players", JSON.stringify(""));
+  //   localStorage.setItem("pairings", JSON.stringify(""));
+  // }, []);
   ///// sätter en key och value i ls annars crashar appen när man ska hämta ls ifrån participantCard och ls är tomt //////
 
   ////// UTKOMMENTERAD FÖR TILLFÄLLET ///////////////
@@ -29,17 +35,17 @@ const Home = () => {
 
   return (
     <div style={homeContainer}>
-      <div className="fatFox"></div>
+      <div className="fest">
+        <div className="test">
+          <div className="foxContainer">
+            <img className="fox" src={fatRobin} alt="maskot" />
+          </div>
+        </div>
+      </div>
+
       <div style={btnContainer}>
-        <Link
-          className="primaryBtn"
-          style={{ marginBottom: "1rem" }}
-          to="/create-tournament"
-        >
+        <Link className="primaryBtn" to="/create-tournament">
           Create Tournament
-        </Link>
-        <Link className="secondaryBtn" to="/">
-          Continue Old
         </Link>
       </div>
     </div>
