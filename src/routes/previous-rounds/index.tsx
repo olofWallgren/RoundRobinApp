@@ -7,32 +7,88 @@ import NavigationBar from "../../components/NavigationBar";
 import { Divider } from "@mui/material";
 import { Link } from "react-router-dom";
 import OutputBarPrevRounds from "../../components/OutputBarPrevRounds";
+import { TournamentArray } from "../../types/tournamentArray";
+import { useEffect } from "react";
+const PreviousRounds = () => {
+  // const [playerList, setPlayerList] = React.useState<TournamentArray>([]);
+  const [pairingList, setPairingList] = React.useState<TournamentArray>([]);
+  const [hasLoaded, setHasLoaded] = React.useState(false);
+  const checkLoading = () => {
+    if (pairingList.length <= 0) {
+      setHasLoaded(false);
+    } else {
+      setHasLoaded(true);
+    }
+  };
 
-const PreviousRounds = () => (
-  <div className="container">
-    <NavigationBar />
-    <Divider />
-    <div className="gameContainer">
-      <div className="rounds__scrollBox">
-        
-        {/* Detta vill vi mappa ut */}
-        <div className="rounds__headingContainer">
-          <h1 className="rounds__heading rounds--noMargin">Round 1</h1>
-        </div>
-        <div className="rounds__textContainer rounds--noMargin">
-          <p className="rounds__text">W-L-D</p>
-        </div>
-        <OutputBarPrevRounds players={"Tony Montana - Fjunte "} roundResult={"2-0-0"} />
+  useEffect(() => {
+    // try {
+    //   let lsPlayers = JSON.parse(localStorage.getItem("players") || "");
 
-        {/* Stängnings-tagg för scrollBox nedanför, inte med i mappningen */}
-      </div>
-      <div className="rounds__linkContainer">
-        <Link to="/" className="rounds__link">
-          End Tournament
-        </Link>
+    //   setPlayerList(lsPlayers);
+    // } catch (error) {}
+    try {
+      let lsPairings = JSON.parse(localStorage.getItem("pairings") || "");
+
+      setPairingList(lsPairings);
+    } catch (error) {}
+  }, []);
+  useEffect(() => {
+    checkLoading();
+  }, [pairingList]);
+
+  return (
+    <div className="container">
+      <NavigationBar />
+      <Divider />
+      <div className="gameContainer">
+        <div className="rounds__scrollBox">
+          {hasLoaded &&
+            pairingList.map((e, index) => {
+              return (
+                <div>
+                  <div className="rounds__headingContainer">
+                    <h1 className="rounds__heading rounds--noMargin">{`Round -${
+                      index + 1
+                    }`}</h1>
+                  </div>
+                  <div className="rounds__textContainer rounds--noMargin">
+                    <p className="rounds__text">W-L-D</p>
+                  </div>
+                  {e.map((round: any) => {
+                    return (
+                      <OutputBarPrevRounds
+                        players={`${round.player1.name} vs ${round.player2.name} `}
+                        roundResult={`${round.matchResult}`}
+                      />
+                    );
+                  })}
+                </div>
+              );
+            })}
+          {/* Detta vill vi mappa ut */}
+
+          {/* <div className="rounds__headingContainer">
+            <h1 className="rounds__heading rounds--noMargin">Round 1</h1>
+          </div>
+          <div className="rounds__textContainer rounds--noMargin">
+            <p className="rounds__text">W-L-D</p>
+          </div>
+          <OutputBarPrevRounds
+            players={"Tony Montana - Fjunte "}
+            roundResult={"2-0-0"}
+          /> */}
+
+          {/* Stängnings-tagg för scrollBox nedanför, inte med i mappningen */}
+        </div>
+        <div className="rounds__linkContainer">
+          <Link to="/" className="rounds__link">
+            End Tournament
+          </Link>
+        </div>
       </div>
     </div>
-  </div>
-);
+  );
+};
 
 export default PreviousRounds;
