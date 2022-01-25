@@ -13,7 +13,6 @@ import { Inputs } from "../../types/tournamentInput";
 import SettingsModal from "../../components/SettingsModal";
 import MakeRoundRobinPairings from "../../Utilities/RoundMaker/roundMaker";
 import { playerItem } from "../../types/playerItem";
-import { savePairingsToDb } from "../../Utilities/SaveToDB/savePairingToDB";
 
 const Tournament = () => {
   ///////// CONTEXT //////////////////////

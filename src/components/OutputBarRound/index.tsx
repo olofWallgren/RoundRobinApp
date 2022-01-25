@@ -58,6 +58,7 @@ const OutputBarRound: React.FC<Props> = ({
   const settingContext = TournamentStore();
   const [pairingList, setPairingList] = useState<TournamentArray>([]);
   const [hasLoaded, setHasLoaded] = useState(false);
+  const [optionState, setOptionState] = useState<any[]>([]);
   const [testRound, setTestRound] = useState(0);
 
   //// Hämtar Pairings från Db //////
@@ -79,13 +80,6 @@ const OutputBarRound: React.FC<Props> = ({
     //   setPairingList(filteredData);
     // };
 
-    /////////// UPDATERAR CONTEXT-STATES FRÅN LS //////////////////
-
-    // try {
-    //   let lsRound = JSON.parse(localStorage.getItem("round") || "");
-
-    //   setTestRound(lsRound);
-    // } catch (error) {}
     try {
       let lsPairings = JSON.parse(localStorage.getItem("pairings") || "");
 
@@ -98,6 +92,12 @@ const OutputBarRound: React.FC<Props> = ({
     checkLoading();
   }, [pairingList]);
 
+  ////// Kollar så att inget input är still playin ////////
+  useEffect(() => {
+    checkStillPlayin();
+  }, [optionState]);
+
+  //////// Kollar så att pairingList har hunnit uppdateras ////////
   const checkLoading = () => {
     if (pairingList.length <= 0) {
       setHasLoaded(false);
@@ -106,6 +106,16 @@ const OutputBarRound: React.FC<Props> = ({
       setHasLoaded(true);
     }
   };
+  ///////// Kollar alla inputs efter still-playin och disablar submitt-knappen ////////
+  function checkStillPlayin() {
+    optionState.forEach((e) => {
+      if (e.targetValue === "Still playing" || optionState.length === 1) {
+        setDisableBtn(true);
+      } else {
+        setDisableBtn(false);
+      }
+    });
+  }
 
   const Total = ({ control }: { control: Control<formValues> }) => {
     const formvalues = useWatch({
@@ -117,7 +127,7 @@ const OutputBarRound: React.FC<Props> = ({
     register,
     control,
     handleSubmit,
-    resetField,
+    getValues,
     formState: { errors },
   } = useForm<formValues>();
   const { fields } = useFieldArray({
@@ -126,13 +136,9 @@ const OutputBarRound: React.FC<Props> = ({
   });
 
   function findPlayer(player: string, score: Score) {
-    // console.log("playerlist context", settingContext.playerList);
     const newPlayer: any = settingContext.playerList.find((p) => {
       return p.name === player;
     });
-    console.log("find player player", newPlayer);
-    // Lägger till poäng, uppdaterar context med nya poäng
-    // Inte säkra på varför context uppdateras dock
     newPlayer.score += score.score;
     newPlayer.matchHistory.win += score.wins;
     newPlayer.matchHistory.loss += score.losses;
@@ -140,16 +146,11 @@ const OutputBarRound: React.FC<Props> = ({
   }
 
   const onSubmit: SubmitHandler<formValues> = (data) => {
-    //console.log("resutat från submitt", data.result);
-    // console.log("db pairing", pairingList[round][0].player1.name);
-    // console.log("db pairing", pairingList[round][0].player2.name);
-    // console.log("context pairing", settingContext.pairings[round][0]);
-
     data.result.forEach((e, index) => {
-      ////////// Utkommenterad pga den kollar i DB-pairingList /////////////
       const player1 = settingContext.pairings[round][index].player1.name;
       const player2 = settingContext.pairings[round][index].player2.name;
 
+      ////////// Utkommenterad pga den kollar i context-pairingList /////////////
       // const player1 = pairingList[round][index].player1.name;
       // const player2 = pairingList[round][index].player2.name;
 
@@ -282,6 +283,9 @@ const OutputBarRound: React.FC<Props> = ({
           findPlayer(player1, scoreP1c8);
           findPlayer(player2, scoreP2c8);
           break;
+        case "still playing":
+          console.log("Please fill in your score");
+          break;
         default:
           console.log("THE END");
       }
@@ -290,28 +294,42 @@ const OutputBarRound: React.FC<Props> = ({
 
     localStorage.setItem("players", JSON.stringify(settingContext.playerList));
     ableNextRound();
+    setOptionState([]);
+    setDisableBtn(true);
   };
   // optionsDataList[0].value sätter statet till "Still playing"
-  const [optionState, setOptionState] = useState(optionsDataList[0].value);
 
-  const handleUserInput = (e: { target: { value: any } }) => {
+  const handleUserInput = (id: string) => (e: { target: { value: any } }) => {
     // Kollar användarens ändringar av options och sätter state utifrån det
-    const selectedResult = e.target.value;
-    setOptionState(selectedResult);
+    //const Newid:string = id
+    const selectedResult = {
+      targetValue: e.target.value,
+      newId: id,
+    };
+
+    setOptionState((prevState) => {
+      let updatedState: any = [
+        ...prevState.filter((e) => e.newId !== id),
+        selectedResult,
+      ];
+      return updatedState;
+    });
 
     // Här vill vi loopa över listan med options
     // för att kolla att alla options inte är still playing och sedan sätta submit-knappen till true
     // fungerar dock inte nu
-    optionsDataList.forEach((option) => {
-      for (const option of optionsDataList) {
-        if (
-          // selectedResult !== "Still playing" &&
-          option.value !== "Still playing"
-        ) {
-          setDisableBtn(true);
-        }
-      }
-    });
+
+    // optionsDataList.forEach((option) => {
+    //   for (const option of optionsDataList) {
+    //     if (
+    //       // selectedResult !== "Still playing" &&
+    //       option.value !== "Still playing"
+    //     ) {
+    //       setDisableBtn(true);
+    //       console.log("sätt disabletill sant");
+    //     }
+    //   }
+    // });
   };
   console.log(optionState);
 
@@ -337,7 +355,7 @@ const OutputBarRound: React.FC<Props> = ({
                   key={`${e.player1.name}-${index}`}
                   className="select"
                   {...register(`result.${index}.name` as const)}
-                  // onChange={handleUserInput}
+                  onChange={handleUserInput(e.player1.name)}
                 >
                   {optionsDataList.map((option) => (
                     <option key={option.value} value={option.value}>
@@ -353,7 +371,7 @@ const OutputBarRound: React.FC<Props> = ({
             type="submit"
             value="Submit result"
             className="primaryBtn primaryBtn--small inputButton"
-            // disabled={disableBtn}
+            disabled={disableBtn}
           />
         </div>
       </form>
