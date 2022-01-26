@@ -113,7 +113,9 @@ const OutputBarRound: React.FC<Props> = ({
       }
     });
   }
-
+  console.log("pairinglist", pairingList);
+  console.log("constext playerLIst", settingContext.playerList);
+  console.log("constext pairinglist", settingContext.pairings);
   const Total = ({ control }: { control: Control<formValues> }) => {
     const formvalues = useWatch({
       name: "result",
@@ -124,6 +126,7 @@ const OutputBarRound: React.FC<Props> = ({
     register,
     control,
     handleSubmit,
+    resetField,
     getValues,
     formState: { errors },
   } = useForm<formValues>();
@@ -286,7 +289,7 @@ const OutputBarRound: React.FC<Props> = ({
         default:
           console.log("THE END");
       }
-      //resetField(`result.${index}.name`);
+      resetField(`result.${index}.name`);
     });
 
     localStorage.setItem("players", JSON.stringify(settingContext.playerList));
