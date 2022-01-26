@@ -1,0 +1,14 @@
+.scoreContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.presentation {
+  text-align: center;
+}
+
+.scoreBoardTitle {
+  margin-bottom: 1rem;
+}

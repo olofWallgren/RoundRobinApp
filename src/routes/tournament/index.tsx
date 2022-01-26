@@ -34,8 +34,8 @@ const Tournament = () => {
   const makePlayersEven = () => {
     const byePlayer: any = {
       id: playerArray.length + 2,
-      name: "**BYE**(Free win)",
       score: 0,
+      name: "**BYE**(Free win)",
       matchHistory: { win: 0, loss: 0, draw: 0 },
     };
     if (playerArray.length % 2) {

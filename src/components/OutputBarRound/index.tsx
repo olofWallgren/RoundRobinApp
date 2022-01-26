@@ -281,10 +281,9 @@ const OutputBarRound: React.FC<Props> = ({
           findPlayer(player2, scoreP2c8);
           break;
         case "still playing":
-          console.log("Please fill in your score");
           break;
         default:
-          console.log("THE END");
+          break;
       }
       resetField(`result.${index}.name`);
     });
@@ -312,22 +311,6 @@ const OutputBarRound: React.FC<Props> = ({
       ];
       return updatedState;
     });
-
-    // Här vill vi loopa över listan med options
-    // för att kolla att alla options inte är still playing och sedan sätta submit-knappen till true
-    // fungerar dock inte nu
-
-    // optionsDataList.forEach((option) => {
-    //   for (const option of optionsDataList) {
-    //     if (
-    //       // selectedResult !== "Still playing" &&
-    //       option.value !== "Still playing"
-    //     ) {
-    //       setDisableBtn(true);
-    //       console.log("sätt disabletill sant");
-    //     }
-    //   }
-    // });
   };
 
   return (
@@ -336,6 +319,7 @@ const OutputBarRound: React.FC<Props> = ({
         {hasLoaded &&
           settingContext.pairings[round].map((e: any, index: number) => (
             <Grid
+              key={e.player1.name}
               container
               className="outputBarContainer"
               direction="row"
