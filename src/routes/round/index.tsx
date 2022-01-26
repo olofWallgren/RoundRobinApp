@@ -105,7 +105,6 @@ const Round = () => {
             <div>{showWinnerModal ? 
             <TransitionsModal />
              : ''}</div>
-
              </div>
           <div className="linkWrapper">
             <Link to="/" className="linkStyle">

@@ -6,6 +6,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import "./playersCard.css";
 import "../../../layout/primaryBtn.css";
 import { playerItem } from "../../../types/playerItem";
+import DescriptionAlerts from "../../NameModal";
 
 const PlayersCard = (props: any) => {
   const { getParticipants } = props;
@@ -19,6 +20,8 @@ const PlayersCard = (props: any) => {
     resetField,
     formState: { errors },
   } = useForm<Inputs>();
+
+  const [showNameInUse, setShowNameInUse] = useState(false) // Hook för att kolla om ett namn används
 
   //// en player array för att mappa ut alla players som skapas ///////
   const [players, setPlayers] = useState<playerItem[]>([]);
@@ -86,9 +89,18 @@ const PlayersCard = (props: any) => {
   }
   };
 
+ 
+  ////// Kollar om namnet är upptaget, skickar en error-modal om
+  ////// namnet redan finns hos en spelare
   const nameAlreadyInUse = () => {
+    setShowNameInUse(true);
+    // wait 3 sek setShowNameInUse(false)
+  }
 
-    alert("name is in use")
+  ////// Sätter tillbaka setshowname till false så att man
+  ////// kan köra nameAlreadyInUse igen
+  function resetNameChecker() {
+    setShowNameInUse(false);
   }
   
   ///// deletar en spelare från particisipant statet /////////
@@ -120,6 +132,10 @@ const PlayersCard = (props: any) => {
             type="submit"
           />
         </form>
+        <div>{showNameInUse ? 
+            <DescriptionAlerts 
+              resetNameChecker={resetNameChecker}/>
+             : ''}</div>
 
         {/* Error Modal */}
         <div className="errorContainer">
