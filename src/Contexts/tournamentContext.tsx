@@ -31,8 +31,6 @@ type ContextTournamentSettings = {
   setPairings: any;
   round: number;
   setRound: any;
-  displayNavigation: boolean;
-  setDisplayNavigation: any;
 };
 
 const TournamentContext = createContext<ContextTournamentSettings>(undefined!);
@@ -42,7 +40,6 @@ export const TournamentProvider: FunctionComponent = ({ children }) => {
   const [playerList, setPlayerList] = useState<playerItem[]>([]);
   const [pairings, setPairings] = useState<TournamentArray>([]);
   const [round, setRound] = useState(0);
-  const [displayNavigation, setDisplayNavigation] = useState(true);
 
   //   function addSettings(hour:string,min:string,sec:string,games:string,win:string,loss:string,draw:string){
   //     let newTournamentSettings = {
@@ -71,8 +68,6 @@ export const TournamentProvider: FunctionComponent = ({ children }) => {
         setPairings,
         round,
         setRound,
-        setDisplayNavigation,
-        displayNavigation,
       }}
     >
       {children}
