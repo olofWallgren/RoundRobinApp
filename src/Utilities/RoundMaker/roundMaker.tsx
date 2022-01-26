@@ -30,6 +30,7 @@ function MakeRoundRobinPairings(props: playerItem[]) {
         player2: players[secondHalf[i]],
         matchId: idMatchFormater,
         matchResult: "",
+        resultAdded: false,
       });
     }
 
