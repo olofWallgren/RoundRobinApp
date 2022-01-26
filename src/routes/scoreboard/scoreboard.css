@@ -1,6 +1,9 @@
 .heading-Wrapper {
   padding: 0.8rem 0 0 0;
 }
+.scoreboard__header {
+  font-size: 20px;
+}
 .textContainer {
   color: #fa04f6;
   margin: 0;
@@ -32,6 +35,9 @@
 }
 
 @media screen and (max-width: 600px) {
+  .scoreboard__header {
+    font-size: 16px;
+  }
   .ptsStyle {
     padding-left: 0;
   }
@@ -42,6 +48,9 @@
 @media screen and (max-width: 376px) {
   .heading-Wrapper {
     padding: 0.2rem 0 0.3rem 0;
+  }
+  .scoreboard__header {
+    font-size: 14px;
   }
   .wld {
     padding-right: 0;
