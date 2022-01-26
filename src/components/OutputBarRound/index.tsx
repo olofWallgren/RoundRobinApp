@@ -99,7 +99,6 @@ const OutputBarRound: React.FC<Props> = ({
     if (pairingList.length <= 0) {
       setHasLoaded(false);
     } else {
-      console.log("more than o");
       setHasLoaded(true);
     }
   };
@@ -141,6 +140,15 @@ const OutputBarRound: React.FC<Props> = ({
     newPlayer.matchHistory.loss += score.losses;
     newPlayer.matchHistory.draw += score.draw;
   }
+  const zeroDropDownOptions: SubmitHandler<formValues> = () => {
+    // let element = optionsDataList.map((option) => (option.value))
+    console.log(optionsDataList[0].value);
+    return 
+    
+ 
+    
+  }
+
 
   const onSubmit: SubmitHandler<formValues> = (data) => {
     data.result.forEach((e, index) => {
@@ -281,12 +289,13 @@ const OutputBarRound: React.FC<Props> = ({
           findPlayer(player2, scoreP2c8);
           break;
         case "still playing":
-          console.log("Please fill in your score");
           break;
         default:
-          console.log("THE END");
+          break;
+          
       }
-      //resetField(`result.${index}.name`);
+      // resetField(`result.${index}.name`);
+     // zeroDropDownOptions();
     });
 
     localStorage.setItem("players", JSON.stringify(settingContext.playerList));
@@ -313,6 +322,7 @@ const OutputBarRound: React.FC<Props> = ({
       return updatedState;
     });
 
+
     // Här vill vi loopa över listan med options
     // för att kolla att alla options inte är still playing och sedan sätta submit-knappen till true
     // fungerar dock inte nu
@@ -336,6 +346,7 @@ const OutputBarRound: React.FC<Props> = ({
         {hasLoaded &&
           settingContext.pairings[round].map((e: any, index: number) => (
             <Grid
+              key={e.player1.name}
               container
               className="outputBarContainer"
               direction="row"

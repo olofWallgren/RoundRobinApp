@@ -13,7 +13,6 @@ import OutputBarRound from "../../components/OutputBarRound";
 import BasicModal from "../../components/WLDmodal";
 import TransitionsModal from "../../components/WinnerModal";
 import { useState } from "react";
-import { useEffect } from "react";
 import NavigationBarHidden from "../../components/NavigationBarHidden";
 
 const Round = () => {
@@ -48,7 +47,7 @@ const Round = () => {
     nxtRoundButtonText = "Final Score!";
   }
   ////// Ökar statet med +1 och updaterar round-LS ////////////////
-  ////////// titta över vad som händer när round == roundLength //////
+
   function incrementRound() {
     ableNextRound();
     if (round + 2 === amountOfplayers) {
@@ -95,6 +94,7 @@ const Round = () => {
           </div>
           <div className="playerContainer">
             <OutputBarRound
+              key={Math.floor(Math.random() * round)}
               //tournamentPairings={settingContext.pairings}
               round={round}
               ableNextRound={ableNextRound}
