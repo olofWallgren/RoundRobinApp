@@ -7,4 +7,4 @@ npm install - to install all dependencies
 
 npm start - To run the app, simple as that!
 
-Made by: (Olof Wallgren)[OlofWallgren], (Tony Martinsson)[TonyMartinsson] and Timothy Gramnaes[TimothyGramnaes]
+Made by: [Olof Wallgren](https://github.com/olofWallgren), [Tony Martinsson](https://github.com/TonyMartinsson) and [Timothy Gramnaes](https://github.com/timothygramnaes)
