@@ -132,21 +132,36 @@ const OutputBarRound: React.FC<Props> = ({
     control,
   });
 
-  function findPlayer(player: string, score: Score) {
+  function findPlayer(player: string, score: Score, scoreAdded: boolean) {
     const newPlayer: any = settingContext.playerList.find((p) => {
       return p.name === player;
     });
-    newPlayer.score += score.score;
-    newPlayer.matchHistory.win += score.wins;
-    newPlayer.matchHistory.loss += score.losses;
-    newPlayer.matchHistory.draw += score.draw;
+
+    if (scoreAdded) {
+      newPlayer.score += 0;
+      newPlayer.matchHistory.win += 0;
+      newPlayer.matchHistory.loss += 0;
+      newPlayer.matchHistory.draw += 0;
+    } else {
+      newPlayer.score += score.score;
+      newPlayer.matchHistory.win += score.wins;
+      newPlayer.matchHistory.loss += score.losses;
+      newPlayer.matchHistory.draw += score.draw;
+    }
   }
 
   const onSubmit: SubmitHandler<formValues> = (data) => {
     data.result.forEach((e, index) => {
+      let scoreAdded: boolean = pairingList[round][index].resultAdded
+        ? true
+        : false;
+
       const player1 = settingContext.pairings[round][index].player1.name;
       const player2 = settingContext.pairings[round][index].player2.name;
-      settingContext.pairings[round][index].matchResult = e.name;
+      /// Ändra så att den tittar i pairingList ist för context.pairings ///////
+      pairingList[round][index].matchResult = e.name;
+      pairingList[round][index].resultAdded = true;
+
       ////////// Utkommenterad pga den kollar i context-pairingList /////////////
       // const player1 = pairingList[round][index].player1.name;
       // const player2 = pairingList[round][index].player2.name;
@@ -165,8 +180,8 @@ const OutputBarRound: React.FC<Props> = ({
             losses: 2,
             draw: 0,
           };
-          findPlayer(player1, scoreP1c1);
-          findPlayer(player2, scoreP2c1);
+          findPlayer(player1, scoreP1c1, scoreAdded);
+          findPlayer(player2, scoreP2c1, scoreAdded);
           break;
         case "2 - 1 - 0":
           let scoreP1c2 = {
@@ -181,8 +196,8 @@ const OutputBarRound: React.FC<Props> = ({
             losses: 2,
             draw: 0,
           };
-          findPlayer(player1, scoreP1c2);
-          findPlayer(player2, scoreP2c2);
+          findPlayer(player1, scoreP1c2, scoreAdded);
+          findPlayer(player2, scoreP2c2, scoreAdded);
           break;
         case "1 - 0 - 1":
           let scoreP1c3 = {
@@ -197,8 +212,8 @@ const OutputBarRound: React.FC<Props> = ({
             losses: 1,
             draw: 1,
           };
-          findPlayer(player1, scoreP1c3);
-          findPlayer(player2, scoreP2c3);
+          findPlayer(player1, scoreP1c3, scoreAdded);
+          findPlayer(player2, scoreP2c3, scoreAdded);
           break;
         case "1 - 1 - 1":
           let scoreP1c4 = {
@@ -213,8 +228,8 @@ const OutputBarRound: React.FC<Props> = ({
             losses: 1,
             draw: 1,
           };
-          findPlayer(player1, scoreP1c4);
-          findPlayer(player2, scoreP2c4);
+          findPlayer(player1, scoreP1c4, scoreAdded);
+          findPlayer(player2, scoreP2c4, scoreAdded);
           break;
         case "0 - 0 - 1":
           let scoreP1c5 = {
@@ -229,8 +244,8 @@ const OutputBarRound: React.FC<Props> = ({
             losses: 0,
             draw: 1,
           };
-          findPlayer(player1, scoreP1c5);
-          findPlayer(player2, scoreP2c5);
+          findPlayer(player1, scoreP1c5, scoreAdded);
+          findPlayer(player2, scoreP2c5, scoreAdded);
           break;
         case "0 - 2 - 0":
           let scoreP1c6 = {
@@ -245,8 +260,8 @@ const OutputBarRound: React.FC<Props> = ({
             losses: 0,
             draw: 0,
           };
-          findPlayer(player1, scoreP1c6);
-          findPlayer(player2, scoreP2c6);
+          findPlayer(player1, scoreP1c6, scoreAdded);
+          findPlayer(player2, scoreP2c6, scoreAdded);
           break;
         case "1 - 2 - 0":
           let scoreP1c7 = {
@@ -261,8 +276,8 @@ const OutputBarRound: React.FC<Props> = ({
             losses: 1,
             draw: 0,
           };
-          findPlayer(player1, scoreP1c7);
-          findPlayer(player2, scoreP2c7);
+          findPlayer(player1, scoreP1c7, scoreAdded);
+          findPlayer(player2, scoreP2c7, scoreAdded);
           break;
         case "0 - 1 - 1":
           let scoreP1c8 = {
@@ -277,8 +292,8 @@ const OutputBarRound: React.FC<Props> = ({
             losses: 0,
             draw: 1,
           };
-          findPlayer(player1, scoreP1c8);
-          findPlayer(player2, scoreP2c8);
+          findPlayer(player1, scoreP1c8, scoreAdded);
+          findPlayer(player2, scoreP2c8, scoreAdded);
           break;
         case "still playing":
           break;
@@ -289,12 +304,12 @@ const OutputBarRound: React.FC<Props> = ({
     });
 
     localStorage.setItem("players", JSON.stringify(settingContext.playerList));
-    localStorage.setItem("pairings", JSON.stringify(settingContext.pairings));
+    //// Ändrade i refresh_submitt_bugg att den sparar pairingList ist för constext.pairinglist ///////
+    localStorage.setItem("pairings", JSON.stringify(pairingList));
     ableNextRound();
     setOptionState([]);
     setDisableBtn(true);
   };
-  // optionsDataList[0].value sätter statet till "Still playing"
 
   const handleUserInput = (id: string) => (e: { target: { value: any } }) => {
     // Kollar användarens ändringar av options och sätter state utifrån det
