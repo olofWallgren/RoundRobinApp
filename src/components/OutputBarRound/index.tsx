@@ -99,7 +99,6 @@ const OutputBarRound: React.FC<Props> = ({
     if (pairingList.length <= 0) {
       setHasLoaded(false);
     } else {
-      console.log("more than o");
       setHasLoaded(true);
     }
   };
@@ -113,9 +112,7 @@ const OutputBarRound: React.FC<Props> = ({
       }
     });
   }
-  console.log("pairinglist", pairingList);
-  console.log("constext playerLIst", settingContext.playerList);
-  console.log("constext pairinglist", settingContext.pairings);
+
   const Total = ({ control }: { control: Control<formValues> }) => {
     const formvalues = useWatch({
       name: "result",
