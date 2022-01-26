@@ -9,7 +9,7 @@ import { playerItem } from "../../../types/playerItem";
 import DescriptionAlerts from "../../NameModal";
 
 const PlayersCard = (props: any) => {
-  const { getParticipants } = props;
+  const { getParticipants, isUnEven } = props;
 
   type Inputs = {
     player: string;
@@ -114,6 +114,18 @@ const PlayersCard = (props: any) => {
     saveToLocalStorage("players", updateParticipants);
   };
 
+  function startTournament() {
+  checkIfEvenAmountOfPlayers(); 
+  props.toggleParticipantView();
+
+  }
+
+  function checkIfEvenAmountOfPlayers() {
+    if ((players.length % 2)) {
+      isUnEven()
+    }
+  }
+
   return (
     <>
       {/* Input för deltagare och add-knapp */}
@@ -177,7 +189,7 @@ const PlayersCard = (props: any) => {
         {players.length >= 2 ? (
           <button
             className="primaryBtn fullWidth"
-            onClick={() => props.toggleParticipantView()}
+            onClick={() => startTournament()}
           >
             Done
           </button>
