@@ -77,7 +77,7 @@ const TransitionsModal = () => {
             <br></br>
             <Typography>
 
-            <div className="scoreContainer">
+            <div className="score-container">
             <Typography className="scoreBoardTitle">
               Scoreboard:
             </Typography>

@@ -14,6 +14,7 @@ import BasicModal from "../../components/WLDmodal";
 import TransitionsModal from "../../components/WinnerModal";
 import { useState } from "react";
 import NavigationBarHidden from "../../components/NavigationBarHidden";
+import TournamentName from "../../components/TournamentName";
 
 const Round = () => {
   const settingContext = TournamentStore();
@@ -73,11 +74,11 @@ const Round = () => {
     <>
       <div className="container">
         {disable ? <NavigationBar /> : <NavigationBarHidden />}
-
         <Divider />
         <div className="gameContainer">
+        <TournamentName />
           <div className="headingWrapper flexBetween">
-            <h3 className="zeroMargin">{`Round-${round + 1}`}</h3>
+            <h1 className="round__header zeroMargin">{`Round ${round + 1}`}</h1>
             <Timer hours={0} minutes={50} seconds={0} />
           </div>
           <div className="textWrapper">

@@ -9,6 +9,8 @@ import { Link } from "react-router-dom";
 import OutputBarPrevRounds from "../../components/OutputBarPrevRounds";
 import { TournamentArray } from "../../types/tournamentArray";
 import { useEffect } from "react";
+import TournamentName from "../../components/TournamentName";
+
 const PreviousRounds = () => {
   // const [playerList, setPlayerList] = React.useState<TournamentArray>([]);
   const [pairingList, setPairingList] = React.useState<TournamentArray>([]);
@@ -47,8 +49,9 @@ const PreviousRounds = () => {
             pairingList.map((e, index) => {
               return (
                 <div>
+                  <TournamentName/>
                   <div className="rounds__headingContainer">
-                    <h1 className="rounds__heading rounds--noMargin">{`Round -${
+                    <h1 className="rounds__heading rounds--noMargin">{`Round ${
                       index + 1
                     }`}</h1>
                   </div>
@@ -66,20 +69,6 @@ const PreviousRounds = () => {
                 </div>
               );
             })}
-          {/* Detta vill vi mappa ut */}
-
-          {/* <div className="rounds__headingContainer">
-            <h1 className="rounds__heading rounds--noMargin">Round 1</h1>
-          </div>
-          <div className="rounds__textContainer rounds--noMargin">
-            <p className="rounds__text">W-L-D</p>
-          </div>
-          <OutputBarPrevRounds
-            players={"Tony Montana - Fjunte "}
-            roundResult={"2-0-0"}
-          /> */}
-
-          {/* Stängnings-tagg för scrollBox nedanför, inte med i mappningen */}
         </div>
         <div className="rounds__linkContainer">
           <Link to="/" className="rounds__link">
