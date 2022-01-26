@@ -21,7 +21,7 @@ const PlayersCard = (props: any) => {
     formState: { errors },
   } = useForm<Inputs>();
 
-  const [showNameInUse, setShowNameInUse] = useState(false) // Hook för att kolla om ett namn används
+  const [showNameInUse, setShowNameInUse] = useState(false); // Hook för att kolla om ett namn används
 
   //// en player array för att mappa ut alla players som skapas ///////
   const [players, setPlayers] = useState<playerItem[]>([]);
@@ -40,69 +40,68 @@ const PlayersCard = (props: any) => {
       setPlayers(ls);
     } catch (error) {}
   }, []);
-  
+
   //// sparar data till LS ///////////
-  
+
   ///////// UTKOMMENTERAD FÖR TILLFÄLLET ///////////
   function saveToLocalStorage(key: string, value: any): void {
     localStorage.setItem(key, JSON.stringify(value));
   }
-  
+
   ///// uppdaterar participants statet ////////////
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     //// Checks if name is already in use
-    let oldNames = players.map((a) => a.name)
+    //makePlayersEven();
+    let oldNames = players.map((a) => a.name);
+
     if (oldNames.includes(data.player)) {
-      nameAlreadyInUse()
+      nameAlreadyInUse();
     } else {
-      
       ///// rensar inputfield //////////
-    resetField("player");
-    setPlayers((prevState) => {  
+      resetField("player");
 
-      ///// Kollar genom alla spelarobjekt efter det
-      ///// högsta ID't. newItem tar sedan det värdet och 
-      ///// lägger till 1 för att skapa ett högre ID
-      let oldIds = prevState.map((a) => a.id)
-      let highestId = 0;
-   
-      oldIds.forEach((a) => {
-        if (highestId < a) {
-          highestId = a;
-        }
-      })
-      
-      const newItems = [
-        ...prevState,
-        {
-          id: highestId + 1,
-          name: data.player,
-          score: 0,
-          matchHistory: { win: 0, loss: 0, draw: 0 },
-        },
-      ]; 
+      setPlayers((prevState) => {
+        ///// Kollar genom alla spelarobjekt efter det
+        ///// högsta ID't. newItem tar sedan det värdet och
+        ///// lägger till 1 för att skapa ett högre ID
+        let oldIds = prevState.map((a) => a.id);
+        let highestId = 0;
 
-      ///////// UTKOMMENTERAD FÖR TILLFÄLLET ///////////
-      saveToLocalStorage("players", newItems);
-      return newItems;
-    });
-  }
+        oldIds.forEach((a) => {
+          if (highestId < a) {
+            highestId = a;
+          }
+        });
+
+        const newItems = [
+          ...prevState,
+          {
+            id: highestId + 1,
+            name: data.player,
+            score: 0,
+            matchHistory: { win: 0, loss: 0, draw: 0 },
+          },
+        ];
+
+        ///////// UTKOMMENTERAD FÖR TILLFÄLLET ///////////
+        saveToLocalStorage("players", newItems);
+        return newItems;
+      });
+    }
   };
 
- 
   ////// Kollar om namnet är upptaget, skickar en error-modal om
   ////// namnet redan finns hos en spelare
   const nameAlreadyInUse = () => {
     setShowNameInUse(true);
-    // wait 3 sek setShowNameInUse(false)
-  }
+  };
 
   ////// Sätter tillbaka setshowname till false så att man
   ////// kan köra nameAlreadyInUse igen
   function resetNameChecker() {
     setShowNameInUse(false);
   }
-  
+
   ///// deletar en spelare från particisipant statet /////////
   const deleteParticipant = (id: number) => {
     const updateParticipants = [
@@ -132,10 +131,13 @@ const PlayersCard = (props: any) => {
             type="submit"
           />
         </form>
-        <div>{showNameInUse ? 
-            <DescriptionAlerts 
-              resetNameChecker={resetNameChecker}/>
-             : ''}</div>
+        <div>
+          {showNameInUse ? (
+            <DescriptionAlerts resetNameChecker={resetNameChecker} />
+          ) : (
+            ""
+          )}
+        </div>
 
         {/* Error Modal */}
         <div className="errorContainer">

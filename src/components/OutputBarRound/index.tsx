@@ -123,6 +123,7 @@ const OutputBarRound: React.FC<Props> = ({
     register,
     control,
     handleSubmit,
+    resetField,
     getValues,
     formState: { errors },
   } = useForm<formValues>();
@@ -140,15 +141,6 @@ const OutputBarRound: React.FC<Props> = ({
     newPlayer.matchHistory.loss += score.losses;
     newPlayer.matchHistory.draw += score.draw;
   }
-  const zeroDropDownOptions: SubmitHandler<formValues> = () => {
-    // let element = optionsDataList.map((option) => (option.value))
-    console.log(optionsDataList[0].value);
-    return 
-    
- 
-    
-  }
-
 
   const onSubmit: SubmitHandler<formValues> = (data) => {
     data.result.forEach((e, index) => {
@@ -292,10 +284,8 @@ const OutputBarRound: React.FC<Props> = ({
           break;
         default:
           break;
-          
       }
-      // resetField(`result.${index}.name`);
-     // zeroDropDownOptions();
+      resetField(`result.${index}.name`);
     });
 
     localStorage.setItem("players", JSON.stringify(settingContext.playerList));
@@ -321,23 +311,6 @@ const OutputBarRound: React.FC<Props> = ({
       ];
       return updatedState;
     });
-
-
-    // Här vill vi loopa över listan med options
-    // för att kolla att alla options inte är still playing och sedan sätta submit-knappen till true
-    // fungerar dock inte nu
-
-    // optionsDataList.forEach((option) => {
-    //   for (const option of optionsDataList) {
-    //     if (
-    //       // selectedResult !== "Still playing" &&
-    //       option.value !== "Still playing"
-    //     ) {
-    //       setDisableBtn(true);
-    //       console.log("sätt disabletill sant");
-    //     }
-    //   }
-    // });
   };
 
   return (

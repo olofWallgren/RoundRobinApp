@@ -18,22 +18,19 @@ const Tournament = () => {
   ///////// CONTEXT //////////////////////
   const settingStore = TournamentStore();
 
-    ///////// state med players som hämtas och uppdateras från Participants card ///////////
-    const [playerArray, setPlayerArray] = useState<playerItem[]>([]);
-    const getParticipants = (data: any) => {
-      setPlayerArray([...data]);
-    };
-    
-    
-    ////////// togglar participants view/////////////////
-    const [showParticipantView, setParticipantView] = useState(true);
-    const toggleParticipantView = () => {
-      setParticipantView(showParticipantView ? false : true);
-      makePlayersEven();
+  ////////// togglar participants view/////////////////
+  const [showParticipantView, setParticipantView] = useState(true);
+  const [playerArray, setPlayerArray] = useState<playerItem[]>([]);
+  const toggleParticipantView = () => {
+    makePlayersEven();
+    setParticipantView(showParticipantView ? false : true);
   };
 
   /// Om det är ojämnt antal spelare så skapas en spelare "**BYE**" som sedan
   /// Räknas som en gratisvinst.
+  function saveToLocalStorage(key: string, value: any): void {
+    localStorage.setItem(key, JSON.stringify(value));
+  }
   const makePlayersEven = () => {
     const byePlayer: any = {
       id: playerArray.length + 2,
@@ -44,6 +41,7 @@ const Tournament = () => {
     if (playerArray.length % 2) {
       setPlayerArray((prevState) => {
         const newPlayerArray = [...prevState, byePlayer];
+        saveToLocalStorage("players", newPlayerArray);
         return newPlayerArray;
       });
     } else {
@@ -51,7 +49,11 @@ const Tournament = () => {
     }
   };
 
+  ///////// state med players som hämtas och uppdateras från Participants card ///////////
 
+  const getParticipants = (data: any) => {
+    setPlayerArray([...data]);
+  };
   const {
     register,
     handleSubmit,
