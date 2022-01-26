@@ -37,9 +37,9 @@ return (
       <div className="scoreContainer">
        {/* Placerar den med högst poäng överst, om två är lika för mest poäng hamnar 
        den med färre losses över, boten filtreras bort från scoreboardet */}
-       {players.sort((a, b) => (b.score) - (a.score)).sort((x, y) =>
+       {players.sort((x, y) =>
        x.matchHistory.loss - y.matchHistory.loss).sort((a, b) => 
-       b.matchHistory.win - a.matchHistory.win).filter((z) => 
+       b.matchHistory.win - a.matchHistory.win).sort((a, b) => (b.score) - (a.score)).filter((z) => 
        z.name !== "**BYE**(Free win)").map((e) => (
           <OutputbarScoreBoard player= {e.name}
                                totalScore= {e.score} 
