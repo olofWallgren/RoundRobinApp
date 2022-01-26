@@ -1,5 +1,5 @@
 .rounds__headingContainer {
-  margin: 1rem 0;
+  padding: 0.8rem 0 0 0;
 }
 .rounds__heading {
   font-size: 20px;
@@ -28,7 +28,7 @@
 .rounds__scrollBox {
   overflow-y: auto;
   overflow-x: hidden;
-  height: 58vh;
+  height: 60vh;
 }
 .rounds--noMargin {
   margin: 0;
@@ -39,7 +39,7 @@
     margin-bottom: 0.5rem;
   }
   .rounds__scrollBox {
-    height: 64vh;
+    height: 65vh;
   }
   .rounds__text {
     font-size: 11px;
@@ -51,6 +51,9 @@
   }
 }
 @media screen and (max-width: 375px) {
+  .rounds__headingContainer {
+    padding: 0.2rem 0 0.3rem 0;
+  }
   .rounds__text {
     font-size: 10px;
     padding-right: 0.4rem;

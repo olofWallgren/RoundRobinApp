@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 import OutputbarScoreBoard from "../../components/OutputBarScoreBoard";
 import { TournamentStore } from "../../Contexts/tournamentContext";
 import { Grid } from "@mui/material";
-import zIndex from "@mui/material/styles/zIndex";
+import TournamentName from "../../components/TournamentName";
 
 
 
@@ -25,7 +25,8 @@ return (
     <NavigationBar />
     <Divider />
     <div className="gameContainer">
-      <div className="headingWrapper">
+        <TournamentName/>
+      <div className="heading-Wrapper">
         <h3 className="noMargin">Scoreboard</h3>
       </div>
       <Grid container direction="row" className="textContainer">

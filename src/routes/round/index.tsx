@@ -74,7 +74,6 @@ const Round = () => {
     <>
       <div className="container">
         {disable ? <NavigationBar /> : <NavigationBarHidden />}
-
         <Divider />
         <div className="gameContainer">
         <TournamentName />
