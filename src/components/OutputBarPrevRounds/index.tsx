@@ -15,18 +15,18 @@ const OutputBarPrevRounds: React.FC<Props> = ({
   children,
 }) => {
   return (
-    <Grid 
+    <Grid
       className="outputBarContainer"
       container
       direction="row"
       justifyContent="space-between"
       alignItems="center"
     >
-      <Grid item >
+      <Grid item>
         <p className="names">{players}</p>
       </Grid>
 
-      <Grid item >
+      <Grid item>
         <p className="totalScore">{roundResult}</p>
       </Grid>
     </Grid>

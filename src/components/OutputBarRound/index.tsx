@@ -4,12 +4,9 @@ import "../../layout/primaryBtn.css";
 import "./OutputBarRound.css";
 import { Grid } from "@mui/material";
 import { TournamentStore } from "../../Contexts/tournamentContext";
-import { playerItem } from "../../types/playerItem";
 import { optionsDataList } from "./optionsDataList";
-import { getUsers } from "../../Utilities/SaveToDB/getPairingDb";
-import { collection, addDoc, doc, setDoc, getDocs } from "@firebase/firestore";
 import { TournamentArray } from "../../types/tournamentArray";
-import { db } from "../../firebase-config";
+
 import {
   useForm,
   SubmitHandler,
@@ -157,7 +154,7 @@ const OutputBarRound: React.FC<Props> = ({
     data.result.forEach((e, index) => {
       const player1 = settingContext.pairings[round][index].player1.name;
       const player2 = settingContext.pairings[round][index].player2.name;
-
+      settingContext.pairings[round][index].matchResult = e.name;
       ////////// Utkommenterad pga den kollar i context-pairingList /////////////
       // const player1 = pairingList[round][index].player1.name;
       // const player2 = pairingList[round][index].player2.name;
@@ -302,6 +299,7 @@ const OutputBarRound: React.FC<Props> = ({
     });
 
     localStorage.setItem("players", JSON.stringify(settingContext.playerList));
+    localStorage.setItem("pairings", JSON.stringify(settingContext.pairings));
     ableNextRound();
     setOptionState([]);
     setDisableBtn(true);
@@ -341,7 +339,6 @@ const OutputBarRound: React.FC<Props> = ({
     //   }
     // });
   };
-//  console.log(optionState);
 
   return (
     <div className="">
