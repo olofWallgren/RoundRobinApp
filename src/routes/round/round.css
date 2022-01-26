@@ -1,5 +1,5 @@
 .headingWrapper {
-  padding: 1rem 0 0 0;
+  padding: 0.8rem 0 0 0;
 }
 .textWrapper {
   display: flex;
@@ -33,7 +33,7 @@
 .playerContainer {
   overflow-y: auto;
   overflow-x: hidden;
-  height: 40vh;
+  height: 35vh;
 }
 .marginBottom {
   margin-bottom: 0.5rem;
@@ -67,7 +67,10 @@
     margin-top: 0.8rem;
   }
 }
-@media screen and (max-width: 375px) {
+@media screen and (max-width: 376px) {
+  .headingWrapper {
+    padding: 0.2rem 0 0.3rem 0;
+  }
   .textWrapper {
     font-size: 10px;
   }
@@ -79,6 +82,9 @@
   }
   .scoringContainer {
     margin-right: 26px;
+  }
+  .playerContainer {
+    height: 38vh;
   }
 }
 @media screen and (max-width: 320px) {

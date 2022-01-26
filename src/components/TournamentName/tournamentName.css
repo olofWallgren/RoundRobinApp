@@ -33,9 +33,7 @@
       .tournament-name__text {
         font-size: 12px;
       }
-}
-@media screen and (max-width: 320px) {
-    .tournament-name__text {
-        font-size: 10px;
+      .tournament-name__icon__container {
+        margin-right: 0.2rem;
       }
 }
