@@ -14,12 +14,13 @@ import BasicModal from "../../components/WLDmodal";
 import TransitionsModal from "../../components/WinnerModal";
 import { useState } from "react";
 import { useEffect } from "react";
+import NavigationBarHidden from "../../components/NavigationBarHidden";
 
 const Round = () => {
   const settingContext = TournamentStore();
   /////// State för Rounds //////////////////
   const [round, setRound] = React.useState(0);
-  const [showWinnerModal, setShowWinnerModal] = useState(false) //// Hook för att visa vinnarmodal
+  const [showWinnerModal, setShowWinnerModal] = useState(false); //// Hook för att visa vinnarmodal
   const [disable, setDisable] = React.useState(true); //Använd denna hook för att göra knappen klickbar efter att resultaten är ifyllda
   /////////// Updaterar alla context-states vid en refresh //////////
   React.useEffect(() => {
@@ -41,25 +42,25 @@ const Round = () => {
   }, []);
 
   let amountOfplayers = settingContext.playerList.length;
-  
+
   let nxtRoundButtonText = "Next Round";
-  if ((round + 2) === amountOfplayers) {
-    nxtRoundButtonText = "Final Score!"
+  if (round + 2 === amountOfplayers) {
+    nxtRoundButtonText = "Final Score!";
   }
   ////// Ökar statet med +1 och updaterar round-LS ////////////////
   ////////// titta över vad som händer när round == roundLength //////
   function incrementRound() {
     ableNextRound();
-    if (((round + 2) === amountOfplayers)) {
-      showWinner()
-      } else {      
+    if (round + 2 === amountOfplayers) {
+      showWinner();
+    } else {
       setRound((prevState) => {
         let newRound = prevState + 1;
         localStorage.setItem("round", JSON.stringify(newRound));
         return newRound;
       });
     }
-  } 
+  }
   function showWinner() {
     setShowWinnerModal(true);
   }
@@ -69,11 +70,11 @@ const Round = () => {
     setDisable(!disable && true);
   };
 
-
   return (
     <>
       <div className="container">
-        <NavigationBar />
+        {disable ? <NavigationBar /> : <NavigationBarHidden />}
+
         <Divider />
         <div className="gameContainer">
           <div className="headingWrapper flexBetween">
@@ -98,11 +99,8 @@ const Round = () => {
               round={round}
               ableNextRound={ableNextRound}
             />
-            <div>{showWinnerModal ? 
-            <TransitionsModal />
-             : ''}</div>
-
-             </div>
+            <div>{showWinnerModal ? <TransitionsModal /> : ""}</div>
+          </div>
           <div className="linkWrapper">
             <Link to="/" className="linkStyle">
               End Tournament
