@@ -12,3 +12,9 @@
 .scoreBoardTitle {
   margin-bottom: 1rem;
 }
+
+.winnerPresentation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

@@ -59,13 +59,15 @@ const TransitionsModal = () => {
               <br></br>
             </div>
             <DialogContent dividers>
+              <div className="winnerPresentation">
               <Typography id="transition-modal-description" sx={{ mt: 2 }}>
                 {winner} that won with {highestScore} points! Bravely fought.
                 You may now wear the tallest wizards hat!
               </Typography>
+              </div>
             </DialogContent>
             <br></br>
-            <Typography>
+
               <div className="score-container">
                 <Typography className="scoreBoardTitle">Scoreboard:</Typography>
                 {/* Placerar den med högst poäng överst, om två är lika för mest poäng hamnar 
@@ -75,9 +77,9 @@ const TransitionsModal = () => {
                   .sort((a, b) => b.matchHistory.win - a.matchHistory.win)
                   .sort((a, b) => b.score - a.score)
                   .filter((z) => z.name !== "**BYE**(Free win)")
-                  .map((e) => (
+                  .map((e, index) => (
                     <OutputbarScoreBoard
-                      key={e.id}
+                      key={`${e.id}-${index}`}
                       player={e.name}
                       totalScore={e.score}
                       wins={e.matchHistory.win}
@@ -86,7 +88,7 @@ const TransitionsModal = () => {
                     />
                   ))}
               </div>
-            </Typography>
+
           </Box>
         </Fade>
       </Modal>
