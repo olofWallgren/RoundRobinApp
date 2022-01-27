@@ -12,9 +12,9 @@ import { useEffect } from "react";
 import TournamentName from "../../components/TournamentName";
 
 const PreviousRounds = () => {
-  // const [playerList, setPlayerList] = React.useState<TournamentArray>([]);
   const [pairingList, setPairingList] = React.useState<TournamentArray>([]);
   const [hasLoaded, setHasLoaded] = React.useState(false);
+
   const checkLoading = () => {
     if (pairingList.length <= 0) {
       setHasLoaded(false);
@@ -24,17 +24,12 @@ const PreviousRounds = () => {
   };
 
   useEffect(() => {
-    // try {
-    //   let lsPlayers = JSON.parse(localStorage.getItem("players") || "");
-
-    //   setPlayerList(lsPlayers);
-    // } catch (error) {}
     try {
       let lsPairings = JSON.parse(localStorage.getItem("pairings") || "");
-
       setPairingList(lsPairings);
     } catch (error) {}
   }, []);
+
   useEffect(() => {
     checkLoading();
   }, [pairingList]);
@@ -48,8 +43,8 @@ const PreviousRounds = () => {
           {hasLoaded &&
             pairingList.map((e, index) => {
               return (
-                <div>
-                  <TournamentName/>
+                <div key={index}>
+                  <TournamentName />
                   <div className="rounds__headingContainer">
                     <h1 className="rounds__heading rounds--noMargin">{`Round ${
                       index + 1
@@ -58,10 +53,11 @@ const PreviousRounds = () => {
                   <div className="rounds__textContainer rounds--noMargin">
                     <p className="rounds__text">W-L-D</p>
                   </div>
-                  {e.map((round: any) => {
+                  {e.map((round: any, i) => {
                     return (
                       <OutputBarPrevRounds
-                        players={`${round.player1.name} vs ${round.player2.name} `}
+                        key={`${round.player1.name}-${i}`}
+                        players={`${round.player1.name} - ${round.player2.name} `}
                         roundResult={`${round.matchResult}`}
                       />
                     );

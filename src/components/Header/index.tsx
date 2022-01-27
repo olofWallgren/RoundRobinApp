@@ -1,9 +1,8 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import "../Header/header.css";
 import "../../layout/container.css";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
-import foxProfile from "../../Assets/images/foXprofile2.png"
+import foxProfile from "../../Assets/images/foXprofile2.png";
 
 const Header = () => {
   return (
@@ -14,7 +13,6 @@ const Header = () => {
       <h1 className="header__h1">Magic Round Robin</h1>
       <div className="header__iconContainer">
         <img className="foxyProfileIcon" src={foxProfile} alt="foxyprofile" />
-        {/* <AccountBoxIcon fontSize="large" className="header__icon" /> */}
       </div>
     </header>
   );

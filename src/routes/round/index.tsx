@@ -18,9 +18,8 @@ import TournamentName from "../../components/TournamentName";
 
 const Round = () => {
   const settingContext = TournamentStore();
-  /////// State för Rounds //////////////////
   const [round, setRound] = React.useState(0);
-  const [showWinnerModal, setShowWinnerModal] = useState(false); //// Hook för att visa vinnarmodal
+  const [showWinnerModal, setShowWinnerModal] = useState(false);
   const [disable, setDisable] = React.useState(true); //Använd denna hook för att göra knappen klickbar efter att resultaten är ifyllda
   /////////// Updaterar alla context-states vid en refresh //////////
   React.useEffect(() => {
@@ -34,7 +33,6 @@ const Round = () => {
       settingContext.setPlayerList(players);
     } catch (error) {}
 
-    ////// Ökar statet med +1 ////////////////
     try {
       let lsRound = JSON.parse(localStorage.getItem("round") || "");
       setRound(lsRound);
@@ -42,13 +40,11 @@ const Round = () => {
   }, []);
 
   let amountOfplayers = settingContext.playerList.length;
-
   let nxtRoundButtonText = "Next Round";
   if (round + 2 === amountOfplayers) {
     nxtRoundButtonText = "Final Score!";
   }
   ////// Ökar statet med +1 och updaterar round-LS ////////////////
-
   function incrementRound() {
     ableNextRound();
     if (round + 2 === amountOfplayers) {
@@ -64,7 +60,6 @@ const Round = () => {
   function showWinner() {
     setShowWinnerModal(true);
   }
-
   ////// Togglar disable på next round-knappen /////////
   const ableNextRound = () => {
     setDisable(!disable && true);
@@ -76,7 +71,7 @@ const Round = () => {
         {disable ? <NavigationBar /> : <NavigationBarHidden />}
         <Divider />
         <div className="gameContainer">
-        <TournamentName />
+          <TournamentName />
           <div className="headingWrapper flexBetween">
             <h1 className="round__header zeroMargin">{`Round ${round + 1}`}</h1>
             <Timer hours={0} minutes={50} seconds={0} />
@@ -96,7 +91,6 @@ const Round = () => {
           <div className="playerContainer">
             <OutputBarRound
               key={Math.floor(Math.random() * round)}
-              //tournamentPairings={settingContext.pairings}
               round={round}
               ableNextRound={ableNextRound}
             />

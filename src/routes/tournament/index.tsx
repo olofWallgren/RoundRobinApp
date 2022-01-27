@@ -15,18 +15,15 @@ import MakeRoundRobinPairings from "../../Utilities/RoundMaker/roundMaker";
 import { playerItem } from "../../types/playerItem";
 
 const Tournament = () => {
-  ///////// CONTEXT //////////////////////
   const settingStore = TournamentStore();
-
-  ////////// togglar participants view/////////////////
   const [isBot, setIsBot] = useState(false);
   const [showParticipantView, setParticipantView] = useState(true);
   const [playerArray, setPlayerArray] = useState<playerItem[]>([]);
+
   const toggleParticipantView = () => {
     makePlayersEven();
     setParticipantView(showParticipantView ? false : true);
   };
-
   /// Om det är ojämnt antal spelare så skapas en spelare "**BYE**" som sedan
   /// Räknas som en gratisvinst.
   function saveToLocalStorage(key: string, value: any): void {
@@ -49,16 +46,13 @@ const Tournament = () => {
       return;
     }
   };
-
-  ///////// state med players som hämtas och uppdateras från Participants card ///////////
-
+  //// state med players som hämtas och uppdateras från Participants card
   const getParticipants = (data: any) => {
     setPlayerArray([...data]);
   };
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm<Inputs>();
 
@@ -71,18 +65,14 @@ const Tournament = () => {
       scoring: { win: data.win, loss: data.loss, draw: data.draw },
     };
     let pairings = MakeRoundRobinPairings(playerArray);
-    //savePairingsToDb(pairings);
     localStorage.setItem("pairings", JSON.stringify(pairings));
     settingStore.setPairings(pairings);
     settingStore.setPlayerList(playerArray);
     settingStore.setTournament(newTournament);
   };
-
   function isUnEven() {
     setIsBot(true);
   }
-
-  
 
   return (
     <>
@@ -93,7 +83,10 @@ const Tournament = () => {
           </div>
           <div className="flexBetween baseline noMargin">
             <p className="noMargin secondaryColor">
-              {`Added players: ${playerArray.length} ${isBot ? '(one bot for even pairings)' : ''}`}</p>
+              {`Added players: ${playerArray.length} ${
+                isBot ? "(one bot for even pairings)" : ""
+              }`}
+            </p>
             {!showParticipantView && (
               <button
                 className="primaryBtn primaryBtn--small"
@@ -103,7 +96,6 @@ const Tournament = () => {
               </button>
             )}
           </div>
-
           {showParticipantView ? (
             <ParticipantsCard
               isUnEven={isUnEven}
@@ -125,8 +117,6 @@ const Tournament = () => {
                   placeholder="Enter tournament name"
                 />
               </div>
-
-              {/* Error modal for tournament name */}
               <div className="errorWrapper">
                 {errors.tournamentName && (
                   <Alert
@@ -158,7 +148,6 @@ const Tournament = () => {
                     {...register("hour", { required: true, min: 0, max: 5 })}
                   />
                 </div>
-
                 {/* Min inputs */}
                 <div className="inputSection marginRight">
                   <p className="noMargin bottomPadding">Min:</p>
@@ -169,7 +158,6 @@ const Tournament = () => {
                     {...register("min", { required: true, min: 0, max: 60 })}
                   />
                 </div>
-
                 {/* Sec inputs */}
                 <div className="inputSection">
                   <p className="noMargin bottomPadding">Sec</p>
@@ -181,7 +169,6 @@ const Tournament = () => {
                   />
                 </div>
               </div>
-
               {/* Error modal for hour, minutes and seconds */}
               <div className="errorWrapper">
                 {errors.hour && errors.min && errors.sec && (
@@ -202,7 +189,6 @@ const Tournament = () => {
               {/* Games per round section */}
               <div className="formSection">
                 <p className="noMargin">Games per match</p>
-
                 <select className="input gamesSelection" {...register("games")}>
                   <option value="best of three">Best of 3</option>
                 </select>

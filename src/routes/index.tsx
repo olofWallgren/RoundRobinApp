@@ -61,7 +61,6 @@ const Router = () => (
           component={route.component}
         />
       ))}
-
       <Route component={NotFound} />
     </Switch>
   </React.Suspense>
