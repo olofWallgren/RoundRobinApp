@@ -1,0 +1,39 @@
+.tournament-name {
+  display: flex;
+  align-items: center;
+  padding-top: 16px;
+}
+.tournament-name__icon__container {
+  margin-right: 0.3rem;
+  color: #fa04f6;
+}
+.tournament-name__icon {
+  font-size: 22px;
+}
+.tournament-name__text {
+  color: #fa04f6;
+  font-size: 16px;
+}
+.tournament-name--noMargin {
+  margin: 0;
+}
+
+@media screen and (max-width: 600px) {
+  .tournament-name {
+    padding-top: 8px;
+  }
+  .tournament-name__text {
+    font-size: 14px;
+  }
+}
+@media screen and (max-width: 375px) {
+    .tournament-name__icon {
+        font-size: 16px;
+      }
+      .tournament-name__text {
+        font-size: 12px;
+      }
+      .tournament-name__icon__container {
+        margin-right: 0.2rem;
+      }
+}

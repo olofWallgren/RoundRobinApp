@@ -16,7 +16,6 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     padding: theme.spacing(1),
   },
 }));
-
 export interface DialogTitleProps {
   id: string;
   children?: React.ReactNode;

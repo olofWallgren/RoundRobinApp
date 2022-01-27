@@ -1,5 +1,4 @@
 import React from "react";
-// import { Link } from "react-router-dom";
 import "../Header/header.css";
 import "../foxButton/foxButton.css";
 
@@ -8,26 +7,19 @@ interface Props {
   width: string;
   onClick: () => void;
   children?: React.ReactNode;
-
 }
 
-const FoxButton: React.FC<Props> = ({
-height,
-width,
-children,
-onClick
-}) => {
-
+const FoxButton: React.FC<Props> = ({ height, width, children, onClick }) => {
   return (
-    <button 
-    className="button"
-    onClick={onClick}
-    style={{
-      height,
-      width
-    }}>
+    <button
+      className="button"
+      onClick={onClick}
+      style={{
+        height,
+        width,
+      }}
+    >
       {children}
-       
     </button>
   );
 };

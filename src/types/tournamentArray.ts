@@ -8,4 +8,5 @@ export type TournamentArray = {
   player2: Player;
   matchId: string;
   matchResult: string;
+  resultAdded: boolean;
 }[][];
