@@ -43,7 +43,7 @@ const PreviousRounds = () => {
           {hasLoaded &&
             pairingList.map((e, index) => {
               return (
-                <div>
+                <div key={index}>
                   <TournamentName />
                   <div className="rounds__headingContainer">
                     <h1 className="rounds__heading rounds--noMargin">{`Round ${
@@ -53,9 +53,10 @@ const PreviousRounds = () => {
                   <div className="rounds__textContainer rounds--noMargin">
                     <p className="rounds__text">W-L-D</p>
                   </div>
-                  {e.map((round: any) => {
+                  {e.map((round: any, i) => {
                     return (
                       <OutputBarPrevRounds
+                        key={`${round.player1.name}-${i}`}
                         players={`${round.player1.name} - ${round.player2.name} `}
                         roundResult={`${round.matchResult}`}
                       />

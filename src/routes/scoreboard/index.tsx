@@ -42,8 +42,9 @@ const Scoreboard = () => {
             .sort((a, b) => b.matchHistory.win - a.matchHistory.win)
             .sort((a, b) => b.score - a.score)
             .filter((z) => z.name !== "**BYE**(Free win)")
-            .map((e) => (
+            .map((e, index) => (
               <OutputbarScoreBoard
+                key={`${e.name}-${index}`}
                 player={e.name}
                 totalScore={e.score}
                 wins={e.matchHistory.win}
