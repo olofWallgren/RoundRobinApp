@@ -2,6 +2,11 @@ import "../../layout/OutputBar.css";
 import { playerItem } from "../../types/playerItem";
 import { TournamentArray } from "../../types/tournamentArray";
 
+
+
+/// Skapar två arrayer för varje runda, en med första halvan av mängden spelare
+/// En med den andra mängden spelare. Sedan roterar alla utom första spelaren varje runda
+
 function MakeRoundRobinPairings(props: playerItem[]) {
   let players = props;
   if (players.length % 2) throw new Error("Teams length must be even");
@@ -22,9 +27,11 @@ function MakeRoundRobinPairings(props: playerItem[]) {
     const secondHalf = newPlayerIndexes.slice(half, playerCount).reverse();
 
     for (let i = 0; i < firstHalf.length; i++) {
+      ///Skapar unikt id för varje pairing
       let roundNumber: any = tournamentPairings.length + 1;
       let idMatchFormater = "r" + roundNumber + "m" + (i + 1);
 
+      /// Samtliga rundor för turneringen
       roundPairings.push({
         player1: players[firstHalf[i]],
         player2: players[secondHalf[i]],
