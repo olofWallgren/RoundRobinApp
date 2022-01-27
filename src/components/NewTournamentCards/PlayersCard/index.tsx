@@ -1,4 +1,3 @@
-import react from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Alert from "@mui/material/Alert";
 import { useState, useEffect } from "react";
@@ -7,7 +6,6 @@ import "./playersCard.css";
 import "../../../layout/primaryBtn.css";
 import { playerItem } from "../../../types/playerItem";
 import DescriptionAlerts from "../../NameModal";
-
 const PlayersCard = (props: any) => {
   const { getParticipants, isUnEven } = props;
 
@@ -20,20 +18,14 @@ const PlayersCard = (props: any) => {
     resetField,
     formState: { errors },
   } = useForm<Inputs>();
-
-  const [showNameInUse, setShowNameInUse] = useState(false); // Hook för att kolla om ett namn används
-
+  const [showNameInUse, setShowNameInUse] = useState(false);
   //// en player array för att mappa ut alla players som skapas ///////
   const [players, setPlayers] = useState<playerItem[]>([]);
-
   ///// uppdaterar en likadan array i tournament view ////////
   useEffect(() => {
     getParticipants(players);
   }, [players]);
 
-  //// uppdaterar participants statet från localstorage/////////
-
-  ////// UTKOMMENTERAD FÖR TILLFÄLLET ////////////
   useEffect(() => {
     try {
       let ls = JSON.parse(localStorage.getItem("players") || "");
@@ -41,19 +33,13 @@ const PlayersCard = (props: any) => {
     } catch (error) {}
   }, []);
 
-  //// sparar data till LS ///////////
-
-  ///////// UTKOMMENTERAD FÖR TILLFÄLLET ///////////
   function saveToLocalStorage(key: string, value: any): void {
     localStorage.setItem(key, JSON.stringify(value));
   }
-
   ///// uppdaterar participants statet ////////////
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     //// Checks if name is already in use
-    //makePlayersEven();
     let oldNames = players.map((a) => a.name);
-
     if (oldNames.includes(data.player)) {
       nameAlreadyInUse();
     } else {
@@ -82,8 +68,6 @@ const PlayersCard = (props: any) => {
             matchHistory: { win: 0, loss: 0, draw: 0 },
           },
         ];
-
-        ///////// UTKOMMENTERAD FÖR TILLFÄLLET ///////////
         saveToLocalStorage("players", newItems);
         return newItems;
       });
@@ -91,17 +75,14 @@ const PlayersCard = (props: any) => {
   };
 
   ////// Kollar om namnet är upptaget, skickar en error-modal om
-  ////// namnet redan finns hos en spelare
   const nameAlreadyInUse = () => {
     setShowNameInUse(true);
   };
-
   ////// Sätter tillbaka setshowname till false så att man
   ////// kan köra nameAlreadyInUse igen
   function resetNameChecker() {
     setShowNameInUse(false);
   }
-
   ///// deletar en spelare från particisipant statet /////////
   const deleteParticipant = (id: number) => {
     const updateParticipants = [
@@ -110,25 +91,19 @@ const PlayersCard = (props: any) => {
       }),
     ];
     setPlayers(updateParticipants);
-    ///////// UTKOMMENTERAD FÖR TILLFÄLLET ///////////
     saveToLocalStorage("players", updateParticipants);
   };
-
   function startTournament() {
-  checkIfEvenAmountOfPlayers(); 
-  props.toggleParticipantView();
-
+    checkIfEvenAmountOfPlayers();
+    props.toggleParticipantView();
   }
-
   function checkIfEvenAmountOfPlayers() {
-    if ((players.length % 2)) {
-      isUnEven()
+    if (players.length % 2) {
+      isUnEven();
     }
   }
-
   return (
     <>
-      {/* Input för deltagare och add-knapp */}
       <div className="inputContainer">
         <form className="flexBetween" onSubmit={handleSubmit(onSubmit)}>
           <input
@@ -150,8 +125,6 @@ const PlayersCard = (props: any) => {
             ""
           )}
         </div>
-
-        {/* Error Modal */}
         <div className="errorContainer">
           {errors.player && (
             <Alert
@@ -167,8 +140,6 @@ const PlayersCard = (props: any) => {
             </Alert>
           )}
         </div>
-
-        {/* Added Players with name and icons in a scrollbox */}
         <div className="scrollBox">
           {players.map((i) => (
             <div key={i.id} className="playerBox flexBetween">
@@ -183,8 +154,6 @@ const PlayersCard = (props: any) => {
           ))}
         </div>
       </div>
-
-      {/* // Buttons // */}
       <div className="buttonSection">
         {players.length >= 2 ? (
           <button

@@ -6,7 +6,6 @@ import { Grid } from "@mui/material";
 import { TournamentStore } from "../../Contexts/tournamentContext";
 import { optionsDataList } from "./optionsDataList";
 import { TournamentArray } from "../../types/tournamentArray";
-
 import {
   useForm,
   SubmitHandler,
@@ -14,21 +13,12 @@ import {
   Control,
   useWatch,
 } from "react-hook-form";
-
 interface Props {
   children?: React.ReactNode;
-  //tournamentPairings: any;
   round: number;
   ableNextRound: () => void;
 }
-
-const OutputBarRound: React.FC<Props> = ({
-  // pairingId,
-  children,
-  // tournamentPairings,
-  round,
-  ableNextRound,
-}) => {
+const OutputBarRound: React.FC<Props> = ({ round, ableNextRound }) => {
   type Score = {
     score: number;
     wins: number;
@@ -40,50 +30,18 @@ const OutputBarRound: React.FC<Props> = ({
       name: string;
     }[];
   };
-  type Player = {
-    name: string;
-    id: number;
-  };
-  type PairingEntity = {
-    matchNo: number;
-    player1: Player;
-    player2: Player;
-    result: string;
-  };
-  // Hook för att disabled button
   const [disableBtn, setDisableBtn] = React.useState(true);
   const settingContext = TournamentStore();
   const [pairingList, setPairingList] = useState<TournamentArray>([]);
   const [hasLoaded, setHasLoaded] = useState(false);
   const [optionState, setOptionState] = useState<any[]>([]);
-  const [testRound, setTestRound] = useState(0);
 
-  //// Hämtar Pairings från Db //////
   useEffect(() => {
-    /////////// HÄMTAR PAIRINGS FRÅN DB ///////////////////
-    // const getUsers = async () => {
-    //   const tournamentCollectionRef = collection(db, "roundPairings");
-    //   const data = await getDocs(tournamentCollectionRef);
-    //   let pairingsDb = data.docs.map((doc) => ({ ...doc.data() }));
-
-    //   //////// Gör om datan till samm struktur som context pairings ////////////
-    //   let filteredData: any = [];
-    //   console.log("from Db", pairingsDb[0].pairings.rounds);
-    //   let test = pairingsDb[0].pairings.rounds;
-    //   test.forEach((e: any) => {
-    //     filteredData.push(e.pairings);
-    //   });
-
-    //   setPairingList(filteredData);
-    // };
-
     try {
       let lsPairings = JSON.parse(localStorage.getItem("pairings") || "");
-
       setPairingList(lsPairings);
     } catch (error) {}
   }, []);
-
   //// Kollar så att PairingList statet är uppdaterat /////////
   useEffect(() => {
     checkLoading();
@@ -112,7 +70,6 @@ const OutputBarRound: React.FC<Props> = ({
       }
     });
   }
-
   const Total = ({ control }: { control: Control<formValues> }) => {
     const formvalues = useWatch({
       name: "result",
@@ -124,19 +81,16 @@ const OutputBarRound: React.FC<Props> = ({
     control,
     handleSubmit,
     resetField,
-    getValues,
     formState: { errors },
   } = useForm<formValues>();
   const { fields } = useFieldArray({
     name: "result",
     control,
   });
-
   function findPlayer(player: string, score: Score, scoreAdded: boolean) {
     const newPlayer: any = settingContext.playerList.find((p) => {
       return p.name === player;
     });
-
     if (scoreAdded) {
       newPlayer.score += 0;
       newPlayer.matchHistory.win += 0;
@@ -149,23 +103,15 @@ const OutputBarRound: React.FC<Props> = ({
       newPlayer.matchHistory.draw += score.draw;
     }
   }
-
   const onSubmit: SubmitHandler<formValues> = (data) => {
     data.result.forEach((e, index) => {
       let scoreAdded: boolean = pairingList[round][index].resultAdded
         ? true
         : false;
-
       const player1 = settingContext.pairings[round][index].player1.name;
       const player2 = settingContext.pairings[round][index].player2.name;
-      /// Ändra så att den tittar i pairingList ist för context.pairings ///////
       pairingList[round][index].matchResult = e.name;
       pairingList[round][index].resultAdded = true;
-
-      ////////// Utkommenterad pga den kollar i context-pairingList /////////////
-      // const player1 = pairingList[round][index].player1.name;
-      // const player2 = pairingList[round][index].player2.name;
-
       switch (e.name) {
         case "2 - 0 - 0":
           let scoreP1c1 = {
@@ -302,23 +248,17 @@ const OutputBarRound: React.FC<Props> = ({
       }
       resetField(`result.${index}.name`);
     });
-
     localStorage.setItem("players", JSON.stringify(settingContext.playerList));
-    //// Ändrade i refresh_submitt_bugg att den sparar pairingList ist för constext.pairinglist ///////
     localStorage.setItem("pairings", JSON.stringify(pairingList));
     ableNextRound();
     setOptionState([]);
     setDisableBtn(true);
   };
-
   const handleUserInput = (id: string) => (e: { target: { value: any } }) => {
-    // Kollar användarens ändringar av options och sätter state utifrån det
-    //const Newid:string = id
     const selectedResult = {
       targetValue: e.target.value,
       newId: id,
     };
-
     setOptionState((prevState) => {
       let updatedState: any = [
         ...prevState.filter((e) => e.newId !== id),
@@ -327,7 +267,6 @@ const OutputBarRound: React.FC<Props> = ({
       return updatedState;
     });
   };
-
   return (
     <div className="">
       <form onSubmit={handleSubmit(onSubmit)}>

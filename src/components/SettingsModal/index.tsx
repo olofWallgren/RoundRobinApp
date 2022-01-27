@@ -18,7 +18,6 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     padding: theme.spacing(1),
   },
 }));
-
 export interface DialogTitleProps {
   id: string;
   children?: React.ReactNode;
@@ -83,8 +82,7 @@ const SettingsModal = () => {
             Click the button to start your tournament.
           </Typography>
           <Typography gutterBottom>
-            To change your tournament settings close this
-            window.       
+            To change your tournament settings close this window.
           </Typography>
         </DialogContent>
         <DialogActions>
