@@ -19,6 +19,7 @@ const Tournament = () => {
   const settingStore = TournamentStore();
 
   ////////// togglar participants view/////////////////
+  const [isBot, setIsBot] = useState(false);
   const [showParticipantView, setParticipantView] = useState(true);
   const [playerArray, setPlayerArray] = useState<playerItem[]>([]);
   const toggleParticipantView = () => {
@@ -77,6 +78,12 @@ const Tournament = () => {
     settingStore.setTournament(newTournament);
   };
 
+  function isUnEven() {
+    setIsBot(true);
+  }
+
+  
+
   return (
     <>
       <div className="container">
@@ -85,7 +92,8 @@ const Tournament = () => {
             <h3 className="noMargin">New Tournament</h3>
           </div>
           <div className="flexBetween baseline noMargin">
-            <p className="noMargin secondaryColor">{`Added players: ${playerArray.length}`}</p>
+            <p className="noMargin secondaryColor">
+              {`Added players: ${playerArray.length} ${isBot ? '(one bot for even pairings)' : ''}`}</p>
             {!showParticipantView && (
               <button
                 className="primaryBtn primaryBtn--small"
@@ -98,6 +106,7 @@ const Tournament = () => {
 
           {showParticipantView ? (
             <ParticipantsCard
+              isUnEven={isUnEven}
               getParticipants={getParticipants}
               playerArray={playerArray}
               toggleParticipantView={toggleParticipantView}
