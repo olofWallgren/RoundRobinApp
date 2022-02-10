@@ -25,6 +25,13 @@
 .input:focus {
   border: 1px solid rgba(250, 0, 255, 1);
 }
+
+.info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .inputSection {
   display: flex;
   flex-direction: column;
@@ -79,5 +86,3 @@
     width: 3rem;
   }
 }
-
-

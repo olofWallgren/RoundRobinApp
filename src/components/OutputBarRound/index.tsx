@@ -103,6 +103,7 @@ const OutputBarRound: React.FC<Props> = ({ round, ableNextRound }) => {
       newPlayer.matchHistory.draw += score.draw;
     }
   }
+  /// kollar genom vilket value som submittats sen pushar till score
   const onSubmit: SubmitHandler<formValues> = (data) => {
     data.result.forEach((e, index) => {
       let scoreAdded: boolean = pairingList[round][index].resultAdded

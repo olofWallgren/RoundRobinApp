@@ -62,7 +62,7 @@ const TransitionsModal = () => {
               <div className="winnerPresentation">
               <Typography id="transition-modal-description" sx={{ mt: 2 }}>
                 {winner} that won with {highestScore} points! Bravely fought.
-                You may now wear the tallest wizards hat!
+                You may now wear the tallest wizard hat!
               </Typography>
               </div>
             </DialogContent>

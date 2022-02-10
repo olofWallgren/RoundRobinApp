@@ -134,12 +134,13 @@ const Tournament = () => {
                 )}
               </div>
               {/* Length of round section */}
-              <div className="formSection">
+              <div className="formSection info">
                 <div className="narrowWidth">
-                  <p className="noMargin">Length of round</p>
+                  <p className="noMargin">Every participant will face eachother once for 
+                  a best of three match</p>
                 </div>
                 {/* Hour input */}
-                <div className="inputSection marginRight">
+                {/* <div className="inputSection marginRight">
                   <p className="noMargin bottomPadding">Hour:</p>
                   <input
                     type="number"
@@ -147,9 +148,9 @@ const Tournament = () => {
                     value="0"
                     {...register("hour", { required: true, min: 0, max: 5 })}
                   />
-                </div>
+                </div> */}
                 {/* Min inputs */}
-                <div className="inputSection marginRight">
+                {/* <div className="inputSection marginRight">
                   <p className="noMargin bottomPadding">Min:</p>
                   <input
                     type="number"
@@ -157,9 +158,9 @@ const Tournament = () => {
                     value="50"
                     {...register("min", { required: true, min: 0, max: 60 })}
                   />
-                </div>
+                </div> */}
                 {/* Sec inputs */}
-                <div className="inputSection">
+                {/* <div className="inputSection">
                   <p className="noMargin bottomPadding">Sec</p>
                   <input
                     className="input inputElement"
@@ -167,7 +168,7 @@ const Tournament = () => {
                     value="0"
                     {...register("sec", { required: true, min: 0, max: 60 })}
                   />
-                </div>
+                </div> */}
               </div>
               {/* Error modal for hour, minutes and seconds */}
               <div className="errorWrapper">
@@ -187,12 +188,12 @@ const Tournament = () => {
                 )}
               </div>
               {/* Games per round section */}
-              <div className="formSection">
+              {/* <div className="formSection">
                 <p className="noMargin">Games per match</p>
                 <select className="input gamesSelection" {...register("games")}>
                   <option value="best of three">Best of 3</option>
                 </select>
-              </div>
+              </div> */}
               {/* Scoring section */}
               <div className="formSection">
                 <div className="narrowWidth">
@@ -200,21 +201,37 @@ const Tournament = () => {
                 </div>
                 <div className="inputSection marginRight">
                   <p className="noMargin bottomPadding">Win:</p>
-                  <select className="input scoringInput" {...register("win")}>
+                  {/* <select className="input scoringInput" {...register("win")}>
                     <option value="3">3</option>
-                  </select>
+                  </select> */}
+                  <div>
+                    <span>
+                      3
+                    </span>
+                  </div>
                 </div>
                 <div className="inputSection marginRight">
                   <p className="noMargin bottomPadding">Loss:</p>
-                  <select className="input scoringInput" {...register("loss")}>
+                  {/* <select className="input scoringInput" {...register("loss")}>
                     <option value="0">0</option>
-                  </select>
+                  </select> */}
+                  <div>
+                    <span>
+                      0
+                    </span>
+                  </div>
                 </div>
                 <div className="inputSection">
                   <p className="noMargin bottomPadding">Draw:</p>
-                  <select className="input scoringInput" {...register("draw")}>
+                  {/* <select className="input scoringInput" {...register("draw")}>
                     <option value="1">1</option>
-                  </select>
+                  </select> */}
+                                    
+                  <div>
+                    <span>
+                      1
+                    </span>
+                  </div>
                 </div>
               </div>
               <div className="buttonContainer">
