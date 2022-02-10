@@ -136,8 +136,8 @@ const Tournament = () => {
               {/* Length of round section */}
               <div className="formSection info">
                 {/* <div className="narrowWidth"> */}
-                  <p className="noMargin">Every participant will face eachother once for 
-                  a best of three match</p>
+                  <p className="noMargin">Every participant will face eachother once in 
+                  a best-of-three match</p>
             
       
               </div>
@@ -166,9 +166,13 @@ const Tournament = () => {
                 </select>
               </div> */}
               {/* Scoring section */}
-              <div className="formSection">
+              <div className="formSection score">
+              <div className="score">
                 <div className="narrowWidth">
-                  <p className="noMargin">Scoring</p>
+                  <p className="noMargin">Scoring per match:</p>
+                </div>
+                <div className="padder">
+
                 </div>
                 <div className="inputSection marginRight">
                   <p className="noMargin bottomPadding">Win:</p>
@@ -179,6 +183,7 @@ const Tournament = () => {
                     <span>
                       3
                     </span>
+                  </div>
                   </div>
                 </div>
                 <div className="inputSection marginRight">
