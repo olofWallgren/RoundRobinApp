@@ -135,43 +135,14 @@ const Tournament = () => {
               </div>
               {/* Length of round section */}
               <div className="formSection info">
-                <div className="narrowWidth">
+                {/* <div className="narrowWidth"> */}
                   <p className="noMargin">Every participant will face eachother once for 
                   a best of three match</p>
-                </div>
-                {/* Hour input */}
-                {/* <div className="inputSection marginRight">
-                  <p className="noMargin bottomPadding">Hour:</p>
-                  <input
-                    type="number"
-                    className="input inputElement"
-                    value="0"
-                    {...register("hour", { required: true, min: 0, max: 5 })}
-                  />
-                </div> */}
-                {/* Min inputs */}
-                {/* <div className="inputSection marginRight">
-                  <p className="noMargin bottomPadding">Min:</p>
-                  <input
-                    type="number"
-                    className="input inputElement"
-                    value="50"
-                    {...register("min", { required: true, min: 0, max: 60 })}
-                  />
-                </div> */}
-                {/* Sec inputs */}
-                {/* <div className="inputSection">
-                  <p className="noMargin bottomPadding">Sec</p>
-                  <input
-                    className="input inputElement"
-                    type="number"
-                    value="0"
-                    {...register("sec", { required: true, min: 0, max: 60 })}
-                  />
-                </div> */}
+            
+      
               </div>
               {/* Error modal for hour, minutes and seconds */}
-              <div className="errorWrapper">
+              {/* <div className="errorWrapper">
                 {errors.hour && errors.min && errors.sec && (
                   <Alert
                     sx={{
@@ -186,7 +157,7 @@ const Tournament = () => {
                     Please enter numbers for hour, minutes and seconds!
                   </Alert>
                 )}
-              </div>
+              </div> */}
               {/* Games per round section */}
               {/* <div className="formSection">
                 <p className="noMargin">Games per match</p>
