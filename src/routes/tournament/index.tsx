@@ -136,7 +136,7 @@ const Tournament = () => {
               {/* Length of round section */}
               <div className="formSection info">
                 {/* <div className="narrowWidth"> */}
-                  <p className="noMargin">Every participant will face eachother once in 
+                  <p className="noMargin">Every participant will face each other once in 
                   a best-of-three match</p>
             
       
