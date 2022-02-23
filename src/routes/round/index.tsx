@@ -74,7 +74,7 @@ const Round = () => {
           <TournamentName />
           <div className="headingWrapper flexBetween">
             <h1 className="round__header zeroMargin">{`Round ${round + 1}`}</h1>
-            <Timer hours={0} minutes={50} seconds={0} />
+            <Timer hours={0} minutes={0} seconds={0} />
           </div>
           <div className="textWrapper">
             <div className="alignBottom marginBottom">

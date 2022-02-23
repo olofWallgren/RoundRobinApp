@@ -18,13 +18,16 @@ const Timer = ({ hours = 0, minutes = 0, seconds = 0 }: ITimer) => {
 
   const tick = () => {
     if (paused || over) return;
-    if (h === 0 && m === 0 && s === 0) setOver(true);
-    else if (m === 0 && s === 0) {
-      setTime([h - 1, 59, 59]);
-    } else if (s === 0) {
-      setTime([h, m - 1, 59]);
+    if (h === 0 && m === 0 && s === 59) {
+     setTime([h, m + 1, 0]);
+    
+
+    } else if (s === 59) {
+      setTime([h, m + 1, 0]);
+    } else if (m === 59) {
+      setTime([h + 1, 0, 0]);
     } else {
-      setTime([h, m, s - 1]);
+      setTime([h, m, s + 1]);
     }
   };
 

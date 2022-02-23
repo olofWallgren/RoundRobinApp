@@ -25,6 +25,23 @@
 .input:focus {
   border: 1px solid rgba(250, 0, 255, 1);
 }
+
+.padder {
+  padding: 0rem 0.5rem 0rem 0.5rem;
+}
+
+.info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.score {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .inputSection {
   display: flex;
   flex-direction: column;
@@ -79,5 +96,3 @@
     width: 3rem;
   }
 }
-
-
