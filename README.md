@@ -1,6 +1,6 @@
 ﻿# RoundRobinApp
 
-Link to the app: https://roundrobbin-253e9.web.app/create-tournament
+Link to the app: https://roundrobbin-253e9.web.app/
 
 An application to keep track of Round Robin-tournaments.
 Our app is nisched towards magic: the gathering.
