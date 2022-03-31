@@ -34,6 +34,8 @@ const TransitionsModal = () => {
       highestScore = a;
     }
   });
+
+  // Hämtar in turneringsnamnet samt spelare för att kunna logga ut när turneringen avslutats
   let theTournamentName = settingContext.tournament.tournamentName;
   let winner = players.find((a) => a.score === highestScore)?.name;
 
